@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Check domain availability and pricing instantly. Find the perfect domain name for your small business website.">
+    <title>Domain Availability Checker - SBWSK</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://bluehost.sjv.io">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1 class="logo">SBWSK</h1>
+                <span class="tagline">Small Business Website Starter Kit</span>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="domain-checker.html" class="active">Domain Checker</a></li>
+                <li><a href="quote-estimator.html">Get Quote</a></li>
+                <li><a href="name-generator.html">Name Generator</a></li>
+                <li><a href="checklist.html">Launch Checklist</a></li>
+                <li><a href="index.html#contact" class="btn btn-primary">Work With Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="tools-section">
+        <div class="container">
+            <!-- Header -->
+            <div class="text-center mb-3">
+                <h2 class="section-title">Domain Availability Checker</h2>
+                <p class="section-subtitle">Find the perfect domain name for your business</p>
+            </div>
+
+            <!-- Search Form -->
+            <div class="tool-card" style="max-width: 800px; margin: 0 auto 2rem;">
+                <form id="domainSearchForm">
+                    <div class="form-group">
+                        <label for="domainName">Enter your desired domain name</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input
+                                type="text"
+                                id="domainName"
+                                placeholder="e.g., mygreatbusiness"
+                                required
+                                style="flex: 1;"
+                            >
+                            <button type="submit" class="btn btn-primary">
+                                Check Availability
+                            </button>
+                        </div>
+                        <p class="form-help">Enter just the name (without .com or other extensions)</p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Results Container -->
+            <div id="resultsContainer" class="hidden"></div>
+
+            <!-- Info Section -->
+            <div class="tool-card" style="max-width: 800px; margin: 2rem auto; background-color: #eff6ff;">
+                <h3 style="margin-bottom: 1rem;">Why Domain Names Matter</h3>
+                <ul style="list-style: disc; padding-left: 1.5rem; color: var(--text-secondary);">
+                    <li>Your domain is your online identity and brand</li>
+                    <li>A memorable domain makes it easy for customers to find you</li>
+                    <li>.com domains are still the most trusted and recognized</li>
+                    <li>Secure your domain early before someone else takes it</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Register Your Domain?</h2>
+                <p>Get your domain + hosting bundle with our recommended partner and save up to 60%</p>
+                <a href="https://bluehost.sjv.io/DyaJob" target="_blank" rel="noopener" class="btn btn-large btn-white">
+                    Get Domain + Hosting →
+                </a>
+                <p class="cta-note">Includes free SSL certificate and 24/7 support</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBWSK</h3>
+                    <p>Free tools for small business owners to launch successful websites.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="domain-checker.html">Domain Checker</a></li>
+                        <li><a href="quote-estimator.html">Quote Estimator</a></li>
+                        <li><a href="name-generator.html">Name Generator</a></li>
+                        <li><a href="checklist.html">Launch Checklist</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="https://bluehost.sjv.io/DyaJob" target="_blank" rel="noopener">Get Hosting</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Small Business Website Starter Kit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/domain-checker.js"></script>
+</body>
+</html>

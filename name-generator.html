@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate creative business names for your company. Get instant domain availability checks and find the perfect name.">
+    <title>Business Name Generator - SBWSK</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://bluehost.sjv.io">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1 class="logo">SBWSK</h1>
+                <span class="tagline">Small Business Website Starter Kit</span>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="domain-checker.html">Domain Checker</a></li>
+                <li><a href="quote-estimator.html">Get Quote</a></li>
+                <li><a href="name-generator.html" class="active">Name Generator</a></li>
+                <li><a href="checklist.html">Launch Checklist</a></li>
+                <li><a href="index.html#contact" class="btn btn-primary">Work With Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="tools-section">
+        <div class="container">
+            <!-- Header -->
+            <div class="text-center mb-3">
+                <h2 class="section-title">Business Name Generator</h2>
+                <p class="section-subtitle">Generate creative, memorable names for your business</p>
+            </div>
+
+            <!-- Generator Form -->
+            <div class="tool-card" style="max-width: 700px; margin: 0 auto 2rem;">
+                <form id="nameGeneratorForm">
+                    <div class="form-group">
+                        <label for="businessType">Business Type *</label>
+                        <select id="businessType" name="businessType" required>
+                            <option value="">Select your industry...</option>
+                            <option value="contractor">Contractor / Construction</option>
+                            <option value="plumbing">Plumbing</option>
+                            <option value="electrical">Electrical</option>
+                            <option value="hvac">HVAC</option>
+                            <option value="landscaping">Landscaping / Lawn Care</option>
+                            <option value="cleaning">Cleaning Services</option>
+                            <option value="legal">Legal / Law Firm</option>
+                            <option value="accounting">Accounting / Finance</option>
+                            <option value="consulting">Consulting</option>
+                            <option value="realestate">Real Estate</option>
+                            <option value="salon">Salon / Beauty</option>
+                            <option value="fitness">Fitness / Gym</option>
+                            <option value="restaurant">Restaurant / Cafe</option>
+                            <option value="bakery">Bakery</option>
+                            <option value="retail">Retail / Shop</option>
+                            <option value="tech">Technology / IT</option>
+                            <option value="medical">Medical / Healthcare</option>
+                            <option value="dental">Dental</option>
+                            <option value="pet">Pet Services</option>
+                            <option value="auto">Auto / Mechanic</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="keywords">Keywords (optional)</label>
+                        <input
+                            type="text"
+                            id="keywords"
+                            name="keywords"
+                            placeholder="e.g., quality, expert, family, pro"
+                        >
+                        <p class="form-help">Add descriptive words to include in your business name</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location (optional)</label>
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="e.g., Boston, Central Mass"
+                        >
+                        <p class="form-help">Include your city or region in the name</p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large btn-block">
+                        Generate Names
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results Container -->
+            <div id="resultsContainer" class="hidden"></div>
+        </div>
+    </main>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Found the Perfect Name?</h2>
+                <p>Register your domain and get hosting to bring your business online</p>
+                <a href="https://bluehost.sjv.io/DyaJob" target="_blank" rel="noopener" class="btn btn-large btn-white">
+                    Get Domain + Hosting →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBWSK</h3>
+                    <p>Free tools for small business owners to launch successful websites.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="domain-checker.html">Domain Checker</a></li>
+                        <li><a href="quote-estimator.html">Quote Estimator</a></li>
+                        <li><a href="name-generator.html">Name Generator</a></li>
+                        <li><a href="checklist.html">Launch Checklist</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="https://bluehost.sjv.io/DyaJob" target="_blank" rel="noopener">Get Hosting</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Small Business Website Starter Kit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/name-generator.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "sbwsk",
+  "version": "1.0.0",
+  "description": "Small Business Website Starter Kit - Free tools for small business owners",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve",
+    "test": "node api/submit-lead.js"
+  },
+  "keywords": [
+    "small-business",
+    "website",
+    "tools",
+    "domain-checker",
+    "quote-estimator"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {}
+}

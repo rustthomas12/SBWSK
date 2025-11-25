@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get an instant website cost estimate. Answer a few questions to receive a personalized quote for your small business website.">
+    <title>Website Quote Estimator - SBWSK</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://bluehost.sjv.io">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1 class="logo">SBWSK</h1>
+                <span class="tagline">Small Business Website Starter Kit</span>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="domain-checker.html">Domain Checker</a></li>
+                <li><a href="quote-estimator.html" class="active">Get Quote</a></li>
+                <li><a href="name-generator.html">Name Generator</a></li>
+                <li><a href="checklist.html">Launch Checklist</a></li>
+                <li><a href="index.html#contact" class="btn btn-primary">Work With Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="tools-section">
+        <div class="container">
+            <!-- Header -->
+            <div class="text-center mb-3">
+                <h2 class="section-title">Website Quote Estimator</h2>
+                <p class="section-subtitle">Get an instant estimate for your website project</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div style="max-width: 600px; margin: 0 auto 2rem;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+                </div>
+                <p class="text-center text-muted" id="progressText">Step 1 of 5</p>
+            </div>
+
+            <!-- Quiz Container -->
+            <div id="quizContainer" style="max-width: 700px; margin: 0 auto;">
+                <!-- Step 1: Business Type -->
+                <div class="quiz-step active tool-card" data-step="1">
+                    <h3 style="margin-bottom: 1.5rem;">What type of business do you have?</h3>
+                    <div class="option-grid">
+                        <label class="option-card">
+                            <input type="radio" name="businessType" value="contractor" required>
+                            <div class="option-icon">🔨</div>
+                            <span class="option-label">Contractor / Trade</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="businessType" value="professional" required>
+                            <div class="option-icon">💼</div>
+                            <span class="option-label">Professional Services</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="businessType" value="retail" required>
+                            <div class="option-icon">🛍️</div>
+                            <span class="option-label">Retail / Shop</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="businessType" value="food" required>
+                            <div class="option-icon">🍽️</div>
+                            <span class="option-label">Restaurant / Food</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="businessType" value="health" required>
+                            <div class="option-icon">⚕️</div>
+                            <span class="option-label">Healthcare / Wellness</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="businessType" value="other" required>
+                            <div class="option-icon">📋</div>
+                            <span class="option-label">Other</span>
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-large btn-block" onclick="nextStep()">
+                        Continue →
+                    </button>
+                </div>
+
+                <!-- Step 2: Number of Pages -->
+                <div class="quiz-step tool-card" data-step="2">
+                    <h3 style="margin-bottom: 1.5rem;">How many pages do you need?</h3>
+                    <div class="option-grid">
+                        <label class="option-card">
+                            <input type="radio" name="pageCount" value="1-3" required>
+                            <div class="option-icon">📄</div>
+                            <span class="option-label">1-3 Pages</span>
+                            <small style="display: block; color: var(--text-secondary); margin-top: 0.5rem;">
+                                Basic site
+                            </small>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="pageCount" value="4-6" required>
+                            <div class="option-icon">📑</div>
+                            <span class="option-label">4-6 Pages</span>
+                            <small style="display: block; color: var(--text-secondary); margin-top: 0.5rem;">
+                                Standard site
+                            </small>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="pageCount" value="7-10" required>
+                            <div class="option-icon">📚</div>
+                            <span class="option-label">7-10 Pages</span>
+                            <small style="display: block; color: var(--text-secondary); margin-top: 0.5rem;">
+                                Comprehensive site
+                            </small>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="pageCount" value="10+" required>
+                            <div class="option-icon">🗂️</div>
+                            <span class="option-label">10+ Pages</span>
+                            <small style="display: block; color: var(--text-secondary); margin-top: 0.5rem;">
+                                Large site
+                            </small>
+                        </label>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()" style="flex: 1;">
+                            ← Back
+                        </button>
+                        <button type="button" class="btn btn-primary btn-large" onclick="nextStep()" style="flex: 2;">
+                            Continue →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Features -->
+                <div class="quiz-step tool-card" data-step="3">
+                    <h3 style="margin-bottom: 1rem;">What features do you need?</h3>
+                    <p class="text-muted" style="margin-bottom: 1.5rem;">Select all that apply</p>
+                    <div class="option-grid">
+                        <label class="option-card">
+                            <input type="checkbox" name="features" value="blog">
+                            <div class="option-icon">✍️</div>
+                            <span class="option-label">Blog</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="checkbox" name="features" value="booking">
+                            <div class="option-icon">📅</div>
+                            <span class="option-label">Online Booking</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="checkbox" name="features" value="gallery">
+                            <div class="option-icon">🖼️</div>
+                            <span class="option-label">Photo Gallery</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="checkbox" name="features" value="ecommerce">
+                            <div class="option-icon">🛒</div>
+                            <span class="option-label">Online Store</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="checkbox" name="features" value="payments">
+                            <div class="option-icon">💳</div>
+                            <span class="option-label">Payment Processing</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="checkbox" name="features" value="forms">
+                            <div class="option-icon">📝</div>
+                            <span class="option-label">Custom Forms</span>
+                        </label>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()" style="flex: 1;">
+                            ← Back
+                        </button>
+                        <button type="button" class="btn btn-primary btn-large" onclick="nextStep()" style="flex: 2;">
+                            Continue →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Design Level -->
+                <div class="quiz-step tool-card" data-step="4">
+                    <h3 style="margin-bottom: 1.5rem;">What design level do you prefer?</h3>
+                    <div class="option-grid" style="grid-template-columns: 1fr;">
+                        <label class="option-card">
+                            <input type="radio" name="designLevel" value="basic" required>
+                            <div style="text-align: left;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <span class="option-label">Basic Template</span>
+                                    <span class="badge badge-success">Most Affordable</span>
+                                </div>
+                                <small style="display: block; color: var(--text-secondary);">
+                                    Pre-designed template with your content and branding
+                                </small>
+                            </div>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="designLevel" value="custom" required>
+                            <div style="text-align: left;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <span class="option-label">Custom Design</span>
+                                    <span class="badge badge-primary">Popular</span>
+                                </div>
+                                <small style="display: block; color: var(--text-secondary);">
+                                    Unique design tailored to your brand and industry
+                                </small>
+                            </div>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="designLevel" value="premium" required>
+                            <div style="text-align: left;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <span class="option-label">Premium Custom</span>
+                                    <span class="badge badge-secondary">Best Quality</span>
+                                </div>
+                                <small style="display: block; color: var(--text-secondary);">
+                                    High-end design with animations, advanced features, and optimization
+                                </small>
+                            </div>
+                        </label>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()" style="flex: 1;">
+                            ← Back
+                        </button>
+                        <button type="button" class="btn btn-primary btn-large" onclick="calculateQuote()" style="flex: 2;">
+                            Get My Quote →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Results -->
+                <div class="quiz-step tool-card" data-step="5" style="display: none;">
+                    <div id="quoteResults"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBWSK</h3>
+                    <p>Free tools for small business owners to launch successful websites.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="domain-checker.html">Domain Checker</a></li>
+                        <li><a href="quote-estimator.html">Quote Estimator</a></li>
+                        <li><a href="name-generator.html">Name Generator</a></li>
+                        <li><a href="checklist.html">Launch Checklist</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="https://bluehost.sjv.io/DyaJob" target="_blank" rel="noopener">Get Hosting</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Small Business Website Starter Kit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/quote-estimator.js"></script>
+</body>
+</html>
