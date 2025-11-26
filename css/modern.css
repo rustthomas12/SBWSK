@@ -436,3 +436,240 @@ textarea:focus {
         transform: rotate(360deg);
     }
 }
+
+/* Enhanced Floating Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(14, 165, 233, 0.8);
+    }
+}
+
+/* Animated Background Gradient for Hero */
+.hero {
+    background: linear-gradient(-45deg, #0ea5e9, #06b6d4, #3b82f6, #8b5cf6);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Floating Icons */
+.tool-icon {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Stagger animation for tool cards */
+.tool-card:nth-child(1) {
+    animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+
+.tool-card:nth-child(2) {
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.tool-card:nth-child(3) {
+    animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+.tool-card:nth-child(4) {
+    animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+/* Glowing CTA Button */
+.btn-primary:hover {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Enhanced Navbar with Shadow on Scroll */
+.navbar.scrolled {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.98);
+}
+
+/* Parallax Hero Effect */
+.hero-content {
+    animation: slideInFromLeft 0.8s ease-out;
+}
+
+/* Interactive Form Elements with Ripple Effect */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Colorful Underline for Links */
+.nav-menu a {
+    position: relative;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+    width: 100%;
+}
+
+/* Enhanced Footer with Gradient */
+.footer {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+}
+
+/* Tool Card Enhanced Hover Effects */
+.tool-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.tool-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    background: linear-gradient(to bottom, rgba(14, 165, 233, 0) 0%, rgba(14, 165, 233, 0.1) 50%, rgba(14, 165, 233, 0) 100%);
+    transform: rotateZ(60deg) translate(-5em, 7.5em);
+    transition: transform 0.6s ease-out;
+}
+
+.tool-card:hover::after {
+    transform: rotateZ(60deg) translate(25em, -15em);
+}
+
+/* Smooth Page Load Animation */
+body {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* CTA Section with Animated Particles */
+.cta-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="stars" width="200" height="200" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1.5" fill="rgba(255,255,255,0.3)"/><circle cx="150" cy="100" r="1" fill="rgba(255,255,255,0.2)"/><circle cx="100" cy="150" r="2" fill="rgba(255,255,255,0.4)"/></pattern></defs><rect width="200" height="200" fill="url(%23stars)"/></svg>');
+    animation: float 20s linear infinite;
+}
+
+/* Enhanced Button Styles */
+.btn-white {
+    background: white;
+    color: var(--color-primary);
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+}
+
+.btn-white:hover {
+    background: #f9fafb;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
+}
+
+/* Section Dividers */
+.section-divider {
+    height: 4px;
+    width: 80px;
+    background: var(--gradient-primary);
+    margin: 2rem auto;
+    border-radius: 2px;
+}

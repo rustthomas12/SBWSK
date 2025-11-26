@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <title>404 - Page Not Found | SBWSK</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/modern.css">
+
+    <style>
+        .error-404 {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .error-content {
+            max-width: 600px;
+        }
+
+        .error-code {
+            font-size: 10rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .error-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .error-suggestions {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .error-suggestions h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .error-links a {
+            color: white;
+            text-decoration: underline;
+            font-size: 1.125rem;
+            transition: opacity 0.2s;
+        }
+
+        .error-links a:hover {
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+
+            .error-title {
+                font-size: 2rem;
+            }
+
+            .error-message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-404">
+        <div class="error-content">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Oops! Page Not Found</h1>
+            <p class="error-message">
+                The page you're looking for seems to have wandered off. Don't worry, even the best websites have their moments!
+            </p>
+
+            <div class="error-actions">
+                <a href="index.html" class="btn btn-large" style="background: white; color: #0ea5e9;">
+                    🏠 Go Home
+                </a>
+                <a href="index.html#contact" class="btn btn-large" style="background: rgba(255, 255, 255, 0.2); color: white; border: 2px solid white;">
+                    📧 Contact Us
+                </a>
+            </div>
+
+            <div class="error-suggestions">
+                <h3>Looking for something specific?</h3>
+                <div class="error-links">
+                    <a href="domain-checker.html">→ Check Domain Availability</a>
+                    <a href="quote-estimator.html">→ Get a Website Quote</a>
+                    <a href="checklist.html">→ Launch Checklist</a>
+                    <a href="blog.html">→ Read Our Blog</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

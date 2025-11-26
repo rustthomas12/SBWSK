@@ -146,6 +146,17 @@ a:hover {
     color: var(--primary-color);
 }
 
+.logo-img {
+    height: 50px;
+    width: auto;
+    display: block;
+    transition: transform var(--transition-base);
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
 .tagline {
     font-size: 0.75rem;
     color: var(--text-secondary);

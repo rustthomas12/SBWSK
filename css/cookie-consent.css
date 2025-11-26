@@ -1,0 +1,103 @@
+/* Cookie Consent Banner Styles */
+.cookie-consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    color: white;
+    padding: 1.5rem;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+    border-top: 3px solid #0ea5e9;
+}
+
+.cookie-consent-banner.show {
+    transform: translateY(0);
+}
+
+.cookie-consent-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.cookie-consent-text h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    color: white;
+}
+
+.cookie-consent-text p {
+    margin: 0;
+    font-size: 0.95rem;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+.cookie-consent-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.cookie-consent-buttons .btn {
+    white-space: nowrap;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+}
+
+.cookie-consent-buttons .btn-secondary {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+.cookie-consent-buttons .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+}
+
+.cookie-learn-more {
+    color: #38bdf8;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.cookie-learn-more:hover {
+    color: #0ea5e9;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .cookie-consent-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cookie-consent-buttons {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .cookie-consent-buttons .btn {
+        flex: 1;
+        min-width: 140px;
+    }
+
+    .cookie-consent-text h3 {
+        font-size: 1.1rem;
+    }
+
+    .cookie-consent-text p {
+        font-size: 0.875rem;
+    }
+}

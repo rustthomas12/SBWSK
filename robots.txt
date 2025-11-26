@@ -1,0 +1,17 @@
+# robots.txt for SBWSK
+# https://www.robotstxt.org/
+
+User-agent: *
+Allow: /
+
+# Disallow admin/api directories
+Disallow: /api/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.vercel/
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Crawl-delay for good citizenship
+Crawl-delay: 1
