@@ -39,22 +39,53 @@ function extractPrice(html, pattern) {
 
 /**
  * Extract promotional/discounted prices
- * Looks for common discount patterns like strikethrough, sale prices, etc.
+ * Returns object with both regular and promo prices if found
  */
-function extractPromoPrice(html, extension) {
-    // Common promo patterns
-    const patterns = [
-        new RegExp(`${extension}[^$]*(?:sale|promo|discount|now)[^$]*\\$(\\d+\\.\\d+)`, 'i'),
-        new RegExp(`${extension}[^$]*<strike[^>]*>.*?</strike>[^$]*\\$(\\d+\\.\\d+)`, 'i'),
-        new RegExp(`${extension}[^$]*(?:was|regular)[^$]*\\$[\\d.]+[^$]*(?:now|sale)[^$]*\\$(\\d+\\.\\d+)`, 'i'),
-        new RegExp(`${extension}[^$]*\\$(\\d+\\.\\d+)[^$]*(?:first year|promotional)`, 'i')
-    ];
+function extractPromoPricing(html, extension) {
+    const result = { regular: null, promo: null };
 
-    for (const pattern of patterns) {
-        const price = extractPrice(html, pattern);
-        if (price) return price;
+    // Pattern 1: Look for strikethrough/crossed-out price followed by sale price
+    const strikethroughPattern = new RegExp(
+        `${extension}[^$]*<(?:strike|s|del)[^>]*>\\s*\\$([\\d.]+)[^<]*</(?:strike|s|del)>[^$]*\\$([\\d.]+)`,
+        'i'
+    );
+    let match = html.match(strikethroughPattern);
+    if (match) {
+        result.regular = parseFloat(match[1]);
+        result.promo = parseFloat(match[2]);
+        return result;
     }
-    return null;
+
+    // Pattern 2: Look for "was $X now $Y" pattern
+    const wasNowPattern = new RegExp(
+        `${extension}[^$]*(?:was|regular)[^$]*\\$([\\d.]+)[^$]*(?:now|sale)[^$]*\\$([\\d.]+)`,
+        'i'
+    );
+    match = html.match(wasNowPattern);
+    if (match) {
+        result.regular = parseFloat(match[1]);
+        result.promo = parseFloat(match[2]);
+        return result;
+    }
+
+    // Pattern 3: Look for discount percentage with price
+    const discountPattern = new RegExp(
+        `${extension}[^$]*(?:save|off)[^$]*\\d+%[^$]*\\$([\\d.]+)`,
+        'i'
+    );
+    match = html.match(discountPattern);
+    if (match) {
+        result.promo = parseFloat(match[1]);
+        // If we find promotion info, calculate regular price if discount % is available
+        const percentMatch = html.match(/(\d+)%\s*(?:off|discount|save)/i);
+        if (percentMatch && result.promo) {
+            const discount = parseInt(percentMatch[1]);
+            result.regular = result.promo / (1 - discount / 100);
+        }
+        return result;
+    }
+
+    return result;
 }
 
 /**
@@ -92,36 +123,42 @@ const priceUpdaters = {
             // Fetch from Hostinger's pricing page
             const html = await httpsGet('https://www.hostinger.com/domain-name-search');
 
-            // Look for regular and promotional pricing
-            const comPrice = extractPrice(html, /\.com[^$]*\$(\d+\.\d+)/i);
-            const comPromo = extractPromoPrice(html, '\\.com');
-            const netPrice = extractPrice(html, /\.net[^$]*\$(\d+\.\d+)/i);
-            const netPromo = extractPromoPrice(html, '\\.net');
-            const orgPrice = extractPrice(html, /\.org[^$]*\$(\d+\.\d+)/i);
-            const orgPromo = extractPromoPrice(html, '\\.org');
+            // Extract regular and promotional pricing
+            const comPricing = extractPromoPricing(html, '\\.com');
+            const netPricing = extractPromoPricing(html, '\\.net');
+            const orgPricing = extractPromoPricing(html, '\\.org');
+
+            // Fallback to regular price extraction if promo pricing not found
+            const comPrice = comPricing.regular || comPricing.promo || extractPrice(html, /\.com[^$]*\$(\d+\.\d+)/i);
+            const netPrice = netPricing.regular || netPricing.promo || extractPrice(html, /\.net[^$]*\$(\d+\.\d+)/i);
+            const orgPrice = orgPricing.regular || orgPricing.promo || extractPrice(html, /\.org[^$]*\$(\d+\.\d+)/i);
 
             // Check for active promotions
             const promotion = extractPromotionInfo(html);
 
-            console.log(`  ${promotion ? '🎉 Active promotion: ' + promotion : '  No active promotions'}`);
+            if (comPricing.promo || netPricing.promo || orgPricing.promo) {
+                console.log(`  🎉 Active promotion detected: ${promotion || 'Sale prices found'}`);
+            } else {
+                console.log(`  ${promotion ? '🎉 Active promotion: ' + promotion : '  No active promotions'}`);
+            }
 
             return {
                 '.com': {
-                    firstYear: comPromo || comPrice || 10.19,
-                    regularPrice: comPrice,
-                    promoPrice: comPromo,
+                    firstYear: comPricing.promo || comPrice || 10.19,
+                    regularPrice: comPricing.regular,
+                    promoPrice: comPricing.promo,
                     renewal: 18.19
                 },
                 '.net': {
-                    firstYear: netPromo || netPrice || 15.19,
-                    regularPrice: netPrice,
-                    promoPrice: netPromo,
+                    firstYear: netPricing.promo || netPrice || 15.19,
+                    regularPrice: netPricing.regular,
+                    promoPrice: netPricing.promo,
                     renewal: 18.19
                 },
                 '.org': {
-                    firstYear: orgPromo || orgPrice || 8.19,
-                    regularPrice: orgPrice,
-                    promoPrice: orgPromo,
+                    firstYear: orgPricing.promo || orgPrice || 8.19,
+                    regularPrice: orgPricing.regular,
+                    promoPrice: orgPricing.promo,
                     renewal: 16.19
                 },
                 '.co': { firstYear: 11.99, renewal: 32.99 },
@@ -147,33 +184,39 @@ const priceUpdaters = {
         try {
             const html = await httpsGet('https://www.godaddy.com/domains/domain-name-search');
 
-            const comPrice = extractPrice(html, /\.com[^$]*\$(\d+\.\d+)/i);
-            const comPromo = extractPromoPrice(html, '\\.com');
-            const netPrice = extractPrice(html, /\.net[^$]*\$(\d+\.\d+)/i);
-            const netPromo = extractPromoPrice(html, '\\.net');
-            const orgPrice = extractPrice(html, /\.org[^$]*\$(\d+\.\d+)/i);
-            const orgPromo = extractPromoPrice(html, '\\.org');
+            const comPricing = extractPromoPricing(html, '\\.com');
+            const netPricing = extractPromoPricing(html, '\\.net');
+            const orgPricing = extractPromoPricing(html, '\\.org');
+
+            const comPrice = comPricing.regular || comPricing.promo || extractPrice(html, /\.com[^$]*\$(\d+\.\d+)/i);
+            const netPrice = netPricing.regular || netPricing.promo || extractPrice(html, /\.net[^$]*\$(\d+\.\d+)/i);
+            const orgPrice = orgPricing.regular || orgPricing.promo || extractPrice(html, /\.org[^$]*\$(\d+\.\d+)/i);
 
             const promotion = extractPromotionInfo(html);
-            console.log(`  ${promotion ? '🎉 Active promotion: ' + promotion : '  No active promotions'}`);
+
+            if (comPricing.promo || netPricing.promo || orgPricing.promo) {
+                console.log(`  🎉 Active promotion detected: ${promotion || 'Sale prices found'}`);
+            } else {
+                console.log(`  ${promotion ? '🎉 Active promotion: ' + promotion : '  No active promotions'}`);
+            }
 
             return {
                 '.com': {
-                    firstYear: comPromo || comPrice || 11.99,
-                    regularPrice: comPrice,
-                    promoPrice: comPromo,
+                    firstYear: comPricing.promo || comPrice || 11.99,
+                    regularPrice: comPricing.regular,
+                    promoPrice: comPricing.promo,
                     renewal: 24.99
                 },
                 '.net': {
-                    firstYear: netPromo || netPrice || 14.99,
-                    regularPrice: netPrice,
-                    promoPrice: netPromo,
+                    firstYear: netPricing.promo || netPrice || 14.99,
+                    regularPrice: netPricing.regular,
+                    promoPrice: netPricing.promo,
                     renewal: 24.99
                 },
                 '.org': {
-                    firstYear: orgPromo || orgPrice || 14.99,
-                    regularPrice: orgPrice,
-                    promoPrice: orgPromo,
+                    firstYear: orgPricing.promo || orgPrice || 14.99,
+                    regularPrice: orgPricing.regular,
+                    promoPrice: orgPricing.promo,
                     renewal: 24.99
                 },
                 '.co': { firstYear: 24.99, renewal: 39.99 },
@@ -199,33 +242,39 @@ const priceUpdaters = {
         try {
             const html = await httpsGet('https://www.siteground.com/domain-names');
 
-            const comPrice = extractPrice(html, /\.com[^$]*\$(\d+\.\d+)/i);
-            const comPromo = extractPromoPrice(html, '\\.com');
-            const netPrice = extractPrice(html, /\.net[^$]*\$(\d+\.\d+)/i);
-            const netPromo = extractPromoPrice(html, '\\.net');
-            const orgPrice = extractPrice(html, /\.org[^$]*\$(\d+\.\d+)/i);
-            const orgPromo = extractPromoPrice(html, '\\.org');
+            const comPricing = extractPromoPricing(html, '\\.com');
+            const netPricing = extractPromoPricing(html, '\\.net');
+            const orgPricing = extractPromoPricing(html, '\\.org');
+
+            const comPrice = comPricing.regular || comPricing.promo || extractPrice(html, /\.com[^$]*\$(\d+\.\d+)/i);
+            const netPrice = netPricing.regular || netPricing.promo || extractPrice(html, /\.net[^$]*\$(\d+\.\d+)/i);
+            const orgPrice = orgPricing.regular || orgPricing.promo || extractPrice(html, /\.org[^$]*\$(\d+\.\d+)/i);
 
             const promotion = extractPromotionInfo(html);
-            console.log(`  ${promotion ? '🎉 Active promotion: ' + promotion : '  No active promotions'}`);
+
+            if (comPricing.promo || netPricing.promo || orgPricing.promo) {
+                console.log(`  🎉 Active promotion detected: ${promotion || 'Sale prices found'}`);
+            } else {
+                console.log(`  ${promotion ? '🎉 Active promotion: ' + promotion : '  No active promotions'}`);
+            }
 
             return {
                 '.com': {
-                    firstYear: comPromo || comPrice || 15.95,
-                    regularPrice: comPrice,
-                    promoPrice: comPromo,
+                    firstYear: comPricing.promo || comPrice || 15.95,
+                    regularPrice: comPricing.regular,
+                    promoPrice: comPricing.promo,
                     renewal: 19.99
                 },
                 '.net': {
-                    firstYear: netPromo || netPrice || 17.95,
-                    regularPrice: netPrice,
-                    promoPrice: netPromo,
+                    firstYear: netPricing.promo || netPrice || 17.95,
+                    regularPrice: netPricing.regular,
+                    promoPrice: netPricing.promo,
                     renewal: 21.99
                 },
                 '.org': {
-                    firstYear: orgPromo || orgPrice || 17.95,
-                    regularPrice: orgPrice,
-                    promoPrice: orgPromo,
+                    firstYear: orgPricing.promo || orgPrice || 17.95,
+                    regularPrice: orgPricing.regular,
+                    promoPrice: orgPricing.promo,
                     renewal: 21.99
                 },
                 '.co': { firstYear: 29.95, renewal: 39.99 },
