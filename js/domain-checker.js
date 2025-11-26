@@ -56,29 +56,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  * Price data from multiple providers (updated 2025)
+ * firstYear: Initial registration price
+ * renewal: Annual renewal price
  */
 const PROVIDER_PRICING = {
     'Bluehost': {
-        '.com': 12.99, '.net': 13.99, '.org': 12.99, '.co': 24.99, '.io': 39.99, '.biz': 15.99,
+        '.com': { firstYear: 0, renewal: 17.99 },
+        '.net': { firstYear: 0, renewal: 18.99 },
+        '.org': { firstYear: 0, renewal: 16.99 },
+        '.co': { firstYear: 0, renewal: 29.99 },
+        '.io': { firstYear: 0, renewal: 59.99 },
+        '.biz': { firstYear: 0, renewal: 19.99 },
         url: 'https://bluehost.sjv.io/DyaJob',
         note: 'Free* with hosting plan',
         isFreeWithHosting: true,
         priority: 0
     },
+    'Hostinger': {
+        '.com': { firstYear: 9.99, renewal: 15.99 },
+        '.net': { firstYear: 12.99, renewal: 16.99 },
+        '.org': { firstYear: 14.99, renewal: 17.99 },
+        '.co': { firstYear: 9.99, renewal: 32.99 },
+        '.io': { firstYear: 39.99, renewal: 59.99 },
+        '.biz': { firstYear: 13.99, renewal: 17.99 },
+        url: 'https://www.hostinger.com',
+        note: 'Low first year price'
+    },
     'GoDaddy': {
-        '.com': 11.99, '.net': 15.99, '.org': 14.99, '.co': 29.99, '.io': 49.99, '.biz': 14.99,
+        '.com': { firstYear: 11.99, renewal: 19.99 },
+        '.net': { firstYear: 15.99, renewal: 19.99 },
+        '.org': { firstYear: 14.99, renewal: 19.99 },
+        '.co': { firstYear: 24.99, renewal: 34.99 },
+        '.io': { firstYear: 49.99, renewal: 69.99 },
+        '.biz': { firstYear: 14.99, renewal: 19.99 },
         url: 'https://www.godaddy.com',
-        note: 'Renewal $19.99/yr'
+        note: 'Popular choice'
     },
-    'Namecheap': {
-        '.com': 9.58, '.net': 12.98, '.org': 10.98, '.co': 8.88, '.io': 32.98, '.biz': 11.98,
-        url: 'https://www.namecheap.com',
-        note: 'Best value'
-    },
-    'Google Domains': {
-        '.com': 12.00, '.net': 12.00, '.org': 12.00, '.co': 30.00, '.io': 60.00, '.biz': 12.00,
-        url: 'https://domains.google',
-        note: 'No renewal price hikes'
+    'SiteGround': {
+        '.com': { firstYear: 15.95, renewal: 17.95 },
+        '.net': { firstYear: 17.95, renewal: 19.95 },
+        '.org': { firstYear: 17.95, renewal: 19.95 },
+        '.co': { firstYear: 29.95, renewal: 34.95 },
+        '.io': { firstYear: 59.95, renewal: 69.95 },
+        '.biz': { firstYear: 17.95, renewal: 19.95 },
+        url: 'https://www.siteground.com',
+        note: 'Consistent pricing'
     }
 };
 
@@ -103,9 +125,10 @@ async function checkMultipleTLDs(domainName) {
         const fullDomain = domainName + tld.extension;
         const availability = await checkDomainAvailability(fullDomain);
 
-        // Get lowest price across providers
+        // Get lowest first year price across providers
         const prices = Object.keys(PROVIDER_PRICING).map(provider => {
-            return PROVIDER_PRICING[provider][tld.extension] || 99.99;
+            const pricing = PROVIDER_PRICING[provider][tld.extension];
+            return pricing ? pricing.firstYear : 99.99;
         });
         const lowestPrice = Math.min(...prices);
 
@@ -314,26 +337,44 @@ function createDomainResultCard(result, available) {
                 <div style="display: grid; gap: 0.5rem;">
         `;
 
-        // Sort providers - Bluehost first (priority 0), then by price
+        // Sort providers - Bluehost first (priority 0), then by first year price
         const providersByPrice = Object.keys(PROVIDER_PRICING)
-            .map(provider => ({
-                name: provider,
-                price: PROVIDER_PRICING[provider][result.extension] || 99.99,
-                url: PROVIDER_PRICING[provider].url,
-                note: PROVIDER_PRICING[provider].note,
-                priority: PROVIDER_PRICING[provider].priority || 999,
-                isFreeWithHosting: PROVIDER_PRICING[provider].isFreeWithHosting || false
-            }))
+            .map(provider => {
+                const pricing = PROVIDER_PRICING[provider][result.extension];
+                return {
+                    name: provider,
+                    firstYear: pricing ? pricing.firstYear : 99.99,
+                    renewal: pricing ? pricing.renewal : 99.99,
+                    url: PROVIDER_PRICING[provider].url,
+                    note: PROVIDER_PRICING[provider].note,
+                    priority: PROVIDER_PRICING[provider].priority || 999,
+                    isFreeWithHosting: PROVIDER_PRICING[provider].isFreeWithHosting || false
+                };
+            })
             .sort((a, b) => {
                 if (a.priority !== b.priority) return a.priority - b.priority;
-                return a.price - b.price;
+                return a.firstYear - b.firstYear;
             });
 
         providersByPrice.forEach((provider, index) => {
             const isFirst = index === 0;
-            const priceDisplay = provider.isFreeWithHosting
-                ? '<span style="font-size: 1.125rem; font-weight: 700; color: #10b981;">Free*</span>'
-                : `<span style="font-size: 1.125rem; font-weight: 700; color: #1e293b;">${formatCurrency(provider.price)}/yr</span>`;
+
+            let priceDisplay;
+            if (provider.isFreeWithHosting) {
+                priceDisplay = `
+                    <div style="text-align: right;">
+                        <div style="font-size: 1.125rem; font-weight: 700; color: #10b981;">Free*</div>
+                        <div style="font-size: 0.75rem; color: #64748b;">Then ${formatCurrency(provider.renewal)}/yr</div>
+                    </div>
+                `;
+            } else {
+                priceDisplay = `
+                    <div style="text-align: right;">
+                        <div style="font-size: 1.125rem; font-weight: 700; color: #1e293b;">${formatCurrency(provider.firstYear)}</div>
+                        <div style="font-size: 0.75rem; color: #64748b;">Renews ${formatCurrency(provider.renewal)}/yr</div>
+                    </div>
+                `;
+            }
 
             priceComparisonHTML += `
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: white; border-radius: 4px; border: ${isFirst ? '2px solid #10b981' : '1px solid #e2e8f0'};">
