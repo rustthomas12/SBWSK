@@ -164,9 +164,13 @@ a:hover {
 }
 
 .tagline {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    display: none;
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    line-height: 1.3;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 .nav-toggle {
@@ -407,9 +411,9 @@ a:hover {
     }
 }
 
-@media (min-width: 769px) {
+@media (max-width: 768px) {
     .tagline {
-        display: inline;
+        font-size: 0.875rem;
     }
 }
 
