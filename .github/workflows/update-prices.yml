@@ -2,8 +2,8 @@ name: Update Domain Prices
 
 on:
   schedule:
-    # Runs every Monday at 9:00 AM UTC
-    - cron: '0 9 * * 1'
+    # Runs every 3 days at 9:00 AM UTC (more frequent to catch price changes)
+    - cron: '0 9 */3 * *'
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab
 
 jobs:
