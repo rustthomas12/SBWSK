@@ -61,7 +61,9 @@ const PROVIDER_PRICING = {
     'Bluehost': {
         '.com': 12.99, '.net': 13.99, '.org': 12.99, '.co': 24.99, '.io': 39.99, '.biz': 15.99,
         url: 'https://bluehost.sjv.io/DyaJob',
-        note: 'Free domain with hosting'
+        note: 'Free* with hosting plan',
+        isFreeWithHosting: true,
+        priority: 0
     },
     'GoDaddy': {
         '.com': 11.99, '.net': 15.99, '.org': 14.99, '.co': 29.99, '.io': 49.99, '.biz': 14.99,
@@ -213,16 +215,7 @@ function displayResults(domainName, results) {
             </h3>
     `;
 
-    // Show available domains first
-    if (available.length > 0) {
-        html += `<div style="margin-bottom: 2rem;">`;
-        available.forEach(result => {
-            html += createDomainResultCard(result, true);
-        });
-        html += `</div>`;
-    }
-
-    // Show unavailable domains
+    // Show unavailable domains first
     if (unavailable.length > 0) {
         html += `
             <h4 style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 1.125rem;">
@@ -231,6 +224,19 @@ function displayResults(domainName, results) {
         `;
         unavailable.forEach(result => {
             html += createDomainResultCard(result, false);
+        });
+        html += `<div style="margin-bottom: 2rem;"></div>`;
+    }
+
+    // Show available domains
+    if (available.length > 0) {
+        html += `
+            <h4 style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 1.125rem;">
+                Available Domains
+            </h4>
+        `;
+        available.forEach(result => {
+            html += createDomainResultCard(result, true);
         });
     }
 
@@ -308,27 +314,35 @@ function createDomainResultCard(result, available) {
                 <div style="display: grid; gap: 0.5rem;">
         `;
 
-        // Sort providers by price for this extension
+        // Sort providers - Bluehost first (priority 0), then by price
         const providersByPrice = Object.keys(PROVIDER_PRICING)
             .map(provider => ({
                 name: provider,
                 price: PROVIDER_PRICING[provider][result.extension] || 99.99,
                 url: PROVIDER_PRICING[provider].url,
-                note: PROVIDER_PRICING[provider].note
+                note: PROVIDER_PRICING[provider].note,
+                priority: PROVIDER_PRICING[provider].priority || 999,
+                isFreeWithHosting: PROVIDER_PRICING[provider].isFreeWithHosting || false
             }))
-            .sort((a, b) => a.price - b.price);
+            .sort((a, b) => {
+                if (a.priority !== b.priority) return a.priority - b.priority;
+                return a.price - b.price;
+            });
 
         providersByPrice.forEach((provider, index) => {
-            const isLowest = index === 0;
+            const isFirst = index === 0;
+            const priceDisplay = provider.isFreeWithHosting
+                ? '<span style="font-size: 1.125rem; font-weight: 700; color: #10b981;">Free*</span>'
+                : `<span style="font-size: 1.125rem; font-weight: 700; color: #1e293b;">${formatCurrency(provider.price)}/yr</span>`;
+
             priceComparisonHTML += `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: white; border-radius: 4px; border: ${isLowest ? '2px solid #10b981' : '1px solid #e2e8f0'};">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: white; border-radius: 4px; border: ${isFirst ? '2px solid #10b981' : '1px solid #e2e8f0'};">
                     <div>
                         <span style="font-weight: 600; color: #1e293b;">${provider.name}</span>
-                        ${isLowest ? '<span style="margin-left: 0.5rem; padding: 0.125rem 0.5rem; background: #10b981; color: white; font-size: 0.75rem; border-radius: 4px; font-weight: 600;">BEST PRICE</span>' : ''}
                         <span style="display: block; font-size: 0.75rem; color: #64748b;">${provider.note}</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 0.75rem;">
-                        <span style="font-size: 1.125rem; font-weight: 700; color: #1e293b;">${formatCurrency(provider.price)}/yr</span>
+                        ${priceDisplay}
                         <a href="${provider.url}" target="_blank" rel="noopener" class="btn btn-sm"
                            style="padding: 0.375rem 0.75rem; font-size: 0.875rem; white-space: nowrap;"
                            onclick="trackAffiliateClick('${provider.name.toLowerCase()}-${result.domain}')">
@@ -341,6 +355,9 @@ function createDomainResultCard(result, available) {
 
         priceComparisonHTML += `
                 </div>
+                <p style="font-size: 0.75rem; color: #64748b; margin-top: 0.5rem; font-style: italic;">
+                    *Free for first year when purchased with a hosting plan
+                </p>
             </div>
         `;
     }
