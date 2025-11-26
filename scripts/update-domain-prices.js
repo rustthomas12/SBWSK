@@ -11,6 +11,18 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
+// Load manual promotional price overrides
+let promoOverrides = {};
+try {
+    const overridesPath = path.join(__dirname, 'promo-overrides.json');
+    if (fs.existsSync(overridesPath)) {
+        promoOverrides = JSON.parse(fs.readFileSync(overridesPath, 'utf8'));
+        console.log('📋 Loaded manual promotional overrides');
+    }
+} catch (error) {
+    console.warn('Could not load promo-overrides.json:', error.message);
+}
+
 /**
  * Make HTTPS request and return response data
  */
@@ -23,6 +35,53 @@ function httpsGet(url) {
             res.on('end', () => resolve(data));
         }).on('error', reject);
     });
+}
+
+/**
+ * Check if a URL is allowed by robots.txt
+ * Returns true if allowed or if robots.txt can't be fetched
+ */
+async function checkRobotsTxt(baseUrl, path) {
+    try {
+        const robotsUrl = new URL('/robots.txt', baseUrl).toString();
+        const robotsTxt = await httpsGet(robotsUrl);
+
+        // Simple robots.txt parser - check for Disallow rules
+        const lines = robotsTxt.split('\n');
+        let isUserAgentSection = false;
+
+        for (const line of lines) {
+            const trimmed = line.trim().toLowerCase();
+
+            // Check if we're in a relevant User-agent section
+            if (trimmed.startsWith('user-agent:')) {
+                const agent = trimmed.split(':')[1].trim();
+                isUserAgentSection = (agent === '*' || agent === 'bot');
+            }
+
+            // Check Disallow rules in our section
+            if (isUserAgentSection && trimmed.startsWith('disallow:')) {
+                const disallowPath = trimmed.split(':')[1].trim();
+                if (disallowPath && path.startsWith(disallowPath)) {
+                    console.log(`  ⚠️  robots.txt disallows scraping ${path}`);
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    } catch (error) {
+        // If we can't fetch robots.txt, assume it's allowed
+        // (conservative approach - don't block on errors)
+        return true;
+    }
+}
+
+/**
+ * Add delay between requests to be respectful
+ */
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /**
@@ -120,6 +179,13 @@ const priceUpdaters = {
     async fetchHostingerPrices() {
         console.log('Fetching Hostinger prices from pricing page...');
         try {
+            // Check robots.txt before scraping
+            const allowed = await checkRobotsTxt('https://www.hostinger.com', '/domain-name-search');
+            if (!allowed) {
+                console.warn('  Skipping Hostinger (robots.txt restriction)');
+                throw new Error('robots.txt restriction');
+            }
+
             // Fetch from Hostinger's pricing page
             const html = await httpsGet('https://www.hostinger.com/domain-name-search');
 
@@ -182,6 +248,13 @@ const priceUpdaters = {
     async fetchGoDaddyPrices() {
         console.log('Fetching GoDaddy prices from pricing page...');
         try {
+            // Check robots.txt before scraping
+            const allowed = await checkRobotsTxt('https://www.godaddy.com', '/domains/domain-name-search');
+            if (!allowed) {
+                console.warn('  Skipping GoDaddy (robots.txt restriction)');
+                throw new Error('robots.txt restriction');
+            }
+
             const html = await httpsGet('https://www.godaddy.com/domains/domain-name-search');
 
             const comPricing = extractPromoPricing(html, '\\.com');
@@ -240,6 +313,13 @@ const priceUpdaters = {
     async fetchSiteGroundPrices() {
         console.log('Fetching SiteGround prices from domain page...');
         try {
+            // Check robots.txt before scraping
+            const allowed = await checkRobotsTxt('https://www.siteground.com', '/domain-names');
+            if (!allowed) {
+                console.warn('  Skipping SiteGround (robots.txt restriction)');
+                throw new Error('robots.txt restriction');
+            }
+
             const html = await httpsGet('https://www.siteground.com/domain-names');
 
             const comPricing = extractPromoPricing(html, '\\.com');
@@ -312,15 +392,21 @@ const priceUpdaters = {
 
 async function updatePrices() {
     console.log('Starting automatic price update...\n');
+    console.log('⏱️  Adding delays between requests to be respectful to servers...\n');
 
     try {
-        // Fetch prices from all providers
-        const [hostinger, godaddy, siteground, bluehost] = await Promise.all([
-            priceUpdaters.fetchHostingerPrices(),
-            priceUpdaters.fetchGoDaddyPrices(),
-            priceUpdaters.fetchSiteGroundPrices(),
-            priceUpdaters.fetchBluehostPrices()
-        ]);
+        // Fetch prices from providers sequentially with delays
+        // This is more respectful than parallel requests
+        const hostinger = await priceUpdaters.fetchHostingerPrices();
+        await delay(2000); // 2 second delay
+
+        const godaddy = await priceUpdaters.fetchGoDaddyPrices();
+        await delay(2000); // 2 second delay
+
+        const siteground = await priceUpdaters.fetchSiteGroundPrices();
+        await delay(2000); // 2 second delay
+
+        const bluehost = await priceUpdaters.fetchBluehostPrices();
 
         // Build the new PROVIDER_PRICING object
         const newPricing = {

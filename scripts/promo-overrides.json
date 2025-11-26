@@ -1,0 +1,59 @@
+{
+  "_comment": "Manual promotional price overrides - Update this when you see active promotions",
+  "_instructions": "Set regularPrice and promoPrice when there's an active sale. Set to null when promo ends.",
+
+  "Hostinger": {
+    ".com": {
+      "regularPrice": null,
+      "promoPrice": null
+    },
+    ".net": {
+      "regularPrice": null,
+      "promoPrice": null
+    },
+    ".org": {
+      "regularPrice": null,
+      "promoPrice": null
+    }
+  },
+
+  "GoDaddy": {
+    ".com": {
+      "regularPrice": null,
+      "promoPrice": null
+    },
+    ".net": {
+      "regularPrice": null,
+      "promoPrice": null
+    },
+    ".org": {
+      "regularPrice": null,
+      "promoPrice": null
+    }
+  },
+
+  "SiteGround": {
+    ".com": {
+      "regularPrice": null,
+      "promoPrice": null
+    },
+    ".net": {
+      "regularPrice": null,
+      "promoPrice": null
+    },
+    ".org": {
+      "regularPrice": null,
+      "promoPrice": null
+    }
+  },
+
+  "_example": {
+    "_comment": "Example of how to set a Black Friday sale:",
+    "Hostinger": {
+      ".com": {
+        "regularPrice": 15.99,
+        "promoPrice": 0.99
+      }
+    }
+  }
+}

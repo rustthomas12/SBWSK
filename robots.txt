@@ -4,8 +4,9 @@
 User-agent: *
 Allow: /
 
-# Disallow admin/api directories
+# Disallow admin/api directories and scripts
 Disallow: /api/
+Disallow: /scripts/
 Disallow: /node_modules/
 Disallow: /.git/
 Disallow: /.vercel/
