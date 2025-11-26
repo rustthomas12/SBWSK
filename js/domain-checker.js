@@ -61,118 +61,139 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 const PROVIDER_PRICING = {
     Bluehost: {
-        .com: {
-            firstYear: 0,
-            renewal: 24.19
+        ".com": {
+            "firstYear": 0,
+            "renewal": 24.19
         },
-        .net: {
-            firstYear: 0,
-            renewal: 20.19
+        ".net": {
+            "firstYear": 0,
+            "renewal": 20.19
         },
-        .org: {
-            firstYear: 0,
-            renewal: 19.19
+        ".org": {
+            "firstYear": 0,
+            "renewal": 19.19
         },
-        .co: {
-            firstYear: 0,
-            renewal: 34.99
+        ".co": {
+            "firstYear": 0,
+            "renewal": 34.99
         },
-        .io: {
-            firstYear: 0,
-            renewal: 64.99
+        ".io": {
+            "firstYear": 0,
+            "renewal": 64.99
         },
-        .biz: {
-            firstYear: 0,
-            renewal: 24.99
+        ".biz": {
+            "firstYear": 0,
+            "renewal": 24.99
         },
-        url: "https://bluehost.sjv.io/DyaJob",
-        note: "Free* with hosting plan",
-        isFreeWithHosting: true,
-        priority: 0
+        "url": "https://bluehost.sjv.io/DyaJob",
+        "note": "Free* with hosting plan",
+        "isFreeWithHosting": true,
+        "priority": 0
     },
     Hostinger: {
-        .com: {
-            firstYear: 10.19,
-            renewal: 18.19
+        ".com": {
+            "firstYear": 10.19,
+            "regularPrice": null,
+            "promoPrice": null,
+            "renewal": 18.19
         },
-        .net: {
-            firstYear: 15.19,
-            renewal: 18.19
+        ".net": {
+            "firstYear": 15.19,
+            "regularPrice": null,
+            "promoPrice": null,
+            "renewal": 18.19
         },
-        .org: {
-            firstYear: 8.19,
-            renewal: 16.19
+        ".org": {
+            "firstYear": 8.19,
+            "regularPrice": null,
+            "promoPrice": null,
+            "renewal": 16.19
         },
-        .co: {
-            firstYear: 11.99,
-            renewal: 32.99
+        ".co": {
+            "firstYear": 11.99,
+            "renewal": 32.99
         },
-        .io: {
-            firstYear: 42.99,
-            renewal: 64.99
+        ".io": {
+            "firstYear": 42.99,
+            "renewal": 64.99
         },
-        .biz: {
-            firstYear: 13.99,
-            renewal: 18.19
+        ".biz": {
+            "firstYear": 13.99,
+            "renewal": 18.19
         },
-        url: "https://www.hostinger.com",
-        note: "Low first year price"
+        "promotion": "99% off",
+        "url": "https://www.hostinger.com",
+        "note": "Low first year price"
     },
     GoDaddy: {
-        .com: {
-            firstYear: 11.99,
-            renewal: 24.99
+        ".com": {
+            "firstYear": 11.99,
+            "regularPrice": null,
+            "promoPrice": null,
+            "renewal": 24.99
         },
-        .net: {
-            firstYear: 14.99,
-            renewal: 24.99
+        ".net": {
+            "firstYear": 14.99,
+            "regularPrice": null,
+            "promoPrice": null,
+            "renewal": 24.99
         },
-        .org: {
-            firstYear: 14.99,
-            renewal: 24.99
+        ".org": {
+            "firstYear": 14.99,
+            "regularPrice": null,
+            "promoPrice": null,
+            "renewal": 24.99
         },
-        .co: {
-            firstYear: 24.99,
-            renewal: 39.99
+        ".co": {
+            "firstYear": 24.99,
+            "renewal": 39.99
         },
-        .io: {
-            firstYear: 49.99,
-            renewal: 79.99
+        ".io": {
+            "firstYear": 49.99,
+            "renewal": 79.99
         },
-        .biz: {
-            firstYear: 14.99,
-            renewal: 24.99
+        ".biz": {
+            "firstYear": 14.99,
+            "renewal": 24.99
         },
-        url: "https://www.godaddy.com",
-        note: "Popular choice"
+        "promotion": null,
+        "url": "https://www.godaddy.com",
+        "note": "Popular choice"
     },
     SiteGround: {
-        .com: {
-            firstYear: 15.95,
-            renewal: 19.99
+        ".com": {
+            "firstYear": 15.95,
+            "regularPrice": null,
+            "promoPrice": null,
+            "renewal": 19.99
         },
-        .net: {
-            firstYear: 17.95,
-            renewal: 21.99
+        ".net": {
+            "firstYear": 17.95,
+            "regularPrice": null,
+            "promoPrice": null,
+            "renewal": 21.99
         },
-        .org: {
-            firstYear: 17.95,
-            renewal: 21.99
+        ".org": {
+            "firstYear": 17.95,
+            "regularPrice": null,
+            "promoPrice": null,
+            "renewal": 21.99
         },
-        .co: {
-            firstYear: 29.95,
-            renewal: 39.99
+        ".co": {
+            "firstYear": 29.95,
+            "renewal": 39.99
         },
-        .io: {
-            firstYear: 59.95,
-            renewal: 79.99
+        ".io": {
+            "firstYear": 59.95,
+            "renewal": 79.99
         },
-        .biz: {
-            firstYear: 17.95,
-            renewal: 21.99
+        ".biz": {
+            "firstYear": 17.95,
+            "renewal": 21.99
         },
-        url: "https://www.siteground.com",
-        note: "Consistent pricing"
+        "promotion": null,
+        "url": "https://www.siteground.com",
+        "note": "Consistent pricing"
     }
 };
 

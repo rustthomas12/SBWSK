@@ -305,7 +305,11 @@ async function updatePrices() {
 
         // Find and replace the PROVIDER_PRICING object
         const pricingRegex = /const PROVIDER_PRICING = \{[\s\S]*?\n\};/;
-        const newPricingString = `const PROVIDER_PRICING = ${JSON.stringify(newPricing, null, 4).replace(/"([^"]+)":/g, '$1:')};`;
+        // Format the object - keep quotes around extension names (like '.com') but remove from provider names
+        let newPricingString = JSON.stringify(newPricing, null, 4);
+        // Only remove quotes from top-level provider names, not extension keys
+        newPricingString = newPricingString.replace(/"(Bluehost|Hostinger|GoDaddy|SiteGround)":/g, '$1:');
+        newPricingString = `const PROVIDER_PRICING = ${newPricingString};`;
 
         if (pricingRegex.test(fileContent)) {
             fileContent = fileContent.replace(pricingRegex, newPricingString);
