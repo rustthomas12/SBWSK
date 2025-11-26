@@ -37,6 +37,53 @@ function extractPrice(html, pattern) {
     return null;
 }
 
+/**
+ * Extract promotional/discounted prices
+ * Looks for common discount patterns like strikethrough, sale prices, etc.
+ */
+function extractPromoPrice(html, extension) {
+    // Common promo patterns
+    const patterns = [
+        new RegExp(`${extension}[^$]*(?:sale|promo|discount|now)[^$]*\\$(\\d+\\.\\d+)`, 'i'),
+        new RegExp(`${extension}[^$]*<strike[^>]*>.*?</strike>[^$]*\\$(\\d+\\.\\d+)`, 'i'),
+        new RegExp(`${extension}[^$]*(?:was|regular)[^$]*\\$[\\d.]+[^$]*(?:now|sale)[^$]*\\$(\\d+\\.\\d+)`, 'i'),
+        new RegExp(`${extension}[^$]*\\$(\\d+\\.\\d+)[^$]*(?:first year|promotional)`, 'i')
+    ];
+
+    for (const pattern of patterns) {
+        const price = extractPrice(html, pattern);
+        if (price) return price;
+    }
+    return null;
+}
+
+/**
+ * Check for active promotions and discount codes
+ */
+function extractPromotionInfo(html) {
+    const promoPatterns = [
+        /save\s+(\d+)%/i,
+        /(\d+)%\s+off/i,
+        /discount:\s*(\d+)%/i,
+        /promo.*?(\d+)%/i
+    ];
+
+    for (const pattern of promoPatterns) {
+        const match = html.match(pattern);
+        if (match && match[1]) {
+            return `${match[1]}% off`;
+        }
+    }
+
+    // Check for specific promo codes
+    const codeMatch = html.match(/(?:code|coupon):\s*([A-Z0-9]{4,})/i);
+    if (codeMatch) {
+        return `Code: ${codeMatch[1]}`;
+    }
+
+    return null;
+}
+
 // Price fetching functions for each provider
 const priceUpdaters = {
     async fetchHostingerPrices() {
@@ -45,33 +92,45 @@ const priceUpdaters = {
             // Fetch from Hostinger's pricing page
             const html = await httpsGet('https://www.hostinger.com/domain-name-search');
 
-            // Look for common pricing patterns in the HTML
-            // These patterns may need updating if the site structure changes
+            // Look for regular and promotional pricing
             const comPrice = extractPrice(html, /\.com[^$]*\$(\d+\.\d+)/i);
+            const comPromo = extractPromoPrice(html, '\\.com');
             const netPrice = extractPrice(html, /\.net[^$]*\$(\d+\.\d+)/i);
+            const netPromo = extractPromoPrice(html, '\\.net');
             const orgPrice = extractPrice(html, /\.org[^$]*\$(\d+\.\d+)/i);
+            const orgPromo = extractPromoPrice(html, '\\.org');
 
-            // Use extracted prices if found, otherwise use last known prices
+            // Check for active promotions
+            const promotion = extractPromotionInfo(html);
+
+            console.log(`  ${promotion ? '🎉 Active promotion: ' + promotion : '  No active promotions'}`);
+
             return {
                 '.com': {
-                    firstYear: comPrice || 10.19,
+                    firstYear: comPromo || comPrice || 10.19,
+                    regularPrice: comPrice,
+                    promoPrice: comPromo,
                     renewal: 18.19
                 },
                 '.net': {
-                    firstYear: netPrice || 15.19,
+                    firstYear: netPromo || netPrice || 15.19,
+                    regularPrice: netPrice,
+                    promoPrice: netPromo,
                     renewal: 18.19
                 },
                 '.org': {
-                    firstYear: orgPrice || 8.19,
+                    firstYear: orgPromo || orgPrice || 8.19,
+                    regularPrice: orgPrice,
+                    promoPrice: orgPromo,
                     renewal: 16.19
                 },
                 '.co': { firstYear: 11.99, renewal: 32.99 },
                 '.io': { firstYear: 42.99, renewal: 64.99 },
-                '.biz': { firstYear: 13.99, renewal: 18.19 }
+                '.biz': { firstYear: 13.99, renewal: 18.19 },
+                promotion: promotion
             };
         } catch (error) {
             console.warn('Could not fetch Hostinger prices, using cached values:', error.message);
-            // Return last known good prices
             return {
                 '.com': { firstYear: 10.19, renewal: 18.19 },
                 '.net': { firstYear: 15.19, renewal: 18.19 },
@@ -89,25 +148,38 @@ const priceUpdaters = {
             const html = await httpsGet('https://www.godaddy.com/domains/domain-name-search');
 
             const comPrice = extractPrice(html, /\.com[^$]*\$(\d+\.\d+)/i);
+            const comPromo = extractPromoPrice(html, '\\.com');
             const netPrice = extractPrice(html, /\.net[^$]*\$(\d+\.\d+)/i);
+            const netPromo = extractPromoPrice(html, '\\.net');
             const orgPrice = extractPrice(html, /\.org[^$]*\$(\d+\.\d+)/i);
+            const orgPromo = extractPromoPrice(html, '\\.org');
+
+            const promotion = extractPromotionInfo(html);
+            console.log(`  ${promotion ? '🎉 Active promotion: ' + promotion : '  No active promotions'}`);
 
             return {
                 '.com': {
-                    firstYear: comPrice || 11.99,
+                    firstYear: comPromo || comPrice || 11.99,
+                    regularPrice: comPrice,
+                    promoPrice: comPromo,
                     renewal: 24.99
                 },
                 '.net': {
-                    firstYear: netPrice || 14.99,
+                    firstYear: netPromo || netPrice || 14.99,
+                    regularPrice: netPrice,
+                    promoPrice: netPromo,
                     renewal: 24.99
                 },
                 '.org': {
-                    firstYear: orgPrice || 14.99,
+                    firstYear: orgPromo || orgPrice || 14.99,
+                    regularPrice: orgPrice,
+                    promoPrice: orgPromo,
                     renewal: 24.99
                 },
                 '.co': { firstYear: 24.99, renewal: 39.99 },
                 '.io': { firstYear: 49.99, renewal: 79.99 },
-                '.biz': { firstYear: 14.99, renewal: 24.99 }
+                '.biz': { firstYear: 14.99, renewal: 24.99 },
+                promotion: promotion
             };
         } catch (error) {
             console.warn('Could not fetch GoDaddy prices, using cached values:', error.message);
@@ -128,25 +200,38 @@ const priceUpdaters = {
             const html = await httpsGet('https://www.siteground.com/domain-names');
 
             const comPrice = extractPrice(html, /\.com[^$]*\$(\d+\.\d+)/i);
+            const comPromo = extractPromoPrice(html, '\\.com');
             const netPrice = extractPrice(html, /\.net[^$]*\$(\d+\.\d+)/i);
+            const netPromo = extractPromoPrice(html, '\\.net');
             const orgPrice = extractPrice(html, /\.org[^$]*\$(\d+\.\d+)/i);
+            const orgPromo = extractPromoPrice(html, '\\.org');
+
+            const promotion = extractPromotionInfo(html);
+            console.log(`  ${promotion ? '🎉 Active promotion: ' + promotion : '  No active promotions'}`);
 
             return {
                 '.com': {
-                    firstYear: comPrice || 15.95,
+                    firstYear: comPromo || comPrice || 15.95,
+                    regularPrice: comPrice,
+                    promoPrice: comPromo,
                     renewal: 19.99
                 },
                 '.net': {
-                    firstYear: netPrice || 17.95,
+                    firstYear: netPromo || netPrice || 17.95,
+                    regularPrice: netPrice,
+                    promoPrice: netPromo,
                     renewal: 21.99
                 },
                 '.org': {
-                    firstYear: orgPrice || 17.95,
+                    firstYear: orgPromo || orgPrice || 17.95,
+                    regularPrice: orgPrice,
+                    promoPrice: orgPromo,
                     renewal: 21.99
                 },
                 '.co': { firstYear: 29.95, renewal: 39.99 },
                 '.io': { firstYear: 59.95, renewal: 79.99 },
-                '.biz': { firstYear: 17.95, renewal: 21.99 }
+                '.biz': { firstYear: 17.95, renewal: 21.99 },
+                promotion: promotion
             };
         } catch (error) {
             console.warn('Could not fetch SiteGround prices, using cached values:', error.message);

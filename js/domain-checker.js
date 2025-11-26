@@ -417,10 +417,13 @@ function createDomainResultCard(result, available) {
                     name: provider,
                     firstYear: pricing ? pricing.firstYear : 99.99,
                     renewal: pricing ? pricing.renewal : 99.99,
+                    regularPrice: pricing ? pricing.regularPrice : null,
+                    promoPrice: pricing ? pricing.promoPrice : null,
                     url: PROVIDER_PRICING[provider].url,
                     note: PROVIDER_PRICING[provider].note,
                     priority: PROVIDER_PRICING[provider].priority || 999,
-                    isFreeWithHosting: PROVIDER_PRICING[provider].isFreeWithHosting || false
+                    isFreeWithHosting: PROVIDER_PRICING[provider].isFreeWithHosting || false,
+                    promotion: PROVIDER_PRICING[provider].promotion || null
                 };
             })
             .sort((a, b) => {
@@ -430,6 +433,7 @@ function createDomainResultCard(result, available) {
 
         providersByPrice.forEach((provider, index) => {
             const isFirst = index === 0;
+            const hasPromo = provider.promoPrice && provider.promoPrice < provider.regularPrice;
 
             let priceDisplay;
             if (provider.isFreeWithHosting) {
@@ -437,6 +441,18 @@ function createDomainResultCard(result, available) {
                     <div style="text-align: right;">
                         <div style="font-size: 1.125rem; font-weight: 700; color: #10b981;">Free*</div>
                         <div style="font-size: 0.75rem; color: #64748b;">Then ${formatCurrency(provider.renewal)}/yr</div>
+                    </div>
+                `;
+            } else if (hasPromo) {
+                // Show promotional pricing with strikethrough regular price
+                priceDisplay = `
+                    <div style="text-align: right;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; justify-content: flex-end;">
+                            <span style="font-size: 0.875rem; color: #94a3b8; text-decoration: line-through;">${formatCurrency(provider.regularPrice)}</span>
+                            <span style="font-size: 1.125rem; font-weight: 700; color: #dc2626;">${formatCurrency(provider.promoPrice)}</span>
+                            <span style="padding: 0.125rem 0.375rem; background: #dc2626; color: white; font-size: 0.625rem; font-weight: 700; border-radius: 3px;">SALE</span>
+                        </div>
+                        <div style="font-size: 0.75rem; color: #64748b;">Renews ${formatCurrency(provider.renewal)}/yr</div>
                     </div>
                 `;
             } else {
