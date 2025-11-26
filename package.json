@@ -16,6 +16,8 @@
   ],
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "dns-lookup": "^0.1.0",
+    "whoiser": "^2.0.0-beta.9"
+  }
 }

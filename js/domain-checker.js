@@ -55,18 +55,44 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
+ * Price data from multiple providers (updated 2025)
+ */
+const PROVIDER_PRICING = {
+    'Bluehost': {
+        '.com': 12.99, '.net': 13.99, '.org': 12.99, '.co': 24.99, '.io': 39.99, '.biz': 15.99,
+        url: 'https://bluehost.sjv.io/DyaJob',
+        note: 'Free domain with hosting'
+    },
+    'GoDaddy': {
+        '.com': 11.99, '.net': 15.99, '.org': 14.99, '.co': 29.99, '.io': 49.99, '.biz': 14.99,
+        url: 'https://www.godaddy.com',
+        note: 'Renewal $19.99/yr'
+    },
+    'Namecheap': {
+        '.com': 9.58, '.net': 12.98, '.org': 10.98, '.co': 8.88, '.io': 32.98, '.biz': 11.98,
+        url: 'https://www.namecheap.com',
+        note: 'Best value'
+    },
+    'Google Domains': {
+        '.com': 12.00, '.net': 12.00, '.org': 12.00, '.co': 30.00, '.io': 60.00, '.biz': 12.00,
+        url: 'https://domains.google',
+        note: 'No renewal price hikes'
+    }
+};
+
+/**
  * Check domain availability for multiple TLDs
  * @param {string} domainName - The base domain name
  * @returns {Promise<Array>} - Array of domain results
  */
 async function checkMultipleTLDs(domainName) {
     const tlds = [
-        { extension: '.com', price: 12.99, priority: 1 },
-        { extension: '.net', price: 14.99, priority: 2 },
-        { extension: '.org', price: 14.99, priority: 3 },
-        { extension: '.co', price: 24.99, priority: 4 },
-        { extension: '.io', price: 39.99, priority: 5 },
-        { extension: '.biz', price: 15.99, priority: 6 }
+        { extension: '.com', priority: 1 },
+        { extension: '.net', priority: 2 },
+        { extension: '.org', priority: 3 },
+        { extension: '.co', priority: 4 },
+        { extension: '.io', priority: 5 },
+        { extension: '.biz', priority: 6 }
     ];
 
     const results = [];
@@ -75,12 +101,20 @@ async function checkMultipleTLDs(domainName) {
         const fullDomain = domainName + tld.extension;
         const availability = await checkDomainAvailability(fullDomain);
 
+        // Get lowest price across providers
+        const prices = Object.keys(PROVIDER_PRICING).map(provider => {
+            return PROVIDER_PRICING[provider][tld.extension] || 99.99;
+        });
+        const lowestPrice = Math.min(...prices);
+
         results.push({
             domain: fullDomain,
             extension: tld.extension,
             available: availability.available,
-            price: tld.price,
-            priority: tld.priority
+            lowestPrice: lowestPrice,
+            priority: tld.priority,
+            error: availability.error,
+            registrationInfo: availability.registrationInfo
         });
     }
 
@@ -89,37 +123,74 @@ async function checkMultipleTLDs(domainName) {
 }
 
 /**
- * Check if a specific domain is available
- *
- * MVP: Uses mock logic
- * Production: Replace with actual API call
- *
+ * Check if a specific domain is available using Google's Public DNS API
+ * This runs entirely client-side and requires no authentication
  * @param {string} domain - Full domain name (e.g., "example.com")
- * @returns {Promise<Object>} - { available: boolean, price: number }
+ * @returns {Promise<Object>} - { available: boolean, registrationInfo: object }
  */
 async function checkDomainAvailability(domain) {
-    // TODO: Replace with real API call in production
-    // Example:
-    // const response = await fetch('/api/check-domain', {
-    //     method: 'POST',
-    //     body: JSON.stringify({ domain })
-    // });
-    // return await response.json();
+    try {
+        // Use Google's Public DNS API - free, no auth required
+        const dnsApiUrl = `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=A`;
 
-    // Mock logic for MVP:
-    // Simulate availability based on simple criteria
-    const mockAvailable = Math.random() > 0.5; // 50% chance available
+        const response = await fetch(dnsApiUrl);
 
-    // Some common domains are likely taken
-    const commonWords = ['best', 'top', 'pro', 'shop', 'store', 'online', 'web', 'digital'];
-    const containsCommonWord = commonWords.some(word => domain.toLowerCase().includes(word));
+        if (!response.ok) {
+            throw new Error('DNS lookup failed');
+        }
 
-    const available = containsCommonWord ? Math.random() > 0.7 : mockAvailable;
+        const dnsData = await response.json();
 
-    return {
-        available,
-        domain
-    };
+        let available = true;
+        let registrationInfo = null;
+
+        // Check DNS status codes:
+        // 0 = NOERROR (domain exists with records)
+        // 3 = NXDOMAIN (domain doesn't exist)
+        if (dnsData.Answer || dnsData.Status === 0) {
+            // Domain has DNS records = definitely registered
+            available = false;
+            registrationInfo = {
+                note: 'Domain is registered and has DNS records'
+            };
+        } else if (dnsData.Status === 3) {
+            // NXDOMAIN = domain doesn't exist
+            // But check for nameservers too (domain might be registered but not configured)
+            const nsApiUrl = `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=NS`;
+            const nsResponse = await fetch(nsApiUrl);
+            const nsData = await nsResponse.json();
+
+            if (nsData.Answer) {
+                // Has nameservers = registered
+                available = false;
+                registrationInfo = {
+                    note: 'Domain is registered but not yet configured'
+                };
+            } else {
+                // No DNS records, no nameservers = likely available
+                available = true;
+            }
+        } else {
+            // Other status - domain likely available
+            available = true;
+        }
+
+        return {
+            available,
+            domain,
+            registrationInfo,
+            error: false
+        };
+    } catch (error) {
+        console.error('Error checking domain:', error);
+        // Return unknown state if DNS lookup fails
+        return {
+            available: null,
+            domain,
+            error: true,
+            errorMessage: 'Unable to check availability. Please try again.'
+        };
+    }
 }
 
 /**
@@ -130,9 +201,10 @@ async function checkDomainAvailability(domain) {
 function displayResults(domainName, results) {
     const resultsContainer = document.getElementById('resultsContainer');
 
-    // Separate available and unavailable domains
-    const available = results.filter(r => r.available);
-    const unavailable = results.filter(r => !r.available);
+    // Separate available, unavailable, and error domains
+    const available = results.filter(r => r.available === true);
+    const unavailable = results.filter(r => r.available === false);
+    const errors = results.filter(r => r.available === null || r.error);
 
     let html = `
         <div style="max-width: 800px; margin: 0 auto;">
@@ -159,6 +231,30 @@ function displayResults(domainName, results) {
         `;
         unavailable.forEach(result => {
             html += createDomainResultCard(result, false);
+        });
+    }
+
+    // Show error domains
+    if (errors.length > 0) {
+        html += `
+            <h4 style="color: #f59e0b; margin-bottom: 1rem; font-size: 1.125rem;">
+                ⚠️ Unable to Check
+            </h4>
+        `;
+        errors.forEach(result => {
+            html += `
+                <div class="result-card" style="margin-bottom: 1rem; border: 2px solid #fef3c7; background: #fffbeb;">
+                    <div style="padding: 1rem;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <span style="font-weight: 600;">${result.domain}</span>
+                            <span class="badge" style="background: #f59e0b;">Error</span>
+                        </div>
+                        <p style="color: #92400e; font-size: 0.875rem; margin-top: 0.5rem;">
+                            Could not verify availability. Try checking directly with a registrar or try again later.
+                        </p>
+                    </div>
+                </div>
+            `;
         });
     }
 
@@ -190,7 +286,7 @@ function displayResults(domainName, results) {
 }
 
 /**
- * Create a result card for a domain
+ * Create a result card for a domain with price comparison
  * @param {Object} result - Domain result object
  * @param {boolean} available - Whether domain is available
  * @returns {string} - HTML string
@@ -201,34 +297,75 @@ function createDomainResultCard(result, available) {
         ? '<span class="badge badge-success">Available</span>'
         : '<span class="badge badge-secondary">Taken</span>';
 
-    const affiliateUrl = `https://bluehost.sjv.io/DyaJob?domain=${encodeURIComponent(result.domain)}`;
+    // Build price comparison table
+    let priceComparisonHTML = '';
+    if (available) {
+        priceComparisonHTML = `
+            <div style="margin: 1rem 0; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; color: #475569;">
+                    Compare Prices
+                </h4>
+                <div style="display: grid; gap: 0.5rem;">
+        `;
 
-    return `
-        <div class="result-card ${cardClass}" style="margin-bottom: 1rem;">
-            <div class="result-header">
-                <div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
-                        <span class="result-title">${result.domain}</span>
-                        ${statusBadge}
+        // Sort providers by price for this extension
+        const providersByPrice = Object.keys(PROVIDER_PRICING)
+            .map(provider => ({
+                name: provider,
+                price: PROVIDER_PRICING[provider][result.extension] || 99.99,
+                url: PROVIDER_PRICING[provider].url,
+                note: PROVIDER_PRICING[provider].note
+            }))
+            .sort((a, b) => a.price - b.price);
+
+        providersByPrice.forEach((provider, index) => {
+            const isLowest = index === 0;
+            priceComparisonHTML += `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: white; border-radius: 4px; border: ${isLowest ? '2px solid #10b981' : '1px solid #e2e8f0'};">
+                    <div>
+                        <span style="font-weight: 600; color: #1e293b;">${provider.name}</span>
+                        ${isLowest ? '<span style="margin-left: 0.5rem; padding: 0.125rem 0.5rem; background: #10b981; color: white; font-size: 0.75rem; border-radius: 4px; font-weight: 600;">BEST PRICE</span>' : ''}
+                        <span style="display: block; font-size: 0.75rem; color: #64748b;">${provider.note}</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <span style="font-size: 1.125rem; font-weight: 700; color: #1e293b;">${formatCurrency(provider.price)}/yr</span>
+                        <a href="${provider.url}" target="_blank" rel="noopener" class="btn btn-sm"
+                           style="padding: 0.375rem 0.75rem; font-size: 0.875rem; white-space: nowrap;"
+                           onclick="trackAffiliateClick('${provider.name.toLowerCase()}-${result.domain}')">
+                            Buy →
+                        </a>
                     </div>
                 </div>
-                <div class="result-price">${formatCurrency(result.price)}/yr</div>
+            `;
+        });
+
+        priceComparisonHTML += `
+                </div>
             </div>
-            ${available ? `
-                <a
-                    href="${affiliateUrl}"
-                    target="_blank"
-                    rel="noopener"
-                    class="btn btn-primary btn-block register-domain-btn"
-                    data-domain="${result.domain}"
-                >
-                    Register ${result.domain} →
-                </a>
-            ` : `
-                <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 0.5rem;">
-                    This domain is already registered. Try a different extension or variation.
-                </p>
-            `}
+        `;
+    }
+
+    return `
+        <div class="result-card ${cardClass}" style="margin-bottom: 1.5rem; border: 2px solid ${available ? '#10b981' : '#e2e8f0'}; border-radius: 12px; overflow: hidden;">
+            <div class="result-header" style="padding: 1rem; background: ${available ? '#ecfdf5' : '#f8fafc'};">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <span class="result-title" style="font-size: 1.25rem; font-weight: 700;">${result.domain}</span>
+                        ${statusBadge}
+                    </div>
+                    <div class="result-price" style="font-size: 1rem; color: #64748b;">
+                        ${available ? `Starting at ${formatCurrency(result.lowestPrice)}/yr` : 'Unavailable'}
+                    </div>
+                </div>
+            </div>
+            <div style="padding: ${available ? '0 1rem 1rem' : '1rem'};">
+                ${available ? priceComparisonHTML : `
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">
+                        ${result.registrationInfo ? `Registered with ${result.registrationInfo.registrar || 'unknown registrar'}.` : ''}
+                        This domain is already taken. Try a different extension or variation.
+                    </p>
+                `}
+            </div>
         </div>
     `;
 }
