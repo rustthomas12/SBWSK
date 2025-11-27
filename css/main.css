@@ -119,25 +119,35 @@ a:hover {
    ========================================================================== */
 
 .navbar {
-    background-color: var(--bg-primary);
-    border-bottom: 1px solid var(--border-color);
-    padding: var(--spacing-md) 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+    padding: 1.25rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
 }
 
 .navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1400px;
 }
 
 .nav-brand {
     display: flex;
-    align-items: flex-start;
-    gap: var(--spacing-lg);
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.nav-brand:hover {
+    transform: translateY(-2px);
 }
 
 .logo {
@@ -150,11 +160,13 @@ a:hover {
     height: 80px;
     width: auto;
     display: block;
-    transition: transform var(--transition-base);
+    transition: transform var(--transition-base), filter var(--transition-base);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
 }
 
-.logo-img:hover {
+.nav-brand:hover .logo-img {
     transform: scale(1.05);
+    filter: drop-shadow(0 4px 8px rgba(14, 165, 233, 0.2));
 }
 
 @media (max-width: 768px) {
@@ -202,14 +214,31 @@ a:hover {
     font-weight: 500;
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--radius-md);
-    transition: var(--transition-fast);
+    transition: all var(--transition-base);
     white-space: nowrap;
     display: inline-block;
+    position: relative;
 }
 
-.nav-menu a:hover,
+.nav-menu a:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
 .nav-menu a.active {
     color: var(--primary-color);
+    background-color: rgba(14, 165, 233, 0.08);
+}
+
+.nav-menu a.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+}
+
+.nav-menu a.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
 }
 
 /* ==========================================================================
@@ -383,12 +412,27 @@ a:hover {
         top: 100%;
         left: 0;
         right: 0;
-        background-color: var(--bg-primary);
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         flex-direction: column;
         align-items: stretch;
         padding: var(--spacing-md);
-        box-shadow: var(--shadow-lg);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        border-top: 1px solid rgba(99, 102, 241, 0.1);
         display: none;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .nav-menu.active {
@@ -397,6 +441,7 @@ a:hover {
 
     .nav-menu a {
         padding: var(--spacing-sm);
+        text-align: center;
     }
 
     .hero-title {
