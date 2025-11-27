@@ -1,20 +1,82 @@
 /**
  * Domain Checker Functionality
  *
- * MVP Implementation: Uses mock data to simulate domain checking
- * Production: Replace checkDomainAvailability() with real API calls
- *
- * Suggested APIs for production:
- * - Namecheap API
- * - GoDaddy API
- * - Domain.com API
- * - Or use a WHOIS lookup service
+ * REAL-TIME PRICING: Fetches exact prices from provider websites
+ * - Hostinger, GoDaddy, SiteGround, Bluehost
+ * - Prices updated every 30 minutes via serverless API
+ * - Falls back to cached prices if API unavailable
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+// Global variable to store live pricing
+let LIVE_PRICING_LOADED = false;
+let PRICING_TIMESTAMP = null;
+
+/**
+ * Fetch live prices from serverless API
+ */
+async function fetchLivePrices() {
+    try {
+        console.log('Fetching live prices from API...');
+        const response = await fetch('/api/get-live-prices');
+
+        if (!response.ok) {
+            throw new Error('API response not ok');
+        }
+
+        const data = await response.json();
+        console.log('Live prices loaded:', data.cached ? 'from cache' : 'fresh');
+
+        // Update global pricing object
+        Object.assign(PROVIDER_PRICING, {
+            Bluehost: data.Bluehost,
+            Hostinger: data.Hostinger,
+            GoDaddy: data.GoDaddy,
+            SiteGround: data.SiteGround
+        });
+
+        LIVE_PRICING_LOADED = true;
+        PRICING_TIMESTAMP = data.timestamp;
+
+        // Show pricing update indicator
+        showPricingStatus(true, data.cached);
+        return true;
+    } catch (error) {
+        console.warn('Could not fetch live prices, using fallback:', error.message);
+        showPricingStatus(false);
+        return false;
+    }
+}
+
+/**
+ * Show pricing status to user
+ */
+function showPricingStatus(success, cached = false) {
+    const statusEl = document.getElementById('pricingStatus');
+    if (!statusEl) return;
+
+    if (success) {
+        const statusText = cached ? 'Prices cached (updated within 30 min)' : 'Live prices loaded';
+        statusEl.innerHTML = `
+            <small style="color: #10b981;">
+                ✓ ${statusText}
+            </small>
+        `;
+    } else {
+        statusEl.innerHTML = `
+            <small style="color: #f59e0b;">
+                ⚠ Using fallback prices (API unavailable)
+            </small>
+        `;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
     const form = document.getElementById('domainSearchForm');
     const domainInput = document.getElementById('domainName');
     const resultsContainer = document.getElementById('resultsContainer');
+
+    // Fetch live prices on page load
+    await fetchLivePrices();
 
     // Check if domain is passed in URL (from Name Generator)
     const urlParams = new URLSearchParams(window.location.search);
@@ -38,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsContainer.innerHTML = `
             <div class="tool-card text-center">
                 <div class="spinner" style="width: 40px; height: 40px; border-width: 4px;"></div>
-                <p style="margin-top: 1rem; color: var(--text-secondary);">Checking availability...</p>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">Checking availability with live pricing...</p>
             </div>
         `;
         show(resultsContainer);
