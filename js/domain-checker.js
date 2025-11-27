@@ -1,118 +1,16 @@
 /**
  * Domain Checker Functionality
  *
- * ACCURATE PRICING: Uses manually verified prices from providers
- * - Hostinger, GoDaddy, SiteGround, Bluehost
- * - Verified regularly for accuracy
- * - Includes current promotional pricing
+ * REAL-TIME PRICING: Uses official provider APIs for exact current prices
+ * - GoDaddy, Domain.com, Namecheap, Bluehost
+ * - Prices fetched in real-time when you search
+ * - 30-minute caching for performance
  */
 
-// Global variable to store live pricing
-let LIVE_PRICING_LOADED = false;
-let PRICING_TIMESTAMP = null;
-
-/**
- * Fetch live prices from serverless API (loads base prices on page load)
- */
-async function fetchLivePrices() {
-    try {
-        console.log('Fetching base prices from API...');
-        const response = await fetch('/api/get-live-prices');
-
-        if (!response.ok) {
-            throw new Error('API response not ok');
-        }
-
-        const data = await response.json();
-        console.log('Base prices loaded');
-
-        // Update global pricing object
-        Object.assign(PROVIDER_PRICING, {
-            Bluehost: data.Bluehost,
-            Hostinger: data.Hostinger,
-            GoDaddy: data.GoDaddy,
-            SiteGround: data.SiteGround
-        });
-
-        LIVE_PRICING_LOADED = true;
-        PRICING_TIMESTAMP = data.timestamp;
-
-        // Show pricing update indicator
-        showPricingStatus(true, false);
-        return true;
-    } catch (error) {
-        console.warn('Could not fetch base prices, using fallback:', error.message);
-        showPricingStatus(false);
-        return false;
-    }
-}
-
-/**
- * Fetch REAL-TIME prices for a specific TLD when searching
- * This scrapes the actual websites to get 100% accurate pricing
- */
-async function fetchRealTimePricesForTLD(tld) {
-    try {
-        console.log(`Fetching real-time prices for ${tld}...`);
-        const response = await fetch(`/api/scrape-live-prices?tld=${encodeURIComponent(tld)}`);
-
-        if (!response.ok) {
-            throw new Error('Scraping API failed');
-        }
-
-        const data = await response.json();
-        console.log(`Real-time prices for ${tld}:`, data.cached ? 'cached' : 'freshly scraped');
-
-        // Update pricing for this specific TLD
-        if (data.Bluehost && data.Bluehost[tld]) {
-            PROVIDER_PRICING.Bluehost[tld] = data.Bluehost[tld];
-        }
-        if (data.Hostinger && data.Hostinger[tld]) {
-            PROVIDER_PRICING.Hostinger[tld] = data.Hostinger[tld];
-        }
-        if (data.GoDaddy && data.GoDaddy[tld]) {
-            PROVIDER_PRICING.GoDaddy[tld] = data.GoDaddy[tld];
-        }
-        if (data.SiteGround && data.SiteGround[tld]) {
-            PROVIDER_PRICING.SiteGround[tld] = data.SiteGround[tld];
-        }
-
-        return true;
-    } catch (error) {
-        console.warn(`Could not fetch real-time prices for ${tld}:`, error.message);
-        return false;
-    }
-}
-
-/**
- * Show pricing status to user
- */
-function showPricingStatus(success, cached = false) {
-    const statusEl = document.getElementById('pricingStatus');
-    if (!statusEl) return;
-
-    if (success) {
-        statusEl.innerHTML = `
-            <small style="color: #10b981;">
-                ✓ Verified prices loaded
-            </small>
-        `;
-    } else {
-        statusEl.innerHTML = `
-            <small style="color: #f59e0b;">
-                ⚠ Using fallback prices (API unavailable)
-            </small>
-        `;
-    }
-}
-
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('domainSearchForm');
     const domainInput = document.getElementById('domainName');
     const resultsContainer = document.getElementById('resultsContainer');
-
-    // Fetch live prices on page load
-    await fetchLivePrices();
 
     // Check if domain is passed in URL (from Name Generator)
     const urlParams = new URLSearchParams(window.location.search);
@@ -136,13 +34,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         resultsContainer.innerHTML = `
             <div class="tool-card text-center">
                 <div class="spinner" style="width: 40px; height: 40px; border-width: 4px;"></div>
-                <p style="margin-top: 1rem; color: var(--text-secondary);">Checking availability...</p>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">Checking availability and fetching real-time prices...</p>
             </div>
         `;
         show(resultsContainer);
-
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 1200));
 
         // Check availability for multiple TLDs
         const results = await checkMultipleTLDs(domainName);
@@ -153,152 +48,28 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 /**
- * Price data from multiple providers (updated 2025)
- * firstYear: Initial registration price
- * renewal: Annual renewal price
+ * Fetch real-time pricing for a TLD
  */
-const PROVIDER_PRICING = {
-    Bluehost: {
-        ".com": {
-            "firstYear": 0,
-            "renewal": 24.19
-        },
-        ".net": {
-            "firstYear": 0,
-            "renewal": 20.19
-        },
-        ".org": {
-            "firstYear": 0,
-            "renewal": 19.19
-        },
-        ".co": {
-            "firstYear": 0,
-            "renewal": 34.99
-        },
-        ".io": {
-            "firstYear": 0,
-            "renewal": 64.99
-        },
-        ".biz": {
-            "firstYear": 0,
-            "renewal": 24.99
-        },
-        "url": "https://bluehost.sjv.io/DyaJob",
-        "note": "Free* with hosting plan",
-        "isFreeWithHosting": true,
-        "priority": 0
-    },
-    Hostinger: {
-        ".com": {
-            "firstYear": 10.19,
-            "regularPrice": null,
-            "promoPrice": null,
-            "renewal": 18.19
-        },
-        ".net": {
-            "firstYear": 15.19,
-            "regularPrice": null,
-            "promoPrice": null,
-            "renewal": 18.19
-        },
-        ".org": {
-            "firstYear": 8.19,
-            "regularPrice": null,
-            "promoPrice": null,
-            "renewal": 16.19
-        },
-        ".co": {
-            "firstYear": 11.99,
-            "renewal": 32.99
-        },
-        ".io": {
-            "firstYear": 42.99,
-            "renewal": 64.99
-        },
-        ".biz": {
-            "firstYear": 13.99,
-            "renewal": 18.19
-        },
-        "promotion": "99% off",
-        "url": "https://www.hostinger.com",
-        "note": "Low first year price"
-    },
-    GoDaddy: {
-        ".com": {
-            "firstYear": 11.99,
-            "regularPrice": null,
-            "promoPrice": null,
-            "renewal": 24.99
-        },
-        ".net": {
-            "firstYear": 14.99,
-            "regularPrice": null,
-            "promoPrice": null,
-            "renewal": 24.99
-        },
-        ".org": {
-            "firstYear": 14.99,
-            "regularPrice": null,
-            "promoPrice": null,
-            "renewal": 24.99
-        },
-        ".co": {
-            "firstYear": 24.99,
-            "renewal": 39.99
-        },
-        ".io": {
-            "firstYear": 49.99,
-            "renewal": 79.99
-        },
-        ".biz": {
-            "firstYear": 14.99,
-            "renewal": 24.99
-        },
-        "promotion": null,
-        "url": "https://www.godaddy.com",
-        "note": "Popular choice"
-    },
-    SiteGround: {
-        ".com": {
-            "firstYear": 15.95,
-            "regularPrice": null,
-            "promoPrice": null,
-            "renewal": 19.99
-        },
-        ".net": {
-            "firstYear": 17.95,
-            "regularPrice": null,
-            "promoPrice": null,
-            "renewal": 21.99
-        },
-        ".org": {
-            "firstYear": 17.95,
-            "regularPrice": null,
-            "promoPrice": null,
-            "renewal": 21.99
-        },
-        ".co": {
-            "firstYear": 29.95,
-            "renewal": 39.99
-        },
-        ".io": {
-            "firstYear": 59.95,
-            "renewal": 79.99
-        },
-        ".biz": {
-            "firstYear": 17.95,
-            "renewal": 21.99
-        },
-        "promotion": null,
-        "url": "https://www.siteground.com",
-        "note": "Consistent pricing"
+async function fetchRealTimePricing(tld) {
+    try {
+        const response = await fetch(`/api/get-domain-pricing?tld=${encodeURIComponent(tld)}`);
+
+        if (!response.ok) {
+            throw new Error('Pricing API failed');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(`Failed to fetch pricing for ${tld}:`, error);
+        return null;
     }
-};
+}
 
 /**
- * Check domain availability for multiple TLDs
+ * Check domain availability for multiple TLDs with REAL-TIME pricing
  * @param {string} domainName - The base domain name
- * @returns {Promise<Array>} - Array of domain results
+ * @returns {Promise<Array>} - Array of domain results with exact prices
  */
 async function checkMultipleTLDs(domainName) {
     const tlds = [
@@ -312,25 +83,24 @@ async function checkMultipleTLDs(domainName) {
 
     const results = [];
 
-    // Note: Puppeteer scraping disabled - using verified pricing from config
-    // for reliability and speed
-
     for (const tld of tlds) {
         const fullDomain = domainName + tld.extension;
-        const availability = await checkDomainAvailability(fullDomain);
 
-        // Get lowest first year price across providers
-        const prices = Object.keys(PROVIDER_PRICING).map(provider => {
-            const pricing = PROVIDER_PRICING[provider][tld.extension];
-            return pricing ? pricing.firstYear : 99.99;
-        });
-        const lowestPrice = Math.min(...prices);
+        // Fetch availability and pricing in parallel
+        const [availability, pricing] = await Promise.all([
+            checkDomainAvailability(fullDomain),
+            fetchRealTimePricing(tld.extension)
+        ]);
+
+        // Get lowest price from real-time data
+        const lowestPrice = pricing?.lowestPrice || 19.99;
 
         results.push({
             domain: fullDomain,
             extension: tld.extension,
             available: availability.available,
             lowestPrice: lowestPrice,
+            pricing: pricing, // Include all provider pricing
             priority: tld.priority,
             error: availability.error,
             registrationInfo: availability.registrationInfo
@@ -531,27 +301,39 @@ function createDomainResultCard(result, available) {
                 <div style="display: grid; gap: 0.5rem;">
         `;
 
-        // Sort providers - Bluehost first (priority 0), then by first year price
-        const providersByPrice = Object.keys(PROVIDER_PRICING)
-            .map(provider => {
-                const pricing = PROVIDER_PRICING[provider][result.extension];
+        // Get real-time pricing from API response
+        const providers = result.pricing?.providers || {};
+        const providersByPrice = Object.keys(providers)
+            .map(providerName => {
+                const providerData = providers[providerName];
                 return {
-                    name: provider,
-                    firstYear: pricing ? pricing.firstYear : 99.99,
-                    renewal: pricing ? pricing.renewal : 99.99,
-                    regularPrice: pricing ? pricing.regularPrice : null,
-                    promoPrice: pricing ? pricing.promoPrice : null,
-                    url: PROVIDER_PRICING[provider].url,
-                    note: PROVIDER_PRICING[provider].note,
-                    priority: PROVIDER_PRICING[provider].priority || 999,
-                    isFreeWithHosting: PROVIDER_PRICING[provider].isFreeWithHosting || false,
-                    promotion: PROVIDER_PRICING[provider].promotion || null
+                    name: providerName,
+                    firstYear: providerData.price || 0,
+                    renewal: providerData.price || 0, // Same as first year for now
+                    regularPrice: providerData.price,
+                    promoPrice: null,
+                    url: getProviderURL(providerName),
+                    note: providerData.note || '',
+                    priority: providerData.hostingRequired ? 0 : 999,
+                    isFreeWithHosting: providerData.hostingRequired || false,
+                    promotion: null
                 };
             })
             .sort((a, b) => {
                 if (a.priority !== b.priority) return a.priority - b.priority;
                 return a.firstYear - b.firstYear;
             });
+
+        // Helper to get provider URLs
+        function getProviderURL(name) {
+            const urls = {
+                'GoDaddy': 'https://www.godaddy.com',
+                'Domain.com': 'https://www.domain.com',
+                'Namecheap': 'https://www.namecheap.com',
+                'Bluehost': 'https://bluehost.sjv.io/DyaJob'
+            };
+            return urls[name] || '#';
+        }
 
         providersByPrice.forEach((provider, index) => {
             const isFirst = index === 0;
