@@ -1,10 +1,10 @@
 /**
  * Domain Checker Functionality
  *
- * REAL-TIME PRICING: Fetches exact prices from provider websites
+ * ACCURATE PRICING: Uses manually verified prices from providers
  * - Hostinger, GoDaddy, SiteGround, Bluehost
- * - Prices updated every 30 minutes via serverless API
- * - Falls back to cached prices if API unavailable
+ * - Verified regularly for accuracy
+ * - Includes current promotional pricing
  */
 
 // Global variable to store live pricing
@@ -55,10 +55,9 @@ function showPricingStatus(success, cached = false) {
     if (!statusEl) return;
 
     if (success) {
-        const statusText = cached ? 'Prices cached (updated within 30 min)' : 'Live prices loaded';
         statusEl.innerHTML = `
             <small style="color: #10b981;">
-                ✓ ${statusText}
+                ✓ Verified prices loaded
             </small>
         `;
     } else {
@@ -100,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         resultsContainer.innerHTML = `
             <div class="tool-card text-center">
                 <div class="spinner" style="width: 40px; height: 40px; border-width: 4px;"></div>
-                <p style="margin-top: 1rem; color: var(--text-secondary);">Checking availability with live pricing...</p>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">Checking availability...</p>
             </div>
         `;
         show(resultsContainer);
