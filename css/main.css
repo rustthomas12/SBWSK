@@ -208,7 +208,6 @@ a:hover {
 .nav-menu a:hover,
 .nav-menu a.active {
     color: var(--primary-color);
-    background-color: var(--bg-secondary);
 }
 
 /* ==========================================================================
