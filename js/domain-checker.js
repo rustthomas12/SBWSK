@@ -220,19 +220,6 @@ function displayResults(domainName, results) {
         });
     }
 
-    // Add alternative suggestions
-    html += `
-        <div class="tool-card" style="margin-top: 2rem; background-color: #f0f9ff;">
-            <h4 style="margin-bottom: 1rem;">💡 Pro Tips</h4>
-            <ul style="list-style: disc; padding-left: 1.5rem; color: var(--text-secondary);">
-                <li>Try adding your location (e.g., "${domainName}boston")</li>
-                <li>Use your industry (e.g., "${domainName}plumbing")</li>
-                <li>Add action words (e.g., "get${domainName}", "${domainName}now")</li>
-                <li>Consider abbreviations or creative spellings</li>
-            </ul>
-        </div>
-    `;
-
     html += `</div>`;
 
     resultsContainer.innerHTML = html;
