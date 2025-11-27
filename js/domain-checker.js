@@ -12,11 +12,11 @@ let LIVE_PRICING_LOADED = false;
 let PRICING_TIMESTAMP = null;
 
 /**
- * Fetch live prices from serverless API
+ * Fetch live prices from serverless API (loads base prices on page load)
  */
 async function fetchLivePrices() {
     try {
-        console.log('Fetching live prices from API...');
+        console.log('Fetching base prices from API...');
         const response = await fetch('/api/get-live-prices');
 
         if (!response.ok) {
@@ -24,7 +24,7 @@ async function fetchLivePrices() {
         }
 
         const data = await response.json();
-        console.log('Live prices loaded:', data.cached ? 'from cache' : 'fresh');
+        console.log('Base prices loaded');
 
         // Update global pricing object
         Object.assign(PROVIDER_PRICING, {
@@ -38,11 +38,48 @@ async function fetchLivePrices() {
         PRICING_TIMESTAMP = data.timestamp;
 
         // Show pricing update indicator
-        showPricingStatus(true, data.cached);
+        showPricingStatus(true, false);
         return true;
     } catch (error) {
-        console.warn('Could not fetch live prices, using fallback:', error.message);
+        console.warn('Could not fetch base prices, using fallback:', error.message);
         showPricingStatus(false);
+        return false;
+    }
+}
+
+/**
+ * Fetch REAL-TIME prices for a specific TLD when searching
+ * This scrapes the actual websites to get 100% accurate pricing
+ */
+async function fetchRealTimePricesForTLD(tld) {
+    try {
+        console.log(`Fetching real-time prices for ${tld}...`);
+        const response = await fetch(`/api/scrape-live-prices?tld=${encodeURIComponent(tld)}`);
+
+        if (!response.ok) {
+            throw new Error('Scraping API failed');
+        }
+
+        const data = await response.json();
+        console.log(`Real-time prices for ${tld}:`, data.cached ? 'cached' : 'freshly scraped');
+
+        // Update pricing for this specific TLD
+        if (data.Bluehost && data.Bluehost[tld]) {
+            PROVIDER_PRICING.Bluehost[tld] = data.Bluehost[tld];
+        }
+        if (data.Hostinger && data.Hostinger[tld]) {
+            PROVIDER_PRICING.Hostinger[tld] = data.Hostinger[tld];
+        }
+        if (data.GoDaddy && data.GoDaddy[tld]) {
+            PROVIDER_PRICING.GoDaddy[tld] = data.GoDaddy[tld];
+        }
+        if (data.SiteGround && data.SiteGround[tld]) {
+            PROVIDER_PRICING.SiteGround[tld] = data.SiteGround[tld];
+        }
+
+        return true;
+    } catch (error) {
+        console.warn(`Could not fetch real-time prices for ${tld}:`, error.message);
         return false;
     }
 }
@@ -275,9 +312,21 @@ async function checkMultipleTLDs(domainName) {
 
     const results = [];
 
+    // Fetch real-time prices for .com first (most common)
+    // This happens in background, other TLDs use cached/fallback
+    const comTLD = tlds.find(t => t.extension === '.com');
+    if (comTLD) {
+        fetchRealTimePricesForTLD('.com').catch(e => console.warn('Real-time .com pricing failed:', e));
+    }
+
     for (const tld of tlds) {
         const fullDomain = domainName + tld.extension;
         const availability = await checkDomainAvailability(fullDomain);
+
+        // If this is .com and real-time prices are still loading, wait a bit
+        if (tld.extension === '.com') {
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
 
         // Get lowest first year price across providers
         const prices = Object.keys(PROVIDER_PRICING).map(provider => {

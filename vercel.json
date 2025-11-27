@@ -3,12 +3,20 @@
     "api/**/*.js": {
       "memory": 1024,
       "maxDuration": 30
+    },
+    "api/scrape-live-prices.js": {
+      "memory": 3008,
+      "maxDuration": 60
     }
   },
   "rewrites": [
     {
       "source": "/api/get-live-prices",
       "destination": "/api/get-live-prices.js"
+    },
+    {
+      "source": "/api/scrape-live-prices",
+      "destination": "/api/scrape-live-prices.js"
     }
   ]
 }
