@@ -58,6 +58,36 @@
                 <p class="section-subtitle">Find the perfect domain name for your business</p>
             </div>
 
+            <!-- Content with Sidebar Layout -->
+            <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1200px; margin: 0 auto;">
+                <style>
+                    @media (min-width: 992px) {
+                        .sidebar-layout {
+                            grid-template-columns: 300px 1fr !important;
+                        }
+                        .sidebar-box {
+                            order: 0 !important;
+                        }
+                    }
+                </style>
+                <div class="sidebar-layout" style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
+
+                <!-- Sidebar -->
+                <div class="sidebar-box" style="order: 2;">
+                    <div class="tool-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem; position: sticky; top: 20px;">
+                        <h3 style="font-size: 1.125rem; margin-bottom: 0.75rem; color: white;">🤔 Not Sure Which Host to Choose?</h3>
+                        <p style="font-size: 0.875rem; margin-bottom: 1rem; color: #f3f4f6; line-height: 1.5;">
+                            Compare all 5 registrars and find the perfect match for your business needs and budget.
+                        </p>
+                        <a href="choose-registrar.html" class="btn" style="display: block; text-align: center; background: white; color: #667eea; font-weight: 600; text-decoration: none; padding: 0.75rem; border-radius: 8px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            Compare Registrars →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div style="order: 1;">
+
             <!-- Info Section -->
             <div class="tool-card" style="max-width: 800px; margin: 0 auto 1.5rem; background-color: #ecfdf5; border-left: 4px solid #10b981;">
                 <h3 style="margin-bottom: 0.5rem; color: #065f46;">✓ Instant Availability Checking</h3>
@@ -122,6 +152,16 @@
                     We participate in affiliate programs with domain registrars. If you purchase a domain through our links, we may earn a commission at no additional cost to you. This helps us keep our tools free. We only recommend registrars we trust and believe offer quality service.
                 </p>
             </div>
+
+                </div>
+                <!-- End Main Content Area -->
+
+                </div>
+                <!-- End sidebar-layout -->
+
+            </div>
+            <!-- End Content with Sidebar Layout -->
+
         </div>
     </main>
 
