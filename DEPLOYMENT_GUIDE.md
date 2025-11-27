@@ -160,7 +160,7 @@ SBWSK/
 ## Customization
 
 ### Update Affiliate Links
-Current affiliate link: `https://bluehost.sjv.io/DyaJob`
+Current affiliate link: `https://bluehost.sjv.io/Webstarterkit`
 
 Replace in these files:
 - index.html

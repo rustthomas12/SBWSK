@@ -275,7 +275,7 @@ function displayQuoteResults(pricing) {
             <p style="margin-bottom: 1rem; color: var(--text-secondary);">
                 Save up to 60% on website hosting with our recommended partner. Includes free domain, SSL certificate, and 24/7 support.
             </p>
-            <a href="https://bluehost.sjv.io/DyaJob" target="_blank" rel="noopener" class="btn btn-secondary btn-block" onclick="trackAffiliateClick('quote-results-hosting')">
+            <a href="https://bluehost.sjv.io/Webstarterkit" target="_blank" rel="noopener" class="btn btn-secondary btn-block" onclick="trackAffiliateClick('quote-results-hosting')">
                 Get Hosting - Save 60% →
             </a>
         </div>

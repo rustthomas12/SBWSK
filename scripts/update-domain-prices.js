@@ -412,7 +412,7 @@ async function updatePrices() {
         const newPricing = {
             'Bluehost': {
                 ...bluehost,
-                url: 'https://bluehost.sjv.io/DyaJob',
+                url: 'https://bluehost.sjv.io/Webstarterkit',
                 note: 'Free* with hosting plan',
                 isFreeWithHosting: true,
                 priority: 0

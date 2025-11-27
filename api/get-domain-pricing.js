@@ -312,7 +312,7 @@ function getBluehostPrice(tld) {
         source: 'verified-standard',
         note: note + ' (estimated)',
         requiresHosting: true,
-        hostingUrl: 'https://bluehost.sjv.io/DyaJob',
+        hostingUrl: 'https://bluehost.sjv.io/Webstarterkit',
         lastVerified: FALLBACK_PRICES.lastUpdated,
         timestamp: Date.now()
     };

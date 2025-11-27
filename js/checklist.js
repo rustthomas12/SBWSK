@@ -36,13 +36,13 @@ const checklistData = {
                 id: 'domain-registered',
                 title: 'Domain name registered',
                 description: 'Purchase your domain name (preferably .com)',
-                link: { text: 'Get Domain', url: 'https://bluehost.sjv.io/DyaJob' }
+                link: { text: 'Get Domain', url: 'https://bluehost.sjv.io/Webstarterkit' }
             },
             {
                 id: 'hosting-setup',
                 title: 'Web hosting account set up',
                 description: 'Choose and set up reliable web hosting',
-                link: { text: 'Get Hosting', url: 'https://bluehost.sjv.io/DyaJob' }
+                link: { text: 'Get Hosting', url: 'https://bluehost.sjv.io/Webstarterkit' }
             },
             {
                 id: 'ssl-installed',
