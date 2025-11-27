@@ -312,21 +312,12 @@ async function checkMultipleTLDs(domainName) {
 
     const results = [];
 
-    // Fetch real-time prices for .com first (most common)
-    // This happens in background, other TLDs use cached/fallback
-    const comTLD = tlds.find(t => t.extension === '.com');
-    if (comTLD) {
-        fetchRealTimePricesForTLD('.com').catch(e => console.warn('Real-time .com pricing failed:', e));
-    }
+    // Note: Puppeteer scraping disabled - using verified pricing from config
+    // for reliability and speed
 
     for (const tld of tlds) {
         const fullDomain = domainName + tld.extension;
         const availability = await checkDomainAvailability(fullDomain);
-
-        // If this is .com and real-time prices are still loading, wait a bit
-        if (tld.extension === '.com') {
-            await new Promise(resolve => setTimeout(resolve, 500));
-        }
 
         // Get lowest first year price across providers
         const prices = Object.keys(PROVIDER_PRICING).map(provider => {

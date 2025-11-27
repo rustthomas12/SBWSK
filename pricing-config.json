@@ -18,28 +18,28 @@
 
   "Hostinger": {
     "_verifiction_url": "https://www.hostinger.com/domain-name-search",
-    ".com": { "firstYear": 0.99, "renewal": 13.99, "promoPrice": 0.99, "regularPrice": 13.99 },
-    ".net": { "firstYear": 2.99, "renewal": 14.99, "promoPrice": 2.99, "regularPrice": 14.99 },
-    ".org": { "firstYear": 4.99, "renewal": 15.99, "promoPrice": 4.99, "regularPrice": 15.99 },
-    ".co": { "firstYear": 1.99, "renewal": 32.99 },
+    ".com": { "firstYear": 9.99, "renewal": 13.99, "promoPrice": null, "regularPrice": 9.99 },
+    ".net": { "firstYear": 12.99, "renewal": 14.99, "promoPrice": null, "regularPrice": 12.99 },
+    ".org": { "firstYear": 12.99, "renewal": 15.99, "promoPrice": null, "regularPrice": 12.99 },
+    ".co": { "firstYear": 11.99, "renewal": 32.99 },
     ".io": { "firstYear": 39.99, "renewal": 59.99 },
-    ".biz": { "firstYear": 4.99, "renewal": 17.99 },
+    ".biz": { "firstYear": 14.99, "renewal": 17.99 },
     "url": "https://www.hostinger.com",
-    "note": "First year promotional pricing",
-    "promotion": "Up to 99% off first year"
+    "note": "Competitive pricing",
+    "promotion": null
   },
 
   "GoDaddy": {
     "_verification_url": "https://www.godaddy.com/domains",
-    ".com": { "firstYear": 0.99, "renewal": 21.99, "promoPrice": 0.99, "regularPrice": 21.99 },
-    ".net": { "firstYear": 1.99, "renewal": 21.99, "promoPrice": 1.99, "regularPrice": 21.99 },
-    ".org": { "firstYear": 2.99, "renewal": 21.99, "promoPrice": 2.99, "regularPrice": 21.99 },
-    ".co": { "firstYear": 6.99, "renewal": 36.99 },
-    ".io": { "firstYear": 39.99, "renewal": 69.99 },
-    ".biz": { "firstYear": 2.99, "renewal": 21.99 },
+    ".com": { "firstYear": 11.99, "renewal": 21.99, "promoPrice": null, "regularPrice": 11.99 },
+    ".net": { "firstYear": 14.99, "renewal": 21.99, "promoPrice": null, "regularPrice": 14.99 },
+    ".org": { "firstYear": 14.99, "renewal": 21.99, "promoPrice": null, "regularPrice": 14.99 },
+    ".co": { "firstYear": 24.99, "renewal": 36.99 },
+    ".io": { "firstYear": 49.99, "renewal": 69.99 },
+    ".biz": { "firstYear": 14.99, "renewal": 21.99 },
     "url": "https://www.godaddy.com",
-    "note": "Popular choice, frequent promotions",
-    "promotion": "First year specials"
+    "note": "Popular choice",
+    "promotion": null
   },
 
   "SiteGround": {
