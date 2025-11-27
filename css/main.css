@@ -137,7 +137,7 @@ a:hover {
 .nav-brand {
     display: flex;
     align-items: flex-start;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-lg);
 }
 
 .logo {
