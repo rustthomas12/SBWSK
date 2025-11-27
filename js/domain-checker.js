@@ -260,12 +260,9 @@ function createDomainResultCard(result, available) {
         : '<span class="badge badge-secondary">Taken</span>';
 
     // Define registrar options with affiliate links
-    // For Bluehost: Impact affiliate network supports deep linking by appending destination URL
-    const bluehostDestination = 'https://www.bluehost.com/domains';
-
     const registrars = [
         { name: 'GoDaddy', url: 'https://www.godaddy.com/domainsearch/find?domainToCheck=' + encodeURIComponent(result.domain) },
-        { name: 'Bluehost', url: 'https://bluehost.sjv.io/Webstarterkit?url=' + encodeURIComponent(bluehostDestination) },
+        { name: 'Bluehost', url: 'https://bluehost.sjv.io/Webstarterkit' },
         { name: 'IONOS', url: 'https://www.ionos.com/domains/domain-names' },
         { name: 'SiteGround', url: 'https://www.siteground.com/domains' },
         { name: 'Hostinger', url: 'https://www.hostinger.com/domain-name-search' }
