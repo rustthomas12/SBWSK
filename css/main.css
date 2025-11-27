@@ -203,6 +203,8 @@ a:hover {
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--radius-md);
     transition: var(--transition-fast);
+    white-space: nowrap;
+    display: inline-block;
 }
 
 .nav-menu a:hover,
