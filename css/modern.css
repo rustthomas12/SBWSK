@@ -565,23 +565,14 @@ textarea:focus {
 /* Colorful Underline for Links */
 .nav-menu a {
     position: relative;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
 }
 
-.nav-menu a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: var(--gradient-primary);
-    transition: width 0.3s ease;
-    border-radius: 2px;
-}
-
-.nav-menu a:hover::after,
-.nav-menu a.active::after {
-    width: 100%;
+.nav-menu a:hover,
+.nav-menu a.active {
+    border-bottom: 2px solid var(--primary-color);
 }
 
 /* Enhanced Footer with Gradient */
