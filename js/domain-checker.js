@@ -1,10 +1,8 @@
 /**
  * Domain Checker Functionality
  *
- * REAL-TIME PRICING: Uses official provider APIs for exact current prices
- * - GoDaddy, Domain.com, Namecheap, Bluehost
- * - Prices fetched in real-time when you search
- * - 30-minute caching for performance
+ * Checks domain availability using DNS lookups
+ * Provides purchase links to trusted registrar partners
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsContainer.innerHTML = `
             <div class="tool-card text-center">
                 <div class="spinner" style="width: 40px; height: 40px; border-width: 4px;"></div>
-                <p style="margin-top: 1rem; color: var(--text-secondary);">Checking availability and fetching real-time prices...</p>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">Checking availability...</p>
             </div>
         `;
         show(resultsContainer);
@@ -48,28 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Fetch real-time pricing for a TLD
- */
-async function fetchRealTimePricing(tld) {
-    try {
-        const response = await fetch(`/api/get-domain-pricing?tld=${encodeURIComponent(tld)}`);
-
-        if (!response.ok) {
-            throw new Error('Pricing API failed');
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error(`Failed to fetch pricing for ${tld}:`, error);
-        return null;
-    }
-}
-
-/**
- * Check domain availability for multiple TLDs with REAL-TIME pricing
+ * Check domain availability for multiple TLDs
  * @param {string} domainName - The base domain name
- * @returns {Promise<Array>} - Array of domain results with exact prices
+ * @returns {Promise<Array>} - Array of domain results
  */
 async function checkMultipleTLDs(domainName) {
     const tlds = [
@@ -85,22 +64,12 @@ async function checkMultipleTLDs(domainName) {
 
     for (const tld of tlds) {
         const fullDomain = domainName + tld.extension;
-
-        // Fetch availability and pricing in parallel
-        const [availability, pricing] = await Promise.all([
-            checkDomainAvailability(fullDomain),
-            fetchRealTimePricing(tld.extension)
-        ]);
-
-        // Get lowest price from real-time data
-        const lowestPrice = pricing?.lowestPrice || 19.99;
+        const availability = await checkDomainAvailability(fullDomain);
 
         results.push({
             domain: fullDomain,
             extension: tld.extension,
             available: availability.available,
-            lowestPrice: lowestPrice,
-            pricing: pricing, // Include all provider pricing
             priority: tld.priority,
             error: availability.error,
             registrationInfo: availability.registrationInfo
@@ -279,7 +248,7 @@ function displayResults(domainName, results) {
 }
 
 /**
- * Create a result card for a domain with price comparison
+ * Create a result card for a domain with purchase options
  * @param {Object} result - Domain result object
  * @param {boolean} available - Whether domain is available
  * @returns {string} - HTML string
@@ -290,107 +259,44 @@ function createDomainResultCard(result, available) {
         ? '<span class="badge badge-success">Available</span>'
         : '<span class="badge badge-secondary">Taken</span>';
 
-    // Build price comparison table
-    let priceComparisonHTML = '';
+    // Define registrar options with affiliate links
+    const registrars = [
+        { name: 'GoDaddy', url: 'https://www.godaddy.com/domainsearch/find?domainToCheck=' + encodeURIComponent(result.domain) },
+        { name: 'Bluehost', url: 'https://bluehost.sjv.io/DyaJob' },
+        { name: 'IONOS', url: 'https://www.ionos.com/domains/domain-names' },
+        { name: 'SiteGround', url: 'https://www.siteground.com/domains' },
+        { name: 'Hostinger', url: 'https://www.hostinger.com/domain-name-search' }
+    ];
+
+    // Build purchase options HTML
+    let purchaseOptionsHTML = '';
     if (available) {
-        priceComparisonHTML = `
+        purchaseOptionsHTML = `
             <div style="margin: 1rem 0; padding: 1rem; background: #f8fafc; border-radius: 8px;">
                 <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; color: #475569;">
-                    Compare Prices
+                    Register at:
                 </h4>
                 <div style="display: grid; gap: 0.5rem;">
         `;
 
-        // Get real-time pricing from API response
-        const providers = result.pricing?.providers || {};
-        const providersByPrice = Object.keys(providers)
-            .map(providerName => {
-                const providerData = providers[providerName];
-                return {
-                    name: providerName,
-                    firstYear: providerData.price || 0,
-                    renewal: providerData.price || 0, // Same as first year for now
-                    regularPrice: providerData.price,
-                    promoPrice: null,
-                    url: getProviderURL(providerName),
-                    note: providerData.note || '',
-                    priority: providerData.hostingRequired ? 0 : 999,
-                    isFreeWithHosting: providerData.hostingRequired || false,
-                    promotion: null
-                };
-            })
-            .sort((a, b) => {
-                if (a.priority !== b.priority) return a.priority - b.priority;
-                return a.firstYear - b.firstYear;
-            });
-
-        // Helper to get provider URLs
-        function getProviderURL(name) {
-            const urls = {
-                'GoDaddy': 'https://www.godaddy.com',
-                'Domain.com': 'https://www.domain.com',
-                'Namecheap': 'https://www.namecheap.com',
-                'Bluehost': 'https://bluehost.sjv.io/DyaJob'
-            };
-            return urls[name] || '#';
-        }
-
-        providersByPrice.forEach((provider, index) => {
-            const isFirst = index === 0;
-            const hasPromo = provider.promoPrice && provider.promoPrice < provider.regularPrice;
-
-            let priceDisplay;
-            if (provider.isFreeWithHosting) {
-                priceDisplay = `
-                    <div style="text-align: right;">
-                        <div style="font-size: 1.125rem; font-weight: 700; color: #10b981;">Free*</div>
-                        <div style="font-size: 0.75rem; color: #64748b;">Then ${formatCurrency(provider.renewal)}/yr</div>
-                    </div>
-                `;
-            } else if (hasPromo) {
-                // Show promotional pricing with strikethrough regular price
-                priceDisplay = `
-                    <div style="text-align: right;">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; justify-content: flex-end;">
-                            <span style="font-size: 0.875rem; color: #94a3b8; text-decoration: line-through;">${formatCurrency(provider.regularPrice)}</span>
-                            <span style="font-size: 1.125rem; font-weight: 700; color: #dc2626;">${formatCurrency(provider.promoPrice)}</span>
-                            <span style="padding: 0.125rem 0.375rem; background: #dc2626; color: white; font-size: 0.625rem; font-weight: 700; border-radius: 3px;">SALE</span>
-                        </div>
-                        <div style="font-size: 0.75rem; color: #64748b;">Renews ${formatCurrency(provider.renewal)}/yr</div>
-                    </div>
-                `;
-            } else {
-                priceDisplay = `
-                    <div style="text-align: right;">
-                        <div style="font-size: 1.125rem; font-weight: 700; color: #1e293b;">${formatCurrency(provider.firstYear)}</div>
-                        <div style="font-size: 0.75rem; color: #64748b;">Renews ${formatCurrency(provider.renewal)}/yr</div>
-                    </div>
-                `;
-            }
-
-            priceComparisonHTML += `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: white; border-radius: 4px; border: ${isFirst ? '2px solid #10b981' : '1px solid #e2e8f0'};">
-                    <div>
-                        <span style="font-weight: 600; color: #1e293b;">${provider.name}</span>
-                        <span style="display: block; font-size: 0.75rem; color: #64748b;">${provider.note}</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                        ${priceDisplay}
-                        <a href="${provider.url}" target="_blank" rel="noopener" class="btn btn-sm"
-                           style="padding: 0.375rem 0.75rem; font-size: 0.875rem; white-space: nowrap;"
-                           onclick="trackAffiliateClick('${provider.name.toLowerCase()}-${result.domain}')">
-                            Buy →
-                        </a>
-                    </div>
-                </div>
+        registrars.forEach((registrar) => {
+            purchaseOptionsHTML += `
+                <a href="${registrar.url}"
+                   target="_blank"
+                   rel="noopener"
+                   class="btn"
+                   style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 4px; text-decoration: none; color: inherit; transition: all 0.2s;"
+                   onmouseover="this.style.borderColor='#10b981'; this.style.background='#f0fdf4';"
+                   onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='white';"
+                   onclick="trackAffiliateClick('${registrar.name.toLowerCase()}-${result.domain}')">
+                    <span style="font-weight: 600; color: #1e293b;">${registrar.name}</span>
+                    <span style="color: #10b981; font-size: 0.875rem;">Register →</span>
+                </a>
             `;
         });
 
-        priceComparisonHTML += `
+        purchaseOptionsHTML += `
                 </div>
-                <p style="font-size: 0.75rem; color: #64748b; margin-top: 0.5rem; font-style: italic;">
-                    *Free for first year when purchased with a hosting plan
-                </p>
             </div>
         `;
     }
@@ -398,20 +304,14 @@ function createDomainResultCard(result, available) {
     return `
         <div class="result-card ${cardClass}" style="margin-bottom: 1.5rem; border: 2px solid ${available ? '#10b981' : '#e2e8f0'}; border-radius: 12px; overflow: hidden;">
             <div class="result-header" style="padding: 1rem; background: ${available ? '#ecfdf5' : '#f8fafc'};">
-                <div style="display: flex; align-items: center; justify-content: space-between;">
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                        <span class="result-title" style="font-size: 1.25rem; font-weight: 700;">${result.domain}</span>
-                        ${statusBadge}
-                    </div>
-                    <div class="result-price" style="font-size: 1rem; color: #64748b;">
-                        ${available ? `Starting at ${formatCurrency(result.lowestPrice)}/yr` : 'Unavailable'}
-                    </div>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span class="result-title" style="font-size: 1.25rem; font-weight: 700;">${result.domain}</span>
+                    ${statusBadge}
                 </div>
             </div>
             <div style="padding: ${available ? '0 1rem 1rem' : '1rem'};">
-                ${available ? priceComparisonHTML : `
+                ${available ? purchaseOptionsHTML : `
                     <p style="color: var(--text-secondary); font-size: 0.875rem;">
-                        ${result.registrationInfo ? `Registered with ${result.registrationInfo.registrar || 'unknown registrar'}.` : ''}
                         This domain is already taken. Try a different extension or variation.
                     </p>
                 `}

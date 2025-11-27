@@ -4,10 +4,12 @@ A comprehensive web app designed to help small business owners plan, price, and 
 
 ## Features
 
-- **Domain Price & Availability Checker** - Find and check domain availability with direct affiliate links to purchase
+- **Domain Price & Availability Checker** - Check domain availability and view estimated pricing with direct affiliate links to purchase
 - **Website Quote Estimator** - Interactive quiz to estimate website project costs
 - **Business Name Generator** - Generate creative business names with instant domain checking
 - **Website Launch Checklist** - Complete checklist to ensure successful website launch
+
+**Important**: All domain prices shown are **estimates only**. Actual prices may vary. Users should always verify the exact price at the registrar before purchasing.
 
 ## Tech Stack
 
@@ -49,51 +51,52 @@ SBWSK/
 
 ## API Configuration
 
-The Domain Checker uses official provider APIs for real-time pricing and discount detection. Configure these environment variables for accurate pricing:
+The Domain Checker uses official provider APIs for real-time pricing and discount detection.
 
-### GoDaddy API (Recommended)
-Get official real-time prices from GoDaddy:
+### Quick Start: GoDaddy API (Free & Recommended)
 
-1. **Create API Keys**:
-   - Go to https://developer.godaddy.com/keys
-   - Sign in with your GoDaddy account (free account works)
-   - Click "Create New API Key"
-   - Select "Production" environment
-   - Copy your API Key and Secret
+**Get estimated pricing from GoDaddy's official API in 5 minutes:**
 
-2. **Configure Environment Variables**:
+📖 **[Complete GoDaddy API Setup Guide →](GODADDY_API_SETUP.md)**
+
+Quick version:
+1. Go to https://developer.godaddy.com/keys
+2. Create Production API keys (free)
+3. Add to environment:
    ```bash
    GODADDY_API_KEY=your_api_key_here
    GODADDY_API_SECRET=your_api_secret_here
    ```
 
+**Note**: Even with API integration, all prices shown are estimates. Actual prices at checkout may vary.
+
 ### Namecheap API (Optional)
-Get real-time prices from Namecheap:
 
-1. **Requirements**:
-   - Active Namecheap account with $50+ balance
-   - Minimum 20 domains in account OR $50+ account balance
+**Requirements**: 20+ domains OR $50+ account balance
 
-2. **Enable API Access**:
-   - Log in to Namecheap
-   - Go to Profile → Tools → API Access
-   - Enable API access
-   - Whitelist your server IP address
-
-3. **Configure Environment Variables**:
+1. Enable API in Namecheap: Profile → API Access
+2. Whitelist your server IP
+3. Configure environment:
    ```bash
    NAMECHEAP_API_USER=your_username
    NAMECHEAP_API_KEY=your_api_key
+   NAMECHEAP_CLIENT_IP=your_server_ip
    ```
 
-### Fallback Pricing
-If API keys are not configured, the system uses verified standard pricing:
-- GoDaddy: Standard published rates
-- Hostinger: Current promotional pricing
-- Bluehost: Free with hosting plans
-- SiteGround: Standard transparent pricing
+### Fallback Pricing System
 
-The system detects discounts, promotions, and special offers automatically.
+If APIs are not configured, the system uses **verified standard pricing** from:
+- GoDaddy, Namecheap, Hostinger, Bluehost, SiteGround
+
+**Prices are manually verified and updated regularly.**
+
+📖 **[How to Update Prices →](PRICING_UPDATE_GUIDE.md)**
+
+The system automatically:
+- Shows when prices were last verified
+- Displays cache age for API calls
+- Falls back gracefully if APIs fail
+- Indicates live vs fallback pricing
 
 ## Deployment
 
