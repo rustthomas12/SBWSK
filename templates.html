@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium website templates for small businesses. Professional, responsive designs ready to deploy. Prices from $50-$200.">
+    <title>Premium Website Templates - SBWSK</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <link rel="stylesheet" href="css/sections.css">
+
+    <style>
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-base);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .template-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .template-preview {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .template-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+        }
+
+        .template-price {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .template-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .template-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .template-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .template-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .template-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .template-features li {
+            padding: 0.25rem 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            position: relative;
+            padding-left: 1.25rem;
+        }
+
+        .template-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .template-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-badge {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.625rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .template-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border-color);
+            background: white;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .templates-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <img src="images/logo.png" alt="SBWSK Logo" class="logo-img">
+                <span class="tagline">
+                    <span>Small Business</span>
+                    <span>Website Starter Kit</span>
+                </span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-dropdown-toggle">Tools</a>
+                    <ul class="nav-dropdown">
+                        <li><a href="domain-checker.html">Domain Checker</a></li>
+                        <li><a href="choose-registrar.html">Choose Registrar</a></li>
+                        <li><a href="logo-generator.html">Logo Generator</a></li>
+                    </ul>
+                </li>
+                <li><a href="templates.html" class="active">Templates</a></li>
+                <li><a href="quote-estimator.html">Get Quote</a></li>
+                <li><a href="checklist.html">Launch Checklist</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#contact" class="btn btn-primary">Work With Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="tools-section">
+        <div class="container">
+            <!-- Header -->
+            <div class="text-center mb-3">
+                <h1 class="section-title">Premium Website Templates</h1>
+                <p class="section-subtitle">Professional, responsive designs ready to deploy. One-time payment, lifetime access.</p>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <h3 style="margin-bottom: 1rem; font-size: 1.125rem;">Filter by Category</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Templates</button>
+                    <button class="filter-btn" data-filter="business">Business</button>
+                    <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+                    <button class="filter-btn" data-filter="creative">Creative</button>
+                    <button class="filter-btn" data-filter="saas">SaaS/Tech</button>
+                    <button class="filter-btn" data-filter="professional">Professional</button>
+                </div>
+            </div>
+
+            <!-- Templates Grid -->
+            <div class="templates-grid">
+
+                <!-- Template 1: Basic Business -->
+                <div class="template-card" data-category="business" data-price="50">
+                    <div class="template-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <span>Business Pro</span>
+                        <div class="template-price">$50</div>
+                        <div class="template-badge">Best Value</div>
+                    </div>
+                    <div class="template-content">
+                        <h3 class="template-title">Basic Business Template</h3>
+                        <p class="template-description">Perfect for small businesses, consultants, and service providers. Clean, professional design with all essential pages.</p>
+
+                        <div class="template-tech">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Responsive</span>
+                        </div>
+
+                        <ul class="template-features">
+                            <li>5 Pre-built Pages (Home, About, Services, Contact, Blog)</li>
+                            <li>Mobile Responsive Design</li>
+                            <li>Contact Form Integration</li>
+                            <li>SEO Optimized</li>
+                            <li>Google Maps Integration</li>
+                            <li>6 Months Support</li>
+                        </ul>
+
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-outline" style="flex: 1;">View Demo</a>
+                            <a href="index.html#contact" class="btn btn-primary" style="flex: 1;">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 2: Portfolio -->
+                <div class="template-card" data-category="creative" data-price="75">
+                    <div class="template-preview" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <span>Portfolio Plus</span>
+                        <div class="template-price">$75</div>
+                    </div>
+                    <div class="template-content">
+                        <h3 class="template-title">Creative Portfolio Template</h3>
+                        <p class="template-description">Showcase your work beautifully. Ideal for photographers, designers, and creative professionals.</p>
+
+                        <div class="template-tech">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">jQuery</span>
+                            <span class="tech-badge">Lightbox</span>
+                        </div>
+
+                        <ul class="template-features">
+                            <li>Portfolio Gallery with Lightbox</li>
+                            <li>Filterable Project Grid</li>
+                            <li>Smooth Animations</li>
+                            <li>Testimonials Section</li>
+                            <li>Blog Integration</li>
+                            <li>Social Media Links</li>
+                        </ul>
+
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-outline" style="flex: 1;">View Demo</a>
+                            <a href="index.html#contact" class="btn btn-primary" style="flex: 1;">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 3: E-commerce Starter -->
+                <div class="template-card" data-category="ecommerce" data-price="99">
+                    <div class="template-preview" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <span>Shop Easy</span>
+                        <div class="template-price">$99</div>
+                        <div class="template-badge">Popular</div>
+                    </div>
+                    <div class="template-content">
+                        <h3 class="template-title">E-commerce Starter</h3>
+                        <p class="template-description">Start selling online immediately. Full-featured shopping cart with payment integration ready.</p>
+
+                        <div class="template-tech">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Stripe Ready</span>
+                        </div>
+
+                        <ul class="template-features">
+                            <li>Product Catalog Pages</li>
+                            <li>Shopping Cart Functionality</li>
+                            <li>Payment Gateway Ready (Stripe/PayPal)</li>
+                            <li>Product Filter & Search</li>
+                            <li>Customer Reviews</li>
+                            <li>Inventory Management UI</li>
+                        </ul>
+
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-outline" style="flex: 1;">View Demo</a>
+                            <a href="index.html#contact" class="btn btn-primary" style="flex: 1;">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 4: Restaurant -->
+                <div class="template-card" data-category="business" data-price="89">
+                    <div class="template-preview" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <span>Foodie Delight</span>
+                        <div class="template-price">$89</div>
+                    </div>
+                    <div class="template-content">
+                        <h3 class="template-title">Restaurant & Cafe Template</h3>
+                        <p class="template-description">Perfect for restaurants, cafes, and food businesses. Beautiful menu displays and reservation system.</p>
+
+                        <div class="template-tech">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Animations</span>
+                        </div>
+
+                        <ul class="template-features">
+                            <li>Digital Menu with Categories</li>
+                            <li>Online Reservation Form</li>
+                            <li>Photo Gallery</li>
+                            <li>Special Offers Section</li>
+                            <li>Location & Hours Info</li>
+                            <li>Chef's Specials Carousel</li>
+                        </ul>
+
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-outline" style="flex: 1;">View Demo</a>
+                            <a href="index.html#contact" class="btn btn-primary" style="flex: 1;">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 5: Real Estate -->
+                <div class="template-card" data-category="business" data-price="129">
+                    <div class="template-preview" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                        <span>Property Showcase</span>
+                        <div class="template-price">$129</div>
+                    </div>
+                    <div class="template-content">
+                        <h3 class="template-title">Real Estate Pro</h3>
+                        <p class="template-description">Advanced real estate template with property listings, search, and virtual tour integration.</p>
+
+                        <div class="template-tech">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Maps API</span>
+                        </div>
+
+                        <ul class="template-features">
+                            <li>Property Listing Grid & List Views</li>
+                            <li>Advanced Search & Filters</li>
+                            <li>Google Maps Integration</li>
+                            <li>Property Detail Pages</li>
+                            <li>Agent Profile Pages</li>
+                            <li>Mortgage Calculator</li>
+                            <li>Contact & Inquiry Forms</li>
+                        </ul>
+
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-outline" style="flex: 1;">View Demo</a>
+                            <a href="index.html#contact" class="btn btn-primary" style="flex: 1;">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 6: SaaS Platform -->
+                <div class="template-card" data-category="saas" data-price="149">
+                    <div class="template-preview" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <span>SaaS Launch</span>
+                        <div class="template-price">$149</div>
+                        <div class="template-badge">Advanced</div>
+                    </div>
+                    <div class="template-content">
+                        <h3 class="template-title">SaaS Platform Template</h3>
+                        <p class="template-description">Modern SaaS landing page with pricing tables, feature showcases, and dashboard preview.</p>
+
+                        <div class="template-tech">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Bootstrap</span>
+                        </div>
+
+                        <ul class="template-features">
+                            <li>Modern Landing Page Design</li>
+                            <li>Pricing Table (Multiple Tiers)</li>
+                            <li>Feature Comparison Chart</li>
+                            <li>FAQ Accordion</li>
+                            <li>Integration Showcases</li>
+                            <li>Testimonials Carousel</li>
+                            <li>Email Signup Integration</li>
+                        </ul>
+
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-outline" style="flex: 1;">View Demo</a>
+                            <a href="index.html#contact" class="btn btn-primary" style="flex: 1;">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 7: Medical/Healthcare -->
+                <div class="template-card" data-category="professional" data-price="139">
+                    <div class="template-preview" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                        <span>Health Plus</span>
+                        <div class="template-price">$139</div>
+                    </div>
+                    <div class="template-content">
+                        <h3 class="template-title">Medical & Healthcare</h3>
+                        <p class="template-description">Professional template for doctors, clinics, and healthcare providers with appointment booking.</p>
+
+                        <div class="template-tech">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Calendar</span>
+                        </div>
+
+                        <ul class="template-features">
+                            <li>Appointment Booking System</li>
+                            <li>Doctor/Staff Profiles</li>
+                            <li>Services & Treatments Pages</li>
+                            <li>Patient Portal Login UI</li>
+                            <li>Insurance Information</li>
+                            <li>Health Blog</li>
+                            <li>Emergency Contact Section</li>
+                        </ul>
+
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-outline" style="flex: 1;">View Demo</a>
+                            <a href="index.html#contact" class="btn btn-primary" style="flex: 1;">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 8: Professional Services -->
+                <div class="template-card" data-category="professional" data-price="119">
+                    <div class="template-preview" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                        <span>Pro Services</span>
+                        <div class="template-price">$119</div>
+                    </div>
+                    <div class="template-content">
+                        <h3 class="template-title">Professional Services</h3>
+                        <p class="template-description">Ideal for lawyers, accountants, consultants, and professional service providers.</p>
+
+                        <div class="template-tech">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Forms</span>
+                        </div>
+
+                        <ul class="template-features">
+                            <li>Practice Areas Showcase</li>
+                            <li>Team Member Profiles</li>
+                            <li>Case Studies/Success Stories</li>
+                            <li>Free Consultation Form</li>
+                            <li>Client Testimonials</li>
+                            <li>Resources/Downloads Section</li>
+                            <li>Newsletter Signup</li>
+                        </ul>
+
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-outline" style="flex: 1;">View Demo</a>
+                            <a href="index.html#contact" class="btn btn-primary" style="flex: 1;">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 9: Creative Agency -->
+                <div class="template-card" data-category="creative" data-price="179">
+                    <div class="template-preview" style="background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);">
+                        <span>Agency Elite</span>
+                        <div class="template-price">$179</div>
+                        <div class="template-badge">Premium</div>
+                    </div>
+                    <div class="template-content">
+                        <h3 class="template-title">Creative Agency</h3>
+                        <p class="template-description">Stunning design for creative agencies, marketing firms, and design studios. Highly customizable.</p>
+
+                        <div class="template-tech">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">GSAP</span>
+                        </div>
+
+                        <ul class="template-features">
+                            <li>Advanced Animations (GSAP)</li>
+                            <li>Portfolio Showcase</li>
+                            <li>Team Profiles</li>
+                            <li>Client Logos Carousel</li>
+                            <li>Service Offerings</li>
+                            <li>Project Case Studies</li>
+                            <li>Contact & Quote Forms</li>
+                            <li>Social Media Integration</li>
+                        </ul>
+
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-outline" style="flex: 1;">View Demo</a>
+                            <a href="index.html#contact" class="btn btn-primary" style="flex: 1;">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 10: Enterprise Multi-page -->
+                <div class="template-card" data-category="business" data-price="199">
+                    <div class="template-preview" style="background: linear-gradient(135deg, #2af598 0%, #009efd 100%);">
+                        <span>Enterprise Suite</span>
+                        <div class="template-price">$199</div>
+                        <div class="template-badge">Most Advanced</div>
+                    </div>
+                    <div class="template-content">
+                        <h3 class="template-title">Enterprise Multi-page</h3>
+                        <p class="template-description">Complete enterprise solution with 20+ pages, advanced features, and full documentation.</p>
+
+                        <div class="template-tech">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Bootstrap</span>
+                            <span class="tech-badge">Charts.js</span>
+                        </div>
+
+                        <ul class="template-features">
+                            <li>20+ Pre-built Pages</li>
+                            <li>Admin Dashboard UI</li>
+                            <li>Advanced Forms & Validation</li>
+                            <li>Data Tables & Charts</li>
+                            <li>Multi-level Navigation</li>
+                            <li>Search Functionality</li>
+                            <li>User Authentication UI</li>
+                            <li>Complete Documentation</li>
+                            <li>12 Months Premium Support</li>
+                        </ul>
+
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-outline" style="flex: 1;">View Demo</a>
+                            <a href="index.html#contact" class="btn btn-primary" style="flex: 1;">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CTA Section -->
+            <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); border-radius: var(--radius-lg); color: white;">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Need a Custom Template?</h2>
+                <p style="font-size: 1.125rem; margin-bottom: 2rem; opacity: 0.95;">We can build a completely custom website template tailored to your specific business needs.</p>
+                <a href="index.html#contact" class="btn btn-large" style="background: white; color: var(--primary-color);">Request Custom Template</a>
+            </div>
+
+            <!-- Info Box -->
+            <div style="margin-top: 3rem; background: #f0f9ff; padding: 2rem; border-radius: var(--radius-lg); border-left: 4px solid var(--primary-color);">
+                <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--text-primary);">What's Included?</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">✓</span>
+                        Full source code (HTML, CSS, JavaScript)
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">✓</span>
+                        Installation guide and documentation
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">✓</span>
+                        Lifetime updates (bug fixes and security patches)
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">✓</span>
+                        6-12 months email support (depending on template)
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">✓</span>
+                        One-time payment, no recurring fees
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--secondary-color); font-weight: bold;">✓</span>
+                        Commercial use license included
+                    </li>
+                </ul>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">
+                    <strong>Need help uploading your template?</strong> Check out our
+                    <a href="blog.html#upload-guide" style="color: var(--primary-color); font-weight: 600;">step-by-step guide</a>
+                    on how to upload and customize your template.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBWSK</h3>
+                    <p>Free tools for small business owners to launch successful websites.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="domain-checker.html">Domain Checker</a></li>
+                        <li><a href="choose-registrar.html">Choose Registrar</a></li>
+                        <li><a href="logo-generator.html">Logo Generator</a></li>
+                        <li><a href="quote-estimator.html">Quote Estimator</a></li>
+                        <li><a href="checklist.html">Launch Checklist</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="templates.html">Website Templates</a></li>
+                        <li><a href="index.html#contact">Custom Development</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Small Business Website Starter Kit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js?v=1.0.0"></script>
+    <script src="js/app.js?v=1.0.0"></script>
+    <script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const templateCards = document.querySelectorAll('.template-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                // Filter templates
+                templateCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
