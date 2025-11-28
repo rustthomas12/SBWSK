@@ -295,6 +295,46 @@
                                 <div class="template-icon">◇</div>
                                 <div class="template-name">Minimal</div>
                             </div>
+                            <div class="template-card premium" data-template="geometric" data-premium="true">
+                                <div class="template-icon">▲</div>
+                                <div class="template-name">Geometric</div>
+                            </div>
+                            <div class="template-card premium" data-template="3d-cube" data-premium="true">
+                                <div class="template-icon">◻</div>
+                                <div class="template-name">3D Cube</div>
+                            </div>
+                            <div class="template-card premium" data-template="starburst" data-premium="true">
+                                <div class="template-icon">✨</div>
+                                <div class="template-name">Starburst</div>
+                            </div>
+                            <div class="template-card premium" data-template="diamond" data-premium="true">
+                                <div class="template-icon">◇</div>
+                                <div class="template-name">Diamond</div>
+                            </div>
+                            <div class="template-card premium" data-template="rings" data-premium="true">
+                                <div class="template-icon">◎</div>
+                                <div class="template-name">Interlocking</div>
+                            </div>
+                            <div class="template-card premium" data-template="shield" data-premium="true">
+                                <div class="template-icon">🛡</div>
+                                <div class="template-name">Shield</div>
+                            </div>
+                            <div class="template-card premium" data-template="wave" data-premium="true">
+                                <div class="template-icon">〰</div>
+                                <div class="template-name">Wave Flow</div>
+                            </div>
+                            <div class="template-card premium" data-template="abstract" data-premium="true">
+                                <div class="template-icon">◉</div>
+                                <div class="template-name">Abstract Art</div>
+                            </div>
+                            <div class="template-card premium" data-template="monogram" data-premium="true">
+                                <div class="template-icon">⚜</div>
+                                <div class="template-name">Monogram</div>
+                            </div>
+                            <div class="template-card premium" data-template="infinity" data-premium="true">
+                                <div class="template-icon">∞</div>
+                                <div class="template-name">Infinity</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -531,6 +571,36 @@
                 case 'minimal':
                     drawMinimalLogo(businessName, tagline, primaryColor, secondaryColor);
                     break;
+                case 'geometric':
+                    drawGeometricLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case '3d-cube':
+                    draw3DCubeLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'starburst':
+                    drawStarburstLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'diamond':
+                    drawDiamondLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'rings':
+                    drawRingsLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'shield':
+                    drawShieldLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'wave':
+                    drawWaveLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'abstract':
+                    drawAbstractLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'monogram':
+                    drawMonogramLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'infinity':
+                    drawInfinityLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
             }
         }
 
@@ -746,6 +816,415 @@
             ctx.moveTo(150, 165);
             ctx.lineTo(250, 165);
             ctx.stroke();
+        }
+
+        function drawGeometricLogo(name, tagline, color1, color2) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            // Draw multiple geometric shapes
+            ctx.fillStyle = color1;
+            ctx.beginPath();
+            ctx.moveTo(200, 50);
+            ctx.lineTo(240, 90);
+            ctx.lineTo(220, 130);
+            ctx.lineTo(180, 130);
+            ctx.lineTo(160, 90);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = color2;
+            ctx.globalAlpha = 0.7;
+            ctx.beginPath();
+            ctx.arc(200, 95, 35, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1.0;
+
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 28px Arial';
+            ctx.fillText(initials, 200, 95);
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText(name, 200, 160);
+        }
+
+        function draw3DCubeLogo(name, tagline, color1, color2) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            // 3D cube effect
+            // Front face
+            ctx.fillStyle = color1;
+            ctx.beginPath();
+            ctx.moveTo(170, 80);
+            ctx.lineTo(230, 80);
+            ctx.lineTo(230, 120);
+            ctx.lineTo(170, 120);
+            ctx.closePath();
+            ctx.fill();
+
+            // Top face
+            const gradient = ctx.createLinearGradient(170, 60, 230, 80);
+            gradient.addColorStop(0, color2);
+            gradient.addColorStop(1, color1);
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.moveTo(170, 80);
+            ctx.lineTo(200, 60);
+            ctx.lineTo(260, 60);
+            ctx.lineTo(230, 80);
+            ctx.closePath();
+            ctx.fill();
+
+            // Right face
+            ctx.fillStyle = color2;
+            ctx.globalAlpha = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(230, 80);
+            ctx.lineTo(260, 60);
+            ctx.lineTo(260, 100);
+            ctx.lineTo(230, 120);
+            ctx.closePath();
+            ctx.fill();
+            ctx.globalAlpha = 1.0;
+
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 32px Arial';
+            ctx.fillText(initials, 200, 105);
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText(name, 200, 150);
+        }
+
+        function drawStarburstLogo(name, tagline, color1, color2) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            // Draw starburst rays
+            ctx.save();
+            ctx.translate(200, 100);
+            for (let i = 0; i < 12; i++) {
+                ctx.rotate(Math.PI / 6);
+                const gradient = ctx.createLinearGradient(0, 0, 0, -50);
+                gradient.addColorStop(0, color1);
+                gradient.addColorStop(1, color2);
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(-8, -35);
+                ctx.lineTo(0, -50);
+                ctx.lineTo(8, -35);
+                ctx.closePath();
+                ctx.fill();
+            }
+            ctx.restore();
+
+            // Center circle
+            const centerGradient = ctx.createRadialGradient(200, 100, 0, 200, 100, 35);
+            centerGradient.addColorStop(0, color2);
+            centerGradient.addColorStop(1, color1);
+            ctx.fillStyle = centerGradient;
+            ctx.beginPath();
+            ctx.arc(200, 100, 35, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 24px Arial';
+            ctx.fillText(initials, 200, 100);
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText(name, 200, 165);
+        }
+
+        function drawDiamondLogo(name, tagline, color1, color2) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            // Outer diamond
+            ctx.fillStyle = color1;
+            ctx.beginPath();
+            ctx.moveTo(200, 45);
+            ctx.lineTo(245, 100);
+            ctx.lineTo(200, 145);
+            ctx.lineTo(155, 100);
+            ctx.closePath();
+            ctx.fill();
+
+            // Inner diamond with gradient
+            const gradient = ctx.createLinearGradient(175, 75, 225, 125);
+            gradient.addColorStop(0, color2);
+            gradient.addColorStop(1, 'white');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.moveTo(200, 70);
+            ctx.lineTo(225, 100);
+            ctx.lineTo(200, 130);
+            ctx.lineTo(175, 100);
+            ctx.closePath();
+            ctx.fill();
+
+            // Facet lines for 3D effect
+            ctx.strokeStyle = color1;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(200, 70);
+            ctx.lineTo(200, 100);
+            ctx.lineTo(175, 100);
+            ctx.moveTo(200, 100);
+            ctx.lineTo(225, 100);
+            ctx.stroke();
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 26px Arial';
+            ctx.fillText(initials, 200, 105);
+
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText(name, 200, 170);
+        }
+
+        function drawRingsLogo(name, tagline, color1, color2) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            // First ring
+            ctx.strokeStyle = color1;
+            ctx.lineWidth = 6;
+            ctx.globalAlpha = 0.8;
+            ctx.beginPath();
+            ctx.arc(185, 100, 35, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Second ring
+            ctx.strokeStyle = color2;
+            ctx.beginPath();
+            ctx.arc(215, 100, 35, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.globalAlpha = 1.0;
+
+            // Center overlap
+            const gradient = ctx.createLinearGradient(180, 80, 220, 120);
+            gradient.addColorStop(0, color1);
+            gradient.addColorStop(0.5, 'white');
+            gradient.addColorStop(1, color2);
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(200, 100, 25, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 24px Arial';
+            ctx.fillText(initials, 200, 100);
+
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText(name, 200, 165);
+        }
+
+        function drawShieldLogo(name, tagline, color1, color2) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            // Shield shape
+            const gradient = ctx.createLinearGradient(150, 50, 250, 140);
+            gradient.addColorStop(0, color1);
+            gradient.addColorStop(1, color2);
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.moveTo(200, 50);
+            ctx.lineTo(250, 70);
+            ctx.lineTo(250, 110);
+            ctx.quadraticCurveTo(250, 130, 200, 145);
+            ctx.quadraticCurveTo(150, 130, 150, 110);
+            ctx.lineTo(150, 70);
+            ctx.closePath();
+            ctx.fill();
+
+            // Shield outline
+            ctx.strokeStyle = color1;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Center division
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(200, 50);
+            ctx.lineTo(200, 145);
+            ctx.stroke();
+
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 36px Arial';
+            ctx.fillText(initials, 200, 100);
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText(name, 200, 170);
+        }
+
+        function drawWaveLogo(name, tagline, color1, color2) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            // Draw flowing waves
+            ctx.strokeStyle = color1;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(140, 70);
+            ctx.quadraticCurveTo(170, 50, 200, 70);
+            ctx.quadraticCurveTo(230, 90, 260, 70);
+            ctx.stroke();
+
+            ctx.strokeStyle = color2;
+            ctx.beginPath();
+            ctx.moveTo(140, 90);
+            ctx.quadraticCurveTo(170, 70, 200, 90);
+            ctx.quadraticCurveTo(230, 110, 260, 90);
+            ctx.stroke();
+
+            ctx.strokeStyle = color1;
+            ctx.globalAlpha = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(140, 110);
+            ctx.quadraticCurveTo(170, 90, 200, 110);
+            ctx.quadraticCurveTo(230, 130, 260, 110);
+            ctx.stroke();
+            ctx.globalAlpha = 1.0;
+
+            // Circle background for initials
+            const gradient = ctx.createRadialGradient(200, 90, 0, 200, 90, 30);
+            gradient.addColorStop(0, 'white');
+            gradient.addColorStop(1, color2);
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(200, 90, 30, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 28px Arial';
+            ctx.fillText(initials, 200, 90);
+
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText(name, 200, 155);
+        }
+
+        function drawAbstractLogo(name, tagline, color1, color2) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            // Abstract shapes
+            ctx.save();
+            ctx.translate(200, 100);
+
+            // Rotating squares
+            for (let i = 0; i < 3; i++) {
+                ctx.rotate(Math.PI / 6);
+                ctx.fillStyle = i % 2 === 0 ? color1 : color2;
+                ctx.globalAlpha = 0.7 - (i * 0.2);
+                ctx.fillRect(-35, -35, 70, 70);
+            }
+
+            ctx.restore();
+            ctx.globalAlpha = 1.0;
+
+            // Center circle
+            const gradient = ctx.createRadialGradient(200, 100, 0, 200, 100, 30);
+            gradient.addColorStop(0, 'white');
+            gradient.addColorStop(1, color1);
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(200, 100, 30, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = color2;
+            ctx.font = 'bold 26px Arial';
+            ctx.fillText(initials, 200, 100);
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText(name, 200, 165);
+        }
+
+        function drawMonogramLogo(name, tagline, color1, color2) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            // Ornate border
+            ctx.strokeStyle = color1;
+            ctx.lineWidth = 3;
+
+            // Outer decorative frame
+            ctx.beginPath();
+            ctx.moveTo(140, 65);
+            ctx.lineTo(150, 55);
+            ctx.lineTo(250, 55);
+            ctx.lineTo(260, 65);
+            ctx.lineTo(260, 125);
+            ctx.lineTo(250, 135);
+            ctx.lineTo(150, 135);
+            ctx.lineTo(140, 125);
+            ctx.closePath();
+            ctx.stroke();
+
+            // Inner frame
+            ctx.strokeStyle = color2;
+            ctx.lineWidth = 1;
+            ctx.strokeRect(155, 70, 90, 50);
+
+            // Decorative corners
+            ctx.fillStyle = color1;
+            const corners = [[145, 60], [255, 60], [145, 130], [255, 130]];
+            corners.forEach(([x, y]) => {
+                ctx.beginPath();
+                ctx.arc(x, y, 3, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Monogram letters with elegant font
+            const gradient = ctx.createLinearGradient(170, 70, 230, 120);
+            gradient.addColorStop(0, color1);
+            gradient.addColorStop(1, color2);
+            ctx.fillStyle = gradient;
+            ctx.font = 'bold 44px Georgia';
+            ctx.fillText(initials, 200, 100);
+
+            ctx.fillStyle = color1;
+            ctx.font = '16px Georgia';
+            ctx.fillText(name.toUpperCase(), 200, 160);
+        }
+
+        function drawInfinityLogo(name, tagline, color1, color2) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            // Draw infinity symbol
+            ctx.save();
+            ctx.translate(200, 95);
+            ctx.scale(1.5, 1);
+
+            const gradient = ctx.createLinearGradient(-30, 0, 30, 0);
+            gradient.addColorStop(0, color1);
+            gradient.addColorStop(0.5, color2);
+            gradient.addColorStop(1, color1);
+
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 8;
+            ctx.beginPath();
+
+            // Left loop
+            ctx.arc(-20, 0, 25, 0, Math.PI * 2, false);
+            ctx.stroke();
+
+            // Right loop
+            ctx.beginPath();
+            ctx.arc(20, 0, 25, 0, Math.PI * 2, false);
+            ctx.stroke();
+
+            ctx.restore();
+
+            // Center with initials
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(200, 95, 18, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText(initials, 200, 95);
+
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText(name, 200, 155);
         }
 
         // Initial draw
