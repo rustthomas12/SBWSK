@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Check your website speed and performance. Get detailed insights and recommendations to improve your site's loading time and user experience.">
+    <title>Website Speed & Performance Check - SBWSK</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <link rel="stylesheet" href="css/sections.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <img src="images/logo.png" alt="SBWSK Logo" class="logo-img">
+                <span class="tagline">
+                    <span>Small Business</span>
+                    <span>Website Starter Kit</span>
+                </span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-dropdown-toggle">Tools</a>
+                    <ul class="nav-dropdown">
+                        <li><a href="domain-checker.html">Domain Checker</a></li>
+                        <li><a href="choose-registrar.html">Choose Registrar</a></li>
+                        <li><a href="logo-generator.html">Logo Generator</a></li>
+                        <li><a href="website-speed-check.html">Speed Check</a></li>
+                    </ul>
+                </li>
+                <li><a href="templates.html">Templates</a></li>
+                <li><a href="quote-estimator.html">Get Quote</a></li>
+                <li><a href="checklist.html">Launch Checklist</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#contact" class="btn btn-primary">Work With Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="tools-section">
+        <div class="container">
+            <!-- Header -->
+            <div class="text-center mb-3">
+                <h2 class="section-title">Website Speed & Performance Check</h2>
+                <p class="section-subtitle">Analyze your website's performance and get actionable insights</p>
+            </div>
+
+            <!-- Speed Test Tool -->
+            <div class="tool-card" style="max-width: 800px; margin: 0 auto 2rem;">
+                <h3 style="margin-bottom: 1rem;">🚀 Test Your Website Speed</h3>
+                <p class="text-muted" style="margin-bottom: 1.5rem;">Enter your website URL to check its loading speed and performance metrics</p>
+
+                <form id="speedTestForm" style="margin-bottom: 2rem;">
+                    <div class="form-group">
+                        <label for="websiteUrl">Website URL</label>
+                        <input
+                            type="url"
+                            id="websiteUrl"
+                            name="websiteUrl"
+                            placeholder="https://example.com"
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large btn-block">
+                        Test Speed →
+                    </button>
+                </form>
+
+                <div id="speedResults" class="hidden">
+                    <!-- Results will be displayed here -->
+                </div>
+            </div>
+
+            <!-- Performance Tools Grid -->
+            <div class="text-center mb-2">
+                <h3>Popular Performance Testing Tools</h3>
+                <p class="text-muted">Use these free tools to analyze your website</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+                <!-- Google PageSpeed Insights -->
+                <div class="tool-card">
+                    <div class="option-icon" style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                    <h4 style="margin-bottom: 0.5rem;">Google PageSpeed Insights</h4>
+                    <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
+                        Analyze your site's performance on mobile and desktop with Google's official tool
+                    </p>
+                    <a href="https://pagespeed.web.dev/" target="_blank" rel="noopener" class="btn btn-outline btn-block">
+                        Test with PageSpeed
+                    </a>
+                </div>
+
+                <!-- GTmetrix -->
+                <div class="tool-card">
+                    <div class="option-icon" style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                    <h4 style="margin-bottom: 0.5rem;">GTmetrix</h4>
+                    <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
+                        Detailed performance reports with waterfall charts and actionable recommendations
+                    </p>
+                    <a href="https://gtmetrix.com/" target="_blank" rel="noopener" class="btn btn-outline btn-block">
+                        Test with GTmetrix
+                    </a>
+                </div>
+
+                <!-- Pingdom -->
+                <div class="tool-card">
+                    <div class="option-icon" style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
+                    <h4 style="margin-bottom: 0.5rem;">Pingdom</h4>
+                    <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
+                        Test your site speed from multiple locations worldwide
+                    </p>
+                    <a href="https://tools.pingdom.com/" target="_blank" rel="noopener" class="btn btn-outline btn-block">
+                        Test with Pingdom
+                    </a>
+                </div>
+
+                <!-- WebPageTest -->
+                <div class="tool-card">
+                    <div class="option-icon" style="font-size: 3rem; margin-bottom: 1rem;">🔬</div>
+                    <h4 style="margin-bottom: 0.5rem;">WebPageTest</h4>
+                    <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
+                        Advanced testing with video capture, connection throttling, and more
+                    </p>
+                    <a href="https://www.webpagetest.org/" target="_blank" rel="noopener" class="btn btn-outline btn-block">
+                        Test with WebPageTest
+                    </a>
+                </div>
+
+                <!-- Chrome DevTools -->
+                <div class="tool-card">
+                    <div class="option-icon" style="font-size: 3rem; margin-bottom: 1rem;">🛠️</div>
+                    <h4 style="margin-bottom: 0.5rem;">Chrome Lighthouse</h4>
+                    <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
+                        Built-in Chrome tool for performance, accessibility, and SEO audits
+                    </p>
+                    <a href="https://developer.chrome.com/docs/lighthouse/overview/" target="_blank" rel="noopener" class="btn btn-outline btn-block">
+                        Learn About Lighthouse
+                    </a>
+                </div>
+
+                <!-- Uptime Robot -->
+                <div class="tool-card">
+                    <div class="option-icon" style="font-size: 3rem; margin-bottom: 1rem;">⏰</div>
+                    <h4 style="margin-bottom: 0.5rem;">Uptime Monitoring</h4>
+                    <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
+                        Monitor your website's uptime and get alerts when it goes down
+                    </p>
+                    <a href="https://uptimerobot.com/" target="_blank" rel="noopener" class="btn btn-outline btn-block">
+                        Check Uptime Robot
+                    </a>
+                </div>
+            </div>
+
+            <!-- Performance Metrics Explained -->
+            <div class="tool-card" style="max-width: 900px; margin: 0 auto 2rem;">
+                <h3 style="margin-bottom: 1.5rem;">📈 Key Performance Metrics</h3>
+
+                <div style="display: grid; gap: 1.5rem;">
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">First Contentful Paint (FCP)</h4>
+                        <p style="margin-bottom: 0.5rem;">Time until the first content appears on screen</p>
+                        <p class="text-muted" style="font-size: 0.875rem;">
+                            <strong>Good:</strong> 0-1.8s | <strong>Needs Improvement:</strong> 1.8-3s | <strong>Poor:</strong> 3s+
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Largest Contentful Paint (LCP)</h4>
+                        <p style="margin-bottom: 0.5rem;">Time until the largest content element is visible</p>
+                        <p class="text-muted" style="font-size: 0.875rem;">
+                            <strong>Good:</strong> 0-2.5s | <strong>Needs Improvement:</strong> 2.5-4s | <strong>Poor:</strong> 4s+
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Cumulative Layout Shift (CLS)</h4>
+                        <p style="margin-bottom: 0.5rem;">Measures visual stability (unexpected layout shifts)</p>
+                        <p class="text-muted" style="font-size: 0.875rem;">
+                            <strong>Good:</strong> 0-0.1 | <strong>Needs Improvement:</strong> 0.1-0.25 | <strong>Poor:</strong> 0.25+
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Time to Interactive (TTI)</h4>
+                        <p style="margin-bottom: 0.5rem;">Time until the page is fully interactive</p>
+                        <p class="text-muted" style="font-size: 0.875rem;">
+                            <strong>Good:</strong> 0-3.8s | <strong>Needs Improvement:</strong> 3.8-7.3s | <strong>Poor:</strong> 7.3s+
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Total Blocking Time (TBT)</h4>
+                        <p style="margin-bottom: 0.5rem;">Time the main thread is blocked from responding to input</p>
+                        <p class="text-muted" style="font-size: 0.875rem;">
+                            <strong>Good:</strong> 0-200ms | <strong>Needs Improvement:</strong> 200-600ms | <strong>Poor:</strong> 600ms+
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Optimization Tips -->
+            <div class="tool-card" style="max-width: 900px; margin: 0 auto 2rem;">
+                <h3 style="margin-bottom: 1.5rem;">💡 Speed Optimization Tips</h3>
+
+                <div style="display: grid; gap: 1rem;">
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 1.5rem;">🖼️</div>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem;">Optimize Images</h4>
+                            <p class="text-muted" style="font-size: 0.875rem;">
+                                Compress images, use WebP format, and implement lazy loading for images below the fold
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 1.5rem;">⚡</div>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem;">Enable Caching</h4>
+                            <p class="text-muted" style="font-size: 0.875rem;">
+                                Set proper cache headers to store static assets in visitors' browsers
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 1.5rem;">📦</div>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem;">Minify CSS & JavaScript</h4>
+                            <p class="text-muted" style="font-size: 0.875rem;">
+                                Remove unnecessary characters and whitespace from code files
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 1.5rem;">🌐</div>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem;">Use a CDN</h4>
+                            <p class="text-muted" style="font-size: 0.875rem;">
+                                Deliver content from servers closest to your visitors with a Content Delivery Network
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 1.5rem;">🔧</div>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem;">Reduce HTTP Requests</h4>
+                            <p class="text-muted" style="font-size: 0.875rem;">
+                                Combine files, use CSS sprites, and eliminate unnecessary plugins and scripts
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 1.5rem;">🚀</div>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem;">Choose Quality Hosting</h4>
+                            <p class="text-muted" style="font-size: 0.875rem;">
+                                Invest in reliable hosting with fast servers and good uptime guarantees
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 1.5rem;">📱</div>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem;">Optimize for Mobile</h4>
+                            <p class="text-muted" style="font-size: 0.875rem;">
+                                Use responsive design and ensure fast loading on mobile networks
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 1.5rem;">🗜️</div>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem;">Enable GZIP Compression</h4>
+                            <p class="text-muted" style="font-size: 0.875rem;">
+                                Compress your website files before sending them to browsers
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Speed Matters -->
+            <div class="tool-card" style="max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white;">
+                <h3 style="margin-bottom: 1rem; color: white;">⚡ Why Website Speed Matters</h3>
+                <div style="display: grid; gap: 1rem;">
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 2rem;">📈</div>
+                        <div>
+                            <strong>Better SEO Rankings</strong>
+                            <p style="opacity: 0.9; font-size: 0.875rem; margin-top: 0.25rem;">
+                                Google uses page speed as a ranking factor. Faster sites rank higher in search results.
+                            </p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 2rem;">😊</div>
+                        <div>
+                            <strong>Improved User Experience</strong>
+                            <p style="opacity: 0.9; font-size: 0.875rem; margin-top: 0.25rem;">
+                                53% of mobile users abandon sites that take longer than 3 seconds to load.
+                            </p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 2rem;">💰</div>
+                        <div>
+                            <strong>Higher Conversion Rates</strong>
+                            <p style="opacity: 0.9; font-size: 0.875rem; margin-top: 0.25rem;">
+                                A 1-second delay in page load time can reduce conversions by 7%.
+                            </p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 2rem;">🎯</div>
+                        <div>
+                            <strong>Lower Bounce Rates</strong>
+                            <p style="opacity: 0.9; font-size: 0.875rem; margin-top: 0.25rem;">
+                                Fast-loading pages keep visitors engaged and reduce bounce rates significantly.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Need Help Optimizing Your Website?</h2>
+                <p>Our team can help improve your site's performance and speed</p>
+                <a href="index.html#contact" class="btn btn-large btn-white">
+                    Get Expert Help →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBWSK</h3>
+                    <p>Free tools for small business owners to launch successful websites.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="domain-checker.html">Domain Checker</a></li>
+                        <li><a href="choose-registrar.html">Choose Registrar</a></li>
+                        <li><a href="logo-generator.html">Logo Generator</a></li>
+                        <li><a href="website-speed-check.html">Speed Check</a></li>
+                        <li><a href="templates.html">Templates</a></li>
+                        <li><a href="quote-estimator.html">Quote Estimator</a></li>
+                        <li><a href="name-generator.html">Name Generator</a></li>
+                        <li><a href="checklist.html">Launch Checklist</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="https://bluehost.sjv.io/Webstarterkit" target="_blank" rel="noopener">Get Hosting</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Small Business Website Starter Kit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/website-speed-check.js"></script>
+</body>
+</html>
