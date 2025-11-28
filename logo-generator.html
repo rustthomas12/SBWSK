@@ -602,6 +602,58 @@
                     drawInfinityLogo(businessName, tagline, primaryColor, secondaryColor);
                     break;
             }
+
+            // Add watermark overlay for premium templates
+            if (isPremium) {
+                drawPreviewWatermark();
+            }
+        }
+
+        // Watermark function for premium templates
+        function drawPreviewWatermark() {
+            ctx.save();
+
+            // Semi-transparent overlay
+            ctx.globalAlpha = 0.15;
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Main diagonal watermark
+            ctx.globalAlpha = 0.4;
+            ctx.translate(200, 100);
+            ctx.rotate(-Math.PI / 6); // -30 degrees
+
+            ctx.fillStyle = '#ffffff';
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 3;
+            ctx.font = 'bold 48px Arial';
+            ctx.strokeText('PREVIEW', 0, 0);
+            ctx.fillText('PREVIEW', 0, 0);
+
+            // Secondary watermark for extra protection
+            ctx.font = 'bold 24px Arial';
+            ctx.globalAlpha = 0.3;
+            ctx.fillText('NOT FOR COMMERCIAL USE', 0, 40);
+
+            ctx.restore();
+
+            // Add corner watermarks
+            ctx.save();
+            ctx.globalAlpha = 0.25;
+            ctx.fillStyle = '#ffffff';
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2;
+            ctx.font = 'bold 16px Arial';
+
+            // Top left corner
+            ctx.strokeText('PREVIEW', 50, 30);
+            ctx.fillText('PREVIEW', 50, 30);
+
+            // Bottom right corner
+            ctx.strokeText('PREVIEW', 350, 180);
+            ctx.fillText('PREVIEW', 350, 180);
+
+            ctx.restore();
         }
 
         function drawCircleLogo(name, tagline, color) {
