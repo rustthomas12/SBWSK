@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create a professional logo for your business. Choose from basic free templates or upgrade to premium designs for $10.">
+    <title>Logo Generator - SBWSK</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <link rel="stylesheet" href="css/sections.css">
+
+    <style>
+        .logo-preview {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-md);
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-preview canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .template-card {
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-align: center;
+            position: relative;
+        }
+
+        .template-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .template-card.selected {
+            border-color: var(--primary-color);
+            background-color: #eff6ff;
+        }
+
+        .template-card.premium::after {
+            content: 'PREMIUM';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        .template-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .template-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .color-picker-group {
+            display: flex;
+            gap: var(--spacing-sm);
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .color-picker-group input[type="color"] {
+            width: 60px;
+            height: 40px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .feature-comparison {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .feature-comparison table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .feature-comparison th,
+        .feature-comparison td {
+            padding: var(--spacing-sm);
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .feature-comparison th {
+            background-color: var(--bg-secondary);
+            font-weight: 700;
+        }
+
+        .checkmark {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .crossmark {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .template-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <img src="images/logo.png" alt="SBWSK Logo" class="logo-img">
+                <span class="tagline">
+                    <span>Small Business</span>
+                    <span>Website Starter Kit</span>
+                </span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-dropdown-toggle">Tools</a>
+                    <ul class="nav-dropdown">
+                        <li><a href="domain-checker.html">Domain Checker</a></li>
+                        <li><a href="choose-registrar.html">Choose Registrar</a></li>
+                        <li><a href="logo-generator.html" class="active">Logo Generator</a></li>
+                    </ul>
+                </li>
+                <li><a href="quote-estimator.html">Get Quote</a></li>
+                <li><a href="checklist.html">Launch Checklist</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#contact" class="btn btn-primary">Work With Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="tools-section">
+        <div class="container">
+            <!-- Header -->
+            <div class="text-center mb-3">
+                <h2 class="section-title">Logo Generator</h2>
+                <p class="section-subtitle">Create a professional logo for your business in minutes</p>
+            </div>
+
+            <!-- Main Content Area -->
+            <div style="max-width: 1000px; margin: 0 auto;">
+
+                <!-- Logo Configuration -->
+                <div class="tool-card" style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-primary);">Customize Your Logo</h3>
+
+                    <!-- Business Name Input -->
+                    <div class="form-group">
+                        <label for="businessName">Business Name</label>
+                        <input
+                            type="text"
+                            id="businessName"
+                            placeholder="Enter your business name"
+                            maxlength="30"
+                        >
+                    </div>
+
+                    <!-- Tagline Input -->
+                    <div class="form-group">
+                        <label for="tagline">Tagline (Optional)</label>
+                        <input
+                            type="text"
+                            id="tagline"
+                            placeholder="Enter your tagline"
+                            maxlength="50"
+                        >
+                    </div>
+
+                    <!-- Color Pickers -->
+                    <div class="form-group">
+                        <label>Choose Your Colors</label>
+                        <div class="color-picker-group">
+                            <div>
+                                <label for="primaryColor" style="font-size: 0.875rem; display: block; margin-bottom: 0.25rem;">Primary Color</label>
+                                <input type="color" id="primaryColor" value="#0ea5e9">
+                            </div>
+                            <div>
+                                <label for="secondaryColor" style="font-size: 0.875rem; display: block; margin-bottom: 0.25rem;">Secondary Color</label>
+                                <input type="color" id="secondaryColor" value="#10b981">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Template Selection -->
+                    <div class="form-group">
+                        <label>Choose a Template</label>
+                        <p class="form-help">Basic templates are free. Premium templates require a $10 upgrade.</p>
+
+                        <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1rem;">Basic Templates (Free)</h4>
+                        <div class="template-grid">
+                            <div class="template-card" data-template="circle" data-premium="false">
+                                <div class="template-icon">●</div>
+                                <div class="template-name">Circle</div>
+                            </div>
+                            <div class="template-card" data-template="square" data-premium="false">
+                                <div class="template-icon">■</div>
+                                <div class="template-name">Square</div>
+                            </div>
+                            <div class="template-card" data-template="text" data-premium="false">
+                                <div class="template-icon">Aa</div>
+                                <div class="template-name">Text Only</div>
+                            </div>
+                            <div class="template-card selected" data-template="initials" data-premium="false">
+                                <div class="template-icon">AB</div>
+                                <div class="template-name">Initials</div>
+                            </div>
+                        </div>
+
+                        <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1rem;">Premium Templates ($10)</h4>
+                        <div class="template-grid">
+                            <div class="template-card premium" data-template="gradient-circle" data-premium="true">
+                                <div class="template-icon">◐</div>
+                                <div class="template-name">Gradient Circle</div>
+                            </div>
+                            <div class="template-card premium" data-template="badge" data-premium="true">
+                                <div class="template-icon">◆</div>
+                                <div class="template-name">Badge</div>
+                            </div>
+                            <div class="template-card premium" data-template="modern" data-premium="true">
+                                <div class="template-icon">⬡</div>
+                                <div class="template-name">Modern Hex</div>
+                            </div>
+                            <div class="template-card premium" data-template="elegant" data-premium="true">
+                                <div class="template-icon">✦</div>
+                                <div class="template-name">Elegant</div>
+                            </div>
+                            <div class="template-card premium" data-template="tech" data-premium="true">
+                                <div class="template-icon">⚡</div>
+                                <div class="template-name">Tech</div>
+                            </div>
+                            <div class="template-card premium" data-template="minimal" data-premium="true">
+                                <div class="template-icon">◇</div>
+                                <div class="template-name">Minimal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logo Preview -->
+                <div class="tool-card" style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-primary);">Preview</h3>
+                    <div class="logo-preview" id="logoPreview">
+                        <canvas id="logoCanvas" width="400" height="200"></canvas>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <button id="downloadBtn" class="btn btn-primary" style="flex: 1;">
+                            Download Logo (PNG)
+                        </button>
+                        <button id="upgradeBtn" class="btn btn-outline" style="flex: 1; display: none;">
+                            Upgrade to Premium - $10
+                        </button>
+                    </div>
+
+                    <div id="premiumAlert" class="alert alert-info" style="margin-top: 1rem; display: none;">
+                        <strong>Premium Template Selected</strong><br>
+                        Upgrade to premium for $10 to unlock high-resolution downloads, vector files (SVG), and commercial usage rights.
+                    </div>
+                </div>
+
+                <!-- Feature Comparison -->
+                <div class="feature-comparison">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-primary);">Basic vs Premium</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th style="text-align: center;">Basic (Free)</th>
+                                <th style="text-align: center;">Premium ($10)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Basic Templates</td>
+                                <td style="text-align: center;"><span class="checkmark">✓</span></td>
+                                <td style="text-align: center;"><span class="checkmark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Premium Templates</td>
+                                <td style="text-align: center;"><span class="crossmark">✗</span></td>
+                                <td style="text-align: center;"><span class="checkmark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>PNG Download (500x500)</td>
+                                <td style="text-align: center;"><span class="checkmark">✓</span></td>
+                                <td style="text-align: center;"><span class="checkmark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>High-Res PNG (2000x2000)</td>
+                                <td style="text-align: center;"><span class="crossmark">✗</span></td>
+                                <td style="text-align: center;"><span class="checkmark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Vector File (SVG)</td>
+                                <td style="text-align: center;"><span class="crossmark">✗</span></td>
+                                <td style="text-align: center;"><span class="checkmark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Commercial Usage Rights</td>
+                                <td style="text-align: center;"><span class="crossmark">✗</span></td>
+                                <td style="text-align: center;"><span class="checkmark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Unlimited Revisions</td>
+                                <td style="text-align: center;"><span class="crossmark">✗</span></td>
+                                <td style="text-align: center;"><span class="checkmark">✓</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBWSK</h3>
+                    <p>Free tools for small business owners to launch successful websites.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="domain-checker.html">Domain Checker</a></li>
+                        <li><a href="choose-registrar.html">Choose Registrar</a></li>
+                        <li><a href="logo-generator.html">Logo Generator</a></li>
+                        <li><a href="quote-estimator.html">Quote Estimator</a></li>
+                        <li><a href="checklist.html">Launch Checklist</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="https://bluehost.sjv.io/Webstarterkit" target="_blank" rel="noopener">Get Hosting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Small Business Website Starter Kit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js?v=1.0.0"></script>
+    <script src="js/app.js?v=1.0.0"></script>
+    <script>
+        // Logo Generator Logic
+        let selectedTemplate = 'initials';
+        let isPremium = false;
+
+        const canvas = document.getElementById('logoCanvas');
+        const ctx = canvas.getContext('2d');
+        const businessNameInput = document.getElementById('businessName');
+        const taglineInput = document.getElementById('tagline');
+        const primaryColorInput = document.getElementById('primaryColor');
+        const secondaryColorInput = document.getElementById('secondaryColor');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const upgradeBtn = document.getElementById('upgradeBtn');
+        const premiumAlert = document.getElementById('premiumAlert');
+
+        // Template selection
+        document.querySelectorAll('.template-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedTemplate = this.dataset.template;
+                isPremium = this.dataset.premium === 'true';
+
+                // Show/hide premium UI
+                if (isPremium) {
+                    premiumAlert.style.display = 'block';
+                    upgradeBtn.style.display = 'block';
+                    downloadBtn.textContent = 'Preview Only (Upgrade to Download)';
+                } else {
+                    premiumAlert.style.display = 'none';
+                    upgradeBtn.style.display = 'none';
+                    downloadBtn.textContent = 'Download Logo (PNG)';
+                }
+
+                drawLogo();
+            });
+        });
+
+        // Input listeners
+        businessNameInput.addEventListener('input', drawLogo);
+        taglineInput.addEventListener('input', drawLogo);
+        primaryColorInput.addEventListener('input', drawLogo);
+        secondaryColorInput.addEventListener('input', drawLogo);
+
+        // Download button
+        downloadBtn.addEventListener('click', function() {
+            if (isPremium) {
+                alert('This is a premium template. Please upgrade to download.');
+                return;
+            }
+
+            const link = document.createElement('a');
+            link.download = (businessNameInput.value || 'logo') + '.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+
+        // Upgrade button
+        upgradeBtn.addEventListener('click', function() {
+            const confirmed = confirm('Upgrade to Premium for $10?\n\nYou will receive:\n• High-resolution PNG (2000x2000)\n• Vector file (SVG)\n• Commercial usage rights\n• Unlimited revisions\n\nClick OK to proceed to payment.');
+
+            if (confirmed) {
+                // In a real implementation, this would redirect to a payment page
+                alert('Payment integration coming soon! For now, please contact us at contact@sbwsk.com to complete your purchase.');
+            }
+        });
+
+        // Draw logo function
+        function drawLogo() {
+            const businessName = businessNameInput.value || 'Your Business';
+            const tagline = taglineInput.value;
+            const primaryColor = primaryColorInput.value;
+            const secondaryColor = secondaryColorInput.value;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Set font
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            switch(selectedTemplate) {
+                case 'circle':
+                    drawCircleLogo(businessName, tagline, primaryColor);
+                    break;
+                case 'square':
+                    drawSquareLogo(businessName, tagline, primaryColor);
+                    break;
+                case 'text':
+                    drawTextLogo(businessName, tagline, primaryColor);
+                    break;
+                case 'initials':
+                    drawInitialsLogo(businessName, tagline, primaryColor);
+                    break;
+                case 'gradient-circle':
+                    drawGradientCircleLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'badge':
+                    drawBadgeLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'modern':
+                    drawModernLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'elegant':
+                    drawElegantLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'tech':
+                    drawTechLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+                case 'minimal':
+                    drawMinimalLogo(businessName, tagline, primaryColor, secondaryColor);
+                    break;
+            }
+        }
+
+        function drawCircleLogo(name, tagline, color) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(200, 100, 60, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 40px Arial';
+            ctx.fillText(initials, 200, 100);
+
+            ctx.fillStyle = color;
+            ctx.font = 'bold 24px Arial';
+            ctx.fillText(name, 200, 175);
+        }
+
+        function drawSquareLogo(name, tagline, color) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            ctx.fillStyle = color;
+            ctx.fillRect(140, 40, 120, 120);
+
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 40px Arial';
+            ctx.fillText(initials, 200, 100);
+
+            ctx.fillStyle = color;
+            ctx.font = 'bold 24px Arial';
+            ctx.fillText(name, 200, 175);
+        }
+
+        function drawTextLogo(name, tagline, color) {
+            ctx.fillStyle = color;
+            ctx.font = 'bold 36px Arial';
+            ctx.fillText(name, 200, 90);
+
+            if (tagline) {
+                ctx.fillStyle = '#666';
+                ctx.font = '18px Arial';
+                ctx.fillText(tagline, 200, 120);
+            }
+        }
+
+        function drawInitialsLogo(name, tagline, color) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            ctx.fillStyle = color;
+            ctx.font = 'bold 70px Arial';
+            ctx.fillText(initials, 200, 80);
+
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 24px Arial';
+            ctx.fillText(name, 200, 135);
+
+            if (tagline) {
+                ctx.fillStyle = '#666';
+                ctx.font = '16px Arial';
+                ctx.fillText(tagline, 200, 160);
+            }
+        }
+
+        function drawGradientCircleLogo(name, tagline, color1, color2) {
+            const gradient = ctx.createLinearGradient(140, 40, 260, 160);
+            gradient.addColorStop(0, color1);
+            gradient.addColorStop(1, color2);
+
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(200, 100, 60, 0, Math.PI * 2);
+            ctx.fill();
+
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 40px Arial';
+            ctx.fillText(initials, 200, 100);
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 24px Arial';
+            ctx.fillText(name, 200, 175);
+        }
+
+        function drawBadgeLogo(name, tagline, color1, color2) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            // Badge shape
+            ctx.fillStyle = color1;
+            ctx.beginPath();
+            ctx.moveTo(200, 40);
+            for (let i = 0; i < 6; i++) {
+                const angle = (Math.PI * 2 * i) / 6 - Math.PI / 2;
+                const x = 200 + Math.cos(angle) * 60;
+                const y = 100 + Math.sin(angle) * 60;
+                ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fill();
+
+            // Inner circle
+            ctx.fillStyle = color2;
+            ctx.beginPath();
+            ctx.arc(200, 100, 45, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 32px Arial';
+            ctx.fillText(initials, 200, 100);
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText(name, 200, 175);
+        }
+
+        function drawModernLogo(name, tagline, color1, color2) {
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+
+            // Hexagon
+            ctx.fillStyle = color1;
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angle = (Math.PI * 2 * i) / 6;
+                const x = 200 + Math.cos(angle) * 55;
+                const y = 100 + Math.sin(angle) * 55;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 36px Arial';
+            ctx.fillText(initials, 200, 100);
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 22px Arial';
+            ctx.fillText(name, 200, 175);
+        }
+
+        function drawElegantLogo(name, tagline, color1, color2) {
+            // Elegant border
+            ctx.strokeStyle = color1;
+            ctx.lineWidth = 3;
+            ctx.strokeRect(120, 30, 160, 140);
+
+            ctx.strokeStyle = color2;
+            ctx.lineWidth = 1;
+            ctx.strokeRect(125, 35, 150, 130);
+
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 48px Georgia';
+            ctx.fillText(initials, 200, 95);
+
+            ctx.fillStyle = color2;
+            ctx.font = '16px Georgia';
+            ctx.fillText(name.toUpperCase(), 200, 145);
+        }
+
+        function drawTechLogo(name, tagline, color1, color2) {
+            // Tech brackets
+            ctx.strokeStyle = color1;
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(160, 50);
+            ctx.lineTo(140, 100);
+            ctx.lineTo(160, 150);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(240, 50);
+            ctx.lineTo(260, 100);
+            ctx.lineTo(240, 150);
+            ctx.stroke();
+
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+            const gradient = ctx.createLinearGradient(170, 70, 230, 130);
+            gradient.addColorStop(0, color1);
+            gradient.addColorStop(1, color2);
+
+            ctx.fillStyle = gradient;
+            ctx.font = 'bold 42px Courier';
+            ctx.fillText(initials, 200, 100);
+
+            ctx.fillStyle = color1;
+            ctx.font = 'bold 20px Courier';
+            ctx.fillText(name, 200, 175);
+        }
+
+        function drawMinimalLogo(name, tagline, color1, color2) {
+            // Minimal line design
+            ctx.strokeStyle = color1;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(150, 80);
+            ctx.lineTo(250, 80);
+            ctx.stroke();
+
+            const initials = name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+            ctx.fillStyle = color1;
+            ctx.font = '300 32px Arial';
+            ctx.fillText(initials, 200, 110);
+
+            ctx.fillStyle = '#333';
+            ctx.font = '500 22px Arial';
+            ctx.fillText(name, 200, 145);
+
+            ctx.strokeStyle = color2;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(150, 165);
+            ctx.lineTo(250, 165);
+            ctx.stroke();
+        }
+
+        // Initial draw
+        drawLogo();
+    </script>
+</body>
+</html>
