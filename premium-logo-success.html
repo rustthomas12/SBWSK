@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thank you for your premium logo design purchase!">
+    <title>Thank You - Premium Logo Design | SBWSK</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <link rel="stylesheet" href="css/sections.css">
+
+    <!-- Stripe.js for session verification -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="api/get-stripe-key"></script>
+
+    <style>
+        .success-hero {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .next-steps {
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .next-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .next-step {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .next-step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .verification-status {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .verification-loading {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .verification-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .verification-error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <span class="brand-emoji">🚀</span>
+                <span class="brand-text">SBWSK</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="logo-generator.html">Logo Generator</a></li>
+                <li><a href="templates.html">Templates</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Success Hero -->
+    <section class="success-hero">
+        <div class="container">
+            <div class="success-icon">✅</div>
+            <h1 style="margin: 0 0 1rem 0; font-size: 2.5rem;">Payment Successful!</h1>
+            <p style="font-size: 1.25rem; margin: 0; opacity: 0.9;">Thank you for purchasing Premium Logo Design</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container">
+            <div style="max-width: 900px; margin: 0 auto;">
+
+                <!-- Verification Status -->
+                <div id="verification-status" class="verification-status verification-loading">
+                    <div id="status-message">⏳ Verifying your payment...</div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="next-steps" id="next-steps-section" style="display: none;">
+                    <h2 style="margin-top: 0;">📋 What Happens Next?</h2>
+
+                    <div class="next-steps-grid">
+                        <div class="next-step">
+                            <div class="next-step-number">1</div>
+                            <h3 style="margin: 0.5rem 0;">Check Your Email</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
+                                You'll receive a confirmation email with your order details and receipt.
+                            </p>
+                        </div>
+
+                        <div class="next-step">
+                            <div class="next-step-number">2</div>
+                            <h3 style="margin: 0.5rem 0;">We'll Contact You</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
+                                Our design team will reach out within 24 hours to discuss your logo requirements.
+                            </p>
+                        </div>
+
+                        <div class="next-step">
+                            <div class="next-step-number">3</div>
+                            <h3 style="margin: 0.5rem 0;">Design Process</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
+                                We'll create custom logo designs based on your preferences and brand vision.
+                            </p>
+                        </div>
+
+                        <div class="next-step">
+                            <div class="next-step-number">4</div>
+                            <h3 style="margin: 0.5rem 0;">Unlimited Revisions</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
+                                Review designs and request changes until you're completely satisfied.
+                            </p>
+                        </div>
+
+                        <div class="next-step">
+                            <div class="next-step-number">5</div>
+                            <h3 style="margin: 0.5rem 0;">Final Delivery</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
+                                Receive high-resolution files in multiple formats (PNG, SVG, etc.).
+                            </p>
+                        </div>
+
+                        <div class="next-step">
+                            <div class="next-step-number">6</div>
+                            <h3 style="margin: 0.5rem 0;">Commercial Rights</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
+                                Full commercial usage rights - use your logo anywhere, anytime.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="tool-card" id="order-summary" style="display: none; margin-top: 2rem;">
+                    <h2 style="margin-top: 0;">📦 Order Summary</h2>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 1rem 0;"><strong>Product:</strong></td>
+                            <td style="padding: 1rem 0; text-align: right;">Premium Logo Design Service</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 1rem 0;"><strong>Price:</strong></td>
+                            <td style="padding: 1rem 0; text-align: right;">$10.00</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 1rem 0;"><strong>Order ID:</strong></td>
+                            <td style="padding: 1rem 0; text-align: right;" id="order-id">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem 0;"><strong>Email:</strong></td>
+                            <td style="padding: 1rem 0; text-align: right;" id="customer-email">Loading...</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Contact Support -->
+                <div class="tool-card" style="margin-top: 2rem; background: #fef3c7; border-left: 4px solid #f59e0b;">
+                    <h3 style="margin-top: 0;">💬 Questions or Special Requests?</h3>
+                    <p style="margin: 0.5rem 0;">
+                        Have specific design requirements or questions about the process? We're here to help!
+                    </p>
+                    <p style="margin: 1rem 0 0 0;">
+                        <strong>Email:</strong> <a href="mailto:support@sbwsk.io">support@sbwsk.io</a><br>
+                        <strong>Response time:</strong> Usually within 24 hours
+                    </p>
+                </div>
+
+                <!-- More Tools -->
+                <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb;">
+                    <h3>Continue Building Your Website</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        Check out our other free tools to complete your website
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="website-copy-kit.html" class="btn btn-secondary">Get Copy Templates</a>
+                        <a href="templates.html" class="btn btn-secondary">Browse Templates</a>
+                        <a href="domain-checker.html" class="btn btn-secondary">Check Domains</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Small Business Website Starter Kit. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+        // Verify session
+        async function verifySession() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+
+            const statusDiv = document.getElementById('verification-status');
+            const statusMessage = document.getElementById('status-message');
+            const nextStepsSection = document.getElementById('next-steps-section');
+            const orderSummary = document.getElementById('order-summary');
+
+            if (!sessionId) {
+                statusDiv.className = 'verification-status verification-error';
+                statusMessage.textContent = '❌ Invalid order link. Please check your email for the correct link.';
+                return;
+            }
+
+            try {
+                // Verify session with backend
+                const response = await fetch('/api/verify-session?session_id=' + sessionId);
+                const data = await response.json();
+
+                if (data.valid) {
+                    statusDiv.className = 'verification-status verification-success';
+                    statusMessage.textContent = '✅ Payment verified! Your order has been confirmed.';
+                    nextStepsSection.style.display = 'block';
+                    orderSummary.style.display = 'block';
+
+                    // Update order details
+                    document.getElementById('order-id').textContent = sessionId.substring(0, 24) + '...';
+                    document.getElementById('customer-email').textContent = data.customer_email || 'Not provided';
+                } else {
+                    throw new Error('Invalid session');
+                }
+            } catch (error) {
+                statusDiv.className = 'verification-status verification-error';
+                statusMessage.textContent = '❌ Unable to verify payment. Please contact support with your order confirmation.';
+                console.error('Verification error:', error);
+            }
+        }
+
+        // Run verification when page loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', verifySession);
+        } else {
+            verifySession();
+        }
+    </script>
+</body>
+</html>

@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="css/modern.css">
     <link rel="stylesheet" href="css/sections.css">
 
+    <!-- Stripe Integration -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="api/get-stripe-key"></script>
+
     <style>
         .logo-preview {
             width: 100%;
@@ -521,14 +525,67 @@
         });
 
         // Upgrade button
-        upgradeBtn.addEventListener('click', function() {
-            const confirmed = confirm('Upgrade to Premium for $10?\n\nYou will receive:\n• High-resolution PNG (2000x2000)\n• Vector file (SVG)\n• Commercial usage rights\n• Unlimited revisions\n\nClick OK to proceed to payment.');
+        upgradeBtn.addEventListener('click', async function() {
+            const confirmed = confirm('Upgrade to Premium Logo Design for $10?\n\nYou will receive:\n• Professional custom logo design\n• High-resolution files\n• Multiple format options\n• Commercial usage rights\n• Unlimited revisions\n\nClick OK to proceed to secure payment.');
 
             if (confirmed) {
-                // In a real implementation, this would redirect to a payment page
-                alert('Payment integration coming soon! For now, please contact us at contact@sbwsk.com to complete your purchase.');
+                await handlePremiumUpgrade();
             }
         });
+
+        // Handle Premium Upgrade Payment
+        async function handlePremiumUpgrade() {
+            try {
+                // Initialize Stripe
+                if (!window.STRIPE_CONFIG || !window.STRIPE_CONFIG.publishableKey) {
+                    alert('Payment system loading. Please try again in a moment.');
+                    return;
+                }
+
+                const stripe = Stripe(window.STRIPE_CONFIG.publishableKey);
+
+                // Show loading state
+                const originalText = upgradeBtn.textContent;
+                upgradeBtn.textContent = 'Processing...';
+                upgradeBtn.disabled = true;
+
+                // Create checkout session
+                const response = await fetch('/api/create-checkout-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        product: 'premium-logo',
+                        successUrl: window.location.origin + '/premium-logo-success.html?session_id={CHECKOUT_SESSION_ID}',
+                        cancelUrl: window.location.href
+                    })
+                });
+
+                const session = await response.json();
+
+                if (session.error) {
+                    throw new Error(session.error);
+                }
+
+                // Redirect to Stripe Checkout
+                const result = await stripe.redirectToCheckout({
+                    sessionId: session.id
+                });
+
+                if (result.error) {
+                    throw new Error(result.error.message);
+                }
+
+            } catch (error) {
+                console.error('Payment error:', error);
+                alert('There was an error processing your payment. Please try again or contact support.');
+
+                // Reset button
+                upgradeBtn.textContent = 'Upgrade to Premium ($10)';
+                upgradeBtn.disabled = false;
+            }
+        }
 
         // Draw logo function
         function drawLogo() {
