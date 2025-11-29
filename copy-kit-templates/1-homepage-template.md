@@ -261,6 +261,6 @@ Before publishing, make sure you have:
 
 ---
 
-**Need more help?** Email us at support@sbwsk.io
+**Need more help?** Email us at tom@lowlightdigital.com
 
 © 2025 Small Business Website Starter Kit

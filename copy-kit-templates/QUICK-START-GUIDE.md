@@ -109,7 +109,7 @@ We suggest completing the templates in this order:
 ## 🆘 NEED HELP?
 
 ### Have questions about the templates?
-📧 Email: support@sbwsk.io
+📧 Email: tom@lowlightdigital.com
 💬 Response time: Usually within 24 hours
 
 ### Want done-for-you copywriting?
@@ -225,7 +225,7 @@ Thank you for supporting small business. We're honored to be part of your websit
 ## 📞 STAY CONNECTED
 
 - 🌐 Website: https://www.sbwsk.io
-- 📧 Email: support@sbwsk.io
+- 📧 Email: tom@lowlightdigital.com
 - 📝 Blog: https://www.sbwsk.io/blog.html
 
 **Need more help?** We're always adding new tools, templates, and resources for small business owners. Check back often!

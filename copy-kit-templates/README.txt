@@ -57,7 +57,7 @@ NEED HELP?
 =====================================================
 
 Have questions? Contact us at:
-Email: support@sbwsk.com
+Email: tom@lowlightdigital.com
 
 Looking for done-for-you copywriting services?
 Visit: https://sbwsk.com/services

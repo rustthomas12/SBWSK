@@ -140,7 +140,7 @@ Once you have your email service set up, the webhook.js file will automatically 
 ## Email Best Practices:
 
 ✅ **Do:**
-- Use a verified domain (support@sbwsk.io vs support@vercel.app)
+- Use a verified domain (tom@lowlightdigital.com vs support@vercel.app)
 - Include unsubscribe link for marketing emails
 - Keep transactional emails simple and clear
 - Test on multiple email clients

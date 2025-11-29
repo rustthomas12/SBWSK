@@ -8,6 +8,7 @@
 const Stripe = require('stripe');
 const fs = require('fs').promises;
 const path = require('path');
+const { Resend } = require('resend');
 
 module.exports = async (req, res) => {
   // Only allow POST requests
@@ -60,8 +61,10 @@ module.exports = async (req, res) => {
         // Log the purchase
         await logPurchase(product, customerEmail, sessionId);
 
-        // Send email with download link (optional - you'd need to set up email service)
-        // await sendDownloadEmail(customerEmail, sessionId);
+        // Send email with download link
+        if (customerEmail) {
+          await sendDownloadEmail(customerEmail, sessionId, product);
+        }
 
         console.log(`Purchase completed: ${product}, Email: ${customerEmail}, Session: ${sessionId}`);
         break;
@@ -115,82 +118,217 @@ async function logPurchase(product, email, sessionId) {
 }
 
 /**
- * Send email with download link
- * Note: This requires an email service like SendGrid, Resend, or AWS SES
- * Uncomment and configure when ready to use
+ * Send email with download link using Resend
  */
-/*
-async function sendDownloadEmail(email, sessionId) {
-  const siteUrl = process.env.SITE_URL || 'https://www.sbwsk.io';
-  const downloadUrl = `${siteUrl}/copy-kit-success.html?session_id=${sessionId}`;
+async function sendDownloadEmail(email, sessionId, product) {
+  try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const siteUrl = process.env.SITE_URL || 'https://www.sbwsk.io';
+    const supportEmail = process.env.SUPPORT_EMAIL || 'tom@lowlightdigital.com';
 
-  // Example with SendGrid (you'd need to install @sendgrid/mail)
-  // const sgMail = require('@sendgrid/mail');
-  // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    let downloadUrl, subject, productName, emailHtml;
 
-  const msg = {
-    to: email,
-    from: 'noreply@sbwsk.io',
-    subject: 'Your 10-Minute Website Copy Kit is Ready!',
-    html: `
-      <html>
-      <head>
-        <style>
-          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-          .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
-          .content { background: #f9fafb; padding: 30px; }
-          .button { display: inline-block; background: #667eea; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0; }
-          .footer { background: #333; color: white; padding: 20px; text-align: center; font-size: 12px; border-radius: 0 0 8px 8px; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h1>🎉 Thank You for Your Purchase!</h1>
+    // Customize email based on product
+    if (product === 'copy-kit') {
+      downloadUrl = `${siteUrl}/copy-kit-success.html?session_id=${sessionId}`;
+      subject = 'Your 10-Minute Website Copy Kit is Ready!';
+      productName = 'The 10-Minute Website Copy Kit';
+
+      emailHtml = `
+        <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+            .content { background: #f9fafb; padding: 30px; }
+            .button { display: inline-block; background: #667eea; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0; }
+            .footer { background: #333; color: white; padding: 20px; text-align: center; font-size: 12px; border-radius: 0 0 8px 8px; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>🎉 Thank You for Your Purchase!</h1>
+            </div>
+            <div class="content">
+              <h2>Your Copy Kit is Ready to Download</h2>
+              <p>Thanks for purchasing The 10-Minute Website Copy Kit! You now have everything you need to create professional website copy in minutes.</p>
+
+              <p><strong>What's Included:</strong></p>
+              <ul>
+                <li>✓ Homepage fill-in-the-blank template (TXT & MD formats)</li>
+                <li>✓ About page template</li>
+                <li>✓ Services page template</li>
+                <li>✓ Contact page template</li>
+                <li>✓ SEO meta tag templates</li>
+                <li>✓ BONUS: Quick Start Guide with tips & resources</li>
+              </ul>
+
+              <p style="text-align: center;">
+                <a href="${downloadUrl}" class="button">Download Your Templates Now →</a>
+              </p>
+
+              <p><strong>Getting Started:</strong></p>
+              <ol>
+                <li>Click the button above to access your download page</li>
+                <li>Download the ZIP file with all templates</li>
+                <li>Open the QUICK-START-GUIDE.md for instructions</li>
+                <li>Fill in the blanks in each template</li>
+                <li>Copy and paste to your website</li>
+              </ol>
+
+              <p><strong>Need Help?</strong></p>
+              <p>If you have any questions or issues, email us at <a href="mailto:${supportEmail}">${supportEmail}</a></p>
+
+              <p>Here's to your success! 🚀</p>
+              <p>- The SBWSK Team</p>
+            </div>
+            <div class="footer">
+              <p>&copy; 2025 Small Business Website Starter Kit</p>
+              <p>Questions? Reply to this email or contact ${supportEmail}</p>
+            </div>
           </div>
-          <div class="content">
-            <h2>Your Copy Kit is Ready to Download</h2>
-            <p>Thanks for purchasing The 10-Minute Website Copy Kit! You now have everything you need to create professional website copy in minutes.</p>
+        </body>
+        </html>
+      `;
+    } else if (product === 'premium-logo') {
+      downloadUrl = `${siteUrl}/premium-logo-success.html?session_id=${sessionId}`;
+      subject = 'Premium Logo Design - Order Confirmed!';
+      productName = 'Premium Logo Design Service';
 
-            <p><strong>What's Included:</strong></p>
-            <ul>
-              <li>✓ Homepage fill-in-the-blank template</li>
-              <li>✓ About page template</li>
-              <li>✓ Services page template</li>
-              <li>✓ Contact page template</li>
-              <li>✓ SEO meta tag templates</li>
-            </ul>
+      emailHtml = `
+        <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+            .content { background: #f9fafb; padding: 30px; }
+            .button { display: inline-block; background: #10b981; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0; }
+            .footer { background: #333; color: white; padding: 20px; text-align: center; font-size: 12px; border-radius: 0 0 8px 8px; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>✅ Order Confirmed!</h1>
+            </div>
+            <div class="content">
+              <h2>Thank You for Your Premium Logo Purchase</h2>
+              <p>We're excited to create a professional logo for your business!</p>
 
-            <p style="text-align: center;">
-              <a href="${downloadUrl}" class="button">Download Your Templates Now →</a>
-            </p>
+              <p><strong>What Happens Next:</strong></p>
+              <ol>
+                <li><strong>We'll contact you within 24 hours</strong> to discuss your logo requirements</li>
+                <li><strong>Design process begins</strong> - we'll create custom designs based on your vision</li>
+                <li><strong>Unlimited revisions</strong> until you're completely satisfied</li>
+                <li><strong>Final delivery</strong> - high-resolution files in multiple formats</li>
+              </ol>
 
-            <p><strong>Getting Started:</strong></p>
-            <ol>
-              <li>Click the button above to access your download page</li>
-              <li>Download all 5 template files</li>
-              <li>Open each template and fill in the blanks</li>
-              <li>Copy and paste to your website</li>
-            </ol>
+              <p style="text-align: center;">
+                <a href="${downloadUrl}" class="button">View Order Details</a>
+              </p>
 
-            <p><strong>Need Help?</strong></p>
-            <p>If you have any questions or issues, just reply to this email. We're here to help!</p>
+              <p><strong>What You'll Receive:</strong></p>
+              <ul>
+                <li>✓ Professional custom logo design</li>
+                <li>✓ High-resolution PNG & SVG files</li>
+                <li>✓ Multiple format options</li>
+                <li>✓ Full commercial usage rights</li>
+                <li>✓ Unlimited revisions</li>
+              </ul>
 
-            <p>Here's to your success! 🚀</p>
-            <p>- The SBWSK Team</p>
+              <p><strong>Have Questions?</strong></p>
+              <p>Email us anytime at <a href="mailto:${supportEmail}">${supportEmail}</a></p>
+
+              <p>Looking forward to creating your perfect logo! 🎨</p>
+              <p>- The SBWSK Team</p>
+            </div>
+            <div class="footer">
+              <p>&copy; 2025 Small Business Website Starter Kit</p>
+              <p>Contact: ${supportEmail}</p>
+            </div>
           </div>
-          <div class="footer">
-            <p>&copy; 2025 Small Business Website Starter Kit</p>
-            <p>You're receiving this email because you purchased our product.</p>
-          </div>
-        </div>
-      </body>
-      </html>
-    `,
-  };
+        </body>
+        </html>
+      `;
+    } else {
+      // Generic template purchase email
+      downloadUrl = `${siteUrl}/template-success.html?session_id=${sessionId}`;
+      subject = 'Your Template Purchase - Order Confirmed!';
+      productName = 'Website Template';
 
-  // await sgMail.send(msg);
-  console.log('Email sent to:', email);
+      emailHtml = `
+        <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+            .content { background: #f9fafb; padding: 30px; }
+            .button { display: inline-block; background: #667eea; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0; }
+            .footer { background: #333; color: white; padding: 20px; text-align: center; font-size: 12px; border-radius: 0 0 8px 8px; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>🎉 Thank You for Your Purchase!</h1>
+            </div>
+            <div class="content">
+              <h2>Your Order is Confirmed</h2>
+              <p>Thank you for purchasing from SBWSK!</p>
+
+              <p style="text-align: center;">
+                <a href="${downloadUrl}" class="button">View Order Details</a>
+              </p>
+
+              <p>We'll be in touch within 24 hours with next steps.</p>
+
+              <p><strong>Questions?</strong></p>
+              <p>Contact us at <a href="mailto:${supportEmail}">${supportEmail}</a></p>
+
+              <p>Thank you for your business! 🚀</p>
+              <p>- The SBWSK Team</p>
+            </div>
+            <div class="footer">
+              <p>&copy; 2025 Small Business Website Starter Kit</p>
+              <p>Contact: ${supportEmail}</p>
+            </div>
+          </div>
+        </body>
+        </html>
+      `;
+    }
+
+    // Send customer email
+    await resend.emails.send({
+      from: 'SBWSK <noreply@lowlightdigital.com>',
+      to: [email],
+      subject: subject,
+      html: emailHtml,
+    });
+
+    // Send notification to support
+    await resend.emails.send({
+      from: 'SBWSK <noreply@lowlightdigital.com>',
+      to: [supportEmail],
+      subject: `New Purchase: ${productName}`,
+      html: `
+        <h2>New Purchase Notification</h2>
+        <p><strong>Product:</strong> ${productName}</p>
+        <p><strong>Customer Email:</strong> ${email}</p>
+        <p><strong>Session ID:</strong> ${sessionId}</p>
+        <p><strong>Time:</strong> ${new Date().toISOString()}</p>
+        <hr>
+        <p><a href="${downloadUrl}">View Order</a></p>
+      `,
+    });
+
+    console.log('Email sent successfully to:', email);
+  } catch (error) {
+    console.error('Error sending email:', error);
+    // Don't throw - we don't want to fail the webhook if email fails
+  }
 }
-*/
