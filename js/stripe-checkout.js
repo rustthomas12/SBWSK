@@ -63,7 +63,7 @@ async function handleCheckout(productKey) {
         button.disabled = true;
 
         // Create checkout session
-        const response = await fetch('/api/create-checkout-session.js', {
+        const response = await fetch('/api/create-checkout-session', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -67,7 +67,7 @@ function initUniversalCheckout() {
 async function handleCheckout(productId, customPrice, customName) {
     try {
         // Create checkout session
-        const response = await fetch('/api/create-checkout-session.php', {
+        const response = await fetch('/api/create-checkout-session', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
