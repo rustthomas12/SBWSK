@@ -2,7 +2,7 @@
  * Real-Time Domain Price API Server - ResellerClub Integration
  *
  * This server queries ResellerClub API for real-time domain pricing.
- * ResellerClub provides a single API for multiple registrars and TLDs.
+ * ResellerClub provides a single API for multiple hosts and TLDs.
  *
  * Setup:
  * 1. Sign up at https://www.resellerclub.com/

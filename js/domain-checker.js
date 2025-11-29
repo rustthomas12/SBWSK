@@ -2,7 +2,7 @@
  * Domain Checker Functionality
  *
  * Checks domain availability using DNS lookups
- * Provides purchase links to trusted registrar partners
+ * Provides purchase links to trusted host partners
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -212,7 +212,7 @@ function displayResults(domainName, results) {
                             <span class="badge" style="background: #f59e0b;">Error</span>
                         </div>
                         <p style="color: #92400e; font-size: 0.875rem; margin-top: 0.5rem;">
-                            Could not verify availability. Try checking directly with a registrar or try again later.
+                            Could not verify availability. Try checking directly with a host or try again later.
                         </p>
                     </div>
                 </div>
@@ -246,8 +246,8 @@ function createDomainResultCard(result, available) {
         ? '<span class="badge badge-success">Available</span>'
         : '<span class="badge badge-secondary">Taken</span>';
 
-    // Define registrar options with affiliate links
-    const registrars = [
+    // Define host options with affiliate links
+    const hosts = [
         { name: 'GoDaddy', url: 'https://www.godaddy.com/domainsearch/find?domainToCheck=' + encodeURIComponent(result.domain) },
         { name: 'Bluehost', url: 'https://bluehost.sjv.io/Webstarterkit' },
         { name: 'IONOS', url: 'https://www.ionos.com/domains/domain-names' },
@@ -266,17 +266,17 @@ function createDomainResultCard(result, available) {
                 <div style="display: grid; gap: 0.5rem;">
         `;
 
-        registrars.forEach((registrar) => {
+        hosts.forEach((host) => {
             purchaseOptionsHTML += `
-                <a href="${registrar.url}"
+                <a href="${host.url}"
                    target="_blank"
                    rel="noopener"
                    class="btn"
                    style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 4px; text-decoration: none; color: inherit; transition: all 0.2s;"
                    onmouseover="this.style.borderColor='#10b981'; this.style.background='#f0fdf4';"
                    onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='white';"
-                   onclick="trackAffiliateClick('${registrar.name.toLowerCase()}-${result.domain}')">
-                    <span style="font-weight: 600; color: #1e293b;">${registrar.name}</span>
+                   onclick="trackAffiliateClick('${host.name.toLowerCase()}-${result.domain}')">
+                    <span style="font-weight: 600; color: #1e293b;">${host.name}</span>
                     <span style="color: #10b981; font-size: 0.875rem;">Register →</span>
                 </a>
             `;

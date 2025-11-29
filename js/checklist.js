@@ -1,36 +1,16 @@
 /**
  * Website Launch Checklist
  * Interactive checklist with localStorage persistence
+ * Organized in 3 tiers: Basic, Advanced, Expert
  */
 
 const checklistData = {
-    section1: {
-        title: 'Before You Start',
-        items: [
-            {
-                id: 'business-goals',
-                title: 'Define your website goals',
-                description: 'What do you want your website to achieve? (leads, sales, information, etc.)'
-            },
-            {
-                id: 'target-audience',
-                title: 'Identify your target audience',
-                description: 'Who are you trying to reach? What are their needs and pain points?'
-            },
-            {
-                id: 'competitor-research',
-                title: 'Research competitor websites',
-                description: 'Look at 3-5 competitor sites to see what works in your industry'
-            },
-            {
-                id: 'content-prepared',
-                title: 'Prepare your content',
-                description: 'Write or gather all text, images, and other content for your pages'
-            }
-        ]
-    },
-    section2: {
-        title: 'Domain & Hosting',
+    // ============================================
+    // TIER 1: BASIC (Essential for launch)
+    // ============================================
+    basicDomain: {
+        title: '🌐 Domain & Hosting',
+        tier: 'basic',
         items: [
             {
                 id: 'domain-registered',
@@ -48,16 +28,12 @@ const checklistData = {
                 id: 'ssl-installed',
                 title: 'SSL certificate installed',
                 description: 'Ensure your site uses HTTPS (usually free with hosting)'
-            },
-            {
-                id: 'email-setup',
-                title: 'Professional email set up',
-                description: 'Create yourname@yourdomain.com email addresses'
             }
         ]
     },
-    section3: {
-        title: 'Essential Pages',
+    basicPages: {
+        title: '📄 Essential Pages',
+        tier: 'basic',
         items: [
             {
                 id: 'homepage',
@@ -78,16 +54,12 @@ const checklistData = {
                 id: 'contact-page',
                 title: 'Contact page set up',
                 description: 'Include form, phone, email, address, and map if relevant'
-            },
-            {
-                id: 'privacy-policy',
-                title: 'Privacy Policy page',
-                description: 'Required if you collect any user data or use cookies'
             }
         ]
     },
-    section4: {
-        title: 'Functionality',
+    basicFunctionality: {
+        title: '⚙️ Core Functionality',
+        tier: 'basic',
         items: [
             {
                 id: 'contact-form-works',
@@ -100,14 +72,9 @@ const checklistData = {
                 description: 'Test on multiple devices and screen sizes'
             },
             {
-                id: 'cross-browser',
-                title: 'Cross-browser compatibility',
-                description: 'Test in Chrome, Firefox, Safari, and Edge'
-            },
-            {
-                id: 'loading-speed',
-                title: 'Fast loading speed',
-                description: 'Optimize images and code for quick load times (under 3 seconds)'
+                id: 'content-proofread',
+                title: 'All content proofread',
+                description: 'Check for typos, grammar, and factual errors'
             },
             {
                 id: 'broken-links',
@@ -116,8 +83,13 @@ const checklistData = {
             }
         ]
     },
-    section5: {
-        title: 'SEO & Analytics',
+
+    // ============================================
+    // TIER 2: ADVANCED (Recommended for success)
+    // ============================================
+    advancedSEO: {
+        title: '📈 SEO Basics',
+        tier: 'advanced',
         items: [
             {
                 id: 'meta-titles',
@@ -138,7 +110,69 @@ const checklistData = {
                 id: 'alt-text',
                 title: 'Image alt text',
                 description: 'Descriptive alt text for all images'
+            }
+        ]
+    },
+    advancedContent: {
+        title: '✍️ Content Quality',
+        tier: 'advanced',
+        items: [
+            {
+                id: 'business-goals',
+                title: 'Clear website goals defined',
+                description: 'What do you want your website to achieve? (leads, sales, information, etc.)'
             },
+            {
+                id: 'target-audience',
+                title: 'Target audience identified',
+                description: 'Who are you trying to reach? What are their needs and pain points?'
+            },
+            {
+                id: 'competitor-research',
+                title: 'Competitor research done',
+                description: 'Analyze 3-5 competitor sites to see what works in your industry'
+            },
+            {
+                id: 'privacy-policy',
+                title: 'Privacy Policy page',
+                description: 'Required if you collect any user data or use cookies'
+            }
+        ]
+    },
+    advancedPerformance: {
+        title: '⚡ Performance',
+        tier: 'advanced',
+        items: [
+            {
+                id: 'loading-speed',
+                title: 'Fast loading speed',
+                description: 'Optimize images and code for quick load times (under 3 seconds)'
+            },
+            {
+                id: 'cross-browser',
+                title: 'Cross-browser compatibility',
+                description: 'Test in Chrome, Firefox, Safari, and Edge'
+            },
+            {
+                id: 'email-setup',
+                title: 'Professional email set up',
+                description: 'Create yourname@yourdomain.com email addresses'
+            },
+            {
+                id: 'favicon',
+                title: 'Favicon uploaded',
+                description: 'Small icon that appears in browser tabs'
+            }
+        ]
+    },
+
+    // ============================================
+    // TIER 3: EXPERT (Pro-level optimization)
+    // ============================================
+    expertAnalytics: {
+        title: '📊 Analytics & Tracking',
+        tier: 'expert',
+        items: [
             {
                 id: 'google-analytics',
                 title: 'Google Analytics installed',
@@ -148,31 +182,63 @@ const checklistData = {
                 id: 'google-search-console',
                 title: 'Google Search Console set up',
                 description: 'Submit sitemap and monitor search performance'
+            },
+            {
+                id: 'conversion-tracking',
+                title: 'Conversion tracking configured',
+                description: 'Track form submissions, button clicks, and goals'
             }
         ]
     },
-    section6: {
-        title: 'Pre-Launch',
+    expertOptimization: {
+        title: '🚀 Advanced SEO',
+        tier: 'expert',
         items: [
             {
-                id: 'content-proofread',
-                title: 'All content proofread',
-                description: 'Check for typos, grammar, and factual errors'
+                id: 'schema-markup',
+                title: 'Schema markup added',
+                description: 'Structured data for better search engine understanding'
             },
             {
-                id: 'favicon',
-                title: 'Favicon uploaded',
-                description: 'Small icon that appears in browser tabs'
+                id: 'sitemap-xml',
+                title: 'XML sitemap generated',
+                description: 'Help search engines discover all your pages'
             },
+            {
+                id: 'robots-txt',
+                title: 'Robots.txt configured',
+                description: 'Control search engine crawling behavior'
+            },
+            {
+                id: 'open-graph',
+                title: 'Open Graph meta tags',
+                description: 'Better social media sharing previews'
+            }
+        ]
+    },
+    expertProfessional: {
+        title: '💎 Professional Polish',
+        tier: 'expert',
+        items: [
             {
                 id: 'social-media-links',
-                title: 'Social media links added',
+                title: 'Social media integration',
                 description: 'Link to your business social media profiles'
             },
             {
                 id: 'backup-plan',
-                title: 'Backup system in place',
+                title: 'Automated backup system',
                 description: 'Automatic backups configured (usually through hosting)'
+            },
+            {
+                id: 'security-headers',
+                title: 'Security headers configured',
+                description: 'Add security headers for better protection'
+            },
+            {
+                id: 'performance-monitoring',
+                title: 'Performance monitoring',
+                description: 'Set up uptime monitoring and performance tracking'
             }
         ]
     }
@@ -190,19 +256,86 @@ function initializeChecklist() {
     // Load saved progress
     const savedProgress = storage.get('checklistProgress', {});
 
-    // Render each section
+    // Group sections by tier
+    const tiers = {
+        basic: [],
+        advanced: [],
+        expert: []
+    };
+
     Object.keys(checklistData).forEach(sectionKey => {
         const section = checklistData[sectionKey];
-        const sectionElement = document.getElementById(sectionKey);
+        tiers[section.tier].push({ key: sectionKey, ...section });
+    });
 
-        if (!sectionElement) return;
+    // Create tier containers
+    const container = document.querySelector('.container');
+    const progressCard = document.querySelector('.tool-card');
 
-        section.items.forEach(item => {
-            const isCompleted = savedProgress[item.id] || false;
-            const listItem = createChecklistItem(item, isCompleted);
-            sectionElement.appendChild(listItem);
+    // Clear existing sections (keep progress card)
+    const existingSections = container.querySelectorAll('.tool-card:not(:first-child)');
+    existingSections.forEach(el => el.remove());
+
+    // Render each tier
+    ['basic', 'advanced', 'expert'].forEach(tierName => {
+        const tierTitle = {
+            basic: '📌 BASIC - Essential for Launch',
+            advanced: '⭐ ADVANCED - Recommended for Success',
+            expert: '🏆 EXPERT - Pro-Level Optimization'
+        }[tierName];
+
+        const tierDescription = {
+            basic: 'These items are absolutely essential before launching your website.',
+            advanced: 'These items will help your website succeed and rank better.',
+            expert: 'These items will give you a professional, optimized website.'
+        }[tierName];
+
+        // Create tier header
+        const tierHeader = document.createElement('div');
+        tierHeader.className = 'tier-header';
+        tierHeader.style.cssText = `
+            background: ${tierName === 'basic' ? '#10b981' : tierName === 'advanced' ? '#667eea' : '#f59e0b'};
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0 1rem 0;
+        `;
+        tierHeader.innerHTML = `
+            <h2 style="margin: 0 0 0.5rem 0; font-size: 1.5rem;">${tierTitle}</h2>
+            <p style="margin: 0; opacity: 0.9;">${tierDescription}</p>
+        `;
+        container.appendChild(tierHeader);
+
+        // Render sections in this tier
+        tiers[tierName].forEach(section => {
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'tool-card mb-2';
+
+            const sectionTitle = document.createElement('h3');
+            sectionTitle.className = 'mb-1';
+            sectionTitle.style.cssText = 'display: flex; align-items: center; gap: 0.5rem;';
+            sectionTitle.textContent = section.title;
+            sectionDiv.appendChild(sectionTitle);
+
+            const ul = document.createElement('ul');
+            ul.className = 'checklist';
+
+            section.items.forEach(item => {
+                const isCompleted = savedProgress[item.id] || false;
+                const listItem = createChecklistItem(item, isCompleted);
+                ul.appendChild(listItem);
+            });
+
+            sectionDiv.appendChild(ul);
+            container.appendChild(sectionDiv);
         });
     });
+
+    // Re-add success message at the end
+    const successMsg = document.getElementById('successMessage');
+    if (successMsg) {
+        container.appendChild(successMsg);
+    }
 }
 
 /**
@@ -346,8 +479,7 @@ function resetChecklist() {
 }
 
 /**
- * Download checklist as text (simulated PDF for MVP)
- * In production, you could use jsPDF or similar library for actual PDF generation
+ * Download checklist as text
  */
 function downloadChecklist() {
     const savedProgress = storage.get('checklistProgress', {});
@@ -355,22 +487,39 @@ function downloadChecklist() {
     let content = 'WEBSITE LAUNCH CHECKLIST\n';
     content += '='.repeat(50) + '\n\n';
 
-    Object.values(checklistData).forEach(section => {
-        content += section.title.toUpperCase() + '\n';
-        content += '-'.repeat(section.title.length) + '\n\n';
+    const tiers = {
+        basic: { title: 'BASIC - Essential for Launch', sections: [] },
+        advanced: { title: 'ADVANCED - Recommended for Success', sections: [] },
+        expert: { title: 'EXPERT - Pro-Level Optimization', sections: [] }
+    };
 
-        section.items.forEach(item => {
-            const status = savedProgress[item.id] ? '[✓]' : '[ ]';
-            content += `${status} ${item.title}\n`;
-            content += `    ${item.description}\n\n`;
+    Object.keys(checklistData).forEach(sectionKey => {
+        const section = checklistData[sectionKey];
+        tiers[section.tier].sections.push(section);
+    });
+
+    Object.keys(tiers).forEach(tierKey => {
+        const tier = tiers[tierKey];
+        content += '\n' + tier.title.toUpperCase() + '\n';
+        content += '='.repeat(tier.title.length) + '\n\n';
+
+        tier.sections.forEach(section => {
+            content += section.title + '\n';
+            content += '-'.repeat(section.title.length) + '\n';
+
+            section.items.forEach(item => {
+                const status = savedProgress[item.id] ? '[✓]' : '[ ]';
+                content += `${status} ${item.title}\n`;
+                content += `    ${item.description}\n`;
+            });
+
+            content += '\n';
         });
-
-        content += '\n';
     });
 
     content += '\n' + '='.repeat(50) + '\n';
     content += 'Generated by Small Business Website Starter Kit\n';
-    content += 'https://yourwebsite.com\n';
+    content += 'https://www.sbwsk.io\n';
 
     // Create download
     const blob = new Blob([content], { type: 'text/plain' });

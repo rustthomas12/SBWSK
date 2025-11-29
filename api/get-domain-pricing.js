@@ -3,7 +3,7 @@
  *
  * IMPORTANT: All prices returned are ESTIMATES ONLY
  * Actual prices may vary based on promotions, location, and other factors.
- * Users must verify exact pricing at each registrar before purchasing.
+ * Users must verify exact pricing at each host before purchasing.
  *
  * Pricing Sources:
  * - GoDaddy: Official API (requires free API keys) - Estimated from API
@@ -24,7 +24,7 @@ const cache = new Map();
 const CACHE_DURATION = 30 * 60 * 1000;
 
 // Fallback prices with last verification dates
-// UPDATE THESE PERIODICALLY by checking registrar websites
+// UPDATE THESE PERIODICALLY by checking host websites
 const FALLBACK_PRICES = {
     lastUpdated: '2025-11-27', // Update this when you verify prices
     prices: {
