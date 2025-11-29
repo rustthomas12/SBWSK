@@ -269,7 +269,7 @@ function initializeChecklist() {
     });
 
     // Create tier containers
-    const container = document.querySelector('.container');
+    const container = document.querySelector('.tools-section .container');
     const progressCard = document.querySelector('.tool-card');
 
     // Clear existing sections (keep progress card)
