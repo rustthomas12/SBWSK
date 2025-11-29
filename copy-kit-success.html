@@ -129,7 +129,7 @@
 
                         <!-- Download All Button -->
                         <div style="text-align: center; margin-bottom: 3rem;">
-                            <a href="api/download.php?session={SESSION_ID}" id="download-all-btn" class="btn btn-primary btn-large">
+                            <a href="api/download?session={SESSION_ID}" id="download-all-btn" class="btn btn-primary btn-large">
                                 📦 Download All Templates (ZIP)
                             </a>
                             <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">
@@ -331,7 +331,7 @@
 
             try {
                 // Verify session with backend
-                const response = await fetch('/api/verify-session.php?session_id=' + sessionId);
+                const response = await fetch('/api/verify-session?session_id=' + sessionId);
                 const data = await response.json();
 
                 if (data.valid) {
@@ -341,7 +341,7 @@
 
                     // Update download all button
                     const downloadAllBtn = document.getElementById('download-all-btn');
-                    downloadAllBtn.href = 'api/download.php?session=' + sessionId;
+                    downloadAllBtn.href = 'api/download?session=' + sessionId;
                 } else {
                     throw new Error('Invalid session');
                 }
