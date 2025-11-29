@@ -157,12 +157,11 @@ async function sendDownloadEmail(email, sessionId, product) {
 
               <p><strong>What's Included:</strong></p>
               <ul>
-                <li>✓ Homepage fill-in-the-blank template (TXT & MD formats)</li>
-                <li>✓ About page template</li>
-                <li>✓ Services page template</li>
-                <li>✓ Contact page template</li>
-                <li>✓ SEO meta tag templates</li>
-                <li>✓ BONUS: Quick Start Guide with tips & resources</li>
+                <li>✓ <strong>Professional PDF Templates</strong> - Beautifully formatted and easy to fill out</li>
+                <li>✓ Homepage Template PDF - Complete fill-in-the-blank guide</li>
+                <li>✓ Quick Start Guide PDF - Tips, best practices, and instructions</li>
+                <li>✓ About, Services, Contact & SEO templates (TXT format)</li>
+                <li>✓ BONUS: Pre-launch checklist and power words guide</li>
               </ul>
 
               <p style="text-align: center;">

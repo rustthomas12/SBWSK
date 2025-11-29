@@ -60,16 +60,15 @@ module.exports = async (req, res) => {
     // Add all template files
     const templatesDir = path.join(process.cwd(), 'copy-kit-templates');
     const files = [
-      // Original TXT files
-      '1-homepage-template.txt',
+      // Professional PDF versions (main format)
+      'pdfs/QUICK-START-GUIDE.pdf',
+      'pdfs/1-Homepage-Template.pdf',
+      // Original TXT files (backup format)
       '2-about-page-template.txt',
       '3-services-page-template.txt',
       '4-contact-page-template.txt',
       '5-seo-meta-tags-template.txt',
-      'README.txt',
-      // New improved Markdown files
-      '1-homepage-template.md',
-      'QUICK-START-GUIDE.md'
+      'README.txt'
     ];
 
     for (const file of files) {
