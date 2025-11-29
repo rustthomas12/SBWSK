@@ -34,3 +34,12 @@ yarn-error.log*
 # Vercel
 .vercel/
 .vercel
+
+# Stripe & Sensitive Configuration
+.env
+*.env
+logs/
+
+# Composer
+vendor/
+composer.lock

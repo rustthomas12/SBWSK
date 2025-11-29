@@ -1,0 +1,431 @@
+=====================================================
+SEO META TAGS TEMPLATE - 10-Minute Website Copy Kit
+=====================================================
+
+INSTRUCTIONS: These meta tags help your website show up in Google
+and look great when shared on social media. Fill them out for
+each page on your website.
+
+=====================================================
+WHAT ARE META TAGS?
+=====================================================
+
+Meta tags are snippets of code that tell search engines and social
+media platforms what your page is about. They don't appear on your
+page, but they affect how your site appears in search results and
+when shared.
+
+
+=====================================================
+HOMEPAGE META TAGS
+=====================================================
+
+Title Tag (50-60 characters):
+This appears as the blue clickable link in Google search results.
+
+Formula: [Primary Keyword] | [What You Do] | [Business Name]
+
+Example: "Website Design for Small Business | Fast & Affordable | SBWSK"
+
+Your Title Tag:
+_____________________________________________________________
+
+
+Meta Description (150-160 characters):
+This appears below the title in search results. Make it compelling!
+
+Formula: [What you do] for [who]. [Key benefit]. [Call to action].
+
+Example: "Professional website design for small businesses. Launch
+your site in 7 days. Get a free quote today!"
+
+Your Meta Description:
+_____________________________________________________________
+_____________________________________________________________
+
+
+Keywords (3-7 keywords):
+What would someone search to find you?
+
+Your Keywords:
+1. _______________________
+2. _______________________
+3. _______________________
+4. _______________________
+5. _______________________
+6. _______________________
+7. _______________________
+
+
+=====================================================
+ABOUT PAGE META TAGS
+=====================================================
+
+Title Tag:
+Formula: About [Business Name] | [What You Do] | [Location if relevant]
+
+Example: "About SBWSK | Website Solutions for Small Business | USA"
+
+Your Title Tag:
+_____________________________________________________________
+
+
+Meta Description:
+
+Example: "Learn about SBWSK's mission to help small businesses
+succeed online. Meet our team and discover why 500+ businesses
+trust us with their websites."
+
+Your Meta Description:
+_____________________________________________________________
+_____________________________________________________________
+
+
+=====================================================
+SERVICES PAGE META TAGS
+=====================================================
+
+Title Tag:
+Formula: [Service Category] | [Key Benefits] | [Business Name]
+
+Example: "Website Design Services | Fast, Affordable, Professional | SBWSK"
+
+Your Title Tag:
+_____________________________________________________________
+
+
+Meta Description:
+
+Example: "Professional website design, hosting, and maintenance
+services for small businesses. Packages starting at $499. Get your
+free quote today!"
+
+Your Meta Description:
+_____________________________________________________________
+_____________________________________________________________
+
+
+=====================================================
+CONTACT PAGE META TAGS
+=====================================================
+
+Title Tag:
+Formula: Contact [Business Name] | [Location] | [Call to Action]
+
+Example: "Contact SBWSK | Free Website Consultation | Get Started Today"
+
+Your Title Tag:
+_____________________________________________________________
+
+
+Meta Description:
+
+Example: "Get in touch with SBWSK for a free website consultation.
+We respond within 24 hours. Call (555) 123-4567 or fill out our
+simple contact form."
+
+Your Meta Description:
+_____________________________________________________________
+_____________________________________________________________
+
+
+=====================================================
+BLOG POST META TAGS (Template)
+=====================================================
+
+Title Tag:
+Formula: [Blog Post Title] | [Business Name]
+
+Keep it under 60 characters and include your main keyword.
+
+Example: "10 Website Mistakes Small Businesses Make | SBWSK"
+
+
+Meta Description:
+Summarize the post and include a call to action.
+
+Example: "Avoid these 10 common website mistakes that cost small
+businesses customers. Learn how to fix them and boost your online
+presence today."
+
+
+=====================================================
+SOCIAL MEDIA META TAGS (Open Graph)
+=====================================================
+
+These control how your pages look when shared on Facebook,
+LinkedIn, Twitter, etc.
+
+OG Title (Same as page title or shorter):
+_____________________________________________________________
+
+OG Description (Same as meta description or shorter):
+_____________________________________________________________
+
+OG Image (Recommended size: 1200x630px):
+Image file name: _______________________
+Image should show: _______________________
+
+Twitter Card Type:
+□ Summary
+□ Summary with Large Image
+□ Custom: _______________
+
+
+=====================================================
+LOCAL SEO (If You Have a Physical Location)
+=====================================================
+
+Business Name: _______________________
+
+Street Address: _______________________
+
+City: _______________________
+
+State/Province: _______________________
+
+ZIP/Postal Code: _______________________
+
+Country: _______________________
+
+Phone: _______________________
+
+Business Hours:
+Monday: _______________________
+Tuesday: _______________________
+Wednesday: _______________________
+Thursday: _______________________
+Friday: _______________________
+Saturday: _______________________
+Sunday: _______________________
+
+Service Area (if applicable):
+Cities/regions you serve:
+_____________________________________________________________
+
+
+=====================================================
+SCHEMA MARKUP (Structured Data)
+=====================================================
+
+Help Google understand your business:
+
+Business Type:
+□ Local Business
+□ Professional Service
+□ Restaurant
+□ Store
+□ Organization
+□ Other: _______________
+
+Services Offered (list main services):
+1. _______________________
+2. _______________________
+3. _______________________
+
+Price Range:
+□ $
+□ $$
+□ $$$
+□ $$$$
+
+
+=====================================================
+IMAGE ALT TEXT TEMPLATE
+=====================================================
+
+Every image on your site should have descriptive alt text for SEO
+and accessibility.
+
+Formula: [What's in the image] [relevant keyword if natural]
+
+Examples:
+✓ "Small business owner working on laptop in coffee shop"
+✓ "Modern website design homepage example"
+✓ "SBWSK team meeting in office"
+
+✗ "image1.jpg"
+✗ "website design website design website design" (keyword stuffing)
+
+
+Your Main Images:
+
+Image 1: _______________________
+Alt Text: _______________________
+
+Image 2: _______________________
+Alt Text: _______________________
+
+Image 3: _______________________
+Alt Text: _______________________
+
+
+=====================================================
+URL STRUCTURE BEST PRACTICES
+=====================================================
+
+Keep URLs short, descriptive, and keyword-rich:
+
+Good URLs:
+✓ yoursite.com/services
+✓ yoursite.com/about
+✓ yoursite.com/contact
+✓ yoursite.com/blog/website-tips
+
+Bad URLs:
+✗ yoursite.com/page?id=123
+✗ yoursite.com/services/index.php
+✗ yoursite.com/this-is-a-really-long-url-with-too-many-words
+
+
+Your Main Pages URLs:
+
+Homepage: _______________________
+About: _______________________
+Services: _______________________
+Contact: _______________________
+Blog: _______________________
+
+
+=====================================================
+GOOGLE MY BUSINESS PROFILE
+=====================================================
+
+If you have a physical location, claim your Google Business Profile:
+
+Business Name: _______________________
+
+Category: _______________________
+(e.g., "Website Designer", "Marketing Agency")
+
+Business Description (750 characters max):
+_____________________________________________________________
+_____________________________________________________________
+_____________________________________________________________
+
+Services (list all):
+_____________________________________________________________
+
+Photos to upload:
+□ Logo
+□ Storefront/Office
+□ Team photos
+□ Work samples
+□ Products/Services
+□ Interior/Exterior
+
+
+=====================================================
+SEO CHECKLIST
+=====================================================
+
+For each page, make sure you have:
+
+□ Unique title tag (not duplicated on other pages)
+□ Compelling meta description
+□ Header tags (H1, H2, H3) with keywords
+□ Alt text on all images
+□ Internal links to other pages
+□ External links to authoritative sources
+□ Mobile-friendly design
+□ Fast page load speed (under 3 seconds)
+□ HTTPS (secure) website
+□ XML sitemap submitted to Google
+□ Google Analytics installed
+□ Google Search Console set up
+
+
+=====================================================
+KEYWORD RESEARCH TEMPLATE
+=====================================================
+
+For each main service/topic, find related keywords:
+
+Main Topic: _______________________
+
+Primary Keyword: _______________________
+Search Volume: _______ (use Google Keyword Planner)
+Competition: Low / Medium / High
+
+Secondary Keywords:
+1. _______________________
+2. _______________________
+3. _______________________
+
+Long-tail Keywords (more specific, easier to rank):
+1. _______________________
+2. _______________________
+3. _______________________
+
+
+=====================================================
+CONTENT IDEAS BASED ON KEYWORDS
+=====================================================
+
+Turn your keywords into content:
+
+Keyword: _______________________
+Blog Post Idea: _______________________
+
+Keyword: _______________________
+Service Page Idea: _______________________
+
+Keyword: _______________________
+FAQ Idea: _______________________
+
+
+=====================================================
+MONTHLY SEO TASKS
+=====================================================
+
+Stay on top of SEO with these monthly tasks:
+
+□ Add 1-2 new blog posts with target keywords
+□ Update old content with fresh information
+□ Check Google Search Console for errors
+□ Monitor rankings for main keywords
+□ Get 1-2 new backlinks (guest posts, directories, etc.)
+□ Update Google Business Profile with new photos/posts
+□ Respond to reviews
+□ Check site speed and fix any issues
+□ Review analytics and adjust strategy
+
+
+=====================================================
+SEO BEST PRACTICES SUMMARY
+=====================================================
+
+✓ Use your main keyword in title, meta description, and H1
+✓ Write for humans first, search engines second
+✓ Keep titles under 60 characters
+✓ Keep meta descriptions under 160 characters
+✓ Use natural language - no keyword stuffing
+✓ Include location keywords if you're a local business
+✓ Make every page unique (no duplicate content)
+✓ Use descriptive URLs with keywords
+✓ Optimize images (compress, add alt text)
+✓ Get backlinks from reputable websites
+✓ Create valuable content that people want to share
+✓ Be patient - SEO takes 3-6 months to show results
+
+=====================================================
+WHERE TO ADD THESE TAGS
+=====================================================
+
+In WordPress:
+- Use Yoast SEO or Rank Math plugin
+- Fill out the SEO section for each page/post
+
+In HTML:
+Add these tags in the <head> section:
+
+<title>Your Title Tag Here</title>
+<meta name="description" content="Your meta description here">
+<meta name="keywords" content="keyword1, keyword2, keyword3">
+
+For social media:
+<meta property="og:title" content="Your Title">
+<meta property="og:description" content="Your Description">
+<meta property="og:image" content="image-url.jpg">
+
+=====================================================

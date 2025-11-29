@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Download Your Copy Kit - SBWSK</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <link rel="stylesheet" href="css/sections.css">
+
+    <!-- Stripe.js for session verification -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- Stripe Config -->
+    <script src="api/get-stripe-key.php"></script>
+
+    <style>
+        .success-hero {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .download-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .download-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .download-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+        .download-info {
+            flex: 1;
+        }
+        .download-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .download-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        .verification-status {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .verification-loading {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .verification-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .verification-error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <img src="images/logo.png" alt="SBWSK Logo" class="logo-img">
+                <span class="tagline">
+                    <span>Small Business</span>
+                    <span>Website Starter Kit</span>
+                </span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Success Hero -->
+    <section class="success-hero">
+        <div class="container">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
+            <h1 style="margin-bottom: 0.5rem; color: white;">Thank You for Your Purchase!</h1>
+            <p style="font-size: 1.125rem; opacity: 0.95;">Your Website Copy Kit is ready to download below</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <section style="padding: 3rem 0;">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto;">
+
+                    <!-- Verification Status -->
+                    <div id="verification-status" class="verification-status verification-loading">
+                        <div id="status-message">⏳ Verifying your payment...</div>
+                    </div>
+
+                    <!-- Download Section (hidden until verified) -->
+                    <div id="download-section" style="display: none;">
+                        <h2 style="margin-bottom: 1.5rem;">Download Your Templates</h2>
+
+                        <p style="margin-bottom: 2rem; color: var(--text-secondary);">
+                            Click below to download all 5 copywriting templates. Save them to your computer and start creating your website copy today!
+                        </p>
+
+                        <!-- Download All Button -->
+                        <div style="text-align: center; margin-bottom: 3rem;">
+                            <a href="api/download.php?session={SESSION_ID}" id="download-all-btn" class="btn btn-primary btn-large">
+                                📦 Download All Templates (ZIP)
+                            </a>
+                            <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">
+                                All 5 templates in one convenient package
+                            </p>
+                        </div>
+
+                        <h3 style="margin-bottom: 1.5rem;">Or download individually:</h3>
+
+                        <!-- Individual Downloads -->
+                        <div class="download-card">
+                            <div class="download-icon">📄</div>
+                            <div class="download-info">
+                                <h4 style="margin-bottom: 0.25rem;">Homepage Template</h4>
+                                <p class="text-muted" style="font-size: 0.875rem;">Complete homepage structure with fill-in-the-blank sections</p>
+                            </div>
+                            <a href="copy-kit-templates/1-homepage-template.txt" download class="download-btn">Download</a>
+                        </div>
+
+                        <div class="download-card">
+                            <div class="download-icon">👥</div>
+                            <div class="download-info">
+                                <h4 style="margin-bottom: 0.25rem;">About Page Template</h4>
+                                <p class="text-muted" style="font-size: 0.875rem;">Tell your story and build trust with visitors</p>
+                            </div>
+                            <a href="copy-kit-templates/2-about-page-template.txt" download class="download-btn">Download</a>
+                        </div>
+
+                        <div class="download-card">
+                            <div class="download-icon">💼</div>
+                            <div class="download-info">
+                                <h4 style="margin-bottom: 0.25rem;">Services Page Template</h4>
+                                <p class="text-muted" style="font-size: 0.875rem;">Showcase what you offer with clear, benefit-driven copy</p>
+                            </div>
+                            <a href="copy-kit-templates/3-services-page-template.txt" download class="download-btn">Download</a>
+                        </div>
+
+                        <div class="download-card">
+                            <div class="download-icon">✉️</div>
+                            <div class="download-info">
+                                <h4 style="margin-bottom: 0.25rem;">Contact Page Template</h4>
+                                <p class="text-muted" style="font-size: 0.875rem;">Make it easy for customers to reach you</p>
+                            </div>
+                            <a href="copy-kit-templates/4-contact-page-template.txt" download class="download-btn">Download</a>
+                        </div>
+
+                        <div class="download-card">
+                            <div class="download-icon">🔍</div>
+                            <div class="download-info">
+                                <h4 style="margin-bottom: 0.25rem;">SEO Meta Tags Template</h4>
+                                <p class="text-muted" style="font-size: 0.875rem;">Optimize your site for search engines</p>
+                            </div>
+                            <a href="copy-kit-templates/5-seo-meta-tags-template.txt" download class="download-btn">Download</a>
+                        </div>
+
+                        <div class="download-card">
+                            <div class="download-icon">📖</div>
+                            <div class="download-info">
+                                <h4 style="margin-bottom: 0.25rem;">README - Getting Started</h4>
+                                <p class="text-muted" style="font-size: 0.875rem;">Instructions and tips for using your templates</p>
+                            </div>
+                            <a href="copy-kit-templates/README.txt" download class="download-btn">Download</a>
+                        </div>
+
+                        <!-- Getting Started -->
+                        <div class="tool-card" style="margin-top: 3rem; background: #f9fafb;">
+                            <h3 style="margin-bottom: 1rem;">🚀 Getting Started</h3>
+                            <ol style="line-height: 2;">
+                                <li><strong>Download all templates</strong> using the button above</li>
+                                <li><strong>Open each template</strong> in any text editor (Notepad, Word, Google Docs, etc.)</li>
+                                <li><strong>Read the instructions</strong> at the top of each template</li>
+                                <li><strong>Fill in the blanks</strong> with your business information</li>
+                                <li><strong>Copy and paste</strong> the completed sections into your website</li>
+                                <li><strong>Customize</strong> to match your brand voice and style</li>
+                            </ol>
+                        </div>
+
+                        <!-- Email Notice -->
+                        <div class="tool-card" style="margin-top: 2rem; border-left: 4px solid var(--primary);">
+                            <h4 style="margin-bottom: 0.5rem;">📧 Check Your Email</h4>
+                            <p class="text-muted">
+                                We've sent a copy of your purchase receipt and download link to your email.
+                                Save this email for future reference!
+                            </p>
+                        </div>
+
+                        <!-- Support -->
+                        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #f9fafb; border-radius: 12px;">
+                            <h3 style="margin-bottom: 1rem;">Need Help?</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                                Have questions about using your templates? We're here to help!
+                            </p>
+                            <a href="index.html#contact" class="btn btn-secondary">Contact Support</a>
+                        </div>
+
+                        <!-- Next Steps -->
+                        <div style="margin-top: 3rem;">
+                            <h3 style="margin-bottom: 1.5rem;">What's Next?</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                                <div class="tool-card">
+                                    <h4>🎨 Get a Logo</h4>
+                                    <p class="text-muted">Use our free logo generator to create your brand identity</p>
+                                    <a href="logo-generator.html" style="color: var(--primary); font-weight: 600;">Try Logo Generator →</a>
+                                </div>
+                                <div class="tool-card">
+                                    <h4>🌐 Check Domain</h4>
+                                    <p class="text-muted">Find and register the perfect domain for your website</p>
+                                    <a href="domain-checker.html" style="color: var(--primary); font-weight: 600;">Check Domains →</a>
+                                </div>
+                                <div class="tool-card">
+                                    <h4>✅ Launch Checklist</h4>
+                                    <p class="text-muted">Make sure you don't miss any critical steps before launching</p>
+                                    <a href="checklist.html" style="color: var(--primary); font-weight: 600;">View Checklist →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBWSK</h3>
+                    <p>Free tools for small business owners to launch successful websites.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="domain-checker.html">Domain Checker</a></li>
+                        <li><a href="choose-registrar.html">Choose Registrar</a></li>
+                        <li><a href="logo-generator.html">Logo Generator</a></li>
+                        <li><a href="website-speed-check.html">Speed Check</a></li>
+                        <li><a href="templates.html">Templates</a></li>
+                        <li><a href="quote-estimator.html">Quote Estimator</a></li>
+                        <li><a href="name-generator.html">Name Generator</a></li>
+                        <li><a href="checklist.html">Launch Checklist</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="templates.html">Website Templates</a></li>
+                        <li><a href="website-copy-kit.html">Copy Kit - $17</a></li>
+                        <li><a href="index.html#contact">Custom Development</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="https://bluehost.sjv.io/Webstarterkit" target="_blank" rel="noopener">Get Hosting</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Small Business Website Starter Kit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+        // Verify Stripe session and show download links
+        let stripe = null;
+
+        // Initialize Stripe once config is loaded
+        if (window.STRIPE_CONFIG && window.STRIPE_CONFIG.publishableKey) {
+            stripe = Stripe(window.STRIPE_CONFIG.publishableKey);
+        }
+
+        async function verifySession() {
+            // Make sure Stripe is initialized
+            if (!stripe && window.STRIPE_CONFIG) {
+                stripe = Stripe(window.STRIPE_CONFIG.publishableKey);
+            }
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+
+            const statusDiv = document.getElementById('verification-status');
+            const statusMessage = document.getElementById('status-message');
+            const downloadSection = document.getElementById('download-section');
+
+            if (!sessionId) {
+                statusDiv.className = 'verification-status verification-error';
+                statusMessage.textContent = '❌ Invalid download link. Please check your email for the correct link.';
+                return;
+            }
+
+            try {
+                // Verify session with backend
+                const response = await fetch('/api/verify-session.php?session_id=' + sessionId);
+                const data = await response.json();
+
+                if (data.valid) {
+                    statusDiv.className = 'verification-status verification-success';
+                    statusMessage.textContent = '✅ Payment verified! Your downloads are ready.';
+                    downloadSection.style.display = 'block';
+
+                    // Update download all button
+                    const downloadAllBtn = document.getElementById('download-all-btn');
+                    downloadAllBtn.href = 'api/download.php?session=' + sessionId;
+                } else {
+                    throw new Error('Invalid session');
+                }
+            } catch (error) {
+                statusDiv.className = 'verification-status verification-error';
+                statusMessage.textContent = '❌ Unable to verify payment. Please contact support with your order confirmation.';
+                console.error('Verification error:', error);
+            }
+        }
+
+        // Run verification when page loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', verifySession);
+        } else {
+            verifySession();
+        }
+    </script>
+</body>
+</html>

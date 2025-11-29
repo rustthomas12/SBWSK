@@ -1,0 +1,323 @@
+=====================================================
+CONTACT PAGE COPY TEMPLATE - 10-Minute Website Copy Kit
+=====================================================
+
+INSTRUCTIONS: Make it easy for people to reach you and give them
+a reason to get in touch!
+
+=====================================================
+PAGE HEADLINE
+=====================================================
+
+Option 1: Get In Touch
+Option 2: Let's Talk About Your Project
+Option 3: Contact Us
+Option 4: Ready to Get Started?
+Option 5: We'd Love to Hear From You
+
+Your Headline: _______________________
+
+
+=====================================================
+OPENING PARAGRAPH
+=====================================================
+
+Make it welcoming and clear what happens next.
+
+Template:
+Have a question about [your services]? Ready to [next step]?
+We'd love to hear from you. Fill out the form below and we'll
+get back to you within [timeframe].
+
+Your Opening:
+_____________________________________________________________
+_____________________________________________________________
+_____________________________________________________________
+
+
+=====================================================
+WHAT TO EXPECT
+=====================================================
+
+Set expectations for response time and next steps:
+
+Response Time:
+□ We respond within 24 hours
+□ We respond within 1 business day
+□ We respond within 2-3 business days
+□ Same-day response (business hours)
+□ Custom: _______________
+
+What Happens Next:
+Step 1: _______________________
+Step 2: _______________________
+Step 3: _______________________
+
+
+=====================================================
+CONTACT FORM FIELDS
+=====================================================
+
+Required Fields:
+□ Name
+□ Email
+□ Phone
+□ Company (optional)
+□ Message
+□ How did you hear about us?
+□ Budget range
+□ Timeline
+□ Service interested in
+□ Custom: _______________
+
+Form Submit Button Text:
+□ Send Message
+□ Get In Touch
+□ Submit
+□ Request Quote
+□ Book Consultation
+□ Custom: _______________
+
+
+=====================================================
+CONTACT INFORMATION
+=====================================================
+
+Email: _______________________
+
+Phone: _______________________
+
+Business Hours:
+Monday-Friday: _______________________
+Saturday: _______________________
+Sunday: _______________________
+
+Physical Address (if applicable):
+_______________________
+_______________________
+_______________________
+
+Mailing Address (if different):
+_______________________
+_______________________
+
+
+=====================================================
+ALTERNATIVE CONTACT METHODS
+=====================================================
+
+Check all that apply:
+
+□ Live Chat Available
+□ Schedule a Call: [Calendly link]
+□ Text Us: [Phone number]
+□ WhatsApp: [Number]
+□ Social Media DMs Welcome
+□ Video Call Available
+
+Social Media Links:
+Facebook: _______________________
+Instagram: _______________________
+LinkedIn: _______________________
+Twitter: _______________________
+YouTube: _______________________
+Other: _______________________
+
+
+=====================================================
+LOCATION MAP (If Applicable)
+=====================================================
+
+Do you have a physical location customers visit?
+
+□ Yes - embed Google Maps
+□ No - we're fully remote
+□ Virtual office
+□ Meet at client location
+
+Address for map: _______________________
+
+
+=====================================================
+COMMON REASONS TO CONTACT
+=====================================================
+
+Help visitors know when to reach out:
+
+Contact us if you:
+□ Have questions about our services
+□ Want a custom quote
+□ Need support with an existing project
+□ Want to discuss a partnership
+□ Have a media inquiry
+□ Other: _______________
+
+
+=====================================================
+QUICK QUESTIONS SECTION (Optional)
+=====================================================
+
+Answer common questions right on the contact page:
+
+Quick Question 1:
+Q: "How much do your services cost?"
+A: _____________________________________________
+
+Quick Question 2:
+Q: "How long does it take?"
+A: _____________________________________________
+
+Quick Question 3:
+Q: "Do you work with clients in [location]?"
+A: _____________________________________________
+
+Quick Question 4:
+Q: "What's your availability?"
+A: _____________________________________________
+
+
+=====================================================
+CALL-TO-ACTION OPTIONS
+=====================================================
+
+Primary CTA (above contact form):
+
+Headline: _______________________
+
+Example: "Ready to transform your website?"
+
+Supporting Text:
+_____________________________________________________________
+
+Example: "Fill out the form below and get a free consultation
+and custom project proposal within 24 hours."
+
+
+Secondary CTA (alternative option):
+
+Prefer to talk? [Book a call] or [Call us at XXX-XXX-XXXX]
+
+Your Secondary CTA:
+_____________________________________________________________
+
+
+=====================================================
+TRUST ELEMENTS
+=====================================================
+
+Add these near the contact form:
+
+□ "Your information is secure and will never be shared"
+□ "No spam, we promise"
+□ "Free consultation - no obligation"
+□ "Response guaranteed within [timeframe]"
+□ SSL Secure badge
+□ Privacy policy link
+□ Testimonial snippet
+
+Your Trust Message:
+_____________________________________________________________
+
+
+=====================================================
+EMERGENCY/URGENT CONTACT (If Applicable)
+=====================================================
+
+For time-sensitive businesses (IT support, medical, etc.):
+
+Urgent/Emergency Contact:
+Phone: _______________________
+Available: _______________________
+Response time: _______________________
+
+
+=====================================================
+OFFICE HOURS & AVAILABILITY
+=====================================================
+
+When can people expect to reach you?
+
+Best Time to Call: _______________________
+
+Email Response Time: _______________________
+
+After Hours: _______________________
+(What happens if they contact you outside business hours?)
+
+
+=====================================================
+TEAM CONTACT (If Applicable)
+=====================================================
+
+If you have different contacts for different needs:
+
+Sales Inquiries:
+Name: _______________________
+Email: _______________________
+Phone: _______________________
+
+Support Questions:
+Name: _______________________
+Email: _______________________
+Phone: _______________________
+
+Media/Press:
+Email: _______________________
+
+Partnerships:
+Email: _______________________
+
+
+=====================================================
+CLOSING PARAGRAPH
+=====================================================
+
+End on a friendly, encouraging note:
+
+Template:
+We're excited to hear about your project! Whether you have a
+quick question or want to discuss a full [service], we're here
+to help. Reach out today and let's make it happen.
+
+Your Closing:
+_____________________________________________________________
+_____________________________________________________________
+_____________________________________________________________
+
+
+=====================================================
+THANK YOU PAGE (After Form Submission)
+=====================================================
+
+Headline: Thanks for Reaching Out!
+
+Message:
+_____________________________________________________________
+_____________________________________________________________
+
+What happens next:
+_____________________________________________________________
+
+While you wait:
+□ Check out our portfolio: [link]
+□ Read our latest blog post: [link]
+□ Follow us on social: [links]
+□ Download our free guide: [link]
+
+
+=====================================================
+CONTACT PAGE BEST PRACTICES
+=====================================================
+
+✓ Keep the form short (3-5 fields max)
+✓ Don't hide your contact info - make it obvious
+✓ Set clear expectations for response time
+✓ Offer multiple contact methods
+✓ Make it mobile-friendly
+✓ Add a compelling reason to contact you
+✓ Include a photo of you/your team (builds trust)
+✓ Test your form regularly
+✓ Send an auto-reply confirming receipt
+✓ Respond quickly (within 24 hours)
+
+=====================================================

@@ -1,0 +1,34 @@
+═══════════════════════════════════════════════════
+  COPY & PASTE THESE 2 COMMANDS IN YOUR TERMINAL
+═══════════════════════════════════════════════════
+
+✅ Premium Logo is now $10 (updated!)
+✅ Everything else is ready
+✅ Just need to install PHP
+
+
+WHERE TO RUN THESE:
+───────────────────
+In VS Code: Press Ctrl + ` (backtick)
+This opens a terminal at the bottom
+Paste the commands there!
+
+
+COMMAND 1 (Install PHP):
+───────────────────────
+sudo apt-get update && sudo apt-get install -y php php-cli php-curl php-mbstring php-xml php-zip unzip curl
+
+
+COMMAND 2 (Install Stripe):
+────────────────────────────
+curl -sS https://getcomposer.org/installer | php && php composer.phar require stripe/stripe-php
+
+
+THAT'S IT!
+──────────
+After running these 2 commands, your payment system is LIVE!
+
+Test at: https://www.sbwsk.io/website-copy-kit.html
+Use card: 4242 4242 4242 4242
+
+═══════════════════════════════════════════════════

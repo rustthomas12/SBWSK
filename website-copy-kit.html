@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/modern.css">
     <link rel="stylesheet" href="css/sections.css">
+
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- Stripe Config -->
+    <script src="api/get-stripe-key.php"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -45,6 +50,7 @@
                     </ul>
                 </li>
                 <li><a href="templates.html">Templates</a></li>
+                <li><a href="website-copy-kit.html" class="nav-highlight active">Copy Kit - $17</a></li>
                 <li><a href="quote-estimator.html">Get Quote</a></li>
                 <li><a href="checklist.html">Launch Checklist</a></li>
                 <li><a href="blog.html">Blog</a></li>
@@ -342,12 +348,12 @@
                             </ul>
                         </div>
 
-                        <a href="index.html#contact" class="btn btn-primary btn-large btn-block" style="font-size: 1.125rem; padding: 1.25rem;">
+                        <button id="checkout-button" class="btn btn-primary btn-large btn-block" style="font-size: 1.125rem; padding: 1.25rem; border: none; cursor: pointer;">
                             Purchase Now for $17 →
-                        </a>
+                        </button>
 
                         <p style="text-align: center; color: var(--text-secondary); font-size: 0.875rem; margin-top: 1rem;">
-                            Secure payment • Contact us to complete your purchase
+                            🔒 Secure payment powered by Stripe • Instant download
                         </p>
                     </div>
 
@@ -443,5 +449,6 @@
     <!-- JavaScript -->
     <script src="js/utils.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/stripe-checkout.js"></script>
 </body>
 </html>
