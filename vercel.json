@@ -1,18 +1,5 @@
 {
-  "version": 2,
   "name": "sbwsk",
-  "builds": [
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    }
-  ],
   "env": {
     "SITE_URL": "https://www.sbwsk.io"
   },
