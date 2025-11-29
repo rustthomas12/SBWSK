@@ -1,8 +1,54 @@
 {
+  "version": 2,
+  "name": "sbwsk",
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    }
+  ],
+  "env": {
+    "SITE_URL": "https://www.sbwsk.io"
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Stripe-Signature"
+        }
+      ]
+    }
+  ],
   "functions": {
     "api/**/*.js": {
       "memory": 1024,
-      "maxDuration": 15
+      "maxDuration": 30
+    },
+    "api/webhook.js": {
+      "memory": 1024,
+      "maxDuration": 30,
+      "includeFiles": "**"
+    },
+    "api/download.js": {
+      "memory": 1024,
+      "maxDuration": 30,
+      "includeFiles": "copy-kit-templates/**"
     }
   }
 }

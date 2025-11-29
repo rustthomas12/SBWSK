@@ -4,20 +4,29 @@
   "description": "Small Business Website Starter Kit - Free tools for small business owners",
   "main": "index.html",
   "scripts": {
-    "dev": "npx serve",
-    "test": "node api/submit-lead.js"
+    "dev": "vercel dev",
+    "test": "node api/submit-lead.js",
+    "deploy": "vercel --prod"
   },
   "keywords": [
     "small-business",
     "website",
     "tools",
     "domain-checker",
-    "quote-estimator"
+    "quote-estimator",
+    "stripe",
+    "payment"
   ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dns-lookup": "^0.1.0",
-    "whoiser": "^2.0.0-beta.9"
+    "whoiser": "^2.0.0-beta.9",
+    "stripe": "^14.10.0",
+    "archiver": "^6.0.1",
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=18.x"
   }
 }

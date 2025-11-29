@@ -1,0 +1,196 @@
+/**
+ * Stripe Webhook Handler
+ * Vercel Serverless Function
+ * Handles Stripe events like successful payments
+ * Set this URL in your Stripe Dashboard: https://dashboard.stripe.com/webhooks
+ */
+
+const Stripe = require('stripe');
+const fs = require('fs').promises;
+const path = require('path');
+
+module.exports = async (req, res) => {
+  // Only allow POST requests
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  try {
+    // Initialize Stripe
+    const stripeSecretKey = process.env.STRIPE_MODE === 'live'
+      ? process.env.STRIPE_SECRET_KEY_LIVE
+      : process.env.STRIPE_SECRET_KEY_TEST;
+
+    const stripe = new Stripe(stripeSecretKey, {
+      apiVersion: '2023-10-16',
+    });
+
+    // Get webhook signing secret
+    const endpointSecret = process.env.STRIPE_MODE === 'live'
+      ? process.env.STRIPE_WEBHOOK_SECRET_LIVE
+      : process.env.STRIPE_WEBHOOK_SECRET_TEST;
+
+    // Get the signature from headers
+    const sig = req.headers['stripe-signature'];
+
+    let event;
+
+    try {
+      // Verify webhook signature
+      // Note: Vercel automatically parses the body, but Stripe needs raw body
+      // We need to get the raw body for signature verification
+      const rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+
+      event = stripe.webhooks.constructEvent(rawBody, sig, endpointSecret);
+    } catch (err) {
+      console.error('Webhook signature verification failed:', err.message);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    // Handle the event
+    switch (event.type) {
+      case 'checkout.session.completed':
+        const session = event.data.object;
+
+        // Get customer information
+        const customerEmail = session.customer_details?.email || session.customer_email;
+        const sessionId = session.id;
+        const product = session.metadata?.product || 'unknown';
+
+        // Log the purchase
+        await logPurchase(product, customerEmail, sessionId);
+
+        // Send email with download link (optional - you'd need to set up email service)
+        // await sendDownloadEmail(customerEmail, sessionId);
+
+        console.log(`Purchase completed: ${product}, Email: ${customerEmail}, Session: ${sessionId}`);
+        break;
+
+      case 'payment_intent.succeeded':
+        // Payment succeeded
+        console.log('Payment succeeded:', event.data.object.id);
+        break;
+
+      case 'payment_intent.payment_failed':
+        // Payment failed
+        console.log('Payment failed:', event.data.object.id);
+        break;
+
+      default:
+        console.log(`Unhandled event type: ${event.type}`);
+    }
+
+    // Return 200 response to acknowledge receipt of the event
+    return res.status(200).json({ received: true });
+
+  } catch (error) {
+    console.error('Webhook error:', error);
+    return res.status(500).json({ error: 'Webhook handler failed' });
+  }
+};
+
+/**
+ * Log purchase to file
+ */
+async function logPurchase(product, email, sessionId) {
+  try {
+    const logDir = path.join('/tmp', 'logs');
+    const logFile = path.join(logDir, 'purchases.log');
+
+    // Create directory if it doesn't exist
+    try {
+      await fs.mkdir(logDir, { recursive: true });
+    } catch (err) {
+      // Directory might already exist
+    }
+
+    const timestamp = new Date().toISOString();
+    const logEntry = `${timestamp} - Purchase: ${product}, Email: ${email}, Session: ${sessionId}\n`;
+
+    await fs.appendFile(logFile, logEntry);
+    console.log('Purchase logged successfully');
+  } catch (error) {
+    console.error('Error logging purchase:', error);
+  }
+}
+
+/**
+ * Send email with download link
+ * Note: This requires an email service like SendGrid, Resend, or AWS SES
+ * Uncomment and configure when ready to use
+ */
+/*
+async function sendDownloadEmail(email, sessionId) {
+  const siteUrl = process.env.SITE_URL || 'https://www.sbwsk.io';
+  const downloadUrl = `${siteUrl}/copy-kit-success.html?session_id=${sessionId}`;
+
+  // Example with SendGrid (you'd need to install @sendgrid/mail)
+  // const sgMail = require('@sendgrid/mail');
+  // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+  const msg = {
+    to: email,
+    from: 'noreply@sbwsk.io',
+    subject: 'Your 10-Minute Website Copy Kit is Ready!',
+    html: `
+      <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+          .content { background: #f9fafb; padding: 30px; }
+          .button { display: inline-block; background: #667eea; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0; }
+          .footer { background: #333; color: white; padding: 20px; text-align: center; font-size: 12px; border-radius: 0 0 8px 8px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>🎉 Thank You for Your Purchase!</h1>
+          </div>
+          <div class="content">
+            <h2>Your Copy Kit is Ready to Download</h2>
+            <p>Thanks for purchasing The 10-Minute Website Copy Kit! You now have everything you need to create professional website copy in minutes.</p>
+
+            <p><strong>What's Included:</strong></p>
+            <ul>
+              <li>✓ Homepage fill-in-the-blank template</li>
+              <li>✓ About page template</li>
+              <li>✓ Services page template</li>
+              <li>✓ Contact page template</li>
+              <li>✓ SEO meta tag templates</li>
+            </ul>
+
+            <p style="text-align: center;">
+              <a href="${downloadUrl}" class="button">Download Your Templates Now →</a>
+            </p>
+
+            <p><strong>Getting Started:</strong></p>
+            <ol>
+              <li>Click the button above to access your download page</li>
+              <li>Download all 5 template files</li>
+              <li>Open each template and fill in the blanks</li>
+              <li>Copy and paste to your website</li>
+            </ol>
+
+            <p><strong>Need Help?</strong></p>
+            <p>If you have any questions or issues, just reply to this email. We're here to help!</p>
+
+            <p>Here's to your success! 🚀</p>
+            <p>- The SBWSK Team</p>
+          </div>
+          <div class="footer">
+            <p>&copy; 2025 Small Business Website Starter Kit</p>
+            <p>You're receiving this email because you purchased our product.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `,
+  };
+
+  // await sgMail.send(msg);
+  console.log('Email sent to:', email);
+}
+*/
