@@ -32,10 +32,6 @@
     }
   ],
   "functions": {
-    "api/**/*.js": {
-      "memory": 1024,
-      "maxDuration": 30
-    },
     "api/webhook.js": {
       "memory": 1024,
       "maxDuration": 30,
@@ -45,6 +41,10 @@
       "memory": 1024,
       "maxDuration": 30,
       "includeFiles": "copy-kit-templates/**"
+    },
+    "api/*.js": {
+      "memory": 1024,
+      "maxDuration": 30
     }
   }
 }
