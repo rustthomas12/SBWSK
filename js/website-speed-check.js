@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const websiteUrlInput = document.getElementById('websiteUrl');
 
     if (speedTestForm) {
-        speedTestForm.addEventListener('submit', (e) => {
+        speedTestForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             let url = websiteUrlInput.value.trim();
@@ -34,42 +34,139 @@ document.addEventListener('DOMContentLoaded', () => {
             speedResults.innerHTML = `
                 <div style="text-align: center; padding: 2rem;">
                     <div class="spinner" style="margin: 0 auto 1rem;"></div>
-                    <p>Redirecting to Google PageSpeed Insights...</p>
+                    <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Analyzing website performance...</p>
+                    <p style="color: #6b7280; font-size: 0.875rem;">This may take 20-30 seconds</p>
                 </div>
             `;
             speedResults.classList.remove('hidden');
 
-            // Redirect to Google PageSpeed Insights with the URL
-            setTimeout(() => {
-                const pageSpeedUrl = `https://pagespeed.web.dev/analysis?url=${encodeURIComponent(url)}`;
-                window.open(pageSpeedUrl, '_blank', 'noopener,noreferrer');
+            try {
+                // Use PageSpeed Insights API to analyze the URL
+                const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile`;
+                const response = await fetch(apiUrl);
 
-                // Show success message
+                if (!response.ok) {
+                    throw new Error('Failed to analyze website');
+                }
+
+                const data = await response.json();
+                const lighthouseResult = data.lighthouseResult;
+                const categories = lighthouseResult.categories;
+                const audits = lighthouseResult.audits;
+
+                // Extract key metrics
+                const performanceScore = Math.round(categories.performance.score * 100);
+                const fcpValue = audits['first-contentful-paint']?.displayValue || 'N/A';
+                const lcpValue = audits['largest-contentful-paint']?.displayValue || 'N/A';
+                const ttiValue = audits['interactive']?.displayValue || 'N/A';
+                const clsValue = audits['cumulative-layout-shift']?.displayValue || 'N/A';
+                const tbtValue = audits['total-blocking-time']?.displayValue || 'N/A';
+
+                // Determine score color
+                const getScoreColor = (score) => {
+                    if (score >= 90) return { bg: '#ecfdf5', border: '#10b981', text: '#059669' };
+                    if (score >= 50) return { bg: '#fef3c7', border: '#f59e0b', text: '#d97706' };
+                    return { bg: '#fee2e2', border: '#ef4444', text: '#dc2626' };
+                };
+
+                const scoreColors = getScoreColor(performanceScore);
+                const pageSpeedUrl = `https://pagespeed.web.dev/analysis?url=${encodeURIComponent(url)}`;
+
+                // Display results
                 speedResults.innerHTML = `
-                    <div style="background: #ecfdf5; border: 2px solid #10b981; border-radius: 8px; padding: 1.5rem; text-align: center;">
-                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">✅</div>
-                        <h4 style="color: #059669; margin-bottom: 0.5rem;">Test Launched!</h4>
-                        <p style="color: #065f46; margin-bottom: 1rem;">
-                            Google PageSpeed Insights has opened in a new tab to analyze <strong>${url}</strong>
-                        </p>
-                        <p style="color: #065f46; font-size: 0.875rem; margin-bottom: 1rem;">
-                            If it didn't open, click the button below:
-                        </p>
-                        <a href="${pageSpeedUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                            Open PageSpeed Insights
-                        </a>
-                        <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #d1fae5;">
-                        <h5 style="margin-bottom: 0.5rem;">💡 What to Look For:</h5>
-                        <ul style="text-align: left; color: #065f46; font-size: 0.875rem; line-height: 1.8; max-width: 500px; margin: 0 auto;">
-                            <li>Performance score (aim for 90+)</li>
-                            <li>Core Web Vitals (LCP, FID, CLS)</li>
-                            <li>Mobile vs Desktop performance</li>
-                            <li>Opportunities for improvement</li>
-                            <li>Diagnostics and recommendations</li>
-                        </ul>
+                    <div style="background: ${scoreColors.bg}; border: 2px solid ${scoreColors.border}; border-radius: 8px; padding: 1.5rem;">
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <div style="font-size: 3rem; font-weight: bold; color: ${scoreColors.text}; margin-bottom: 0.5rem;">
+                                ${performanceScore}
+                            </div>
+                            <h4 style="color: ${scoreColors.text}; margin-bottom: 0.5rem;">Performance Score</h4>
+                            <p style="color: #6b7280; font-size: 0.875rem;">Mobile Analysis for ${url}</p>
+                        </div>
+
+                        <div style="display: grid; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="background: white; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">First Contentful Paint</div>
+                                        <div style="color: #6b7280; font-size: 0.875rem;">Time until first content appears</div>
+                                    </div>
+                                    <div style="font-size: 1.25rem; font-weight: bold; color: var(--primary);">${fcpValue}</div>
+                                </div>
+                            </div>
+
+                            <div style="background: white; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">Largest Contentful Paint</div>
+                                        <div style="color: #6b7280; font-size: 0.875rem;">Time until largest content is visible</div>
+                                    </div>
+                                    <div style="font-size: 1.25rem; font-weight: bold; color: var(--primary);">${lcpValue}</div>
+                                </div>
+                            </div>
+
+                            <div style="background: white; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">Time to Interactive</div>
+                                        <div style="color: #6b7280; font-size: 0.875rem;">Time until fully interactive</div>
+                                    </div>
+                                    <div style="font-size: 1.25rem; font-weight: bold; color: var(--primary);">${ttiValue}</div>
+                                </div>
+                            </div>
+
+                            <div style="background: white; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">Cumulative Layout Shift</div>
+                                        <div style="color: #6b7280; font-size: 0.875rem;">Visual stability measure</div>
+                                    </div>
+                                    <div style="font-size: 1.25rem; font-weight: bold; color: var(--primary);">${clsValue}</div>
+                                </div>
+                            </div>
+
+                            <div style="background: white; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">Total Blocking Time</div>
+                                        <div style="color: #6b7280; font-size: 0.875rem;">Main thread blocking time</div>
+                                    </div>
+                                    <div style="font-size: 1.25rem; font-weight: bold; color: var(--primary);">${tbtValue}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; padding-top: 1rem; border-top: 2px solid rgba(0,0,0,0.1);">
+                            <a href="${pageSpeedUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                View Detailed Report →
+                            </a>
+                            <button onclick="document.getElementById('speedResults').classList.add('hidden')" class="btn" style="margin-left: 0.5rem; background: #f3f4f6;">
+                                Run Another Test
+                            </button>
+                        </div>
                     </div>
                 `;
-            }, 1000);
+            } catch (error) {
+                // Show error with fallback to redirect option
+                const pageSpeedUrl = `https://pagespeed.web.dev/analysis?url=${encodeURIComponent(url)}`;
+                speedResults.innerHTML = `
+                    <div style="background: #fef3c7; border: 2px solid #f59e0b; border-radius: 8px; padding: 1.5rem; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚠️</div>
+                        <h4 style="color: #d97706; margin-bottom: 0.5rem;">Unable to Fetch Results</h4>
+                        <p style="color: #92400e; margin-bottom: 1rem;">
+                            We couldn't analyze the website automatically. This might be due to API rate limits or an invalid URL.
+                        </p>
+                        <p style="color: #92400e; margin-bottom: 1.5rem;">
+                            Click below to analyze <strong>${url}</strong> directly on Google PageSpeed Insights:
+                        </p>
+                        <a href="${pageSpeedUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            Open PageSpeed Insights →
+                        </a>
+                        <button onclick="document.getElementById('speedResults').classList.add('hidden')" class="btn" style="margin-left: 0.5rem; background: #f3f4f6;">
+                            Try Another URL
+                        </button>
+                    </div>
+                `;
+            }
         });
     }
 });
