@@ -298,7 +298,8 @@ function initializeChecklist() {
             color: white;
             padding: 1.5rem;
             border-radius: 8px;
-            margin: 2rem 0 1rem 0;
+            margin: 2rem auto 1rem auto;
+            max-width: 900px;
         `;
         tierHeader.innerHTML = `
             <h2 style="margin: 0 0 0.5rem 0; font-size: 1.5rem;">${tierTitle}</h2>
@@ -310,6 +311,7 @@ function initializeChecklist() {
         tiers[tierName].forEach(section => {
             const sectionDiv = document.createElement('div');
             sectionDiv.className = 'tool-card mb-2';
+            sectionDiv.style.cssText = 'max-width: 900px; margin-left: auto; margin-right: auto;';
 
             const sectionTitle = document.createElement('h3');
             sectionTitle.className = 'mb-1';
