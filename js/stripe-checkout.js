@@ -1,5 +1,5 @@
 // Stripe Checkout Integration for Website Copy Kit
-// Key is loaded from server config via get-stripe-key.php
+// Key is loaded from server config via get-stripe-key.js
 
 // Wait for config to load, then initialize Stripe
 let stripe = null;
@@ -63,7 +63,7 @@ async function handleCheckout(productKey) {
         button.disabled = true;
 
         // Create checkout session
-        const response = await fetch('/api/create-checkout-session.php', {
+        const response = await fetch('/api/create-checkout-session.js', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
