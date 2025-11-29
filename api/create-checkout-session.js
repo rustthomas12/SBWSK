@@ -77,7 +77,7 @@ module.exports = async (req, res) => {
     const cancelUrl = data.cancelUrl || siteUrl;
 
     // Create Stripe Checkout Session
-    const session = await stripe.checkout.sessions.create({
+    const sessionConfig = {
       payment_method_types: ['card'],
       line_items: [{
         price_data: {
@@ -97,9 +97,15 @@ module.exports = async (req, res) => {
       metadata: {
         product: productId,
       },
-      customer_email: data.email || null,
       allow_promotion_codes: true,
-    });
+    };
+
+    // Only include customer_email if provided
+    if (data.email && data.email.trim()) {
+      sessionConfig.customer_email = data.email;
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionConfig);
 
     // Return session ID and URL
     return res.status(200).json({
