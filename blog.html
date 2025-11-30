@@ -66,6 +66,16 @@
     <!-- Blog Posts -->
     <main class="blog-section" style="padding: 4rem 0; background: #f9fafb;">
         <div class="container" style="max-width: 1200px;">
+            <style>
+                @media (max-width: 768px) {
+                    .blog-post-featured > div {
+                        grid-template-columns: 1fr !important;
+                    }
+                    .blog-post-featured > div > div:last-child {
+                        padding: 2rem !important;
+                    }
+                }
+            </style>
 
             <!-- Featured Post -->
             <article class="blog-post-featured" style="background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 3rem;">

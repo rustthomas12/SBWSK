@@ -473,7 +473,7 @@ a:hover {
     }
 
     .tagline {
-        display: none;
+        font-size: 0.75rem;
     }
 
     .nav-menu {
@@ -510,13 +510,17 @@ a:hover {
 
     .nav-menu a {
         padding: var(--spacing-sm);
-        text-align: center;
+        text-align: left;
     }
 
     /* Mobile Dropdown Styles */
     .nav-item-dropdown {
         display: flex;
         flex-direction: column;
+    }
+
+    .nav-item-dropdown > a {
+        text-align: left;
     }
 
     .nav-dropdown {
@@ -565,12 +569,6 @@ a:hover {
 
     .tools-grid {
         grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .tagline {
-        font-size: 0.875rem;
     }
 }
 
