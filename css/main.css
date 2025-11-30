@@ -491,6 +491,8 @@ a:hover {
         border-top: 1px solid rgba(99, 102, 241, 0.1);
         display: none;
         animation: slideDown 0.3s ease-out;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
     }
 
     @keyframes slideDown {
@@ -537,9 +539,12 @@ a:hover {
         transition: max-height var(--transition-base);
     }
 
-    .nav-item-dropdown:hover .nav-dropdown,
     .nav-item-dropdown.active .nav-dropdown {
         max-height: 500px;
+    }
+
+    .nav-item-dropdown.active .nav-dropdown-toggle::after {
+        transform: rotate(180deg);
     }
 
     .nav-dropdown a {
