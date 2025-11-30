@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div style="text-align: center; padding: 2rem;">
                     <div class="spinner" style="margin: 0 auto 1rem;"></div>
                     <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Analyzing website performance...</p>
-                    <p style="color: #6b7280; font-size: 0.875rem;">This may take 20-30 seconds</p>
+                    <p style="color: #6b7280; font-size: 0.875rem;">Testing both mobile and desktop • This may take 30-45 seconds</p>
                 </div>
             `;
             speedResults.classList.remove('hidden');
@@ -55,13 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error(data.error || 'Failed to analyze website');
                 }
 
-                // Extract key metrics from backend response
-                const performanceScore = data.metrics.performanceScore;
-                const fcpValue = data.metrics.metrics.firstContentfulPaint;
-                const lcpValue = data.metrics.metrics.largestContentfulPaint;
-                const ttiValue = data.metrics.metrics.timeToInteractive;
-                const clsValue = data.metrics.metrics.cumulativeLayoutShift;
-                const tbtValue = data.metrics.metrics.totalBlockingTime;
+                // Extract metrics for both mobile and desktop
+                const mobileScore = data.mobile.performanceScore;
+                const desktopScore = data.desktop.performanceScore;
+                const mobileMetrics = data.mobile.metrics;
+                const desktopMetrics = data.desktop.metrics;
 
                 // Determine score color
                 const getScoreColor = (score) => {
@@ -70,71 +68,93 @@ document.addEventListener('DOMContentLoaded', () => {
                     return { bg: '#fee2e2', border: '#ef4444', text: '#dc2626' };
                 };
 
-                const scoreColors = getScoreColor(performanceScore);
+                const mobileColors = getScoreColor(mobileScore);
+                const desktopColors = getScoreColor(desktopScore);
                 const pageSpeedUrl = `https://pagespeed.web.dev/analysis?url=${encodeURIComponent(url)}`;
 
-                // Display results
+                // Display results with both mobile and desktop scores
                 speedResults.innerHTML = `
-                    <div style="background: ${scoreColors.bg}; border: 2px solid ${scoreColors.border}; border-radius: 8px; padding: 1.5rem;">
-                        <div style="text-align: center; margin-bottom: 1.5rem;">
-                            <div style="font-size: 3rem; font-weight: bold; color: ${scoreColors.text}; margin-bottom: 0.5rem;">
-                                ${performanceScore}
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="text-align: center; margin-bottom: 1rem; color: #374151;">Performance Scores for ${url}</h4>
+
+                        <!-- Mobile and Desktop Scores Side by Side -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+                            <!-- Mobile Score -->
+                            <div style="background: ${mobileColors.bg}; border: 2px solid ${mobileColors.border}; border-radius: 8px; padding: 1.5rem; text-align: center;">
+                                <div style="font-size: 2.5rem; font-weight: bold; color: ${mobileColors.text}; margin-bottom: 0.5rem;">
+                                    ${mobileScore}
+                                </div>
+                                <h5 style="color: ${mobileColors.text}; margin: 0;">📱 Mobile</h5>
                             </div>
-                            <h4 style="color: ${scoreColors.text}; margin-bottom: 0.5rem;">Performance Score</h4>
-                            <p style="color: #6b7280; font-size: 0.875rem;">Mobile Analysis for ${url}</p>
+
+                            <!-- Desktop Score -->
+                            <div style="background: ${desktopColors.bg}; border: 2px solid ${desktopColors.border}; border-radius: 8px; padding: 1.5rem; text-align: center;">
+                                <div style="font-size: 2.5rem; font-weight: bold; color: ${desktopColors.text}; margin-bottom: 0.5rem;">
+                                    ${desktopScore}
+                                </div>
+                                <h5 style="color: ${desktopColors.text}; margin: 0;">💻 Desktop</h5>
+                            </div>
                         </div>
 
-                        <div style="display: grid; gap: 1rem; margin-bottom: 1.5rem;">
-                            <div style="background: white; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">First Contentful Paint</div>
-                                        <div style="color: #6b7280; font-size: 0.875rem;">Time until first content appears</div>
-                                    </div>
-                                    <div style="font-size: 1.25rem; font-weight: bold; color: var(--primary);">${fcpValue}</div>
+                        <!-- Metrics Comparison -->
+                        <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem;">
+                            <h5 style="margin-bottom: 1rem; color: #374151;">Performance Metrics Comparison</h5>
+                            <div style="display: grid; gap: 0.75rem;">
+                                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; padding: 0.75rem; background: #f9fafb; border-radius: 6px; align-items: center;">
+                                    <div style="font-weight: 600; color: #374151;">Metric</div>
+                                    <div style="font-weight: 600; color: #374151; text-align: center;">📱 Mobile</div>
+                                    <div style="font-weight: 600; color: #374151; text-align: center;">💻 Desktop</div>
                                 </div>
-                            </div>
 
-                            <div style="background: white; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; padding: 0.75rem; border-bottom: 1px solid #e5e7eb; align-items: center;">
                                     <div>
-                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">Largest Contentful Paint</div>
-                                        <div style="color: #6b7280; font-size: 0.875rem;">Time until largest content is visible</div>
+                                        <div style="font-weight: 600; font-size: 0.875rem;">First Contentful Paint</div>
+                                        <div style="color: #6b7280; font-size: 0.75rem;">Time until first content</div>
                                     </div>
-                                    <div style="font-size: 1.25rem; font-weight: bold; color: var(--primary);">${lcpValue}</div>
+                                    <div style="font-weight: bold; color: var(--primary); text-align: center;">${mobileMetrics.firstContentfulPaint}</div>
+                                    <div style="font-weight: bold; color: var(--primary); text-align: center;">${desktopMetrics.firstContentfulPaint}</div>
                                 </div>
-                            </div>
 
-                            <div style="background: white; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; padding: 0.75rem; border-bottom: 1px solid #e5e7eb; align-items: center;">
                                     <div>
-                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">Time to Interactive</div>
-                                        <div style="color: #6b7280; font-size: 0.875rem;">Time until fully interactive</div>
+                                        <div style="font-weight: 600; font-size: 0.875rem;">Largest Contentful Paint</div>
+                                        <div style="color: #6b7280; font-size: 0.75rem;">Largest content visible</div>
                                     </div>
-                                    <div style="font-size: 1.25rem; font-weight: bold; color: var(--primary);">${ttiValue}</div>
+                                    <div style="font-weight: bold; color: var(--primary); text-align: center;">${mobileMetrics.largestContentfulPaint}</div>
+                                    <div style="font-weight: bold; color: var(--primary); text-align: center;">${desktopMetrics.largestContentfulPaint}</div>
                                 </div>
-                            </div>
 
-                            <div style="background: white; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; padding: 0.75rem; border-bottom: 1px solid #e5e7eb; align-items: center;">
                                     <div>
-                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">Cumulative Layout Shift</div>
-                                        <div style="color: #6b7280; font-size: 0.875rem;">Visual stability measure</div>
+                                        <div style="font-weight: 600; font-size: 0.875rem;">Time to Interactive</div>
+                                        <div style="color: #6b7280; font-size: 0.75rem;">Fully interactive</div>
                                     </div>
-                                    <div style="font-size: 1.25rem; font-weight: bold; color: var(--primary);">${clsValue}</div>
+                                    <div style="font-weight: bold; color: var(--primary); text-align: center;">${mobileMetrics.timeToInteractive}</div>
+                                    <div style="font-weight: bold; color: var(--primary); text-align: center;">${desktopMetrics.timeToInteractive}</div>
                                 </div>
-                            </div>
 
-                            <div style="background: white; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; padding: 0.75rem; border-bottom: 1px solid #e5e7eb; align-items: center;">
                                     <div>
-                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">Total Blocking Time</div>
-                                        <div style="color: #6b7280; font-size: 0.875rem;">Main thread blocking time</div>
+                                        <div style="font-weight: 600; font-size: 0.875rem;">Cumulative Layout Shift</div>
+                                        <div style="color: #6b7280; font-size: 0.75rem;">Visual stability</div>
                                     </div>
-                                    <div style="font-size: 1.25rem; font-weight: bold; color: var(--primary);">${tbtValue}</div>
+                                    <div style="font-weight: bold; color: var(--primary); text-align: center;">${mobileMetrics.cumulativeLayoutShift}</div>
+                                    <div style="font-weight: bold; color: var(--primary); text-align: center;">${desktopMetrics.cumulativeLayoutShift}</div>
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; padding: 0.75rem; align-items: center;">
+                                    <div>
+                                        <div style="font-weight: 600; font-size: 0.875rem;">Total Blocking Time</div>
+                                        <div style="color: #6b7280; font-size: 0.75rem;">Main thread blocking</div>
+                                    </div>
+                                    <div style="font-weight: bold; color: var(--primary); text-align: center;">${mobileMetrics.totalBlockingTime}</div>
+                                    <div style="font-weight: bold; color: var(--primary); text-align: center;">${desktopMetrics.totalBlockingTime}</div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem;">
 
                         <div style="text-align: center; padding-top: 1rem; border-top: 2px solid rgba(0,0,0,0.1);">
                             <a href="${pageSpeedUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
