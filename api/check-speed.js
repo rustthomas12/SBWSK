@@ -61,6 +61,12 @@ module.exports = async (req, res) => {
       const categories = lighthouseResult.categories;
       const audits = lighthouseResult.audits;
 
+      // Debug logging
+      console.log('Lighthouse Version:', lighthouseResult?.lighthouseVersion);
+      console.log('Raw Performance Score:', categories.performance?.score);
+      console.log('Calculated Score:', Math.round((categories.performance?.score || 0) * 100));
+      console.log('Form Factor:', lighthouseResult?.configSettings?.formFactor);
+
       return {
         performanceScore: Math.round((categories.performance?.score || 0) * 100),
         metrics: {
