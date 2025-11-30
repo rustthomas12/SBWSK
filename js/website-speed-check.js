@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
             speedResults.classList.remove('hidden');
 
             try {
-                // Use PageSpeed Insights API to analyze the URL
-                const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile`;
+                // Use backend API to analyze the URL
+                const apiUrl = `/api/check-speed?url=${encodeURIComponent(url)}`;
                 const response = await fetch(apiUrl);
 
                 if (!response.ok) {
@@ -50,17 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 const data = await response.json();
-                const lighthouseResult = data.lighthouseResult;
-                const categories = lighthouseResult.categories;
-                const audits = lighthouseResult.audits;
 
-                // Extract key metrics
-                const performanceScore = Math.round(categories.performance.score * 100);
-                const fcpValue = audits['first-contentful-paint']?.displayValue || 'N/A';
-                const lcpValue = audits['largest-contentful-paint']?.displayValue || 'N/A';
-                const ttiValue = audits['interactive']?.displayValue || 'N/A';
-                const clsValue = audits['cumulative-layout-shift']?.displayValue || 'N/A';
-                const tbtValue = audits['total-blocking-time']?.displayValue || 'N/A';
+                if (!data.success) {
+                    throw new Error(data.error || 'Failed to analyze website');
+                }
+
+                // Extract key metrics from backend response
+                const performanceScore = data.metrics.performanceScore;
+                const fcpValue = data.metrics.metrics.firstContentfulPaint;
+                const lcpValue = data.metrics.metrics.largestContentfulPaint;
+                const ttiValue = data.metrics.metrics.timeToInteractive;
+                const clsValue = data.metrics.metrics.cumulativeLayoutShift;
+                const tbtValue = data.metrics.metrics.totalBlockingTime;
 
                 // Determine score color
                 const getScoreColor = (score) => {
