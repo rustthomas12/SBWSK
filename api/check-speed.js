@@ -32,9 +32,14 @@ module.exports = async (req, res) => {
     }
 
     // Call Google PageSpeed Insights API
-    // Using the public API (no key required, but has rate limits)
-    // For production, you should get a free API key from Google Cloud Console
-    const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&category=performance&strategy=mobile`;
+    // Using API key if available, otherwise use public API (has rate limits)
+    // Get free API key from: https://console.cloud.google.com/apis/credentials
+    let apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&category=performance&strategy=mobile`;
+
+    // Add API key if configured
+    if (process.env.GOOGLE_PAGESPEED_API_KEY) {
+      apiUrl += `&key=${process.env.GOOGLE_PAGESPEED_API_KEY}`;
+    }
 
     const response = await fetch(apiUrl);
 
