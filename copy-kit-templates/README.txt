@@ -57,10 +57,10 @@ NEED HELP?
 =====================================================
 
 Have questions? Contact us at:
-Email: tom@lowlightdigital.com
+Email: support@sbwsk.io
 
-Looking for done-for-you copywriting services?
-Visit: https://sbwsk.com/services
+Looking for done-for-you website setup?
+Visit: https://www.sbwsk.io/services.html
 
 
 =====================================================
@@ -68,28 +68,30 @@ BONUS RESOURCES
 =====================================================
 
 Free Tools:
-- Domain Checker: https://sbwsk.com/domain-checker.html
-- Logo Generator: https://sbwsk.com/logo-generator.html
-- Speed Check: https://sbwsk.com/website-speed-check.html
-- Templates: https://sbwsk.com/templates.html
+- Domain Checker: https://www.sbwsk.io/domain-checker.html
+- Logo Generator: https://www.sbwsk.io/logo-generator.html
+- Speed Check: https://www.sbwsk.io/website-speed-check.html
+- Templates: https://www.sbwsk.io/templates.html
 
 More Resources:
-- Blog: https://sbwsk.com/blog.html
-- Launch Checklist: https://sbwsk.com/checklist.html
+- Blog: https://www.sbwsk.io/blog.html
+- Launch Checklist: https://www.sbwsk.io/checklist.html
 
 
 =====================================================
-SHARE YOUR SUCCESS
+WHAT'S NEXT?
 =====================================================
 
-We'd love to see how you use these templates!
+Need help implementing these templates?
 
-Tag us on social media:
-Instagram: @sbwsk
-Twitter: @sbwsk
-Facebook: /sbwsk
+✓ Done-For-You Website Setup - $397
+  We'll install your template and customize it with your copy.
+  Ready in 48 hours!
+  https://www.sbwsk.io/setup-service.html
 
-Or leave a review and help other small business owners!
+✓ Website Care Plan - Starting at $39/month
+  Monthly maintenance, security, and backups.
+  https://www.sbwsk.io/website-care-plan.html
 
 
 =====================================================
