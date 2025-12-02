@@ -100,6 +100,68 @@ const products = {
     download_files: [],
     success_url: '/package-success.html',
   },
+
+  // NEW REVENUE SERVICES
+  'setup-service': {
+    name: 'Done-For-You Website Setup Service',
+    price: 39700, // $397.00
+    currency: 'usd',
+    description: 'Complete website installation and customization - Launch ready in 48 hours',
+    images: [],
+    download_files: [],
+    success_url: '/setup-service-success.html',
+  },
+
+  'setup-service-upsell': {
+    name: 'Done-For-You Website Setup Service (Special Offer)',
+    price: 34700, // $347.00 (Copy Kit buyer special)
+    currency: 'usd',
+    description: 'Complete website installation and customization - Launch ready in 48 hours',
+    images: [],
+    download_files: [],
+    success_url: '/setup-service-success.html',
+  },
+
+  'speed-optimization': {
+    name: 'Speed Optimization Service',
+    price: 14700, // $147.00
+    currency: 'usd',
+    description: 'Lightning-fast website optimization with guaranteed 50%+ speed improvement',
+    images: [],
+    download_files: [],
+    success_url: '/speed-optimization-success.html',
+  },
+};
+
+// Subscription Products (for Care Plans)
+const subscriptions = {
+  'care-plan-basic': {
+    name: 'Website Care Plan - Basic',
+    price: 3900, // $39.00/month
+    currency: 'usd',
+    interval: 'month',
+    description: 'Monthly website maintenance - speed checks, security, backups, and support',
+    success_url: '/care-plan-success.html',
+  },
+
+  'care-plan-pro': {
+    name: 'Website Care Plan - Pro',
+    price: 7900, // $79.00/month
+    currency: 'usd',
+    interval: 'month',
+    description: 'Pro maintenance with 1 hour updates, weekly backups, SEO monitoring',
+    success_url: '/care-plan-success.html',
+  },
+
+  'care-plan-premium': {
+    name: 'Website Care Plan - Premium',
+    price: 14900, // $149.00/month
+    currency: 'usd',
+    interval: 'month',
+    description: 'Premium care with 3 hours updates, daily backups, priority support',
+    success_url: '/care-plan-success.html',
+  },
 };
 
 module.exports = products;
+module.exports.subscriptions = subscriptions;
