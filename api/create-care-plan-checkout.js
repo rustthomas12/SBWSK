@@ -52,31 +52,24 @@ module.exports = async (req, res) => {
     }
 
     // Build success URL
-    const successUrl = `${siteUrl}${subscription.success_url}?session_id={CHECKOUT_SESSION_ID}`;
+    const successUrl = `${siteUrl}${subscription.success_url}?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`;
     const cancelUrl = data.cancelUrl || `${siteUrl}/website-care-plan.html`;
 
-    // For subscriptions, we need to create or use a Price object
-    // In production, you'd create these prices in Stripe Dashboard
-    // For now, we'll create them on-the-fly (not recommended for production)
-
-    // Create a Price for this subscription
-    const price = await stripe.prices.create({
-      currency: subscription.currency,
-      unit_amount: subscription.price,
-      recurring: {
-        interval: subscription.interval,
-      },
-      product_data: {
-        name: subscription.name,
-        description: subscription.description,
-      },
-    });
-
-    // Create checkout session for subscription
+    // Create checkout session for subscription using inline price_data
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [{
-        price: price.id,
+        price_data: {
+          currency: subscription.currency,
+          unit_amount: subscription.price,
+          recurring: {
+            interval: subscription.interval,
+          },
+          product_data: {
+            name: subscription.name,
+            description: subscription.description,
+          },
+        },
         quantity: 1,
       }],
       mode: 'subscription',
@@ -91,7 +84,6 @@ module.exports = async (req, res) => {
           plan: plan,
           service_type: 'care-plan',
         },
-        trial_period_days: 0, // No trial by default, add if desired
       },
       allow_promotion_codes: true,
       billing_address_collection: 'required',
