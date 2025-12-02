@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Monthly website care plan - Keep your site fast, secure, and updated. Professional maintenance starting at $39/month.">
+    <title>Monthly Website Care Plan | SBWSK</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <link rel="stylesheet" href="css/sections.css">
+
+    <!-- Stripe Integration -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="api/get-stripe-key"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <img src="images/logo.png" alt="SBWSK Logo" class="logo-img">
+                <span class="tagline">
+                    <span>Small Business</span>
+                    <span>Website Starter Kit</span>
+                </span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="checklist.html" class="nav-highlight">Launch Checklist</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-dropdown-toggle">Tools</a>
+                    <ul class="nav-dropdown">
+                        <li><a href="domain-checker.html">Domain Checker</a></li>
+                        <li><a href="choose-registrar.html">Choose Hosts</a></li>
+                        <li><a href="logo-generator.html">Logo Generator</a></li>
+                        <li><a href="website-speed-check.html">Speed Check</a></li>
+                    </ul>
+                </li>
+                <li><a href="templates.html">Templates</a></li>
+                <li><a href="website-copy-kit.html" class="nav-highlight">Copy Kit - $17</a></li>
+                <li><a href="quote-estimator.html">Get Quote</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); padding: 5rem 0; color: white; text-align: center;">
+        <div class="container" style="max-width: 900px;">
+            <div style="display: inline-block; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.2); border-radius: 30px; font-size: 0.875rem; font-weight: 600; margin-bottom: 1.5rem; backdrop-filter: blur(10px);">
+                🛡️ PROTECT YOUR WEBSITE
+            </div>
+            <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.2;">Monthly Website Care Plan</h1>
+            <p style="font-size: 1.25rem; opacity: 0.95; margin-bottom: 2rem; line-height: 1.6;">
+                Keep your website fast, secure, and running smoothly. Cancel anytime.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin-bottom: 2rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.5rem;">✓</span>
+                    <span>Monthly Monitoring</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.5rem;">✓</span>
+                    <span>Security Updates</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.5rem;">✓</span>
+                    <span>Priority Support</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Problem Section -->
+    <section style="padding: 4rem 0; background: #f9fafb;">
+        <div class="container" style="max-width: 800px;">
+            <h2 style="text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Is Your Website Being Ignored?</h2>
+            <p style="text-align: center; color: #6b7280; margin-bottom: 3rem; font-size: 1.125rem;">Most small business owners launch their site... then never touch it again.</p>
+
+            <div style="display: grid; gap: 1.5rem;">
+                <div style="background: white; padding: 2rem; border-radius: 12px; border-left: 4px solid #ef4444;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🐌</div>
+                    <strong style="font-size: 1.125rem; display: block; margin-bottom: 0.5rem;">Slow Load Times = Lost Customers</strong>
+                    <p style="color: #6b7280; margin: 0;">40% of visitors abandon a site that takes more than 3 seconds to load.</p>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 12px; border-left: 4px solid #f59e0b;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🔓</div>
+                    <strong style="font-size: 1.125rem; display: block; margin-bottom: 0.5rem;">Security Vulnerabilities</strong>
+                    <p style="color: #6b7280; margin: 0;">Outdated sites get hacked. One breach can destroy your reputation.</p>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 12px; border-left: 4px solid #8b5cf6;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">📉</div>
+                    <strong style="font-size: 1.125rem; display: block; margin-bottom: 0.5rem;">Falling in Google Rankings</strong>
+                    <p style="color: #6b7280; margin: 0;">Google penalizes slow, insecure sites. You're losing visibility every day.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #f3e8ff 0%, #ede9fe 100%); border-radius: 16px;">
+                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #5b21b6;">We Handle Everything</h3>
+                <p style="font-size: 1.125rem; color: #6d28d9; margin: 0;">Your website stays fast, secure, and optimized—automatically.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Plans -->
+    <section style="padding: 4rem 0;">
+        <div class="container" style="max-width: 1200px;">
+            <h2 style="text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Choose Your Plan</h2>
+            <p style="text-align: center; color: #6b7280; margin-bottom: 3rem; font-size: 1.125rem;">All plans include monthly monitoring and support. Cancel anytime.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+
+                <!-- Basic Plan -->
+                <div style="background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 2px solid #e5e7eb;">
+                    <div style="font-size: 1rem; color: #6b7280; font-weight: 600; margin-bottom: 0.5rem;">BASIC</div>
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem; font-weight: 800; color: #1f2937;">$39</span>
+                        <span style="color: #6b7280;">/month</span>
+                    </div>
+                    <p style="color: #6b7280; margin-bottom: 2rem;">Perfect for simple websites</p>
+
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem; color: #374151;">
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #f3f4f6; display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                            <span>Monthly speed check</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #f3f4f6; display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                            <span>Security monitoring</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #f3f4f6; display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                            <span>Monthly backups</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #f3f4f6; display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                            <span>Email support</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #f3f4f6; display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                            <span>Monthly performance report</span>
+                        </li>
+                    </ul>
+
+                    <button onclick="handleCheckout('basic')" style="width: 100%; padding: 1rem; background: #8b5cf6; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem;">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Pro Plan (Most Popular) -->
+                <div style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); padding: 2.5rem; border-radius: 16px; box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3); position: relative; color: white; transform: scale(1.05);">
+                    <div style="position: absolute; top: -12px; right: 20px; background: #f59e0b; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">MOST POPULAR</div>
+
+                    <div style="font-size: 1rem; opacity: 0.9; font-weight: 600; margin-bottom: 0.5rem;">PRO</div>
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem; font-weight: 800;">$79</span>
+                        <span style="opacity: 0.9;">/month</span>
+                    </div>
+                    <p style="opacity: 0.9; margin-bottom: 2rem;">For growing businesses</p>
+
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.2); display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="flex-shrink: 0;">✓</span>
+                            <span>Everything in Basic</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.2); display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="flex-shrink: 0;">✓</span>
+                            <span><strong>1 hour</strong> of updates/changes</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.2); display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="flex-shrink: 0;">✓</span>
+                            <span>Weekly backups</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.2); display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="flex-shrink: 0;">✓</span>
+                            <span>Priority support</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.2); display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="flex-shrink: 0;">✓</span>
+                            <span>SEO monitoring</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.2); display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="flex-shrink: 0;">✓</span>
+                            <span>Content updates</span>
+                        </li>
+                    </ul>
+
+                    <button onclick="handleCheckout('pro')" style="width: 100%; padding: 1rem; background: white; color: #8b5cf6; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem;">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div style="background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 2px solid #e5e7eb;">
+                    <div style="font-size: 1rem; color: #6b7280; font-weight: 600; margin-bottom: 0.5rem;">PREMIUM</div>
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem; font-weight: 800; color: #1f2937;">$149</span>
+                        <span style="color: #6b7280;">/month</span>
+                    </div>
+                    <p style="color: #6b7280; margin-bottom: 2rem;">Complete peace of mind</p>
+
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem; color: #374151;">
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #f3f4f6; display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                            <span>Everything in Pro</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #f3f4f6; display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                            <span><strong>3 hours</strong> of updates/changes</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #f3f4f6; display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                            <span>Daily backups</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #f3f4f6; display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                            <span>24/7 priority support</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #f3f4f6; display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                            <span>Advanced SEO optimization</span>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #f3f4f6; display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                            <span>Monthly strategy call</span>
+                        </li>
+                    </ul>
+
+                    <button onclick="handleCheckout('premium')" style="width: 100%; padding: 1rem; background: #8b5cf6; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem;">
+                        Get Started
+                    </button>
+                </div>
+
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; color: #6b7280; font-size: 0.875rem;">
+                ✓ No long-term contracts • ✓ Cancel anytime • ✓ Money-back guarantee
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Included Details -->
+    <section style="padding: 4rem 0; background: #f9fafb;">
+        <div class="container" style="max-width: 1000px;">
+            <h2 style="text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 3rem;">What's Included in Every Plan</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+
+                <div style="background: white; padding: 2rem; border-radius: 12px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚡</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Speed Monitoring</h3>
+                    <p style="color: #6b7280; margin: 0;">We check your site speed monthly and optimize images, code, and caching to keep load times under 3 seconds.</p>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 12px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🛡️</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Security Monitoring</h3>
+                    <p style="color: #6b7280; margin: 0;">Daily scans for malware, broken links, and security vulnerabilities. We fix issues before they become problems.</p>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 12px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">💾</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Automatic Backups</h3>
+                    <p style="color: #6b7280; margin: 0;">Regular backups stored securely off-site. If anything goes wrong, we can restore your site in minutes.</p>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 12px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">📊</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Performance Reports</h3>
+                    <p style="color: #6b7280; margin: 0;">Monthly reports showing your site's speed, uptime, security status, and visitor analytics.</p>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 12px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">✉️</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Priority Support</h3>
+                    <p style="color: #6b7280; margin: 0;">Email support with fast response times. Pro and Premium plans get even faster priority service.</p>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 12px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔧</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Updates & Fixes</h3>
+                    <p style="color: #6b7280; margin: 0;">Minor bug fixes and updates included. Pro+ plans include hours for content changes and improvements.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="padding: 4rem 0;">
+        <div class="container" style="max-width: 800px;">
+            <h2 style="text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 3rem;">Frequently Asked Questions</h2>
+
+            <div style="display: grid; gap: 1.5rem;">
+                <div style="background: #f9fafb; padding: 2rem; border-radius: 12px;">
+                    <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;">Can I cancel anytime?</h3>
+                    <p style="color: #6b7280; margin: 0;">Yes! There are no long-term contracts. Cancel anytime with 30 days notice.</p>
+                </div>
+
+                <div style="background: #f9fafb; padding: 2rem; border-radius: 12px;">
+                    <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;">What if I need more than my plan's hours?</h3>
+                    <p style="color: #6b7280; margin: 0;">You can upgrade your plan or purchase additional hours at $50/hour. We'll always notify you before using extra hours.</p>
+                </div>
+
+                <div style="background: #f9fafb; padding: 2rem; border-radius: 12px;">
+                    <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;">Do unused hours roll over?</h3>
+                    <p style="color: #6b7280; margin: 0;">No, hours reset each month. However, we'll work with you to make sure you're on the right plan for your needs.</p>
+                </div>
+
+                <div style="background: #f9fafb; padding: 2rem; border-radius: 12px;">
+                    <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;">What types of updates are included?</h3>
+                    <p style="color: #6b7280; margin: 0;">Text changes, image swaps, minor layout tweaks, security updates, plugin updates, and bug fixes. Major redesigns or new features are separate projects.</p>
+                </div>
+
+                <div style="background: #f9fafb; padding: 2rem; border-radius: 12px;">
+                    <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;">Will you work on sites you didn't build?</h3>
+                    <p style="color: #6b7280; margin: 0;">Yes! We maintain websites built by anyone. We'll do a quick audit first to make sure everything is in good shape.</p>
+                </div>
+
+                <div style="background: #f9fafb; padding: 2rem; border-radius: 12px;">
+                    <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;">What happens if my site goes down?</h3>
+                    <p style="color: #6b7280; margin: 0;">We monitor uptime 24/7. If your site goes down, we'll be notified immediately and work to get it back online ASAP.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section style="padding: 4rem 0; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+        <div class="container" style="max-width: 700px; text-align: center; color: white;">
+            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: white;">Ready to Protect Your Website?</h2>
+            <p style="font-size: 1.25rem; opacity: 0.95; margin-bottom: 2rem;">Join hundreds of small businesses who sleep better knowing their website is in good hands.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button onclick="handleCheckout('pro')" style="padding: 1.25rem 2.5rem; background: white; color: #8b5cf6; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 1.125rem;">
+                    Start Pro Plan - $79/mo
+                </button>
+                <button onclick="handleCheckout('basic')" style="padding: 1.25rem 2.5rem; background: rgba(255,255,255,0.2); color: white; border: 2px solid white; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 1.125rem;">
+                    Start Basic - $39/mo
+                </button>
+            </div>
+            <div style="margin-top: 2rem; font-size: 0.875rem; opacity: 0.9;">
+                ✓ Cancel anytime • ✓ No setup fees • ✓ 30-day money-back guarantee
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: #1f2937; color: white; padding: 3rem 0;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">SBWSK</h3>
+                    <p style="color: #9ca3af; font-size: 0.875rem;">Free tools for small business owners to launch successful websites.</p>
+                </div>
+                <div>
+                    <h4 style="font-weight: 600; margin-bottom: 1rem;">Tools</h4>
+                    <ul style="list-style: none; padding: 0; color: #9ca3af; font-size: 0.875rem; line-height: 2;">
+                        <li><a href="domain-checker.html" style="color: #9ca3af; text-decoration: none;">Domain Checker</a></li>
+                        <li><a href="choose-registrar.html" style="color: #9ca3af; text-decoration: none;">Choose Hosts</a></li>
+                        <li><a href="templates.html" style="color: #9ca3af; text-decoration: none;">Templates</a></li>
+                        <li><a href="quote-estimator.html" style="color: #9ca3af; text-decoration: none;">Quote Estimator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-weight: 600; margin-bottom: 1rem;">Resources</h4>
+                    <ul style="list-style: none; padding: 0; color: #9ca3af; font-size: 0.875rem; line-height: 2;">
+                        <li><a href="blog.html" style="color: #9ca3af; text-decoration: none;">Blog</a></li>
+                        <li><a href="index.html#contact" style="color: #9ca3af; text-decoration: none;">Contact Us</a></li>
+                        <li><a href="https://bluehost.sjv.io/Webstarterkit" target="_blank" rel="noopener" style="color: #9ca3af; text-decoration: none;">Get Hosting</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #374151; padding-top: 2rem; text-align: center; color: #9ca3af; font-size: 0.875rem;">
+                <p>&copy; 2025 Small Business Website Starter Kit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+    <script>
+        // Stripe Checkout for Subscriptions
+        async function handleCheckout(plan) {
+            try {
+                if (!window.STRIPE_CONFIG) {
+                    alert('Payment system is loading. Please try again in a moment.');
+                    return;
+                }
+
+                const stripe = Stripe(window.STRIPE_CONFIG.publishableKey);
+
+                // Create checkout session for subscription
+                const response = await fetch('/api/create-care-plan-checkout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ plan: plan })
+                });
+
+                const session = await response.json();
+
+                // Redirect to Stripe Checkout
+                const result = await stripe.redirectToCheckout({
+                    sessionId: session.sessionId
+                });
+
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again or contact support.');
+            }
+        }
+    </script>
+</body>
+</html>
