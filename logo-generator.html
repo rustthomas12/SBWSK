@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create a professional logo for your business. Choose from basic free templates or upgrade to premium designs for $10.">
+    <meta name="description" content="Create a professional logo for your business. Choose from basic free templates or upgrade to premium designs for $97.">
     <title>Logo Generator - SBWSK</title>
 
     <!-- Favicon -->
@@ -253,7 +253,7 @@
                     <!-- Template Selection -->
                     <div class="form-group">
                         <label>Choose a Template</label>
-                        <p class="form-help">Basic templates are free. Premium templates require a $10 upgrade.</p>
+                        <p class="form-help">Basic templates are free. Premium custom design service: $97.</p>
 
                         <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1rem;">Basic Templates (Free)</h4>
                         <div class="template-grid">
@@ -299,7 +299,7 @@
                             </div>
                         </div>
 
-                        <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1rem;">Premium Templates ($10)</h4>
+                        <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1rem;">Premium Templates ($97)</h4>
                         <div class="template-grid">
                             <div class="template-card premium" data-template="gradient-circle" data-premium="true">
                                 <div class="template-icon">◐</div>
@@ -411,13 +411,13 @@
                             </button>
                         </div>
                         <button id="upgradeBtn" class="btn btn-outline" style="flex: 1; display: none;">
-                            Upgrade to Premium - $10
+                            Upgrade to Premium - $97
                         </button>
                     </div>
 
                     <div id="premiumAlert" class="alert alert-info" style="margin-top: 1rem; display: none;">
                         <strong>Premium Template Selected</strong><br>
-                        Upgrade to premium for $10 to unlock high-resolution downloads, vector files (SVG), and commercial usage rights.
+                        Upgrade to premium for $97 to unlock high-resolution downloads, vector files (SVG), and commercial usage rights.
                     </div>
                 </div>
 
@@ -429,7 +429,7 @@
                             <tr>
                                 <th>Feature</th>
                                 <th style="text-align: center;">Basic (Free)</th>
-                                <th style="text-align: center;">Premium ($10)</th>
+                                <th style="text-align: center;">Premium ($97)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -599,7 +599,7 @@
 
         // Upgrade button
         upgradeBtn.addEventListener('click', async function() {
-            const confirmed = confirm('Upgrade to Premium Logo Design for $10?\n\nYou will receive:\n• Professional custom logo design\n• High-resolution files\n• Multiple format options\n• Commercial usage rights\n• Unlimited revisions\n\nClick OK to proceed to secure payment.');
+            const confirmed = confirm('Upgrade to Premium Logo Design for $97?\n\nYou will receive:\n• Professional custom logo design\n• High-resolution files\n• Multiple format options\n• Commercial usage rights\n• Unlimited revisions\n\nClick OK to proceed to secure payment.');
 
             if (confirmed) {
                 await handlePremiumUpgrade();
@@ -655,7 +655,7 @@
                 alert('There was an error processing your payment. Please try again or contact support.');
 
                 // Reset button
-                upgradeBtn.textContent = 'Upgrade to Premium ($10)';
+                upgradeBtn.textContent = 'Upgrade to Premium ($97)';
                 upgradeBtn.disabled = false;
             }
         }

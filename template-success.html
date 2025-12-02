@@ -61,11 +61,25 @@
         <section style="padding: 4rem 0;">
             <div class="container" style="max-width: 800px;">
 
+                <!-- Download Button -->
+                <div style="background: white; padding: 3rem; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 3rem; text-align: center;">
+                    <h2 style="font-size: 2rem; margin-bottom: 1rem;">Download Your Template</h2>
+                    <p style="color: #6b7280; margin-bottom: 2rem;">
+                        Click below to download your website template files.
+                    </p>
+                    <a href="#" id="download-btn" class="btn btn-primary btn-large" style="background: #8b5cf6; color: white; padding: 1rem 2.5rem; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: 700;">
+                        📦 Download Template (ZIP)
+                    </a>
+                    <p style="color: #6b7280; font-size: 0.875rem; margin-top: 1rem;">
+                        ✓ Includes all HTML, CSS, and JS files
+                    </p>
+                </div>
+
                 <!-- Email Notification -->
                 <div style="background: #dbeafe; padding: 2rem; border-radius: 12px; border-left: 4px solid #3b82f6; margin-bottom: 3rem; text-align: center;">
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #1e40af;">📧 Check Your Email</h3>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #1e40af;">📧 Download Link Also Sent to Your Email</h3>
                     <p style="color: #1e40af; margin: 0;">
-                        We've sent your template download link and installation guide to your email address.
+                        Check your email for the download link and installation guide.
                     </p>
                 </div>
 
@@ -202,5 +216,15 @@
 
     <!-- JavaScript -->
     <script src="js/app.js"></script>
+    <script>
+        // Set download link from session ID
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+        const downloadBtn = document.getElementById('download-btn');
+
+        if (sessionId && downloadBtn) {
+            downloadBtn.href = `/api/download-template?session=${sessionId}&product=startup-pro`;
+        }
+    </script>
 </body>
 </html>

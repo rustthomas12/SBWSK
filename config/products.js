@@ -23,7 +23,7 @@ const products = {
 
   'premium-logo': {
     name: 'Premium Logo Design Service',
-    price: 1000, // $10.00 in cents
+    price: 9700, // $97.00 in cents
     currency: 'usd',
     description: 'Professional custom logo design with unlimited revisions and full commercial rights',
     images: [],
