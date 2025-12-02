@@ -414,11 +414,17 @@
                     body: JSON.stringify({ plan: plan })
                 });
 
-                const session = await response.json();
+                const data = await response.json();
+
+                // Check for errors in the response
+                if (!response.ok || data.error) {
+                    alert(data.error || 'Failed to create checkout session. Please try again.');
+                    return;
+                }
 
                 // Redirect to Stripe Checkout
                 const result = await stripe.redirectToCheckout({
-                    sessionId: session.sessionId
+                    sessionId: data.sessionId
                 });
 
                 if (result.error) {
