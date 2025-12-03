@@ -346,17 +346,23 @@ a:hover {
     transition: transform var(--transition-fast);
 }
 
+/* Hide nested dropdowns by default */
 .nav-dropdown .nav-dropdown {
     position: absolute;
     left: 100%;
     top: 0;
     margin-left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition: all var(--transition-fast);
 }
 
-.nav-item-dropdown .nav-item-dropdown:hover > .nav-dropdown {
+/* Show nested dropdown on hover */
+.nav-dropdown .nav-item-dropdown:hover > .nav-dropdown {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(0);
 }
 
 /* ==========================================================================
