@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
 
     // Helper function to fetch PageSpeed data for a specific strategy
     const fetchPageSpeedData = async (strategy) => {
-      let apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&category=performance&strategy=${strategy}`;
+      let apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&category=performance&category=accessibility&category=best-practices&category=seo&strategy=${strategy}`;
 
       // Add API key if configured
       if (process.env.GOOGLE_PAGESPEED_API_KEY) {
@@ -61,14 +61,36 @@ module.exports = async (req, res) => {
       const categories = lighthouseResult.categories;
       const audits = lighthouseResult.audits;
 
-      // Debug logging
-      console.log('Lighthouse Version:', lighthouseResult?.lighthouseVersion);
-      console.log('Raw Performance Score:', categories.performance?.score);
-      console.log('Calculated Score:', Math.round((categories.performance?.score || 0) * 100));
-      console.log('Form Factor:', lighthouseResult?.configSettings?.formFactor);
+      // Count image issues
+      const imageIssues = [];
+      if (audits['modern-image-formats']?.score < 1) {
+        imageIssues.push({ type: 'Old formats', count: audits['modern-image-formats']?.details?.items?.length || 0 });
+      }
+      if (audits['uses-optimized-images']?.score < 1) {
+        imageIssues.push({ type: 'Unoptimized', count: audits['uses-optimized-images']?.details?.items?.length || 0 });
+      }
+      if (audits['uses-responsive-images']?.score < 1) {
+        imageIssues.push({ type: 'Non-responsive', count: audits['uses-responsive-images']?.details?.items?.length || 0 });
+      }
+
+      // Count accessibility issues
+      const missingAltText = audits['image-alt']?.score < 1 ? (audits['image-alt']?.details?.items?.length || 0) : 0;
+      const missingH1s = audits['heading-order']?.score < 1 || audits['document-title']?.score < 1;
+
+      // SEO structure issues
+      const seoScore = Math.round((categories.seo?.score || 0) * 100);
+      const seoIssues = [];
+      if (audits['meta-description']?.score < 1) seoIssues.push('Missing meta description');
+      if (audits['document-title']?.score < 1) seoIssues.push('Missing page title');
+      if (audits['heading-order']?.score < 1) seoIssues.push('Heading structure issues');
+      if (audits['crawlable-anchors']?.score < 1) seoIssues.push('Uncrawlable links');
+      if (audits['link-text']?.score < 1) seoIssues.push('Generic link text');
 
       return {
         performanceScore: Math.round((categories.performance?.score || 0) * 100),
+        seoScore: seoScore,
+        accessibilityScore: Math.round((categories.accessibility?.score || 0) * 100),
+        bestPracticesScore: Math.round((categories['best-practices']?.score || 0) * 100),
         metrics: {
           firstContentfulPaint: audits['first-contentful-paint']?.displayValue || 'N/A',
           largestContentfulPaint: audits['largest-contentful-paint']?.displayValue || 'N/A',
@@ -76,6 +98,15 @@ module.exports = async (req, res) => {
           cumulativeLayoutShift: audits['cumulative-layout-shift']?.displayValue || 'N/A',
           speedIndex: audits['speed-index']?.displayValue || 'N/A',
           timeToInteractive: audits['interactive']?.displayValue || 'N/A',
+        },
+        issues: {
+          imageIssues: imageIssues,
+          totalImageIssues: imageIssues.reduce((sum, issue) => sum + issue.count, 0),
+          missingAltText: missingAltText,
+          missingH1s: missingH1s,
+          seoIssues: seoIssues,
+          mobileOptimized: audits['viewport']?.score === 1,
+          hasMetaViewport: audits['viewport']?.score === 1
         }
       };
     };
