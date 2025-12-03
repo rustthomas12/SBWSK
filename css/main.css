@@ -310,6 +310,24 @@ a:hover {
     color: var(--primary-color);
 }
 
+/* Dropdown headers and dividers */
+.dropdown-header {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background-color: var(--bg-secondary);
+    cursor: default;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: #e5e7eb;
+    margin: 0.25rem 0;
+}
+
 /* ==========================================================================
    Hero Section
    ========================================================================== */
