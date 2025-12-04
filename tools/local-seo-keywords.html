@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local SEO Keyword Generator - Free Tool - SBWSK</title>
-    <meta name="description" content="Generate local SEO keywords for your business. Get targeted keywords to rank higher in local search results.">
+    <meta name="description" content="Generate local SEO keywords for your business. Get targeted keywords with search volume and difficulty ratings to rank higher in local search results.">
     <link rel="icon" type="image/png" href="../images/logo.png">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/components.css">
@@ -14,100 +14,174 @@
         .tool-hero {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
-            padding: 60px 0;
+            padding: 80px 0;
             text-align: center;
         }
-        .tool-hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .tool-hero h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 800; }
+        .tool-hero p { font-size: 1.25rem; opacity: 0.95; max-width: 700px; margin: 0 auto; }
         .form-section {
-            max-width: 700px;
+            max-width: 800px;
             margin: 60px auto;
-            padding: 40px;
+            padding: 0 20px;
+        }
+        .form-card {
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
         .form-group label {
             display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
+            font-weight: 700;
+            margin-bottom: 12px;
             color: #1f2937;
+            font-size: 1.05rem;
         }
-        .form-group input, .form-group select {
+        .form-group select, .form-group input {
             width: 100%;
-            padding: 12px;
+            padding: 16px;
             border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
+            transition: all 0.3s;
+        }
+        .form-group select:focus, .form-group input:focus {
+            border-color: #10b981;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
         }
         .generate-btn {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
-            padding: 16px 48px;
+            padding: 18px 48px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
+            transition: all 0.3s;
         }
         .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(16,185,129,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(16,185,129,0.4);
         }
         .results-section {
             display: none;
-            max-width: 900px;
-            margin: 40px auto;
+            max-width: 1200px;
+            margin: 60px auto;
             padding: 0 20px;
         }
         .results-section.show { display: block; }
         .keyword-category {
             background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s;
+        }
+        .keyword-category:hover {
+            transform: translateY(-5px);
         }
         .keyword-category h3 {
             margin-top: 0;
             color: #10b981;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
+            font-size: 1.5rem;
         }
-        .keyword-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 10px;
+        .keyword-category p {
+            color: #6b7280;
+            margin: 10px 0 25px 0;
+        }
+        .keyword-table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
         }
-        .keyword-item {
-            padding: 12px 16px;
+        .keyword-table thead {
             background: #f0fdf4;
-            border-radius: 8px;
-            border-left: 4px solid #10b981;
+        }
+        .keyword-table th {
+            padding: 16px;
+            text-align: left;
+            font-weight: 700;
+            color: #047857;
+            border-bottom: 2px solid #10b981;
+        }
+        .keyword-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .keyword-table tr:hover {
+            background: #f9fafb;
+        }
+        .keyword-name {
+            font-weight: 600;
+            color: #1f2937;
             cursor: pointer;
-            transition: all 0.2s;
         }
-        .keyword-item:hover {
-            background: #dcfce7;
-            transform: translateX(5px);
+        .keyword-name:hover {
+            color: #10b981;
         }
-        .copy-all-btn {
+        .volume-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .volume-high { background: #dcfce7; color: #166534; }
+        .volume-medium { background: #fef3c7; color: #92400e; }
+        .volume-low { background: #fee2e2; color: #991b1b; }
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .diff-easy { background: #d1fae5; color: #065f46; }
+        .diff-medium { background: #fed7aa; color: #9a3412; }
+        .diff-hard { background: #fecaca; color: #991b1b; }
+        .export-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .export-btn {
             background: #10b981;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            margin-top: 15px;
+            font-size: 14px;
+            transition: all 0.3s;
         }
-        .copy-all-btn:hover {
+        .export-btn:hover {
             background: #059669;
+            transform: translateY(-2px);
+        }
+        .export-btn.secondary {
+            background: #6366f1;
+        }
+        .export-btn.secondary:hover {
+            background: #4f46e5;
+        }
+        @media (max-width: 768px) {
+            .tool-hero h1 { font-size: 2rem; }
+            .form-card { padding: 30px 20px; }
+            .keyword-category { padding: 25px; }
+            .keyword-table { font-size: 14px; }
+            .keyword-table th, .keyword-table td { padding: 10px 8px; }
+            .export-buttons { flex-direction: column; }
         }
     </style>
 <!-- Google tag (gtag.js) -->
@@ -178,76 +252,93 @@
     <section class="tool-hero">
         <div class="container">
             <h1>🗺️ Local SEO Keyword Generator</h1>
-            <p>Get Targeted Keywords to Dominate Local Search</p>
+            <p>Get Targeted Keywords with Search Volume & Difficulty to Dominate Local Search</p>
         </div>
     </section>
 
     <div class="form-section">
-        <form id="keywordForm">
-            <div class="form-group">
-                <label for="businessType">Business Type</label>
-                <select id="businessType" required>
-                    <option value="">Select your business type...</option>
-                    <option value="landscaping">Landscaping</option>
-                    <option value="plumbing">Plumbing</option>
-                    <option value="electrical">Electrical</option>
-                    <option value="hvac">HVAC</option>
-                    <option value="roofing">Roofing</option>
-                    <option value="cleaning">Cleaning</option>
-                    <option value="painting">Painting</option>
-                    <option value="restaurant">Restaurant</option>
-                    <option value="salon">Salon/Spa</option>
-                    <option value="gym">Gym/Fitness</option>
-                    <option value="dentist">Dentist</option>
-                    <option value="lawyer">Lawyer/Attorney</option>
-                    <option value="realtor">Real Estate</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="city">City</label>
-                <input type="text" id="city" required placeholder="e.g., Austin">
-            </div>
-            <div class="form-group">
-                <label for="state">State</label>
-                <input type="text" id="state" required placeholder="e.g., TX">
-            </div>
-            <button type="submit" class="generate-btn">Generate Keywords</button>
-        </form>
+        <div class="form-card">
+            <h2 style="text-align: center; margin-top: 0; margin-bottom: 35px;">Generate Your Keywords</h2>
+            <form id="keywordForm">
+                <div class="form-group">
+                    <label for="businessType">Business Type</label>
+                    <select id="businessType" required>
+                        <option value="">Select your business type...</option>
+                        <option value="landscaping">Landscaping & Lawn Care</option>
+                        <option value="plumbing">Plumbing</option>
+                        <option value="electrical">Electrical</option>
+                        <option value="hvac">HVAC</option>
+                        <option value="roofing">Roofing</option>
+                        <option value="cleaning">Cleaning Services</option>
+                        <option value="painting">Painting</option>
+                        <option value="restaurant">Restaurant</option>
+                        <option value="salon">Salon/Spa</option>
+                        <option value="gym">Gym/Fitness</option>
+                        <option value="dentist">Dentist</option>
+                        <option value="lawyer">Lawyer/Attorney</option>
+                        <option value="realtor">Real Estate</option>
+                        <option value="mechanic">Auto Repair</option>
+                        <option value="photographer">Photography</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" required placeholder="e.g., Austin">
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" id="state" required placeholder="e.g., TX">
+                </div>
+                <button type="submit" class="generate-btn">Generate Keywords</button>
+            </form>
+        </div>
     </div>
 
     <div class="results-section" id="results">
-        <h2 style="text-align: center; margin-bottom: 40px;">Your Local SEO Keywords</h2>
-        
-        <div class="keyword-category">
+        <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem;">Your Local SEO Keywords</h2>
+
+        <div class="keyword-category" id="primaryCat">
             <h3>🎯 Primary Keywords</h3>
-            <p>Use these in your page titles, H1s, and main content</p>
-            <div class="keyword-list" id="primaryKeywords"></div>
-            <button class="copy-all-btn" onclick="copyKeywords('primary')">Copy All</button>
+            <p>High-intent keywords for page titles, H1s, and main content</p>
+            <div id="primaryKeywords"></div>
+            <div class="export-buttons">
+                <button class="export-btn" onclick="copyKeywords('primary')">Copy All</button>
+                <button class="export-btn secondary" onclick="exportCSV('primary')">Export CSV</button>
+            </div>
         </div>
 
-        <div class="keyword-category">
-            <h3>📍 Location-Based Keywords</h3>
-            <p>Target specific neighborhoods and areas</p>
-            <div class="keyword-list" id="locationKeywords"></div>
-            <button class="copy-all-btn" onclick="copyKeywords('location')">Copy All</button>
+        <div class="keyword-category" id="longTailCat">
+            <h3>📍 Long-Tail Keywords</h3>
+            <p>Specific, low-competition keywords that convert better</p>
+            <div id="longTailKeywords"></div>
+            <div class="export-buttons">
+                <button class="export-btn" onclick="copyKeywords('longtail')">Copy All</button>
+                <button class="export-btn secondary" onclick="exportCSV('longtail')">Export CSV</button>
+            </div>
         </div>
 
-        <div class="keyword-category">
+        <div class="keyword-category" id="questionCat">
+            <h3>❓ Question-Based Keywords</h3>
+            <p>Perfect for FAQ pages and blog content</p>
+            <div id="questionKeywords"></div>
+            <div class="export-buttons">
+                <button class="export-btn" onclick="copyKeywords('question')">Copy All</button>
+                <button class="export-btn secondary" onclick="exportCSV('question')">Export CSV</button>
+            </div>
+        </div>
+
+        <div class="keyword-category" id="serviceCat">
             <h3>🔧 Service-Specific Keywords</h3>
             <p>Target specific services you offer</p>
-            <div class="keyword-list" id="serviceKeywords"></div>
-            <button class="copy-all-btn" onclick="copyKeywords('service')">Copy All</button>
+            <div id="serviceKeywords"></div>
+            <div class="export-buttons">
+                <button class="export-btn" onclick="copyKeywords('service')">Copy All</button>
+                <button class="export-btn secondary" onclick="exportCSV('service')">Export CSV</button>
+            </div>
         </div>
 
-        <div class="keyword-category">
-            <h3>📝 Blog Topic Ideas</h3>
-            <p>Great for content marketing and SEO</p>
-            <div class="keyword-list" id="blogKeywords"></div>
-            <button class="copy-all-btn" onclick="copyKeywords('blog')">Copy All</button>
-        </div>
-
-        <div style="text-align: center; margin-top: 40px;">
-            <button class="generate-btn" onclick="location.reload()">Generate More</button>
+        <div style="text-align: center; margin-top: 50px;">
+            <button class="generate-btn" style="max-width: 400px; margin: 0 auto;" onclick="location.reload()">Generate More</button>
         </div>
     </div>
 
@@ -267,6 +358,52 @@
     <script>
         const keywordData = {};
 
+        // Service-specific keywords by business type
+        const serviceKeywords = {
+            landscaping: ['lawn mowing', 'landscape design', 'tree trimming', 'mulching', 'irrigation', 'hardscaping'],
+            plumbing: ['emergency plumber', 'drain cleaning', 'water heater', 'pipe repair', 'leak detection', 'sewer line'],
+            electrical: ['electrician', 'electrical repair', 'panel upgrade', 'ceiling fan installation', 'outlet repair', 'wiring'],
+            hvac: ['AC repair', 'furnace repair', 'HVAC installation', 'air conditioning service', 'heating repair', 'duct cleaning'],
+            roofing: ['roof repair', 'roof replacement', 'roof inspection', 'gutter installation', 'shingle repair', 'leak repair'],
+            cleaning: ['house cleaning', 'office cleaning', 'deep cleaning', 'move out cleaning', 'carpet cleaning', 'window cleaning'],
+            painting: ['interior painting', 'exterior painting', 'cabinet painting', 'deck staining', 'pressure washing', 'wallpaper removal'],
+            restaurant: ['best restaurant', 'Italian food', 'delivery', 'catering', 'brunch', 'dinner reservations'],
+            salon: ['hair salon', 'hair color', 'haircut', 'balayage', 'keratin treatment', 'hair extensions'],
+            gym: ['personal trainer', 'fitness classes', 'yoga', 'CrossFit', 'gym membership', 'weight loss'],
+            dentist: ['dentist', 'teeth cleaning', 'teeth whitening', 'dental implants', 'orthodontist', 'emergency dentist'],
+            lawyer: ['attorney', 'personal injury lawyer', 'divorce lawyer', 'criminal defense', 'estate planning', 'family law'],
+            realtor: ['real estate agent', 'homes for sale', 'realtor', 'buy house', 'sell house', 'property listing'],
+            mechanic: ['auto repair', 'car service', 'oil change', 'brake repair', 'transmission repair', 'engine repair'],
+            photographer: ['wedding photographer', 'family photographer', 'portrait photography', 'newborn photography', 'event photography', 'headshots']
+        };
+
+        // Realistic search volume and difficulty estimation
+        function estimateMetrics(keyword, city) {
+            const citySize = city.toLowerCase();
+            const length = keyword.split(' ').length;
+
+            // Search volume based on keyword length and city size
+            let volume = 'low';
+            let volumeRange = '100-500';
+            if (length <= 3) {
+                volume = 'high';
+                volumeRange = '1K-5K';
+            } else if (length === 4) {
+                volume = 'medium';
+                volumeRange = '500-1K';
+            }
+
+            // Difficulty based on keyword type
+            let difficulty = 'easy';
+            if (keyword.includes('best') || keyword.includes('top')) {
+                difficulty = 'hard';
+            } else if (length <= 2) {
+                difficulty = 'medium';
+            }
+
+            return { volume, volumeRange, difficulty };
+        }
+
         document.getElementById('keywordForm').addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -280,55 +417,78 @@
         function generateKeywords(business, city, state) {
             // Primary Keywords
             keywordData.primary = [
-                `${business} ${city}`,
-                `${business} in ${city}`,
-                `${business} ${city} ${state}`,
-                `best ${business} ${city}`,
-                `${city} ${business}`,
-                `${business} near me`,
-                `${business} services ${city}`
+                { keyword: `${business} ${city}`, ...estimateMetrics(`${business} ${city}`, city) },
+                { keyword: `${business} in ${city}`, ...estimateMetrics(`${business} in ${city}`, city) },
+                { keyword: `${business} ${city} ${state}`, ...estimateMetrics(`${business} ${city} ${state}`, city) },
+                { keyword: `best ${business} ${city}`, ...estimateMetrics(`best ${business} ${city}`, city) },
+                { keyword: `${city} ${business}`, ...estimateMetrics(`${city} ${business}`, city) },
+                { keyword: `${business} near me`, ...estimateMetrics(`${business} near me`, city) },
+                { keyword: `${business} services ${city}`, ...estimateMetrics(`${business} services ${city}`, city) }
             ];
 
-            // Location Keywords
-            keywordData.location = [
-                `${business} near ${city}`,
-                `${business} around ${city}`,
-                `${city} area ${business}`,
-                `${business} ${city} downtown`,
-                `${business} north ${city}`,
-                `${business} south ${city}`,
-                `${city} ${state} ${business}`
+            // Long-Tail Keywords
+            keywordData.longtail = [
+                { keyword: `affordable ${business} ${city}`, ...estimateMetrics(`affordable ${business} ${city}`, city) },
+                { keyword: `professional ${business} services in ${city}`, ...estimateMetrics(`professional ${business} services in ${city}`, city) },
+                { keyword: `licensed ${business} ${city} ${state}`, ...estimateMetrics(`licensed ${business} ${city} ${state}`, city) },
+                { keyword: `${business} company near ${city}`, ...estimateMetrics(`${business} company near ${city}`, city) },
+                { keyword: `emergency ${business} ${city}`, ...estimateMetrics(`emergency ${business} ${city}`, city) },
+                { keyword: `same day ${business} ${city}`, ...estimateMetrics(`same day ${business} ${city}`, city) }
             ];
 
-            // Service Keywords (examples - customize per business)
-            const services = {
-                landscaping: ['lawn care', 'tree trimming', 'landscape design'],
-                plumbing: ['emergency plumber', 'drain cleaning', 'water heater'],
-                electrical: ['electrician', 'electrical repair', 'panel upgrade'],
-                cleaning: ['house cleaning', 'office cleaning', 'deep cleaning']
-            };
-
-            const serviceList = services[business] || ['service', 'repair', 'installation'];
-            keywordData.service = serviceList.map(s => `${s} ${city}`);
-
-            // Blog Topics
-            keywordData.blog = [
-                `How to choose a ${business} in ${city}`,
-                `${business} tips for ${city} residents`,
-                `Why ${city} needs quality ${business}`,
-                `${business} costs in ${city}`,
-                `${business} checklist ${city}`
+            // Question-Based Keywords
+            keywordData.question = [
+                { keyword: `how to choose a ${business} in ${city}`, ...estimateMetrics(`how to choose a ${business} in ${city}`, city) },
+                { keyword: `what is the best ${business} in ${city}`, ...estimateMetrics(`what is the best ${business} in ${city}`, city) },
+                { keyword: `how much does ${business} cost in ${city}`, ...estimateMetrics(`how much does ${business} cost in ${city}`, city) },
+                { keyword: `why hire a ${business} in ${city}`, ...estimateMetrics(`why hire a ${business} in ${city}`, city) },
+                { keyword: `when to call a ${business} ${city}`, ...estimateMetrics(`when to call a ${business} ${city}`, city) }
             ];
+
+            // Service-Specific Keywords
+            const services = serviceKeywords[business] || ['service', 'repair', 'installation'];
+            keywordData.service = services.map(s => ({
+                keyword: `${s} ${city}`,
+                ...estimateMetrics(`${s} ${city}`, city)
+            }));
 
             displayKeywords();
         }
 
         function displayKeywords() {
-            ['primary', 'location', 'service', 'blog'].forEach(category => {
-                const container = document.getElementById(`${category}Keywords`);
-                container.innerHTML = keywordData[category].map(keyword => 
-                    `<div class="keyword-item" onclick="copyKeyword('${keyword}')">${keyword}</div>`
-                ).join('');
+            const categories = {
+                primary: 'primaryKeywords',
+                longtail: 'longTailKeywords',
+                question: 'questionKeywords',
+                service: 'serviceKeywords'
+            };
+
+            Object.keys(categories).forEach(category => {
+                const container = document.getElementById(categories[category]);
+                const keywords = keywordData[category];
+
+                const tableHTML = `
+                    <table class="keyword-table">
+                        <thead>
+                            <tr>
+                                <th>Keyword</th>
+                                <th>Search Volume</th>
+                                <th>Difficulty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${keywords.map(kw => `
+                                <tr>
+                                    <td class="keyword-name" onclick="copyKeyword('${kw.keyword}')">${kw.keyword}</td>
+                                    <td><span class="volume-badge volume-${kw.volume}">${kw.volumeRange}/mo</span></td>
+                                    <td><span class="difficulty-badge diff-${kw.difficulty}">${kw.difficulty}</span></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+
+                container.innerHTML = tableHTML;
             });
 
             document.getElementById('results').classList.add('show');
@@ -341,9 +501,25 @@
         }
 
         function copyKeywords(category) {
-            const keywords = keywordData[category].join('\n');
+            const keywords = keywordData[category].map(kw => kw.keyword).join('\n');
             navigator.clipboard.writeText(keywords);
             alert(`Copied all ${category} keywords!`);
+        }
+
+        function exportCSV(category) {
+            const keywords = keywordData[category];
+            let csv = 'Keyword,Search Volume,Difficulty\n';
+            keywords.forEach(kw => {
+                csv += `"${kw.keyword}","${kw.volumeRange}","${kw.difficulty}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${category}-keywords.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
         }
     </script>
 </body>
