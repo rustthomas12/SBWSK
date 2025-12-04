@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Palette Generator - Free Tool - SBWSK</title>
-    <meta name="description" content="Generate beautiful color palettes for your brand. Free AI-powered color palette generator with hex codes.">
+    <title>Professional Color Palette Generator - Free Brand Color Tool - SBWSK</title>
+    <meta name="description" content="Generate beautiful, accessible color palettes for your brand. Professional color theory with hex codes, RGB, HSL values, and accessibility checking.">
     <link rel="icon" type="image/png" href="../images/logo.png">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/components.css">
@@ -14,89 +14,227 @@
         .tool-hero {
             background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
             color: white;
-            padding: 60px 0;
+            padding: 80px 0;
             text-align: center;
         }
-        .tool-hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .tool-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        .tool-hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+        }
         .form-section {
-            max-width: 700px;
+            max-width: 800px;
             margin: 60px auto;
-            padding: 40px;
+            padding: 50px;
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
         .form-group label {
             display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
+            font-weight: 700;
+            margin-bottom: 12px;
             color: #1f2937;
+            font-size: 1.1rem;
         }
-        .form-group select {
+        .form-group select, .form-group input {
             width: 100%;
-            padding: 12px;
+            padding: 16px;
             border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
+            transition: all 0.3s;
+        }
+        .form-group select:focus, .form-group input:focus {
+            border-color: #ec4899;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(236,72,153,0.1);
+        }
+        .color-input-wrapper {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .color-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            border: 3px solid #e5e7eb;
+            cursor: pointer;
         }
         .generate-btn {
             background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
             color: white;
-            padding: 16px 48px;
+            padding: 18px 48px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
+            transition: all 0.3s;
         }
         .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(236,72,153,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(236,72,153,0.4);
         }
         .palettes-section {
             display: none;
-            max-width: 1000px;
-            margin: 40px auto;
+            max-width: 1200px;
+            margin: 60px auto;
             padding: 0 20px;
         }
         .palettes-section.show { display: block; }
         .palette-card {
             background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s;
         }
-        .color-swatches {
+        .palette-card:hover {
+            transform: translateY(-5px);
+        }
+        .palette-header {
             display: flex;
-            gap: 10px;
-            margin: 20px 0;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
         }
-        .color-swatch {
-            flex: 1;
-            height: 120px;
+        .palette-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+        .export-btn {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border: none;
             border-radius: 8px;
             cursor: pointer;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            padding: 10px;
-            color: white;
             font-weight: 600;
-            transition: transform 0.2s;
+            font-size: 14px;
+        }
+        .export-btn:hover {
+            background: #059669;
+        }
+        .color-swatches {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .color-swatch {
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s;
         }
         .color-swatch:hover {
             transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
         }
-        .color-code {
-            background: rgba(0,0,0,0.5);
-            padding: 4px 8px;
-            border-radius: 4px;
+        .color-display {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .copy-indicator {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .color-swatch:active .copy-indicator {
+            opacity: 1;
+        }
+        .color-info {
+            background: #f9fafb;
+            padding: 16px;
+        }
+        .color-name {
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .color-values {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .color-value {
             font-size: 12px;
+            color: #6b7280;
+            font-family: 'Courier New', monospace;
+        }
+        .accessibility-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+        .accessibility-badge.warning {
+            background: #f59e0b;
+        }
+        .accessibility-badge.fail {
+            background: #ef4444;
+        }
+        .palette-usage {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+        .palette-usage h4 {
+            margin: 0 0 12px 0;
+            color: #065f46;
+            font-size: 1rem;
+        }
+        .usage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .usage-item {
+            font-size: 14px;
+            color: #047857;
+        }
+        .usage-item strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+        @media (max-width: 768px) {
+            .tool-hero h1 { font-size: 2rem; }
+            .form-section { padding: 30px 20px; }
+            .palette-card { padding: 25px; }
+            .color-swatches {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 <!-- Google tag (gtag.js) -->
@@ -166,48 +304,61 @@
 
     <section class="tool-hero">
         <div class="container">
-            <h1>🎨 Color Palette Generator</h1>
-            <p>Create Beautiful Brand Colors in Seconds</p>
+            <h1>🎨 Professional Color Palette Generator</h1>
+            <p>Create Beautiful, Accessible Brand Colors Based on Color Theory</p>
         </div>
     </section>
 
     <div class="form-section">
+        <h2 style="text-align: center; margin-top: 0; margin-bottom: 35px;">Generate Your Perfect Palette</h2>
         <form id="paletteForm">
             <div class="form-group">
                 <label for="industry">Your Industry</label>
                 <select id="industry" required>
                     <option value="">Select your industry...</option>
-                    <option value="tech">Technology</option>
+                    <option value="tech">Technology & SaaS</option>
                     <option value="health">Health & Wellness</option>
                     <option value="food">Food & Restaurant</option>
                     <option value="retail">Retail & E-commerce</option>
                     <option value="creative">Creative & Design</option>
                     <option value="professional">Professional Services</option>
-                    <option value="education">Education</option>
+                    <option value="education">Education & Training</option>
                     <option value="construction">Construction & Trades</option>
+                    <option value="finance">Finance & Banking</option>
+                    <option value="realestate">Real Estate</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="vibe">Brand Vibe</label>
+                <label for="vibe">Brand Personality</label>
                 <select id="vibe" required>
-                    <option value="">Select your vibe...</option>
-                    <option value="modern">Modern & Minimalist</option>
-                    <option value="bold">Bold & Energetic</option>
-                    <option value="professional">Professional & Trust</option>
-                    <option value="calm">Calm & Peaceful</option>
-                    <option value="luxury">Luxury & Premium</option>
-                    <option value="friendly">Friendly & Approachable</option>
+                    <option value="">Select your brand vibe...</option>
+                    <option value="modern">Modern & Minimalist - Clean, simple, contemporary</option>
+                    <option value="bold">Bold & Energetic - Vibrant, eye-catching, dynamic</option>
+                    <option value="professional">Professional & Trustworthy - Corporate, reliable, established</option>
+                    <option value="calm">Calm & Peaceful - Soothing, relaxed, gentle</option>
+                    <option value="luxury">Luxury & Premium - Elegant, sophisticated, high-end</option>
+                    <option value="friendly">Friendly & Approachable - Warm, welcoming, casual</option>
+                    <option value="creative">Creative & Artistic - Unique, expressive, imaginative</option>
+                    <option value="eco">Eco & Natural - Organic, sustainable, earthy</option>
                 </select>
             </div>
-            <button type="submit" class="generate-btn">Generate Palettes</button>
+            <div class="form-group">
+                <label for="baseColor">Base Color (Optional)</label>
+                <div class="color-input-wrapper">
+                    <input type="color" id="baseColor" class="color-preview" value="#ec4899">
+                    <input type="text" id="baseColorHex" placeholder="#ec4899" maxlength="7" style="flex: 1;">
+                </div>
+                <small style="color: #6b7280; margin-top: 8px; display: block;">Start with a color you already use, or leave default for AI suggestions</small>
+            </div>
+            <button type="submit" class="generate-btn">Generate Professional Palettes</button>
         </form>
     </div>
 
     <div class="palettes-section" id="palettes">
-        <h2 style="text-align: center; margin-bottom: 40px;">Your Color Palettes</h2>
+        <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.2rem;">Your Custom Color Palettes</h2>
         <div id="paletteResults"></div>
-        <div style="text-align: center; margin-top: 30px;">
-            <button class="generate-btn" onclick="location.reload()">Generate More</button>
+        <div style="text-align: center; margin-top: 50px;">
+            <button class="generate-btn" style="max-width: 400px; margin: 0 auto;" onclick="location.reload()">Generate New Palettes</button>
         </div>
     </div>
 
@@ -216,7 +367,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>SBWSK</h3>
-                    <p>Free tools for small business websites.</p>
+                    <p>Free professional tools for small business websites.</p>
                 </div>
             </div>
         </div>
@@ -225,67 +376,434 @@
     <script src="../js/utils.js"></script>
     <script src="../js/app.js"></script>
     <script>
-        const palettes = {
+        // Sync color picker with hex input
+        document.getElementById('baseColor').addEventListener('input', (e) => {
+            document.getElementById('baseColorHex').value = e.target.value;
+        });
+
+        document.getElementById('baseColorHex').addEventListener('input', (e) => {
+            const hex = e.target.value;
+            if (/^#[0-9A-F]{6}$/i.test(hex)) {
+                document.getElementById('baseColor').value = hex;
+            }
+        });
+
+        // Comprehensive color palettes based on color theory
+        const professionalPalettes = {
             modern: [
-                ['#1a1a1a', '#ffffff', '#0ea5e9', '#64748b', '#f1f5f9'],
-                ['#000000', '#fafafa', '#6366f1', '#94a3b8', '#e2e8f0'],
-                ['#0f172a', '#ffffff', '#8b5cf6', '#475569', '#f8fafc']
+                {
+                    name: 'Minimalist Tech',
+                    colors: [
+                        { hex: '#0a0a0a', name: 'Deep Black', usage: 'Primary text, headers' },
+                        { hex: '#f5f5f5', name: 'Clean White', usage: 'Backgrounds, cards' },
+                        { hex: '#0ea5e9', name: 'Sky Blue', usage: 'CTAs, links, accents' },
+                        { hex: '#64748b', name: 'Slate Gray', usage: 'Secondary text' },
+                        { hex: '#e0f2fe', name: 'Light Sky', usage: 'Highlights, badges' }
+                    ]
+                },
+                {
+                    name: 'Nordic Clean',
+                    colors: [
+                        { hex: '#1a1a1a', name: 'Carbon', usage: 'Headers, navigation' },
+                        { hex: '#ffffff', name: 'Pure White', usage: 'Main background' },
+                        { hex: '#6366f1', name: 'Indigo', usage: 'Primary actions' },
+                        { hex: '#94a3b8', name: 'Cool Gray', usage: 'Borders, dividers' },
+                        { hex: '#e0e7ff', name: 'Indigo Tint', usage: 'Hover states' }
+                    ]
+                },
+                {
+                    name: 'Contemporary Edge',
+                    colors: [
+                        { hex: '#0f172a', name: 'Navy Black', usage: 'Dark mode, footer' },
+                        { hex: '#f8fafc', name: 'Off White', usage: 'Light sections' },
+                        { hex: '#8b5cf6', name: 'Purple', usage: 'Brand accent' },
+                        { hex: '#475569', name: 'Charcoal', usage: 'Body text' },
+                        { hex: '#f5f3ff', name: 'Lavender Mist', usage: 'Feature boxes' }
+                    ]
+                }
             ],
             bold: [
-                ['#dc2626', '#fef2f2', '#0ea5e9', '#1e293b', '#fbbf24'],
-                ['#ea580c', '#fff7ed', '#8b5cf6', '#334155', '#22c55e'],
-                ['#c026d3', '#fdf4ff', '#06b6d4', '#1e3a8a', '#facc15']
+                {
+                    name: 'Energetic Pulse',
+                    colors: [
+                        { hex: '#dc2626', name: 'Vibrant Red', usage: 'CTAs, alerts' },
+                        { hex: '#fef2f2', name: 'Rose Tint', usage: 'Backgrounds' },
+                        { hex: '#0ea5e9', name: 'Electric Blue', usage: 'Links, icons' },
+                        { hex: '#1e293b', name: 'Deep Slate', usage: 'Text, headers' },
+                        { hex: '#fcd34d', name: 'Golden Yellow', usage: 'Highlights' }
+                    ]
+                },
+                {
+                    name: 'Neon Glow',
+                    colors: [
+                        { hex: '#c026d3', name: 'Magenta', usage: 'Primary brand' },
+                        { hex: '#fdf4ff', name: 'Soft Pink', usage: 'Light sections' },
+                        { hex: '#06b6d4', name: 'Cyan', usage: 'Secondary accent' },
+                        { hex: '#1e3a8a', name: 'Royal Blue', usage: 'Footers, dark areas' },
+                        { hex: '#fde047', name: 'Bright Yellow', usage: 'Badges, notifications' }
+                    ]
+                },
+                {
+                    name: 'Power Surge',
+                    colors: [
+                        { hex: '#ea580c', name: 'Blaze Orange', usage: 'Main CTAs' },
+                        { hex: '#fff7ed', name: 'Cream', usage: 'Backgrounds' },
+                        { hex: '#8b5cf6', name: 'Violet', usage: 'Links, buttons' },
+                        { hex: '#334155', name: 'Graphite', usage: 'Text' },
+                        { hex: '#4ade80', name: 'Lime Green', usage: 'Success states' }
+                    ]
+                }
             ],
             professional: [
-                ['#1e40af', '#eff6ff', '#0ea5e9', '#1e293b', '#e0e7ff'],
-                ['#0f766e', '#f0fdfa', '#06b6d4', '#334155', '#ccfbf1'],
-                ['#7c3aed', '#faf5ff', '#8b5cf6', '#1e293b', '#ede9fe']
+                {
+                    name: 'Corporate Trust',
+                    colors: [
+                        { hex: '#1e40af', name: 'Navy Blue', usage: 'Headers, navigation' },
+                        { hex: '#eff6ff', name: 'Ice Blue', usage: 'Page background' },
+                        { hex: '#3b82f6', name: 'Blue', usage: 'CTAs, links' },
+                        { hex: '#1e293b', name: 'Charcoal', usage: 'Body text' },
+                        { hex: '#dbeafe', name: 'Sky Tint', usage: 'Cards, sections' }
+                    ]
+                },
+                {
+                    name: 'Executive Suite',
+                    colors: [
+                        { hex: '#0f766e', name: 'Teal', usage: 'Brand primary' },
+                        { hex: '#f0fdfa', name: 'Mint Cream', usage: 'Backgrounds' },
+                        { hex: '#06b6d4', name: 'Cyan', usage: 'Interactive elements' },
+                        { hex: '#334155', name: 'Slate', usage: 'Text' },
+                        { hex: '#ccfbf1', name: 'Aqua Tint', usage: 'Highlights' }
+                    ]
+                },
+                {
+                    name: 'Business Elite',
+                    colors: [
+                        { hex: '#6d28d9', name: 'Deep Purple', usage: 'Primary brand' },
+                        { hex: '#faf5ff', name: 'Violet Mist', usage: 'Sections' },
+                        { hex: '#8b5cf6', name: 'Purple', usage: 'Buttons, links' },
+                        { hex: '#1e293b', name: 'Carbon Black', usage: 'Headers, text' },
+                        { hex: '#ede9fe', name: 'Lavender', usage: 'Cards, badges' }
+                    ]
+                }
             ],
             calm: [
-                ['#0891b2', '#ecfeff', '#67e8f9', '#0e7490', '#cffafe'],
-                ['#2563eb', '#eff6ff', '#93c5fd', '#1e40af', '#dbeafe'],
-                ['#0d9488', '#f0fdfa', '#5eead4', '#0f766e', '#ccfbf1']
+                {
+                    name: 'Ocean Breeze',
+                    colors: [
+                        { hex: '#0891b2', name: 'Cyan', usage: 'Primary elements' },
+                        { hex: '#ecfeff', name: 'Sky Mist', usage: 'Backgrounds' },
+                        { hex: '#67e8f9', name: 'Aqua', usage: 'Accents, icons' },
+                        { hex: '#0e7490', name: 'Deep Teal', usage: 'Headers' },
+                        { hex: '#cffafe', name: 'Light Cyan', usage: 'Sections' }
+                    ]
+                },
+                {
+                    name: 'Serene Sky',
+                    colors: [
+                        { hex: '#2563eb', name: 'Royal Blue', usage: 'Brand color' },
+                        { hex: '#eff6ff', name: 'Cloud White', usage: 'Page background' },
+                        { hex: '#93c5fd', name: 'Soft Blue', usage: 'Highlights' },
+                        { hex: '#1e40af', name: 'Navy', usage: 'Text, footers' },
+                        { hex: '#dbeafe', name: 'Powder Blue', usage: 'Cards' }
+                    ]
+                },
+                {
+                    name: 'Peaceful Waters',
+                    colors: [
+                        { hex: '#0d9488', name: 'Teal', usage: 'Primary actions' },
+                        { hex: '#f0fdfa', name: 'Seafoam', usage: 'Backgrounds' },
+                        { hex: '#5eead4', name: 'Turquoise', usage: 'Links, icons' },
+                        { hex: '#0f766e', name: 'Deep Sea', usage: 'Headers' },
+                        { hex: '#ccfbf1', name: 'Mint', usage: 'Feature boxes' }
+                    ]
+                }
             ],
             luxury: [
-                ['#18181b', '#fafafa', '#d4af37', '#71717a', '#f4f4f5'],
-                ['#292524', '#fafaf9', '#a855f7', '#78716c', '#f5f5f4'],
-                ['#1e1b4b', '#f5f3ff', '#c084fc', '#3730a3', '#ede9fe']
+                {
+                    name: 'Royal Gold',
+                    colors: [
+                        { hex: '#18181b', name: 'Onyx', usage: 'Headers, text' },
+                        { hex: '#fafafa', name: 'Pearl White', usage: 'Backgrounds' },
+                        { hex: '#ca8a04', name: 'Gold', usage: 'Premium accents' },
+                        { hex: '#71717a', name: 'Silver Gray', usage: 'Secondary text' },
+                        { hex: '#fef9c3', name: 'Champagne', usage: 'Highlights' }
+                    ]
+                },
+                {
+                    name: 'Elegant Noir',
+                    colors: [
+                        { hex: '#1c1917', name: 'Black Pearl', usage: 'Primary brand' },
+                        { hex: '#fafaf9', name: 'Ivory', usage: 'Light sections' },
+                        { hex: '#a855f7', name: 'Amethyst', usage: 'Luxury accents' },
+                        { hex: '#78716c', name: 'Taupe', usage: 'Subtle text' },
+                        { hex: '#f5f5f4', name: 'Cream', usage: 'Cards' }
+                    ]
+                },
+                {
+                    name: 'Premium Prestige',
+                    colors: [
+                        { hex: '#1e1b4b', name: 'Midnight Blue', usage: 'Main brand' },
+                        { hex: '#f5f3ff', name: 'Silk White', usage: 'Backgrounds' },
+                        { hex: '#c084fc', name: 'Orchid', usage: 'CTAs, premium features' },
+                        { hex: '#3730a3', name: 'Deep Indigo', usage: 'Headers' },
+                        { hex: '#ede9fe', name: 'Lilac Mist', usage: 'Sections' }
+                    ]
+                }
             ],
             friendly: [
-                ['#f59e0b', '#fffbeb', '#06b6d4', '#1e293b', '#fef3c7'],
-                ['#ec4899', '#fdf2f8', '#14b8a6', '#334155', '#fce7f3'],
-                ['#8b5cf6', '#faf5ff', '#10b981', '#1e293b', '#f3e8ff']
+                {
+                    name: 'Warm Welcome',
+                    colors: [
+                        { hex: '#f59e0b', name: 'Amber', usage: 'Brand primary' },
+                        { hex: '#fffbeb', name: 'Cream', usage: 'Backgrounds' },
+                        { hex: '#06b6d4', name: 'Sky Blue', usage: 'Links, icons' },
+                        { hex: '#1e293b', name: 'Charcoal', usage: 'Text' },
+                        { hex: '#fef3c7', name: 'Honey', usage: 'Highlights' }
+                    ]
+                },
+                {
+                    name: 'Cheerful Spirit',
+                    colors: [
+                        { hex: '#ec4899', name: 'Hot Pink', usage: 'Primary accent' },
+                        { hex: '#fdf2f8', name: 'Blush', usage: 'Light sections' },
+                        { hex: '#14b8a6', name: 'Teal', usage: 'Secondary actions' },
+                        { hex: '#334155', name: 'Slate', usage: 'Body text' },
+                        { hex: '#fce7f3', name: 'Rose Petal', usage: 'Cards' }
+                    ]
+                },
+                {
+                    name: 'Happy Vibes',
+                    colors: [
+                        { hex: '#8b5cf6', name: 'Purple', usage: 'Main brand' },
+                        { hex: '#faf5ff', name: 'Lavender Mist', usage: 'Backgrounds' },
+                        { hex: '#10b981', name: 'Emerald', usage: 'Success, CTAs' },
+                        { hex: '#1e293b', name: 'Carbon', usage: 'Headers, text' },
+                        { hex: '#f3e8ff', name: 'Violet Tint', usage: 'Feature boxes' }
+                    ]
+                }
+            ],
+            creative: [
+                {
+                    name: 'Artistic Flair',
+                    colors: [
+                        { hex: '#db2777', name: 'Fuchsia', usage: 'Bold accents' },
+                        { hex: '#fdf2f8', name: 'Pink Mist', usage: 'Backgrounds' },
+                        { hex: '#6366f1', name: 'Indigo', usage: 'Interactive elements' },
+                        { hex: '#0f172a', name: 'Midnight', usage: 'Text' },
+                        { hex: '#fbbf24', name: 'Sunflower', usage: 'Highlights' }
+                    ]
+                },
+                {
+                    name: 'Design Studio',
+                    colors: [
+                        { hex: '#7c3aed', name: 'Violet', usage: 'Primary brand' },
+                        { hex: '#f5f3ff', name: 'Soft Lavender', usage: 'Light areas' },
+                        { hex: '#f97316', name: 'Tangerine', usage: 'CTAs, accents' },
+                        { hex: '#1e293b', name: 'Graphite', usage: 'Text, headers' },
+                        { hex: '#34d399', name: 'Mint Green', usage: 'Success states' }
+                    ]
+                },
+                {
+                    name: 'Imagination Station',
+                    colors: [
+                        { hex: '#0891b2', name: 'Cyan', usage: 'Main brand' },
+                        { hex: '#ecfeff', name: 'Ice Blue', usage: 'Backgrounds' },
+                        { hex: '#f472b6', name: 'Pink', usage: 'Playful accents' },
+                        { hex: '#334155', name: 'Slate', usage: 'Body text' },
+                        { hex: '#fde047', name: 'Lemon', usage: 'Energy pops' }
+                    ]
+                }
+            ],
+            eco: [
+                {
+                    name: 'Natural Earth',
+                    colors: [
+                        { hex: '#15803d', name: 'Forest Green', usage: 'Primary brand' },
+                        { hex: '#f0fdf4', name: 'Mint Cream', usage: 'Backgrounds' },
+                        { hex: '#65a30d', name: 'Lime', usage: 'CTAs, accents' },
+                        { hex: '#422006', name: 'Earth Brown', usage: 'Text' },
+                        { hex: '#dcfce7', name: 'Spring Green', usage: 'Highlights' }
+                    ]
+                },
+                {
+                    name: 'Organic Living',
+                    colors: [
+                        { hex: '#84cc16', name: 'Fresh Lime', usage: 'Brand primary' },
+                        { hex: '#fefce8', name: 'Cream', usage: 'Light sections' },
+                        { hex: '#0891b2', name: 'Ocean Blue', usage: 'Links, water theme' },
+                        { hex: '#292524', name: 'Soil Brown', usage: 'Headers, text' },
+                        { hex: '#d9f99d', name: 'Light Lime', usage: 'Cards' }
+                    ]
+                },
+                {
+                    name: 'Sustainable Growth',
+                    colors: [
+                        { hex: '#059669', name: 'Emerald', usage: 'Primary actions' },
+                        { hex: '#ecfdf5', name: 'Mint White', usage: 'Backgrounds' },
+                        { hex: '#a3e635', name: 'Grass Green', usage: 'Accents, growth' },
+                        { hex: '#1c1917', name: 'Charcoal', usage: 'Text' },
+                        { hex: '#d1fae5', name: 'Sage', usage: 'Feature areas' }
+                    ]
+                }
             ]
         };
 
+        // Hex to RGB conversion
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        // Calculate relative luminance for WCAG contrast
+        function getLuminance(r, g, b) {
+            const [rs, gs, bs] = [r, g, b].map(c => {
+                c = c / 255;
+                return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+            });
+            return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+        }
+
+        // Calculate contrast ratio
+        function getContrastRatio(hex1, hex2) {
+            const rgb1 = hexToRgb(hex1);
+            const rgb2 = hexToRgb(hex2);
+            const l1 = getLuminance(rgb1.r, rgb1.g, rgb1.b);
+            const l2 = getLuminance(rgb2.r, rgb2.g, rgb2.b);
+            const lighter = Math.max(l1, l2);
+            const darker = Math.min(l1, l2);
+            return (lighter + 0.05) / (darker + 0.05);
+        }
+
+        // Get accessibility badge
+        function getAccessibilityBadge(textColor, bgColor) {
+            const ratio = getContrastRatio(textColor, bgColor);
+            if (ratio >= 7) return { text: 'AAA ✓', class: '' };
+            if (ratio >= 4.5) return { text: 'AA ✓', class: '' };
+            if (ratio >= 3) return { text: 'AA Large', class: 'warning' };
+            return { text: 'Low Contrast', class: 'fail' };
+        }
+
+        // RGB to HSL conversion
+        function rgbToHsl(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                l: Math.round(l * 100)
+            };
+        }
+
+        // Export palette to CSS
+        function exportPalette(palette) {
+            let css = `/* ${palette.name} Color Palette */\n:root {\n`;
+            palette.colors.forEach((color, i) => {
+                const varName = color.name.toLowerCase().replace(/\s+/g, '-');
+                css += `  --color-${varName}: ${color.hex};\n`;
+                const rgb = hexToRgb(color.hex);
+                css += `  --color-${varName}-rgb: ${rgb.r}, ${rgb.g}, ${rgb.b};\n`;
+            });
+            css += `}\n`;
+
+            // Download as file
+            const blob = new Blob([css], { type: 'text/css' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${palette.name.toLowerCase().replace(/\s+/g, '-')}-palette.css`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Copy color to clipboard
+        function copyColor(hex, element) {
+            navigator.clipboard.writeText(hex);
+            const indicator = element.querySelector('.copy-indicator');
+            indicator.style.opacity = '1';
+            setTimeout(() => {
+                indicator.style.opacity = '0';
+            }, 1000);
+        }
+
+        // Generate palettes
         document.getElementById('paletteForm').addEventListener('submit', (e) => {
             e.preventDefault();
+
             const vibe = document.getElementById('vibe').value;
-            const selectedPalettes = palettes[vibe] || palettes.modern;
-            
-            const html = selectedPalettes.map((colors, i) => `
-                <div class="palette-card">
-                    <h3>Palette ${i + 1}</h3>
-                    <div class="color-swatches">
-                        ${colors.map(color => `
-                            <div class="color-swatch" style="background: ${color}" onclick="copyColor('${color}')">
-                                <span class="color-code">${color}</span>
+            const industry = document.getElementById('industry').value;
+            const selectedPalettes = professionalPalettes[vibe] || professionalPalettes.modern;
+
+            const html = selectedPalettes.map((palette, i) => {
+                const colorSwatches = palette.colors.map((color, j) => {
+                    const rgb = hexToRgb(color.hex);
+                    const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+                    const textColor = hsl.l > 50 ? '#1f2937' : '#ffffff';
+                    const accessibility = getAccessibilityBadge(color.hex, j === 1 ? palette.colors[0].hex : '#ffffff');
+
+                    return `
+                        <div class="color-swatch" onclick="copyColor('${color.hex}', this)">
+                            <div class="color-display" style="background: ${color.hex}; color: ${textColor};">
+                                <div class="copy-indicator">Copied!</div>
                             </div>
-                        `).join('')}
+                            <div class="color-info">
+                                <div class="color-name">${color.name}</div>
+                                <div class="color-values">
+                                    <div class="color-value">HEX: ${color.hex}</div>
+                                    <div class="color-value">RGB: ${rgb.r}, ${rgb.g}, ${rgb.b}</div>
+                                    <div class="color-value">HSL: ${hsl.h}°, ${hsl.s}%, ${hsl.l}%</div>
+                                </div>
+                                <div class="accessibility-badge ${accessibility.class}">${accessibility.text}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                const usageItems = palette.colors.map(color =>
+                    `<div class="usage-item"><strong>${color.name}</strong>${color.usage}</div>`
+                ).join('');
+
+                return `
+                    <div class="palette-card">
+                        <div class="palette-header">
+                            <div class="palette-name">${palette.name}</div>
+                            <button class="export-btn" onclick='exportPalette(${JSON.stringify(palette)})'>
+                                Export CSS
+                            </button>
+                        </div>
+                        <div class="color-swatches">
+                            ${colorSwatches}
+                        </div>
+                        <div class="palette-usage">
+                            <h4>Recommended Usage</h4>
+                            <div class="usage-grid">
+                                ${usageItems}
+                            </div>
+                        </div>
                     </div>
-                    <p>Click any color to copy hex code</p>
-                </div>
-            `).join('');
+                `;
+            }).join('');
 
             document.getElementById('paletteResults').innerHTML = html;
             document.getElementById('palettes').classList.add('show');
             document.getElementById('palettes').scrollIntoView({ behavior: 'smooth' });
         });
-
-        function copyColor(color) {
-            navigator.clipboard.writeText(color);
-            alert(`Copied ${color} to clipboard!`);
-        }
     </script>
 </body>
 </html>

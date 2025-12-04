@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Write My Homepage Generator - Free Tool - SBWSK</title>
-    <meta name="description" content="Generate professional homepage copy in minutes. AI-powered homepage generator for small businesses. Free tool by SBWSK.">
+    <title>Professional Homepage Copy Generator - Free AI Tool - SBWSK</title>
+    <meta name="description" content="Generate professional, conversion-focused homepage copy in minutes. AI-powered with proven copywriting frameworks for small businesses.">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../images/logo.png">
@@ -21,46 +21,65 @@
         .tool-hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 60px 0;
+            padding: 80px 0;
             text-align: center;
         }
 
         .tool-hero h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
+            font-weight: 800;
         }
 
         .tool-hero p {
             font-size: 1.25rem;
-            opacity: 0.9;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .form-section {
-            max-width: 800px;
+            max-width: 900px;
             margin: 60px auto;
             padding: 0 20px;
         }
 
+        .form-card {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
 
         .form-group label {
             display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
+            font-weight: 700;
+            margin-bottom: 12px;
             color: #1f2937;
+            font-size: 1.05rem;
+        }
+
+        .form-group small {
+            display: block;
+            color: #6b7280;
+            margin-top: 8px;
+            font-size: 0.9rem;
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 12px;
+            padding: 16px;
             border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            font-family: inherit;
         }
 
         .form-group input:focus,
@@ -68,6 +87,7 @@
         .form-group select:focus {
             border-color: #667eea;
             outline: none;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
         }
 
         .form-group textarea {
@@ -75,22 +95,28 @@
             resize: vertical;
         }
 
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
         .generate-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 16px 48px;
+            padding: 18px 48px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s;
         }
 
         .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
         }
 
         .generate-btn:disabled {
@@ -101,12 +127,9 @@
 
         .results-section {
             display: none;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
         }
 
         .results-section.show {
@@ -114,48 +137,76 @@
         }
 
         .copy-section {
-            background: #f9fafb;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .copy-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
         }
 
         .copy-section h3 {
             margin-top: 0;
             color: #667eea;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .copy-section p {
+        .copy-section .section-label {
+            font-size: 0.85rem;
+            background: #ede9fe;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: #5b21b6;
+            font-weight: 600;
+        }
+
+        .copy-text {
             line-height: 1.8;
             color: #374151;
+            font-size: 1.05rem;
+            white-space: pre-wrap;
         }
 
         .copy-btn {
             background: #10b981;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            margin-top: 10px;
+            margin-top: 15px;
+            transition: all 0.3s;
         }
 
         .copy-btn:hover {
             background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .copy-btn.copied {
+            background: #6366f1;
         }
 
         .loading {
             text-align: center;
-            padding: 40px;
+            padding: 60px 20px;
         }
 
         .loading-spinner {
             border: 4px solid #f3f4f6;
             border-top: 4px solid #667eea;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
         }
@@ -163,6 +214,36 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        .tips-section {
+            background: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .tips-section h4 {
+            margin: 0 0 15px 0;
+            color: #075985;
+        }
+
+        .tips-section ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .tips-section li {
+            color: #0369a1;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .tool-hero h1 { font-size: 2rem; }
+            .form-card { padding: 30px 20px; }
+            .form-row { grid-template-columns: 1fr; }
+            .copy-section { padding: 25px; }
         }
     </style>
 <!-- Google tag (gtag.js) -->
@@ -236,114 +317,202 @@
     <!-- Hero Section -->
     <section class="tool-hero">
         <div class="container">
-            <h1>🏠 Write My Homepage Generator</h1>
-            <p>Generate professional homepage copy in minutes. Powered by AI.</p>
+            <h1>🏠 Professional Homepage Copy Generator</h1>
+            <p>Generate conversion-focused homepage copy using proven copywriting frameworks. Save hours of writing and get professional results instantly.</p>
         </div>
     </section>
 
     <!-- Form Section -->
     <section class="form-section">
-        <form id="homepageForm">
-            <div class="form-group">
-                <label for="businessName">Business Name *</label>
-                <input type="text" id="businessName" required placeholder="e.g., Smith's Landscaping">
-            </div>
+        <div class="form-card">
+            <h2 style="text-align: center; margin-top: 0; margin-bottom: 40px;">Tell Us About Your Business</h2>
+            <form id="homepageForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="businessName">Business Name *</label>
+                        <input type="text" id="businessName" required placeholder="e.g., Smith's Landscaping">
+                    </div>
 
-            <div class="form-group">
-                <label for="businessType">Business Type *</label>
-                <select id="businessType" required>
-                    <option value="">Select your business type...</option>
-                    <option value="landscaping">Landscaping</option>
-                    <option value="cleaning">Cleaning Services</option>
-                    <option value="photography">Photography</option>
-                    <option value="consulting">Consulting</option>
-                    <option value="plumbing">Plumbing</option>
-                    <option value="electrical">Electrical Services</option>
-                    <option value="hvac">HVAC</option>
-                    <option value="roofing">Roofing</option>
-                    <option value="painting">Painting</option>
-                    <option value="construction">Construction</option>
-                    <option value="restaurant">Restaurant/Cafe</option>
-                    <option value="retail">Retail Store</option>
-                    <option value="salon">Salon/Spa</option>
-                    <option value="gym">Gym/Fitness</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
+                    <div class="form-group">
+                        <label for="location">Location *</label>
+                        <input type="text" id="location" required placeholder="e.g., Austin, TX">
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label for="location">Location (City, State) *</label>
-                <input type="text" id="location" required placeholder="e.g., Austin, TX">
-            </div>
+                <div class="form-group">
+                    <label for="businessType">Industry *</label>
+                    <select id="businessType" required>
+                        <option value="">Select your industry...</option>
+                        <option value="landscaping">Landscaping & Lawn Care</option>
+                        <option value="cleaning">Cleaning Services</option>
+                        <option value="photography">Photography</option>
+                        <option value="consulting">Consulting</option>
+                        <option value="plumbing">Plumbing</option>
+                        <option value="electrical">Electrical Services</option>
+                        <option value="hvac">HVAC</option>
+                        <option value="roofing">Roofing</option>
+                        <option value="painting">Painting</option>
+                        <option value="construction">Construction</option>
+                        <option value="restaurant">Restaurant/Cafe</option>
+                        <option value="retail">Retail Store</option>
+                        <option value="salon">Salon/Spa</option>
+                        <option value="gym">Gym/Fitness</option>
+                        <option value="dentist">Dental Practice</option>
+                        <option value="lawyer">Legal Services</option>
+                        <option value="realtor">Real Estate</option>
+                        <option value="accounting">Accounting/Bookkeeping</option>
+                        <option value="mechanic">Auto Repair</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="services">Main Services (comma-separated) *</label>
-                <textarea id="services" required placeholder="e.g., Lawn care, Tree trimming, Landscape design"></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="services">Main Services (one per line) *</label>
+                    <textarea id="services" required placeholder="Lawn mowing&#10;Landscaping design&#10;Tree trimming&#10;Seasonal cleanup"></textarea>
+                    <small>List your top 3-5 services, one per line</small>
+                </div>
 
-            <div class="form-group">
-                <label for="uniqueValue">What makes you unique?</label>
-                <textarea id="uniqueValue" placeholder="e.g., 20+ years experience, eco-friendly products, same-day service"></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="uniqueValue">What Makes You Different? *</label>
+                    <textarea id="uniqueValue" required placeholder="e.g., 20+ years experience, eco-friendly products, same-day service, family-owned, certified professionals"></textarea>
+                    <small>What sets you apart from competitors? Awards, certifications, guarantees, years in business?</small>
+                </div>
 
-            <div class="form-group">
-                <label for="tone">Brand Tone *</label>
-                <select id="tone" required>
-                    <option value="professional">Professional & Trustworthy</option>
-                    <option value="friendly">Friendly & Approachable</option>
-                    <option value="luxury">Premium & Luxury</option>
-                    <option value="modern">Modern & Innovative</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="targetAudience">Target Customer *</label>
+                    <select id="targetAudience" required>
+                        <option value="">Who are your ideal customers?</option>
+                        <option value="homeowners">Homeowners</option>
+                        <option value="business">Business Owners</option>
+                        <option value="luxury">Luxury/High-End Clients</option>
+                        <option value="budget">Budget-Conscious Customers</option>
+                        <option value="eco">Eco-Conscious Consumers</option>
+                        <option value="senior">Seniors</option>
+                        <option value="young">Young Professionals</option>
+                        <option value="families">Families</option>
+                    </select>
+                </div>
 
-            <button type="submit" class="generate-btn" id="generateBtn">
-                Generate My Homepage Copy
-            </button>
-        </form>
+                <div class="form-group">
+                    <label for="tone">Brand Voice *</label>
+                    <select id="tone" required>
+                        <option value="">Select your brand personality...</option>
+                        <option value="professional">Professional & Trustworthy - Corporate, established</option>
+                        <option value="friendly">Friendly & Approachable - Warm, conversational</option>
+                        <option value="luxury">Premium & Luxury - Sophisticated, elite</option>
+                        <option value="modern">Modern & Innovative - Tech-forward, cutting-edge</option>
+                        <option value="local">Local & Community-Focused - Neighborhood, family</option>
+                        <option value="expert">Expert & Authoritative - Knowledgeable, certified</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="yearsInBusiness">Years in Business</label>
+                        <input type="number" id="yearsInBusiness" placeholder="e.g., 15" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="tel" id="phoneNumber" placeholder="(555) 123-4567">
+                    </div>
+                </div>
+
+                <button type="submit" class="generate-btn" id="generateBtn">
+                    Generate My Homepage Copy
+                </button>
+            </form>
+        </div>
     </section>
 
     <!-- Loading -->
     <div id="loading" class="loading" style="display: none;">
         <div class="loading-spinner"></div>
-        <p>Generating your professional homepage copy...</p>
+        <p style="font-size: 18px; color: #6b7280;">Crafting your professional homepage copy...</p>
+        <p style="color: #9ca3af;">Using proven copywriting frameworks for maximum conversion</p>
     </div>
 
     <!-- Results Section -->
     <section class="results-section" id="results">
-        <h2 style="text-align: center; margin-bottom: 30px;">Your Homepage Copy</h2>
+        <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem;">Your Professional Homepage Copy</h2>
 
         <div class="copy-section">
-            <h3>Hero Headline</h3>
-            <p id="heroHeadline"></p>
-            <button class="copy-btn" onclick="copyToClipboard('heroHeadline')">Copy</button>
+            <h3>
+                Hero Headline
+                <span class="section-label">Above the Fold</span>
+            </h3>
+            <div class="copy-text" id="heroHeadline"></div>
+            <button class="copy-btn" onclick="copyToClipboard('heroHeadline', this)">Copy to Clipboard</button>
         </div>
 
         <div class="copy-section">
-            <h3>Hero Subheadline</h3>
-            <p id="heroSubheadline"></p>
-            <button class="copy-btn" onclick="copyToClipboard('heroSubheadline')">Copy</button>
+            <h3>
+                Hero Subheadline
+                <span class="section-label">Supporting Text</span>
+            </h3>
+            <div class="copy-text" id="heroSubheadline"></div>
+            <button class="copy-btn" onclick="copyToClipboard('heroSubheadline', this)">Copy to Clipboard</button>
         </div>
 
         <div class="copy-section">
-            <h3>About Section</h3>
-            <p id="aboutSection"></p>
-            <button class="copy-btn" onclick="copyToClipboard('aboutSection')">Copy</button>
+            <h3>
+                About Section
+                <span class="section-label">Trust Building</span>
+            </h3>
+            <div class="copy-text" id="aboutSection"></div>
+            <button class="copy-btn" onclick="copyToClipboard('aboutSection', this)">Copy to Clipboard</button>
         </div>
 
         <div class="copy-section">
-            <h3>Services Section</h3>
-            <p id="servicesSection"></p>
-            <button class="copy-btn" onclick="copyToClipboard('servicesSection')">Copy</button>
+            <h3>
+                Services Introduction
+                <span class="section-label">Value Proposition</span>
+            </h3>
+            <div class="copy-text" id="servicesIntro"></div>
+            <button class="copy-btn" onclick="copyToClipboard('servicesIntro', this)">Copy to Clipboard</button>
         </div>
 
         <div class="copy-section">
-            <h3>Call-to-Action</h3>
-            <p id="ctaSection"></p>
-            <button class="copy-btn" onclick="copyToClipboard('ctaSection')">Copy</button>
+            <h3>
+                Service Descriptions
+                <span class="section-label">Features & Benefits</span>
+            </h3>
+            <div class="copy-text" id="servicesSection"></div>
+            <button class="copy-btn" onclick="copyToClipboard('servicesSection', this)">Copy to Clipboard</button>
         </div>
 
-        <div style="text-align: center; margin-top: 30px;">
-            <button class="generate-btn" onclick="location.reload()">Generate Another</button>
+        <div class="copy-section">
+            <h3>
+                Why Choose Us Section
+                <span class="section-label">Competitive Advantage</span>
+            </h3>
+            <div class="copy-text" id="whyChooseSection"></div>
+            <button class="copy-btn" onclick="copyToClipboard('whyChooseSection', this)">Copy to Clipboard</button>
+        </div>
+
+        <div class="copy-section">
+            <h3>
+                Call-to-Action
+                <span class="section-label">Conversion</span>
+            </h3>
+            <div class="copy-text" id="ctaSection"></div>
+            <button class="copy-btn" onclick="copyToClipboard('ctaSection', this)">Copy to Clipboard</button>
+        </div>
+
+        <div class="tips-section">
+            <h4>💡 Tips for Using Your Homepage Copy</h4>
+            <ul>
+                <li>Copy and paste each section into your website builder</li>
+                <li>Customize the copy to add your personal touch and specific details</li>
+                <li>Use the Hero Headline as your H1 tag for SEO</li>
+                <li>Add customer testimonials between sections to build trust</li>
+                <li>Include high-quality photos of your work throughout</li>
+                <li>Make sure your phone number and contact form are prominent</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <button class="generate-btn" style="max-width: 400px; margin: 0 auto;" onclick="location.reload()">Generate Another Homepage</button>
         </div>
     </section>
 
@@ -353,7 +522,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>SBWSK</h3>
-                    <p>Small Business Website Starter Kit - Free tools to launch and grow your online presence.</p>
+                    <p>Professional tools to launch and grow your small business website.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Free Tools</h4>
@@ -384,78 +553,155 @@
     <script src="../js/utils.js"></script>
     <script src="../js/app.js"></script>
     <script>
+        // Professional copywriting templates
+        const copywritingFrameworks = {
+            professional: {
+                heroFormula: (data) => `Professional ${data.businessType} Services in ${data.location}`,
+                subFormula: (data) => `Trusted by ${data.location} ${data.targetAudience} for ${data.yearsInBusiness ? data.yearsInBusiness + '+ Years' : 'Years'} - Quality Results, Every Time`,
+                aboutFormula: (data) => `At ${data.businessName}, we've built our reputation on delivering exceptional ${data.businessType} services throughout ${data.location}. ${data.uniqueValue ? data.uniqueValue + '.' : ''} Our team of certified professionals brings expertise, reliability, and a commitment to excellence to every project.`
+            },
+            friendly: {
+                heroFormula: (data) => `Your Friendly Neighborhood ${data.businessType} Experts`,
+                subFormula: (data) => `Serving ${data.location} families and businesses with a smile since ${data.yearsInBusiness ? new Date().getFullYear() - data.yearsInBusiness : 'day one'}`,
+                aboutFormula: (data) => `Hey there! We're ${data.businessName}, and we absolutely love what we do. ${data.uniqueValue ? data.uniqueValue + '.' : ''} We're not just another ${data.businessType} company - we're your neighbors, and we care about making ${data.location} a better place, one satisfied customer at a time.`
+            },
+            luxury: {
+                heroFormula: (data) => `Premium ${data.businessType} Services for Discerning Clients`,
+                subFormula: (data) => `Elevating Standards in ${data.location} - Where Excellence Meets Sophistication`,
+                aboutFormula: (data) => `${data.businessName} represents the pinnacle of ${data.businessType} services in ${data.location}. ${data.uniqueValue ? data.uniqueValue + '.' : ''} We cater exclusively to clients who demand nothing but the finest, delivering impeccable results with meticulous attention to detail.`
+            },
+            modern: {
+                heroFormula: (data) => `Next-Generation ${data.businessType} Solutions in ${data.location}`,
+                subFormula: (data) => `Innovative Technology Meets Expert Service - The Modern Way to ${data.businessType}`,
+                aboutFormula: (data) => `${data.businessName} is revolutionizing ${data.businessType} services in ${data.location}. ${data.uniqueValue ? data.uniqueValue + '.' : ''} We combine cutting-edge technology with proven expertise to deliver faster, smarter, better results for today's customers.`
+            },
+            local: {
+                heroFormula: (data) => `${data.location}'s Local ${data.businessType} Experts`,
+                subFormula: (data) => `Proudly Serving Our Community ${data.yearsInBusiness ? 'for ' + data.yearsInBusiness + '+ Years' : ''} - Your Neighbors You Can Trust`,
+                aboutFormula: (data) => `We're ${data.businessName}, a family-owned ${data.businessType} company right here in ${data.location}. ${data.uniqueValue ? data.uniqueValue + '.' : ''} We live and work in this community, and we treat every customer like family because that's what neighbors do.`
+            },
+            expert: {
+                heroFormula: (data) => `Certified ${data.businessType} Specialists in ${data.location}`,
+                subFormula: (data) => `Licensed, Insured & Expert - The Professional Choice for ${data.businessType}`,
+                aboutFormula: (data) => `${data.businessName} brings unmatched expertise to ${data.businessType} services in ${data.location}. ${data.uniqueValue ? data.uniqueValue + '.' : ''} Our certified technicians undergo rigorous training and stay current with industry best practices to deliver superior results.`
+            }
+        };
+
         document.getElementById('homepageForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const formData = {
-                businessName: document.getElementById('businessName').value,
-                businessType: document.getElementById('businessType').value,
-                location: document.getElementById('location').value,
-                services: document.getElementById('services').value,
-                uniqueValue: document.getElementById('uniqueValue').value,
-                tone: document.getElementById('tone').value
+                businessName: document.getElementById('businessName').value.trim(),
+                businessType: document.getElementById('businessType').options[document.getElementById('businessType').selectedIndex].text,
+                location: document.getElementById('location').value.trim(),
+                services: document.getElementById('services').value.trim(),
+                uniqueValue: document.getElementById('uniqueValue').value.trim(),
+                tone: document.getElementById('tone').value,
+                targetAudience: document.getElementById('targetAudience').options[document.getElementById('targetAudience').selectedIndex].text,
+                yearsInBusiness: document.getElementById('yearsInBusiness').value,
+                phoneNumber: document.getElementById('phoneNumber').value.trim()
             };
 
             // Show loading
+            document.querySelector('.form-section').style.display = 'none';
             document.getElementById('loading').style.display = 'block';
-            document.getElementById('generateBtn').disabled = true;
 
-            // Generate copy (simulated - you can replace with API call later)
+            // Generate copy
             setTimeout(() => {
-                const copy = generateHomepageCopy(formData);
+                const copy = generateProfessionalCopy(formData);
 
                 document.getElementById('heroHeadline').textContent = copy.heroHeadline;
                 document.getElementById('heroSubheadline').textContent = copy.heroSubheadline;
                 document.getElementById('aboutSection').textContent = copy.aboutSection;
+                document.getElementById('servicesIntro').textContent = copy.servicesIntro;
                 document.getElementById('servicesSection').textContent = copy.servicesSection;
+                document.getElementById('whyChooseSection').textContent = copy.whyChooseSection;
                 document.getElementById('ctaSection').textContent = copy.ctaSection;
 
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('results').classList.add('show');
                 document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-            }, 2000);
+            }, 2500);
         });
 
-        function generateHomepageCopy(data) {
-            const toneStyles = {
-                professional: {
-                    headline: `Professional ${data.businessType} Services in ${data.location}`,
-                    sub: `Trust our expert team for quality ${data.businessType} solutions.`
-                },
-                friendly: {
-                    headline: `Your Friendly ${data.businessType} Experts in ${data.location}`,
-                    sub: `We're here to help with all your ${data.businessType} needs!`
-                },
-                luxury: {
-                    headline: `Premium ${data.businessType} Services in ${data.location}`,
-                    sub: `Experience excellence with our luxury ${data.businessType} solutions.`
-                },
-                modern: {
-                    headline: `Modern ${data.businessType} Solutions in ${data.location}`,
-                    sub: `Innovative ${data.businessType} services for today's needs.`
-                }
-            };
+        function generateProfessionalCopy(data) {
+            const framework = copywritingFrameworks[data.tone] || copywritingFrameworks.professional;
 
-            const style = toneStyles[data.tone] || toneStyles.professional;
+            // Parse services
+            const servicesList = data.services.split('\n').filter(s => s.trim()).map(s => s.trim());
+
+            // Hero sections
+            const heroHeadline = framework.heroFormula(data);
+            const heroSubheadline = framework.subFormula(data);
+
+            // About section
+            const aboutSection = framework.aboutFormula(data);
+
+            // Services introduction
+            const servicesIntro = `We offer comprehensive ${data.businessType.toLowerCase()} services designed to meet your needs and exceed your expectations. From routine maintenance to complex projects, we have the expertise and equipment to handle it all.`;
+
+            // Service descriptions with benefits
+            const serviceDescriptions = servicesList.map(service => {
+                const benefits = {
+                    'lawn': 'Keep your lawn lush, green, and healthy year-round',
+                    'landscape': 'Transform your outdoor space into a beautiful oasis',
+                    'tree': 'Maintain healthy, beautiful trees that add value to your property',
+                    'clean': 'Enjoy a spotless, sanitized space without lifting a finger',
+                    'design': 'Bring your vision to life with expert design services',
+                    'install': 'Professional installation with attention to every detail',
+                    'repair': 'Fast, reliable repairs that last',
+                    'maintenance': 'Proactive care to prevent problems before they start',
+                    'consultation': 'Expert guidance tailored to your specific needs'
+                };
+
+                let benefit = 'Professional service with guaranteed results';
+                Object.keys(benefits).forEach(key => {
+                    if (service.toLowerCase().includes(key)) {
+                        benefit = benefits[key];
+                    }
+                });
+
+                return `• ${service}\n  ${benefit}`;
+            }).join('\n\n');
+
+            const servicesSection = `Our Services Include:\n\n${serviceDescriptions}`;
+
+            // Why choose us section
+            const whyChoosePoints = [
+                `✓ ${data.uniqueValue}`,
+                `✓ Serving ${data.location} and surrounding areas`,
+                `✓ Licensed, insured, and professional`,
+                `✓ Customer satisfaction guaranteed`,
+                `✓ ${data.yearsInBusiness ? data.yearsInBusiness + '+ years' : 'Years'} of proven expertise`,
+                `✓ Fair, transparent pricing`,
+                `✓ Prompt, reliable service`
+            ];
+
+            const whyChooseSection = `Why Choose ${data.businessName}?\n\n${whyChoosePoints.join('\n')}`;
+
+            // Call to action
+            const ctaSection = `Ready to experience the ${data.businessName} difference?\n\nGet your free consultation today! ${data.phoneNumber ? 'Call us at ' + data.phoneNumber + ' or f' : 'F'}ill out our contact form, and we'll get back to you within 24 hours with a personalized quote.\n\nServing ${data.location} with pride. Your satisfaction is our success.`;
 
             return {
-                heroHeadline: `${data.businessName} - ${style.headline}`,
-                heroSubheadline: style.sub,
-                aboutSection: `Welcome to ${data.businessName}, your trusted ${data.businessType} partner in ${data.location}. ${data.uniqueValue ? data.uniqueValue + '.' : ''} We're dedicated to providing exceptional service and results that exceed expectations.`,
-                servicesSection: `Our Services: ${data.services.split(',').map(s => s.trim()).join(', ')}. Each service is delivered with attention to detail and commitment to your satisfaction.`,
-                ctaSection: `Ready to get started? Contact ${data.businessName} today for a free consultation. Call us or fill out our contact form, and we'll get back to you within 24 hours.`
+                heroHeadline,
+                heroSubheadline,
+                aboutSection,
+                servicesIntro,
+                servicesSection,
+                whyChooseSection,
+                ctaSection
             };
         }
 
-        function copyToClipboard(elementId) {
+        function copyToClipboard(elementId, button) {
             const text = document.getElementById(elementId).textContent;
             navigator.clipboard.writeText(text).then(() => {
-                const btn = event.target;
-                btn.textContent = 'Copied!';
-                btn.style.background = '#10b981';
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
                 setTimeout(() => {
-                    btn.textContent = 'Copy';
-                    btn.style.background = '';
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
                 }, 2000);
             });
         }
