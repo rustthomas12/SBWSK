@@ -189,6 +189,16 @@
             100% { transform: rotate(360deg); }
         }
     </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L3765SHQLJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L3765SHQLJ');
+</script>
+
 </head>
 <body>
     <!-- Navigation -->
@@ -256,7 +266,7 @@
     <div class="audit-form">
         <h2 style="text-align: center; margin-top: 0;">Enter Your Website URL</h2>
         <form id="auditForm">
-            <input type="url" id="websiteUrl" placeholder="https://yourwebsite.com" required>
+            <input type="text" id="websiteUrl" placeholder="https://yourwebsite.com or yourwebsite.com" required>
             <button type="submit" class="audit-btn" id="auditBtn">Run Free Audit</button>
         </form>
     </div>
@@ -348,7 +358,12 @@
         document.getElementById('auditForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const url = document.getElementById('websiteUrl').value;
+            let url = document.getElementById('websiteUrl').value.trim();
+
+            // Normalize URL - add https:// if no protocol specified
+            if (!url.match(/^https?:\/\//i)) {
+                url = 'https://' + url;
+            }
 
             // Hide form, show loading
             document.querySelector('.audit-form').style.display = 'none';
