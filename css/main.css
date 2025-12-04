@@ -280,7 +280,8 @@ a:hover {
     z-index: 1000;
 }
 
-.nav-item-dropdown:hover .nav-dropdown {
+/* Only show direct child dropdown on hover, not nested ones */
+.nav-item-dropdown:hover > .nav-dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -351,14 +352,16 @@ a:hover {
     position: absolute;
     left: 100%;
     top: 0;
+    margin-top: 0;
     margin-left: 0;
     opacity: 0;
     visibility: hidden;
     transform: translateX(-10px);
     transition: all var(--transition-fast);
+    z-index: 1001;
 }
 
-/* Show nested dropdown on hover */
+/* Show nested dropdown on hover of parent item */
 .nav-dropdown .nav-item-dropdown:hover > .nav-dropdown {
     opacity: 1;
     visibility: visible;
