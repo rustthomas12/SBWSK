@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Palette Generator - Free Tool - SBWSK</title>
+    <meta name="description" content="Generate beautiful color palettes for your brand. Free AI-powered color palette generator with hex codes.">
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/modern.css">
+    <link rel="stylesheet" href="../css/sections.css">
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .tool-hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .form-section {
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 24px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1f2937;
+        }
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .generate-btn {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            color: white;
+            padding: 16px 48px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(236,72,153,0.3);
+        }
+        .palettes-section {
+            display: none;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .palettes-section.show { display: block; }
+        .palette-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .color-swatches {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .color-swatch {
+            flex: 1;
+            height: 120px;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 10px;
+            color: white;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .color-swatch:hover {
+            transform: scale(1.05);
+        }
+        .color-code {
+            background: rgba(0,0,0,0.5);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="nav-brand">
+                <img src="../images/logo.png" alt="SBWSK Logo" class="logo-img">
+                <span class="tagline">
+                    <span>Small Business</span>
+                    <span>Website Starter Kit</span>
+                </span>
+            </a>
+            <button class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../checklist.html" class="nav-highlight">Launch Checklist</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-dropdown-toggle">Free Tools</a>
+                    <ul class="nav-dropdown">
+                        <li class="nav-item-dropdown">
+                            <a href="#">Domain & Hosting</a>
+                            <ul class="nav-dropdown">
+                                <li><a href="../domain-checker.html">Domain Checker</a></li>
+                                <li><a href="../choose-registrar.html">Choose Hosts</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item-dropdown">
+                            <a href="#">SEO</a>
+                            <ul class="nav-dropdown">
+                                <li><a href="../website-speed-check.html">Speed Check</a></li>
+                                <li><a href="homepage-generator.html">Homepage Generator</a></li>
+                                <li><a href="website-audit.html">Website Audit</a></li>
+                                <li><a href="local-seo-keywords.html">Local SEO Keywords</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item-dropdown">
+                            <a href="#">Business Essentials</a>
+                            <ul class="nav-dropdown">
+                                <li><a href="../logo-generator.html">Logo Generator</a></li>
+                                <li><a href="color-palette-generator.html" class="active">Color Palette Generator</a></li>
+                                <li><a href="template-quiz.html">Template Selector Quiz</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="../templates.html">Templates</a></li>
+                <li><a href="../website-copy-kit.html" class="nav-highlight">Copy Kit - $17</a></li>
+                <li><a href="../quote-estimator.html">Get Quote</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="tool-hero">
+        <div class="container">
+            <h1>🎨 Color Palette Generator</h1>
+            <p>Create Beautiful Brand Colors in Seconds</p>
+        </div>
+    </section>
+
+    <div class="form-section">
+        <form id="paletteForm">
+            <div class="form-group">
+                <label for="industry">Your Industry</label>
+                <select id="industry" required>
+                    <option value="">Select your industry...</option>
+                    <option value="tech">Technology</option>
+                    <option value="health">Health & Wellness</option>
+                    <option value="food">Food & Restaurant</option>
+                    <option value="retail">Retail & E-commerce</option>
+                    <option value="creative">Creative & Design</option>
+                    <option value="professional">Professional Services</option>
+                    <option value="education">Education</option>
+                    <option value="construction">Construction & Trades</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="vibe">Brand Vibe</label>
+                <select id="vibe" required>
+                    <option value="">Select your vibe...</option>
+                    <option value="modern">Modern & Minimalist</option>
+                    <option value="bold">Bold & Energetic</option>
+                    <option value="professional">Professional & Trust</option>
+                    <option value="calm">Calm & Peaceful</option>
+                    <option value="luxury">Luxury & Premium</option>
+                    <option value="friendly">Friendly & Approachable</option>
+                </select>
+            </div>
+            <button type="submit" class="generate-btn">Generate Palettes</button>
+        </form>
+    </div>
+
+    <div class="palettes-section" id="palettes">
+        <h2 style="text-align: center; margin-bottom: 40px;">Your Color Palettes</h2>
+        <div id="paletteResults"></div>
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="generate-btn" onclick="location.reload()">Generate More</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBWSK</h3>
+                    <p>Free tools for small business websites.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        const palettes = {
+            modern: [
+                ['#1a1a1a', '#ffffff', '#0ea5e9', '#64748b', '#f1f5f9'],
+                ['#000000', '#fafafa', '#6366f1', '#94a3b8', '#e2e8f0'],
+                ['#0f172a', '#ffffff', '#8b5cf6', '#475569', '#f8fafc']
+            ],
+            bold: [
+                ['#dc2626', '#fef2f2', '#0ea5e9', '#1e293b', '#fbbf24'],
+                ['#ea580c', '#fff7ed', '#8b5cf6', '#334155', '#22c55e'],
+                ['#c026d3', '#fdf4ff', '#06b6d4', '#1e3a8a', '#facc15']
+            ],
+            professional: [
+                ['#1e40af', '#eff6ff', '#0ea5e9', '#1e293b', '#e0e7ff'],
+                ['#0f766e', '#f0fdfa', '#06b6d4', '#334155', '#ccfbf1'],
+                ['#7c3aed', '#faf5ff', '#8b5cf6', '#1e293b', '#ede9fe']
+            ],
+            calm: [
+                ['#0891b2', '#ecfeff', '#67e8f9', '#0e7490', '#cffafe'],
+                ['#2563eb', '#eff6ff', '#93c5fd', '#1e40af', '#dbeafe'],
+                ['#0d9488', '#f0fdfa', '#5eead4', '#0f766e', '#ccfbf1']
+            ],
+            luxury: [
+                ['#18181b', '#fafafa', '#d4af37', '#71717a', '#f4f4f5'],
+                ['#292524', '#fafaf9', '#a855f7', '#78716c', '#f5f5f4'],
+                ['#1e1b4b', '#f5f3ff', '#c084fc', '#3730a3', '#ede9fe']
+            ],
+            friendly: [
+                ['#f59e0b', '#fffbeb', '#06b6d4', '#1e293b', '#fef3c7'],
+                ['#ec4899', '#fdf2f8', '#14b8a6', '#334155', '#fce7f3'],
+                ['#8b5cf6', '#faf5ff', '#10b981', '#1e293b', '#f3e8ff']
+            ]
+        };
+
+        document.getElementById('paletteForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const vibe = document.getElementById('vibe').value;
+            const selectedPalettes = palettes[vibe] || palettes.modern;
+            
+            const html = selectedPalettes.map((colors, i) => `
+                <div class="palette-card">
+                    <h3>Palette ${i + 1}</h3>
+                    <div class="color-swatches">
+                        ${colors.map(color => `
+                            <div class="color-swatch" style="background: ${color}" onclick="copyColor('${color}')">
+                                <span class="color-code">${color}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <p>Click any color to copy hex code</p>
+                </div>
+            `).join('');
+
+            document.getElementById('paletteResults').innerHTML = html;
+            document.getElementById('palettes').classList.add('show');
+            document.getElementById('palettes').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function copyColor(color) {
+            navigator.clipboard.writeText(color);
+            alert(`Copied ${color} to clipboard!`);
+        }
+    </script>
+</body>
+</html>

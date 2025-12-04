@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Selector Quiz - Find Your Perfect Template - SBWSK</title>
+    <meta name="description" content="Take our quiz to find the perfect website template for your business. Quick, easy, personalized recommendations.">
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/modern.css">
+    <link rel="stylesheet" href="../css/sections.css">
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .tool-hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .quiz-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .question {
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+        .question h2 {
+            margin-top: 0;
+            color: #1f2937;
+            margin-bottom: 30px;
+        }
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+        .option {
+            padding: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .option:hover {
+            border-color: #f59e0b;
+            background: #fffbeb;
+        }
+        .option.selected {
+            border-color: #f59e0b;
+            background: #fffbeb;
+        }
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .navigation-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .quiz-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .quiz-btn.primary {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+        }
+        .quiz-btn.secondary {
+            background: #f3f4f6;
+            color: #374151;
+        }
+        .quiz-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            transition: width 0.3s;
+        }
+        .results {
+            display: none;
+        }
+        .results.show {
+            display: block;
+        }
+        .recommendation-card {
+            background: #fffbeb;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 2px solid #f59e0b;
+        }
+        .recommendation-card h3 {
+            color: #f59e0b;
+            margin-top: 0;
+        }
+        .template-preview {
+            background: #f3f4f6;
+            height: 200px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="nav-brand">
+                <img src="../images/logo.png" alt="SBWSK Logo" class="logo-img">
+                <span class="tagline">
+                    <span>Small Business</span>
+                    <span>Website Starter Kit</span>
+                </span>
+            </a>
+            <button class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../checklist.html" class="nav-highlight">Launch Checklist</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-dropdown-toggle">Free Tools</a>
+                    <ul class="nav-dropdown">
+                        <li class="nav-item-dropdown">
+                            <a href="#">Domain & Hosting</a>
+                            <ul class="nav-dropdown">
+                                <li><a href="../domain-checker.html">Domain Checker</a></li>
+                                <li><a href="../choose-registrar.html">Choose Hosts</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item-dropdown">
+                            <a href="#">SEO</a>
+                            <ul class="nav-dropdown">
+                                <li><a href="../website-speed-check.html">Speed Check</a></li>
+                                <li><a href="homepage-generator.html">Homepage Generator</a></li>
+                                <li><a href="website-audit.html">Website Audit</a></li>
+                                <li><a href="local-seo-keywords.html">Local SEO Keywords</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item-dropdown">
+                            <a href="#">Business Essentials</a>
+                            <ul class="nav-dropdown">
+                                <li><a href="../logo-generator.html">Logo Generator</a></li>
+                                <li><a href="color-palette-generator.html">Color Palette Generator</a></li>
+                                <li><a href="template-quiz.html" class="active">Template Selector Quiz</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="../templates.html">Templates</a></li>
+                <li><a href="../website-copy-kit.html" class="nav-highlight">Copy Kit - $17</a></li>
+                <li><a href="../quote-estimator.html">Get Quote</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="tool-hero">
+        <div class="container">
+            <h1>✨ Template Selector Quiz</h1>
+            <p>Find Your Perfect Website Template in 60 Seconds</p>
+        </div>
+    </section>
+
+    <div class="quiz-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+
+        <div class="question active" data-question="1">
+            <h2>What type of business do you have?</h2>
+            <div class="options">
+                <div class="option" data-value="service">
+                    <div class="option-title">🔧 Service Business</div>
+                    <div>Plumbing, Cleaning, Consulting, etc.</div>
+                </div>
+                <div class="option" data-value="retail">
+                    <div class="option-title">🛍️ Retail/E-commerce</div>
+                    <div>Online store, Physical shop, Products</div>
+                </div>
+                <div class="option" data-value="creative">
+                    <div class="option-title">🎨 Creative/Portfolio</div>
+                    <div>Photography, Design, Art</div>
+                </div>
+                <div class="option" data-value="restaurant">
+                    <div class="option-title">🍽️ Restaurant/Food</div>
+                    <div>Restaurant, Cafe, Food service</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question" data-question="2">
+            <h2>What's your primary goal?</h2>
+            <div class="options">
+                <div class="option" data-value="leads">
+                    <div class="option-title">📞 Get Leads & Calls</div>
+                    <div>Generate inquiries and phone calls</div>
+                </div>
+                <div class="option" data-value="sales">
+                    <div class="option-title">💰 Make Sales Online</div>
+                    <div>Sell products or services directly</div>
+                </div>
+                <div class="option" data-value="portfolio">
+                    <div class="option-title">🎯 Showcase Work</div>
+                    <div>Display portfolio and projects</div>
+                </div>
+                <div class="option" data-value="info">
+                    <div class="option-title">📋 Provide Information</div>
+                    <div>Share details, menu, hours, location</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question" data-question="3">
+            <h2>What style appeals to you?</h2>
+            <div class="options">
+                <div class="option" data-value="modern">
+                    <div class="option-title">✨ Modern & Minimalist</div>
+                    <div>Clean lines, lots of white space</div>
+                </div>
+                <div class="option" data-value="bold">
+                    <div class="option-title">🔥 Bold & Colorful</div>
+                    <div>Eye-catching, vibrant colors</div>
+                </div>
+                <div class="option" data-value="professional">
+                    <div class="option-title">👔 Professional & Trust</div>
+                    <div>Traditional, trustworthy look</div>
+                </div>
+                <div class="option" data-value="creative">
+                    <div class="option-title">🎨 Creative & Unique</div>
+                    <div>Artistic, standout design</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation-buttons">
+            <button class="quiz-btn secondary" id="prevBtn" style="display:none;">Previous</button>
+            <button class="quiz-btn primary" id="nextBtn" disabled>Next</button>
+        </div>
+
+        <div class="results" id="results">
+            <h2 style="text-align: center;">Your Perfect Template Match!</h2>
+            <div class="recommendation-card">
+                <h3 id="templateName">Business Pro Template</h3>
+                <div class="template-preview">📄</div>
+                <p id="templateDesc">Perfect for service businesses looking to generate leads and showcase expertise.</p>
+                <ul id="templateFeatures"></ul>
+                <a href="../templates.html" class="quiz-btn primary" style="display: inline-block; text-align: center; text-decoration: none; margin-top: 20px;">View Templates</a>
+            </div>
+            <button class="quiz-btn secondary" onclick="location.reload()">Take Quiz Again</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBWSK</h3>
+                    <p>Free tools for small business websites.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 3;
+        const answers = {};
+
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.question');
+                question.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                const questionNum = question.dataset.question;
+                answers[questionNum] = this.dataset.value;
+                
+                document.getElementById('nextBtn').disabled = false;
+            });
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentQuestion < totalQuestions) {
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('active');
+                currentQuestion++;
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+                
+                const progress = (currentQuestion / totalQuestions) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+                
+                document.getElementById('prevBtn').style.display = 'block';
+                document.getElementById('nextBtn').disabled = !answers[currentQuestion];
+                
+                if (currentQuestion === totalQuestions) {
+                    document.getElementById('nextBtn').textContent = 'See Results';
+                }
+            } else {
+                showResults();
+            }
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentQuestion > 1) {
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('active');
+                currentQuestion--;
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+                
+                const progress = (currentQuestion / totalQuestions) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+                
+                document.getElementById('nextBtn').textContent = 'Next';
+                document.getElementById('nextBtn').disabled = false;
+                
+                if (currentQuestion === 1) {
+                    document.getElementById('prevBtn').style.display = 'none';
+                }
+            }
+        });
+
+        function showResults() {
+            const recommendations = {
+                service: {
+                    name: 'Business Pro Template',
+                    desc: 'Perfect for service businesses. Optimized for lead generation with prominent contact forms and call-to-action buttons.',
+                    features: ['Contact Form Integration', 'Service Showcase Pages', 'Testimonials Section', 'Mobile Responsive']
+                },
+                retail: {
+                    name: 'E-commerce Starter',
+                    desc: 'Designed for online stores with product catalogs, shopping cart, and payment integration.',
+                    features: ['Product Gallery', 'Shopping Cart', 'Payment Integration', 'Inventory Management']
+                },
+                creative: {
+                    name: 'Portfolio Plus',
+                    desc: 'Showcase your creative work beautifully with lightbox galleries and project pages.',
+                    features: ['Portfolio Gallery', 'Filterable Projects', 'Lightbox Display', 'Client Testimonials']
+                },
+                restaurant: {
+                    name: 'Restaurant Deluxe',
+                    desc: 'Show off your menu, location, and atmosphere with this food-focused template.',
+                    features: ['Menu Display', 'Online Reservations', 'Photo Gallery', 'Location Map']
+                }
+            };
+
+            const businessType = answers['1'];
+            const recommendation = recommendations[businessType] || recommendations.service;
+
+            document.getElementById('templateName').textContent = recommendation.name;
+            document.getElementById('templateDesc').textContent = recommendation.desc;
+            document.getElementById('templateFeatures').innerHTML = recommendation.features.map(f => `<li>${f}</li>`).join('');
+
+            document.querySelector('.question.active').style.display = 'none';
+            document.querySelector('.navigation-buttons').style.display = 'none';
+            document.getElementById('results').classList.add('show');
+        }
+    </script>
+</body>
+</html>

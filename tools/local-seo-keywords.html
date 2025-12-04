@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local SEO Keyword Generator - Free Tool - SBWSK</title>
+    <meta name="description" content="Generate local SEO keywords for your business. Get targeted keywords to rank higher in local search results.">
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/modern.css">
+    <link rel="stylesheet" href="../css/sections.css">
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .tool-hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .form-section {
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 24px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1f2937;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .generate-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 16px 48px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16,185,129,0.3);
+        }
+        .results-section {
+            display: none;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .results-section.show { display: block; }
+        .keyword-category {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .keyword-category h3 {
+            margin-top: 0;
+            color: #10b981;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .keyword-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .keyword-item {
+            padding: 12px 16px;
+            background: #f0fdf4;
+            border-radius: 8px;
+            border-left: 4px solid #10b981;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .keyword-item:hover {
+            background: #dcfce7;
+            transform: translateX(5px);
+        }
+        .copy-all-btn {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        .copy-all-btn:hover {
+            background: #059669;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="nav-brand">
+                <img src="../images/logo.png" alt="SBWSK Logo" class="logo-img">
+                <span class="tagline">
+                    <span>Small Business</span>
+                    <span>Website Starter Kit</span>
+                </span>
+            </a>
+            <button class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../checklist.html" class="nav-highlight">Launch Checklist</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-dropdown-toggle">Free Tools</a>
+                    <ul class="nav-dropdown">
+                        <li class="nav-item-dropdown">
+                            <a href="#">Domain & Hosting</a>
+                            <ul class="nav-dropdown">
+                                <li><a href="../domain-checker.html">Domain Checker</a></li>
+                                <li><a href="../choose-registrar.html">Choose Hosts</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item-dropdown">
+                            <a href="#">SEO</a>
+                            <ul class="nav-dropdown">
+                                <li><a href="../website-speed-check.html">Speed Check</a></li>
+                                <li><a href="homepage-generator.html">Homepage Generator</a></li>
+                                <li><a href="website-audit.html">Website Audit</a></li>
+                                <li><a href="local-seo-keywords.html" class="active">Local SEO Keywords</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item-dropdown">
+                            <a href="#">Business Essentials</a>
+                            <ul class="nav-dropdown">
+                                <li><a href="../logo-generator.html">Logo Generator</a></li>
+                                <li><a href="color-palette-generator.html">Color Palette Generator</a></li>
+                                <li><a href="template-quiz.html">Template Selector Quiz</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="../templates.html">Templates</a></li>
+                <li><a href="../website-copy-kit.html" class="nav-highlight">Copy Kit - $17</a></li>
+                <li><a href="../quote-estimator.html">Get Quote</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="tool-hero">
+        <div class="container">
+            <h1>🗺️ Local SEO Keyword Generator</h1>
+            <p>Get Targeted Keywords to Dominate Local Search</p>
+        </div>
+    </section>
+
+    <div class="form-section">
+        <form id="keywordForm">
+            <div class="form-group">
+                <label for="businessType">Business Type</label>
+                <select id="businessType" required>
+                    <option value="">Select your business type...</option>
+                    <option value="landscaping">Landscaping</option>
+                    <option value="plumbing">Plumbing</option>
+                    <option value="electrical">Electrical</option>
+                    <option value="hvac">HVAC</option>
+                    <option value="roofing">Roofing</option>
+                    <option value="cleaning">Cleaning</option>
+                    <option value="painting">Painting</option>
+                    <option value="restaurant">Restaurant</option>
+                    <option value="salon">Salon/Spa</option>
+                    <option value="gym">Gym/Fitness</option>
+                    <option value="dentist">Dentist</option>
+                    <option value="lawyer">Lawyer/Attorney</option>
+                    <option value="realtor">Real Estate</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" required placeholder="e.g., Austin">
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" required placeholder="e.g., TX">
+            </div>
+            <button type="submit" class="generate-btn">Generate Keywords</button>
+        </form>
+    </div>
+
+    <div class="results-section" id="results">
+        <h2 style="text-align: center; margin-bottom: 40px;">Your Local SEO Keywords</h2>
+        
+        <div class="keyword-category">
+            <h3>🎯 Primary Keywords</h3>
+            <p>Use these in your page titles, H1s, and main content</p>
+            <div class="keyword-list" id="primaryKeywords"></div>
+            <button class="copy-all-btn" onclick="copyKeywords('primary')">Copy All</button>
+        </div>
+
+        <div class="keyword-category">
+            <h3>📍 Location-Based Keywords</h3>
+            <p>Target specific neighborhoods and areas</p>
+            <div class="keyword-list" id="locationKeywords"></div>
+            <button class="copy-all-btn" onclick="copyKeywords('location')">Copy All</button>
+        </div>
+
+        <div class="keyword-category">
+            <h3>🔧 Service-Specific Keywords</h3>
+            <p>Target specific services you offer</p>
+            <div class="keyword-list" id="serviceKeywords"></div>
+            <button class="copy-all-btn" onclick="copyKeywords('service')">Copy All</button>
+        </div>
+
+        <div class="keyword-category">
+            <h3>📝 Blog Topic Ideas</h3>
+            <p>Great for content marketing and SEO</p>
+            <div class="keyword-list" id="blogKeywords"></div>
+            <button class="copy-all-btn" onclick="copyKeywords('blog')">Copy All</button>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <button class="generate-btn" onclick="location.reload()">Generate More</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBWSK</h3>
+                    <p>Free tools for small business websites.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        const keywordData = {};
+
+        document.getElementById('keywordForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const businessType = document.getElementById('businessType').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+
+            generateKeywords(businessType, city, state);
+        });
+
+        function generateKeywords(business, city, state) {
+            // Primary Keywords
+            keywordData.primary = [
+                `${business} ${city}`,
+                `${business} in ${city}`,
+                `${business} ${city} ${state}`,
+                `best ${business} ${city}`,
+                `${city} ${business}`,
+                `${business} near me`,
+                `${business} services ${city}`
+            ];
+
+            // Location Keywords
+            keywordData.location = [
+                `${business} near ${city}`,
+                `${business} around ${city}`,
+                `${city} area ${business}`,
+                `${business} ${city} downtown`,
+                `${business} north ${city}`,
+                `${business} south ${city}`,
+                `${city} ${state} ${business}`
+            ];
+
+            // Service Keywords (examples - customize per business)
+            const services = {
+                landscaping: ['lawn care', 'tree trimming', 'landscape design'],
+                plumbing: ['emergency plumber', 'drain cleaning', 'water heater'],
+                electrical: ['electrician', 'electrical repair', 'panel upgrade'],
+                cleaning: ['house cleaning', 'office cleaning', 'deep cleaning']
+            };
+
+            const serviceList = services[business] || ['service', 'repair', 'installation'];
+            keywordData.service = serviceList.map(s => `${s} ${city}`);
+
+            // Blog Topics
+            keywordData.blog = [
+                `How to choose a ${business} in ${city}`,
+                `${business} tips for ${city} residents`,
+                `Why ${city} needs quality ${business}`,
+                `${business} costs in ${city}`,
+                `${business} checklist ${city}`
+            ];
+
+            displayKeywords();
+        }
+
+        function displayKeywords() {
+            ['primary', 'location', 'service', 'blog'].forEach(category => {
+                const container = document.getElementById(`${category}Keywords`);
+                container.innerHTML = keywordData[category].map(keyword => 
+                    `<div class="keyword-item" onclick="copyKeyword('${keyword}')">${keyword}</div>`
+                ).join('');
+            });
+
+            document.getElementById('results').classList.add('show');
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyKeyword(keyword) {
+            navigator.clipboard.writeText(keyword);
+            alert(`Copied: ${keyword}`);
+        }
+
+        function copyKeywords(category) {
+            const keywords = keywordData[category].join('\n');
+            navigator.clipboard.writeText(keywords);
+            alert(`Copied all ${category} keywords!`);
+        }
+    </script>
+</body>
+</html>

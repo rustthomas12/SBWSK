@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write My Homepage Generator - Free Tool - SBWSK</title>
+    <meta name="description" content="Generate professional homepage copy in minutes. AI-powered homepage generator for small businesses. Free tool by SBWSK.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/logo.png">
+    <link rel="apple-touch-icon" href="../images/logo.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/modern.css">
+    <link rel="stylesheet" href="../css/sections.css">
+
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .tool-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        .form-section {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1f2937;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 48px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results-section {
+            display: none;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .results-section.show {
+            display: block;
+        }
+
+        .copy-section {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .copy-section h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+
+        .copy-section p {
+            line-height: 1.8;
+            color: #374151;
+        }
+
+        .copy-btn {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #059669;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="nav-brand">
+                <img src="../images/logo.png" alt="SBWSK Logo" class="logo-img">
+                <span class="tagline">
+                    <span>Small Business</span>
+                    <span>Website Starter Kit</span>
+                </span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../checklist.html" class="nav-highlight">Launch Checklist</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-dropdown-toggle">Free Tools</a>
+                    <ul class="nav-dropdown">
+                        <li class="nav-item-dropdown">
+                            <a href="#">Domain & Hosting</a>
+                            <ul class="nav-dropdown">
+                                <li><a href="../domain-checker.html">Domain Checker</a></li>
+                                <li><a href="../choose-registrar.html">Choose Hosts</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item-dropdown">
+                            <a href="#">SEO</a>
+                            <ul class="nav-dropdown">
+                                <li><a href="../website-speed-check.html">Speed Check</a></li>
+                                <li><a href="homepage-generator.html" class="active">Homepage Generator</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item-dropdown">
+                            <a href="#">Business Essentials</a>
+                            <ul class="nav-dropdown">
+                                <li><a href="../logo-generator.html">Logo Generator</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="../templates.html">Templates</a></li>
+                <li><a href="../website-copy-kit.html" class="nav-highlight">Copy Kit - $17</a></li>
+                <li><a href="../quote-estimator.html">Get Quote</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="tool-hero">
+        <div class="container">
+            <h1>🏠 Write My Homepage Generator</h1>
+            <p>Generate professional homepage copy in minutes. Powered by AI.</p>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <form id="homepageForm">
+            <div class="form-group">
+                <label for="businessName">Business Name *</label>
+                <input type="text" id="businessName" required placeholder="e.g., Smith's Landscaping">
+            </div>
+
+            <div class="form-group">
+                <label for="businessType">Business Type *</label>
+                <select id="businessType" required>
+                    <option value="">Select your business type...</option>
+                    <option value="landscaping">Landscaping</option>
+                    <option value="cleaning">Cleaning Services</option>
+                    <option value="photography">Photography</option>
+                    <option value="consulting">Consulting</option>
+                    <option value="plumbing">Plumbing</option>
+                    <option value="electrical">Electrical Services</option>
+                    <option value="hvac">HVAC</option>
+                    <option value="roofing">Roofing</option>
+                    <option value="painting">Painting</option>
+                    <option value="construction">Construction</option>
+                    <option value="restaurant">Restaurant/Cafe</option>
+                    <option value="retail">Retail Store</option>
+                    <option value="salon">Salon/Spa</option>
+                    <option value="gym">Gym/Fitness</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location (City, State) *</label>
+                <input type="text" id="location" required placeholder="e.g., Austin, TX">
+            </div>
+
+            <div class="form-group">
+                <label for="services">Main Services (comma-separated) *</label>
+                <textarea id="services" required placeholder="e.g., Lawn care, Tree trimming, Landscape design"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="uniqueValue">What makes you unique?</label>
+                <textarea id="uniqueValue" placeholder="e.g., 20+ years experience, eco-friendly products, same-day service"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="tone">Brand Tone *</label>
+                <select id="tone" required>
+                    <option value="professional">Professional & Trustworthy</option>
+                    <option value="friendly">Friendly & Approachable</option>
+                    <option value="luxury">Premium & Luxury</option>
+                    <option value="modern">Modern & Innovative</option>
+                </select>
+            </div>
+
+            <button type="submit" class="generate-btn" id="generateBtn">
+                Generate My Homepage Copy
+            </button>
+        </form>
+    </section>
+
+    <!-- Loading -->
+    <div id="loading" class="loading" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Generating your professional homepage copy...</p>
+    </div>
+
+    <!-- Results Section -->
+    <section class="results-section" id="results">
+        <h2 style="text-align: center; margin-bottom: 30px;">Your Homepage Copy</h2>
+
+        <div class="copy-section">
+            <h3>Hero Headline</h3>
+            <p id="heroHeadline"></p>
+            <button class="copy-btn" onclick="copyToClipboard('heroHeadline')">Copy</button>
+        </div>
+
+        <div class="copy-section">
+            <h3>Hero Subheadline</h3>
+            <p id="heroSubheadline"></p>
+            <button class="copy-btn" onclick="copyToClipboard('heroSubheadline')">Copy</button>
+        </div>
+
+        <div class="copy-section">
+            <h3>About Section</h3>
+            <p id="aboutSection"></p>
+            <button class="copy-btn" onclick="copyToClipboard('aboutSection')">Copy</button>
+        </div>
+
+        <div class="copy-section">
+            <h3>Services Section</h3>
+            <p id="servicesSection"></p>
+            <button class="copy-btn" onclick="copyToClipboard('servicesSection')">Copy</button>
+        </div>
+
+        <div class="copy-section">
+            <h3>Call-to-Action</h3>
+            <p id="ctaSection"></p>
+            <button class="copy-btn" onclick="copyToClipboard('ctaSection')">Copy</button>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="generate-btn" onclick="location.reload()">Generate Another</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBWSK</h3>
+                    <p>Small Business Website Starter Kit - Free tools to launch and grow your online presence.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Free Tools</h4>
+                    <ul>
+                        <li><a href="../domain-checker.html">Domain Checker</a></li>
+                        <li><a href="../choose-registrar.html">Choose Hosts</a></li>
+                        <li><a href="../website-speed-check.html">Speed Check</a></li>
+                        <li><a href="../logo-generator.html">Logo Generator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../checklist.html">Launch Checklist</a></li>
+                        <li><a href="../templates.html">Templates</a></li>
+                        <li><a href="../blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: support@sbwsk.io</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        document.getElementById('homepageForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                businessName: document.getElementById('businessName').value,
+                businessType: document.getElementById('businessType').value,
+                location: document.getElementById('location').value,
+                services: document.getElementById('services').value,
+                uniqueValue: document.getElementById('uniqueValue').value,
+                tone: document.getElementById('tone').value
+            };
+
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('generateBtn').disabled = true;
+
+            // Generate copy (simulated - you can replace with API call later)
+            setTimeout(() => {
+                const copy = generateHomepageCopy(formData);
+
+                document.getElementById('heroHeadline').textContent = copy.heroHeadline;
+                document.getElementById('heroSubheadline').textContent = copy.heroSubheadline;
+                document.getElementById('aboutSection').textContent = copy.aboutSection;
+                document.getElementById('servicesSection').textContent = copy.servicesSection;
+                document.getElementById('ctaSection').textContent = copy.ctaSection;
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').classList.add('show');
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+            }, 2000);
+        });
+
+        function generateHomepageCopy(data) {
+            const toneStyles = {
+                professional: {
+                    headline: `Professional ${data.businessType} Services in ${data.location}`,
+                    sub: `Trust our expert team for quality ${data.businessType} solutions.`
+                },
+                friendly: {
+                    headline: `Your Friendly ${data.businessType} Experts in ${data.location}`,
+                    sub: `We're here to help with all your ${data.businessType} needs!`
+                },
+                luxury: {
+                    headline: `Premium ${data.businessType} Services in ${data.location}`,
+                    sub: `Experience excellence with our luxury ${data.businessType} solutions.`
+                },
+                modern: {
+                    headline: `Modern ${data.businessType} Solutions in ${data.location}`,
+                    sub: `Innovative ${data.businessType} services for today's needs.`
+                }
+            };
+
+            const style = toneStyles[data.tone] || toneStyles.professional;
+
+            return {
+                heroHeadline: `${data.businessName} - ${style.headline}`,
+                heroSubheadline: style.sub,
+                aboutSection: `Welcome to ${data.businessName}, your trusted ${data.businessType} partner in ${data.location}. ${data.uniqueValue ? data.uniqueValue + '.' : ''} We're dedicated to providing exceptional service and results that exceed expectations.`,
+                servicesSection: `Our Services: ${data.services.split(',').map(s => s.trim()).join(', ')}. Each service is delivered with attention to detail and commitment to your satisfaction.`,
+                ctaSection: `Ready to get started? Contact ${data.businessName} today for a free consultation. Call us or fill out our contact form, and we'll get back to you within 24 hours.`
+            };
+        }
+
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                btn.textContent = 'Copied!';
+                btn.style.background = '#10b981';
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.style.background = '';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
