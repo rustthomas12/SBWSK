@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Website Audit Tool - SEO & Performance Check - SBWSK</title>
-    <meta name="description" content="Free comprehensive website audit tool. Check SEO, performance, mobile optimization, and get actionable recommendations. Instant results.">
+    <title>Free Website Audit Tool - Real PageSpeed Data - SBWSK</title>
+    <meta name="description" content="Free comprehensive website audit using Google PageSpeed Insights. Check real SEO, performance, mobile optimization scores and get actionable recommendations.">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../images/logo.png">
@@ -21,64 +21,80 @@
         .tool-hero {
             background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
             color: white;
-            padding: 60px 0;
+            padding: 80px 0;
             text-align: center;
         }
 
         .tool-hero h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .tool-hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .audit-form {
-            max-width: 600px;
+            max-width: 700px;
             margin: 60px auto;
-            padding: 40px;
+            padding: 0 20px;
+        }
+
+        .form-card {
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .audit-form input {
             width: 100%;
             padding: 16px;
             border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
             margin-bottom: 16px;
+            transition: all 0.3s;
         }
 
         .audit-form input:focus {
             border-color: #0ea5e9;
             outline: none;
+            box-shadow: 0 0 0 3px rgba(14,165,233,0.1);
         }
 
         .audit-btn {
             background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
             color: white;
-            padding: 16px 48px;
+            padding: 18px 48px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
+            transition: all 0.3s;
         }
 
         .audit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(14, 165, 233, 0.4);
         }
 
         .audit-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+            transform: none;
         }
 
         .results {
             display: none;
-            max-width: 900px;
-            margin: 40px auto;
+            max-width: 1000px;
+            margin: 60px auto;
             padding: 0 20px;
         }
 
@@ -88,11 +104,11 @@
 
         .score-card {
             background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .score-circle {
@@ -103,9 +119,10 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            font-size: 60px;
-            font-weight: 700;
+            font-size: 64px;
+            font-weight: 800;
             color: white;
+            position: relative;
         }
 
         .score-good { background: linear-gradient(135deg, #10b981, #059669); }
@@ -115,15 +132,21 @@
         .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+            gap: 25px;
+            margin-bottom: 50px;
         }
 
         .category-card {
             background: white;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
 
         .category-card h3 {
@@ -131,27 +154,29 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1.2rem;
         }
 
         .category-score {
-            font-size: 32px;
-            font-weight: 700;
-            margin: 10px 0;
+            font-size: 48px;
+            font-weight: 800;
+            margin: 15px 0;
         }
 
-        .issues-list {
+        .issues-section {
             background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
         }
 
         .issue-item {
-            padding: 16px;
+            padding: 20px;
             border-left: 4px solid #ef4444;
             background: #fef2f2;
-            margin-bottom: 12px;
-            border-radius: 4px;
+            margin-bottom: 15px;
+            border-radius: 8px;
         }
 
         .issue-item.warning {
@@ -165,28 +190,57 @@
         }
 
         .issue-title {
-            font-weight: 600;
-            margin-bottom: 4px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .issue-desc {
+            color: #6b7280;
+            line-height: 1.6;
         }
 
         .loading {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px;
+            display: none;
+        }
+
+        .loading.show {
+            display: block;
         }
 
         .loading-spinner {
-            border: 4px solid #f3f4f6;
-            border-top: 4px solid #0ea5e9;
+            border: 5px solid #f3f4f6;
+            border-top: 5px solid #0ea5e9;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
         }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        .api-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #065f46;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .tool-hero h1 { font-size: 2rem; }
+            .form-card { padding: 30px 20px; }
+            .score-card { padding: 30px 20px; }
+            .category-grid { grid-template-columns: 1fr; }
         }
     </style>
 <!-- Google tag (gtag.js) -->
@@ -261,66 +315,79 @@
     <section class="tool-hero">
         <div class="container">
             <h1>🔍 Free Website Audit Tool</h1>
-            <p>Comprehensive SEO & Performance Analysis in Seconds</p>
+            <p>Comprehensive SEO & Performance Analysis Using Google PageSpeed Insights API</p>
+            <div class="api-badge" style="background: rgba(255,255,255,0.2); color: white; margin-top: 20px;">
+                ✓ Real Data from Google PageSpeed Insights
+            </div>
         </div>
     </section>
 
     <!-- Audit Form -->
     <div class="audit-form">
-        <h2 style="text-align: center; margin-top: 0;">Enter Your Website URL</h2>
-        <form id="auditForm">
-            <input type="text" id="websiteUrl" placeholder="https://yourwebsite.com or yourwebsite.com" required>
-            <button type="submit" class="audit-btn" id="auditBtn">Run Free Audit</button>
-        </form>
+        <div class="form-card">
+            <h2 style="text-align: center; margin-top: 0; margin-bottom: 30px;">Enter Your Website URL</h2>
+            <form id="auditForm">
+                <input type="text" id="websiteUrl" placeholder="https://yourwebsite.com or yourwebsite.com" required>
+                <button type="submit" class="audit-btn" id="auditBtn">Run Free Audit</button>
+            </form>
+            <p style="text-align: center; color: #6b7280; margin-top: 15px; font-size: 14px;">
+                Powered by Google PageSpeed Insights API • Real-time analysis
+            </p>
+        </div>
     </div>
 
     <!-- Loading -->
-    <div id="loading" class="loading" style="display: none;">
+    <div id="loading" class="loading">
         <div class="loading-spinner"></div>
-        <p style="font-size: 18px; color: #6b7280;">Analyzing your website...</p>
-        <p style="color: #9ca3af;">Checking SEO, performance, mobile optimization, and more</p>
+        <p style="font-size: 20px; color: #1f2937; font-weight: 600; margin-bottom: 10px;">Analyzing your website...</p>
+        <p style="color: #6b7280; margin-bottom: 20px;">Fetching real data from Google PageSpeed Insights</p>
+        <p style="color: #9ca3af; font-size: 14px;">This may take 10-30 seconds for accurate results</p>
     </div>
 
     <!-- Results -->
     <div class="results" id="results">
         <div class="score-card">
-            <h2>Overall Website Score</h2>
-            <div class="score-circle" id="overallScore">
-                85
-            </div>
-            <p style="font-size: 18px; color: #6b7280;">Your website is performing well with room for improvement</p>
+            <h2>Performance Score</h2>
+            <div class="score-circle" id="overallScore">85</div>
+            <p style="font-size: 18px; color: #6b7280;" id="scoreDescription">Your website performance rating</p>
+            <div class="api-badge">Real data from Google PageSpeed Insights</div>
         </div>
 
         <div class="category-grid">
             <div class="category-card">
-                <h3>📱 Mobile Friendly</h3>
-                <div class="category-score" id="mobileScore">92</div>
-                <p style="color: #6b7280;">Excellent mobile experience</p>
+                <h3>⚡ Performance</h3>
+                <div class="category-score" id="performanceScore">--</div>
+                <p style="color: #6b7280; margin: 0;" id="performanceLabel">Loading...</p>
             </div>
             <div class="category-card">
-                <h3>⚡ Page Speed</h3>
-                <div class="category-score" id="speedScore">78</div>
-                <p style="color: #6b7280;">Good loading performance</p>
+                <h3>♿ Accessibility</h3>
+                <div class="category-score" id="accessibilityScore">--</div>
+                <p style="color: #6b7280; margin: 0;" id="accessibilityLabel">Loading...</p>
+            </div>
+            <div class="category-card">
+                <h3>✅ Best Practices</h3>
+                <div class="category-score" id="bestPracticesScore">--</div>
+                <p style="color: #6b7280; margin: 0;" id="bestPracticesLabel">Loading...</p>
             </div>
             <div class="category-card">
                 <h3>🔍 SEO</h3>
-                <div class="category-score" id="seoScore">85</div>
-                <p style="color: #6b7280;">Well optimized for search</p>
-            </div>
-            <div class="category-card">
-                <h3>🔒 Security</h3>
-                <div class="category-score" id="securityScore">95</div>
-                <p style="color: #6b7280;">Secure and protected</p>
+                <div class="category-score" id="seoScore">--</div>
+                <p style="color: #6b7280; margin: 0;" id="seoLabel">Loading...</p>
             </div>
         </div>
 
-        <div class="issues-list">
-            <h2>Issues & Recommendations</h2>
+        <div class="issues-section">
+            <h2 style="margin-top: 0;">Core Web Vitals & Metrics</h2>
+            <div id="metricsData"></div>
+        </div>
+
+        <div class="issues-section">
+            <h2 style="margin-top: 0;">Recommendations</h2>
             <div id="issuesList"></div>
         </div>
 
         <div style="text-align: center; margin-top: 40px;">
-            <button class="audit-btn" onclick="location.reload()">Audit Another Website</button>
+            <button class="audit-btn" style="max-width: 400px; margin: 0 auto;" onclick="location.reload()">Audit Another Website</button>
         </div>
     </div>
 
@@ -330,26 +397,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>SBWSK</h3>
-                    <p>Free tools to launch and grow your small business website.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Free Tools</h4>
-                    <ul>
-                        <li><a href="../domain-checker.html">Domain Checker</a></li>
-                        <li><a href="../website-speed-check.html">Speed Check</a></li>
-                        <li><a href="website-audit.html">Website Audit</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="../checklist.html">Launch Checklist</a></li>
-                        <li><a href="../templates.html">Templates</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email: support@sbwsk.io</p>
+                    <p>Free professional tools for small business websites.</p>
                 </div>
             </div>
         </div>
@@ -358,69 +406,162 @@
     <script src="../js/utils.js"></script>
     <script src="../js/app.js"></script>
     <script>
+        // Google PageSpeed Insights API
+        const API_KEY = 'AIzaSyBvAj0TDe8jZuiBVIXIjoyjwNgmOMRoZh8'; // Public API key for PageSpeed Insights
+
         document.getElementById('auditForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
             let url = document.getElementById('websiteUrl').value.trim();
 
-            // Normalize URL - add https:// if no protocol specified
+            // Normalize URL
             if (!url.match(/^https?:\/\//i)) {
                 url = 'https://' + url;
             }
 
+            // Validate URL
+            try {
+                new URL(url);
+            } catch (e) {
+                alert('Please enter a valid URL');
+                return;
+            }
+
             // Hide form, show loading
             document.querySelector('.audit-form').style.display = 'none';
-            document.getElementById('loading').style.display = 'block';
+            document.getElementById('loading').classList.add('show');
 
-            // Simulate audit (replace with real API call)
-            setTimeout(() => {
-                runAudit(url);
-            }, 3000);
+            // Run real PageSpeed audit
+            try {
+                await runPageSpeedAudit(url);
+            } catch (error) {
+                console.error('Audit error:', error);
+                document.getElementById('loading').classList.remove('show');
+                document.querySelector('.audit-form').style.display = 'block';
+                alert('Error running audit. Please check the URL and try again.');
+            }
         });
 
-        function runAudit(url) {
-            // Generate simulated audit results
-            const scores = {
-                mobile: Math.floor(Math.random() * 20) + 80,
-                speed: Math.floor(Math.random() * 30) + 60,
-                seo: Math.floor(Math.random() * 25) + 70,
-                security: Math.floor(Math.random() * 15) + 85
+        async function runPageSpeedAudit(url) {
+            try {
+                // Call PageSpeed Insights API
+                const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&key=${API_KEY}&category=performance&category=accessibility&category=best-practices&category=seo&strategy=mobile`;
+
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error?.message || 'Failed to fetch audit data');
+                }
+
+                displayResults(data, url);
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        function displayResults(data, url) {
+            const categories = data.lighthouseResult.categories;
+            const audits = data.lighthouseResult.audits;
+
+            // Overall Performance Score
+            const perfScore = Math.round(categories.performance.score * 100);
+            document.getElementById('overallScore').textContent = perfScore;
+            document.getElementById('overallScore').className = 'score-circle ' + getScoreClass(perfScore);
+            document.getElementById('scoreDescription').textContent = getScoreDescription(perfScore);
+
+            // Individual Category Scores
+            updateCategoryScore('performance', categories.performance.score);
+            updateCategoryScore('accessibility', categories.accessibility.score);
+            updateCategoryScore('bestPractices', categories['best-practices'].score);
+            updateCategoryScore('seo', categories.seo.score);
+
+            // Core Web Vitals
+            const metrics = {
+                'First Contentful Paint': audits['first-contentful-paint'],
+                'Largest Contentful Paint': audits['largest-contentful-paint'],
+                'Total Blocking Time': audits['total-blocking-time'],
+                'Cumulative Layout Shift': audits['cumulative-layout-shift'],
+                'Speed Index': audits['speed-index']
             };
 
-            const overall = Math.round((scores.mobile + scores.speed + scores.seo + scores.security) / 4);
+            let metricsHTML = '';
+            Object.keys(metrics).forEach(key => {
+                const metric = metrics[key];
+                if (metric) {
+                    const scoreClass = metric.score >= 0.9 ? 'success' : metric.score >= 0.5 ? 'warning' : '';
+                    metricsHTML += `
+                        <div class="issue-item ${scoreClass}">
+                            <div class="issue-title">${key}: ${metric.displayValue || 'N/A'}</div>
+                            <div class="issue-desc">${metric.title}</div>
+                        </div>
+                    `;
+                }
+            });
+            document.getElementById('metricsData').innerHTML = metricsHTML;
 
-            // Update scores
-            document.getElementById('overallScore').textContent = overall;
-            document.getElementById('overallScore').className = 'score-circle ' +
-                (overall >= 80 ? 'score-good' : overall >= 60 ? 'score-medium' : 'score-poor');
+            // Recommendations
+            const opportunities = Object.values(audits).filter(audit =>
+                audit.details && audit.details.type === 'opportunity' && audit.score < 1
+            );
 
-            document.getElementById('mobileScore').textContent = scores.mobile;
-            document.getElementById('speedScore').textContent = scores.speed;
-            document.getElementById('seoScore').textContent = scores.seo;
-            document.getElementById('securityScore').textContent = scores.security;
+            let issuesHTML = '';
+            opportunities.slice(0, 8).forEach(opp => {
+                const scoreClass = opp.score >= 0.9 ? 'success' : opp.score >= 0.5 ? 'warning' : '';
+                issuesHTML += `
+                    <div class="issue-item ${scoreClass}">
+                        <div class="issue-title">${opp.title}</div>
+                        <div class="issue-desc">${opp.description || ''}</div>
+                    </div>
+                `;
+            });
 
-            // Generate issues
-            const issues = [
-                { type: 'success', title: 'HTTPS Enabled', desc: 'Your site uses secure HTTPS protocol' },
-                { type: 'success', title: 'Mobile Responsive', desc: 'Site adapts well to mobile devices' },
-                { type: 'warning', title: 'Image Optimization', desc: 'Some images could be compressed to improve loading speed' },
-                { type: 'warning', title: 'Meta Descriptions', desc: 'Add unique meta descriptions to 3 pages' },
-                { type: 'error', title: 'Page Speed', desc: 'Consider enabling browser caching to improve load time' }
-            ];
-
-            const issuesHTML = issues.map(issue => `
-                <div class="issue-item ${issue.type}">
-                    <div class="issue-title">${issue.title}</div>
-                    <div>${issue.desc}</div>
-                </div>
-            `).join('');
+            if (!issuesHTML) {
+                issuesHTML = '<div class="issue-item success"><div class="issue-title">Great job!</div><div class="issue-desc">No major issues found. Your website is well optimized.</div></div>';
+            }
 
             document.getElementById('issuesList').innerHTML = issuesHTML;
 
-            // Hide loading, show results
-            document.getElementById('loading').style.display = 'none';
+            // Show results
+            document.getElementById('loading').classList.remove('show');
             document.getElementById('results').classList.add('show');
             document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateCategoryScore(category, score) {
+            const scoreValue = Math.round(score * 100);
+            const scoreElement = document.getElementById(`${category}Score`);
+            const labelElement = document.getElementById(`${category}Label`);
+
+            scoreElement.textContent = scoreValue;
+            scoreElement.style.color = getScoreColor(scoreValue);
+            labelElement.textContent = getScoreLabel(scoreValue);
+        }
+
+        function getScoreClass(score) {
+            if (score >= 90) return 'score-good';
+            if (score >= 50) return 'score-medium';
+            return 'score-poor';
+        }
+
+        function getScoreColor(score) {
+            if (score >= 90) return '#10b981';
+            if (score >= 50) return '#f59e0b';
+            return '#ef4444';
+        }
+
+        function getScoreLabel(score) {
+            if (score >= 90) return 'Excellent';
+            if (score >= 75) return 'Good';
+            if (score >= 50) return 'Needs work';
+            return 'Poor';
+        }
+
+        function getScoreDescription(score) {
+            if (score >= 90) return 'Excellent! Your website is performing very well';
+            if (score >= 75) return 'Good performance with some room for improvement';
+            if (score >= 50) return 'Average performance - optimization recommended';
+            return 'Poor performance - immediate optimization needed';
         }
     </script>
 </body>
