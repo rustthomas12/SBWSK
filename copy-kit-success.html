@@ -83,6 +83,41 @@
             background: #fee2e2;
             color: #991b1b;
         }
+
+        /* Mobile Optimization for Copy Kit Form */
+        @media (max-width: 768px) {
+            .ai-form-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            #ai-form-container {
+                padding: 1.5rem !important;
+            }
+
+            .ai-copy-section {
+                padding: 1.5rem !important;
+            }
+
+            .copy-button-row {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+            }
+
+            .copy-button-row button {
+                margin-top: 0.5rem !important;
+                width: 100% !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #ai-form-container {
+                padding: 1rem !important;
+            }
+
+            input, select, textarea {
+                font-size: 16px !important; /* Prevents zoom on iOS */
+            }
+        }
     </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-L3765SHQLJ"></script>
@@ -143,7 +178,7 @@
 
                             <div id="ai-form-container" style="background: white; padding: 2.5rem; border-radius: 16px;">
                                 <form id="copyKitForm" style="color: #1f2937;">
-                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                                    <div class="ai-form-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
 
                                         <div>
                                             <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Business Name *</label>
@@ -192,7 +227,7 @@
 
                                         <div>
                                             <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Website (if you have one)</label>
-                                            <input type="url" id="website" placeholder="https://yourbusiness.com" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                            <input type="text" id="website" placeholder="yourbusiness.com or https://yourbusiness.com" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
                                         </div>
 
                                         <div>
@@ -240,7 +275,7 @@
                                         <textarea id="uniqueValue" rows="3" placeholder="e.g., Family-owned for 3 generations, 24/7 emergency service, satisfaction guarantee" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; font-family: inherit;"></textarea>
                                     </div>
 
-                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                                    <div class="ai-form-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
                                         <div>
                                             <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Service Area</label>
                                             <input type="text" id="serviceArea" placeholder="e.g., Austin and surrounding 30 miles" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
@@ -583,55 +618,83 @@
         // =================================================================
         // AI COPY GENERATION
         // =================================================================
-        document.getElementById('copyKitForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const formData = {
-                businessName: document.getElementById('businessName').value.trim(),
-                businessType: document.getElementById('businessType').value,
-                location: document.getElementById('location').value.trim(),
-                services: document.getElementById('services').value.trim(),
-                uniqueValue: document.getElementById('uniqueValue').value.trim(),
-                tone: document.getElementById('tone').value,
-                targetAudience: document.getElementById('targetAudience').value,
-                yearsInBusiness: document.getElementById('yearsInBusiness').value,
-                phoneNumber: document.getElementById('phoneNumber').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                website: document.getElementById('website').value.trim(),
-                teamSize: document.getElementById('teamSize').value.trim(),
-                certifications: document.getElementById('certifications').value.trim(),
-                serviceArea: document.getElementById('serviceArea').value.trim(),
-                operatingHours: document.getElementById('operatingHours').value.trim(),
-                emergencyService: document.getElementById('emergencyService').value
-            };
-
-            // Show loading, hide form
-            document.getElementById('ai-form-container').style.display = 'none';
-            document.getElementById('ai-loading').style.display = 'block';
-
-            try {
-                const response = await fetch('/api/generate-copy-kit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to generate copy');
-                }
-
-                const result = await response.json();
-                displayAIResults(result.pages);
-
-            } catch (error) {
-                console.error('Error generating copy:', error);
-                alert('Sorry, there was an error generating your copy. Please try again or contact support.');
-                document.getElementById('ai-form-container').style.display = 'block';
-                document.getElementById('ai-loading').style.display = 'none';
+        function initCopyKitForm() {
+            const form = document.getElementById('copyKitForm');
+            if (!form) {
+                console.error('Copy kit form not found!');
+                return;
             }
-        });
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                console.log('Form submitted!');
+
+                const formData = {
+                    businessName: document.getElementById('businessName').value.trim(),
+                    businessType: document.getElementById('businessType').value,
+                    location: document.getElementById('location').value.trim(),
+                    services: document.getElementById('services').value.trim(),
+                    uniqueValue: document.getElementById('uniqueValue').value.trim(),
+                    tone: document.getElementById('tone').value,
+                    targetAudience: document.getElementById('targetAudience').value,
+                    yearsInBusiness: document.getElementById('yearsInBusiness').value,
+                    phoneNumber: document.getElementById('phoneNumber').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    website: document.getElementById('website').value.trim(),
+                    teamSize: document.getElementById('teamSize').value.trim(),
+                    certifications: document.getElementById('certifications').value.trim(),
+                    serviceArea: document.getElementById('serviceArea').value.trim(),
+                    operatingHours: document.getElementById('operatingHours').value.trim(),
+                    emergencyService: document.getElementById('emergencyService').value
+                };
+
+                console.log('Form data:', formData);
+
+                // Show loading, hide form
+                const formContainer = document.getElementById('ai-form-container');
+                const loadingDiv = document.getElementById('ai-loading');
+
+                formContainer.style.display = 'none';
+                loadingDiv.style.display = 'block';
+
+                try {
+                    console.log('Calling API...');
+                    const response = await fetch('/api/generate-copy-kit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    console.log('API response status:', response.status);
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error('API error response:', errorText);
+                        throw new Error(`API returned ${response.status}: ${errorText}`);
+                    }
+
+                    const result = await response.json();
+                    console.log('API result:', result);
+
+                    displayAIResults(result.pages);
+
+                } catch (error) {
+                    console.error('Error generating copy:', error);
+                    alert('Sorry, there was an error generating your copy. Error: ' + error.message + '\n\nPlease try again or contact support.');
+                    formContainer.style.display = 'block';
+                    loadingDiv.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize form after page loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCopyKitForm);
+        } else {
+            initCopyKitForm();
+        }
 
         function displayAIResults(pages) {
             document.getElementById('ai-loading').style.display = 'none';
