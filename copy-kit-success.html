@@ -131,6 +131,156 @@
 
                     <!-- Download Section (hidden until verified) -->
                     <div id="download-section" style="display: none;">
+
+                        <!-- AI-Powered Copy Generation Section -->
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3rem; border-radius: 20px; margin-bottom: 3rem;">
+                            <div style="text-align: center; margin-bottom: 2rem;">
+                                <h2 style="font-size: 2rem; margin-bottom: 0.75rem; color: white;">🤖 Get Your Custom AI-Generated Copy</h2>
+                                <p style="font-size: 1.125rem; opacity: 0.95; max-width: 700px; margin: 0 auto;">
+                                    Fill out the form below and our AI will instantly generate professional, customized copy for all 5 pages of your website!
+                                </p>
+                            </div>
+
+                            <div id="ai-form-container" style="background: white; padding: 2.5rem; border-radius: 16px;">
+                                <form id="copyKitForm" style="color: #1f2937;">
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Business Name *</label>
+                                            <input type="text" id="businessName" required style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                        </div>
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Business Type *</label>
+                                            <select id="businessType" required style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                                <option value="">Select your business type</option>
+                                                <option value="Plumbing">Plumbing</option>
+                                                <option value="HVAC">HVAC</option>
+                                                <option value="Electrical">Electrical</option>
+                                                <option value="Landscaping">Landscaping</option>
+                                                <option value="Cleaning">Cleaning</option>
+                                                <option value="Roofing">Roofing</option>
+                                                <option value="Painting">Painting</option>
+                                                <option value="Carpentry">Carpentry</option>
+                                                <option value="Real Estate">Real Estate</option>
+                                                <option value="Consulting">Consulting</option>
+                                                <option value="Marketing">Marketing</option>
+                                                <option value="Legal">Legal Services</option>
+                                                <option value="Accounting">Accounting</option>
+                                                <option value="Restaurant">Restaurant</option>
+                                                <option value="Retail">Retail Store</option>
+                                                <option value="Salon">Salon/Spa</option>
+                                                <option value="Photography">Photography</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Location (City, State) *</label>
+                                            <input type="text" id="location" required placeholder="e.g., Austin, TX" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                        </div>
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Phone Number</label>
+                                            <input type="tel" id="phoneNumber" placeholder="(555) 123-4567" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                        </div>
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Email Address</label>
+                                            <input type="email" id="email" placeholder="info@yourbusiness.com" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                        </div>
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Website (if you have one)</label>
+                                            <input type="url" id="website" placeholder="https://yourbusiness.com" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                        </div>
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Years in Business</label>
+                                            <input type="number" id="yearsInBusiness" placeholder="5" min="0" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                        </div>
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Team Size</label>
+                                            <input type="text" id="teamSize" placeholder="e.g., 5-10 employees" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                        </div>
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Tone/Style</label>
+                                            <select id="tone" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                                <option value="professional">Professional</option>
+                                                <option value="friendly">Friendly</option>
+                                                <option value="luxury">Luxury</option>
+                                                <option value="modern">Modern</option>
+                                                <option value="local">Local/Community-Focused</option>
+                                                <option value="expert">Expert/Technical</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Target Audience</label>
+                                            <select id="targetAudience" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                                <option value="Homeowners">Homeowners</option>
+                                                <option value="Businesses">Businesses</option>
+                                                <option value="Both Homeowners and Businesses">Both</option>
+                                                <option value="Property Managers">Property Managers</option>
+                                                <option value="Contractors">Contractors</option>
+                                                <option value="General Public">General Public</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div style="margin-bottom: 1.5rem;">
+                                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Your Services * (one per line, 3-6 services)</label>
+                                        <textarea id="services" required rows="5" placeholder="Service 1&#10;Service 2&#10;Service 3" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; font-family: inherit;"></textarea>
+                                    </div>
+
+                                    <div style="margin-bottom: 1.5rem;">
+                                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">What Makes You Unique?</label>
+                                        <textarea id="uniqueValue" rows="3" placeholder="e.g., Family-owned for 3 generations, 24/7 emergency service, satisfaction guarantee" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; font-family: inherit;"></textarea>
+                                    </div>
+
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Service Area</label>
+                                            <input type="text" id="serviceArea" placeholder="e.g., Austin and surrounding 30 miles" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                        </div>
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Certifications/Licenses</label>
+                                            <input type="text" id="certifications" placeholder="e.g., Licensed, Bonded, Insured" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                        </div>
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Operating Hours</label>
+                                            <input type="text" id="operatingHours" placeholder="e.g., Mon-Fri 8am-6pm" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                        </div>
+
+                                        <div>
+                                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Emergency Service Available?</label>
+                                            <select id="emergencyService" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;">
+                                                <option value="no">No</option>
+                                                <option value="yes">Yes - 24/7</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.25rem; font-size: 1.125rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; color: white; border-radius: 12px; cursor: pointer; transition: transform 0.2s;">
+                                        ✨ Generate My Custom Copy Now
+                                    </button>
+                                </form>
+
+                                <div id="ai-loading" style="display: none; text-align: center; padding: 3rem;">
+                                    <div style="font-size: 3rem; margin-bottom: 1rem;">⏳</div>
+                                    <h3 style="margin-bottom: 0.5rem; color: #374151;">Generating Your Custom Copy...</h3>
+                                    <p style="color: #6b7280;">Our AI is crafting professional copy for all 5 pages. This takes about 30-60 seconds.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI-Generated Results (hidden until generated) -->
+                        <div id="ai-results" style="display: none; margin-bottom: 3rem;"></div>
+
                         <h2 style="margin-bottom: 1.5rem;">Download Your Templates</h2>
 
                         <p style="margin-bottom: 2rem; color: var(--text-secondary);">
@@ -426,8 +576,230 @@
         // Run verification when page loads
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', verifySession);
-        } else {
+        } else{
             verifySession();
+        }
+
+        // =================================================================
+        // AI COPY GENERATION
+        // =================================================================
+        document.getElementById('copyKitForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                businessName: document.getElementById('businessName').value.trim(),
+                businessType: document.getElementById('businessType').value,
+                location: document.getElementById('location').value.trim(),
+                services: document.getElementById('services').value.trim(),
+                uniqueValue: document.getElementById('uniqueValue').value.trim(),
+                tone: document.getElementById('tone').value,
+                targetAudience: document.getElementById('targetAudience').value,
+                yearsInBusiness: document.getElementById('yearsInBusiness').value,
+                phoneNumber: document.getElementById('phoneNumber').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                website: document.getElementById('website').value.trim(),
+                teamSize: document.getElementById('teamSize').value.trim(),
+                certifications: document.getElementById('certifications').value.trim(),
+                serviceArea: document.getElementById('serviceArea').value.trim(),
+                operatingHours: document.getElementById('operatingHours').value.trim(),
+                emergencyService: document.getElementById('emergencyService').value
+            };
+
+            // Show loading, hide form
+            document.getElementById('ai-form-container').style.display = 'none';
+            document.getElementById('ai-loading').style.display = 'block';
+
+            try {
+                const response = await fetch('/api/generate-copy-kit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to generate copy');
+                }
+
+                const result = await response.json();
+                displayAIResults(result.pages);
+
+            } catch (error) {
+                console.error('Error generating copy:', error);
+                alert('Sorry, there was an error generating your copy. Please try again or contact support.');
+                document.getElementById('ai-form-container').style.display = 'block';
+                document.getElementById('ai-loading').style.display = 'none';
+            }
+        });
+
+        function displayAIResults(pages) {
+            document.getElementById('ai-loading').style.display = 'none';
+
+            const resultsHTML = `
+                <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 2rem; border-radius: 20px; text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">✨</div>
+                    <h2 style="font-size: 2rem; margin-bottom: 0.5rem; color: white;">Your Custom Copy is Ready!</h2>
+                    <p style="font-size: 1.125rem; opacity: 0.95;">Professional AI-generated copy for all 5 pages below. Copy and paste into your website!</p>
+                </div>
+
+                ${generatePageSection('📄 About Us Page', pages.about, [
+                    {key: 'openingStatement', label: 'Opening Statement'},
+                    {key: 'ourStory', label: 'Our Story'},
+                    {key: 'whyChooseUs', label: 'Why Choose Us'},
+                    {key: 'ourTeam', label: 'Our Team'},
+                    {key: 'ourCommitment', label: 'Our Commitment'}
+                ])}
+
+                ${generateServicesSection(pages.services)}
+
+                ${generatePageSection('✉️ Contact Page', pages.contact, [
+                    {key: 'headline', label: 'Page Headline'},
+                    {key: 'openingParagraph', label: 'Opening Paragraph'},
+                    {key: 'contactMethodsIntro', label: 'Contact Methods'},
+                    {key: 'formInstructions', label: 'Form Instructions'},
+                    {key: 'responseTimePromise', label: 'Response Time Promise'}
+                ])}
+
+                ${generateFAQSection(pages.faq)}
+
+                ${generateLegalSection('🔒 Privacy Policy', pages.privacy)}
+                ${generateLegalSection('📜 Terms of Service', pages.terms)}
+            `;
+
+            const resultsDiv = document.getElementById('ai-results');
+            resultsDiv.innerHTML = resultsHTML;
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function generatePageSection(title, data, fields) {
+            let html = `<div style="background: white; border: 2px solid #e5e7eb; border-radius: 16px; padding: 2rem; margin-bottom: 2rem;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: #1f2937;">${title}</h3>`;
+
+            fields.forEach(field => {
+                const content = data[field.key] || '';
+                html += `
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <h4 style="font-size: 1rem; font-weight: 600; color: #374151;">${field.label}</h4>
+                            <button onclick="copyToClipboard('${field.key}-${title}')" style="background: #0ea5e9; color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 600;">Copy</button>
+                        </div>
+                        <div id="${field.key}-${title}" style="background: #f9fafb; padding: 1rem; border-radius: 8px; color: #1f2937; line-height: 1.6; white-space: pre-wrap;">${content}</div>
+                    </div>`;
+            });
+
+            html += '</div>';
+            return html;
+        }
+
+        function generateServicesSection(servicesData) {
+            let html = `<div style="background: white; border: 2px solid #e5e7eb; border-radius: 16px; padding: 2rem; margin-bottom: 2rem;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: #1f2937;">💼 Services Page</h3>`;
+
+            // Service Introduction
+            html += `
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h4 style="font-size: 1rem; font-weight: 600; color: #374151;">Service Introduction</h4>
+                        <button onclick="copyToClipboard('service-intro')" style="background: #0ea5e9; color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 600;">Copy</button>
+                    </div>
+                    <div id="service-intro" style="background: #f9fafb; padding: 1rem; border-radius: 8px; color: #1f2937; line-height: 1.6;">${servicesData.serviceIntro}</div>
+                </div>`;
+
+            // Individual Services
+            servicesData.services.forEach((service, index) => {
+                html += `
+                    <div style="margin-bottom: 1.5rem; border-left: 4px solid #0ea5e9; padding-left: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <h4 style="font-size: 1rem; font-weight: 600; color: #374151;">${service.name}</h4>
+                            <button onclick="copyToClipboard('service-${index}')" style="background: #0ea5e9; color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 600;">Copy</button>
+                        </div>
+                        <div id="service-${index}" style="background: #f9fafb; padding: 1rem; border-radius: 8px; color: #1f2937; line-height: 1.6;">
+                            <p style="margin-bottom: 0.75rem;">${service.description}</p>
+                            <ul style="list-style: disc; margin-left: 1.5rem;">
+                                ${service.features.map(f => `<li>${f}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>`;
+            });
+
+            // Process Steps
+            html += `
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h4 style="font-size: 1rem; font-weight: 600; color: #374151;">Our Process</h4>
+                        <button onclick="copyToClipboard('process-steps')" style="background: #0ea5e9; color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 600;">Copy</button>
+                    </div>
+                    <div id="process-steps" style="background: #f9fafb; padding: 1rem; border-radius: 8px; color: #1f2937; line-height: 1.6;">
+                        <ol style="list-style: decimal; margin-left: 1.5rem;">
+                            ${servicesData.processSteps.map(step => `<li>${step}</li>`).join('')}
+                        </ol>
+                    </div>
+                </div>`;
+
+            // Call to Action
+            html += `
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h4 style="font-size: 1rem; font-weight: 600; color: #374151;">Call to Action</h4>
+                        <button onclick="copyToClipboard('service-cta')" style="background: #0ea5e9; color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 600;">Copy</button>
+                    </div>
+                    <div id="service-cta" style="background: #f9fafb; padding: 1rem; border-radius: 8px; color: #1f2937; line-height: 1.6;">${servicesData.callToAction}</div>
+                </div>`;
+
+            html += '</div>';
+            return html;
+        }
+
+        function generateFAQSection(faqData) {
+            let html = `<div style="background: white; border: 2px solid #e5e7eb; border-radius: 16px; padding: 2rem; margin-bottom: 2rem;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: #1f2937;">❓ FAQ Page</h3>`;
+
+            faqData.faqs.forEach((faq, index) => {
+                html += `
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                            <h4 style="font-size: 1rem; font-weight: 600; color: #374151; flex: 1;">${faq.question}</h4>
+                            <button onclick="copyToClipboard('faq-${index}')" style="background: #0ea5e9; color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 600; margin-left: 1rem;">Copy</button>
+                        </div>
+                        <div id="faq-${index}" style="background: #f9fafb; padding: 1rem; border-radius: 8px; color: #6b7280; line-height: 1.6;">${faq.answer}</div>
+                    </div>`;
+            });
+
+            html += '</div>';
+            return html;
+        }
+
+        function generateLegalSection(title, content) {
+            return `
+                <div style="background: white; border: 2px solid #e5e7eb; border-radius: 16px; padding: 2rem; margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3 style="font-size: 1.5rem; color: #1f2937;">${title}</h3>
+                        <button onclick="copyToClipboard('legal-${title}')" style="background: #0ea5e9; color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 600;">Copy All</button>
+                    </div>
+                    <div id="legal-${title}" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; color: #374151; line-height: 1.8; white-space: pre-wrap; font-size: 0.875rem;">${content}</div>
+                </div>`;
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.innerText || element.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#0ea5e9';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy. Please select and copy manually.');
+            });
         }
     </script>
 </body>
