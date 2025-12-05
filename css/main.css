@@ -528,6 +528,10 @@ a:hover {
 @media (max-width: 768px) {
     .nav-toggle {
         display: flex;
+        min-width: 44px;
+        min-height: 44px;
+        justify-content: center;
+        align-items: center;
     }
 
     .tagline {
@@ -567,8 +571,11 @@ a:hover {
     }
 
     .nav-menu a {
-        padding: 0.4rem 0.5rem;
+        padding: 0.75rem 1rem;
         text-align: left;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
     }
 
     /* Mobile Dropdown Styles */
