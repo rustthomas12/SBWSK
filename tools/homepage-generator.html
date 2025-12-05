@@ -511,6 +511,29 @@
             </ul>
         </div>
 
+        <!-- Copy Kit Upsell -->
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 20px; margin-top: 60px; text-align: center;">
+            <h3 style="font-size: 2rem; margin-bottom: 15px; color: white;">🚀 Need Copy for Your Other Pages?</h3>
+            <p style="font-size: 1.125rem; margin-bottom: 25px; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto;">
+                You've got your homepage covered! Now get professional, conversion-focused copy for all your essential pages: About, Services, Contact, FAQ, and more.
+            </p>
+            <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 15px; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <p style="font-size: 1rem; margin-bottom: 10px; font-weight: 600;">✅ Complete Website Copy Kit includes:</p>
+                <ul style="list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.8;">
+                    <li>📄 About Us page copy</li>
+                    <li>📄 Services/Products page templates</li>
+                    <li>📄 Contact page copy</li>
+                    <li>📄 FAQ section templates</li>
+                    <li>📄 Privacy Policy & Terms of Service</li>
+                    <li>📄 Email templates for customer communication</li>
+                </ul>
+            </div>
+            <a href="../website-copy-kit.html" class="btn btn-large" style="background: white; color: #667eea; font-weight: 700; display: inline-block; margin-top: 10px; padding: 18px 40px; text-decoration: none; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                Get Complete Copy Kit - Only $17 →
+            </a>
+            <p style="font-size: 0.875rem; margin-top: 15px; opacity: 0.85;">Launch your complete website in hours, not weeks</p>
+        </div>
+
         <div style="text-align: center; margin-top: 50px;">
             <button class="generate-btn" style="max-width: 400px; margin: 0 auto;" onclick="location.reload()">Generate Another Homepage</button>
         </div>
@@ -606,8 +629,39 @@
             document.querySelector('.form-section').style.display = 'none';
             document.getElementById('loading').style.display = 'block';
 
-            // Generate copy
-            setTimeout(() => {
+            try {
+                // Call Claude API for professional AI-generated copy
+                const response = await fetch('/api/generate-homepage', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to generate copy');
+                }
+
+                const result = await response.json();
+                const copy = result.copy;
+
+                // Display AI-generated results
+                document.getElementById('heroHeadline').textContent = copy.heroHeadline;
+                document.getElementById('heroSubheadline').textContent = copy.heroSubheadline;
+                document.getElementById('aboutSection').textContent = copy.aboutSection;
+                document.getElementById('servicesIntro').textContent = copy.servicesIntro;
+                document.getElementById('servicesSection').textContent = copy.servicesSection;
+                document.getElementById('whyChooseSection').textContent = copy.whyChooseSection;
+                document.getElementById('ctaSection').textContent = copy.ctaSection;
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').classList.add('show');
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+
+            } catch (error) {
+                console.error('Error generating copy:', error);
+                // Fallback to template-based generation
                 const copy = generateProfessionalCopy(formData);
 
                 document.getElementById('heroHeadline').textContent = copy.heroHeadline;
@@ -621,7 +675,7 @@
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('results').classList.add('show');
                 document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-            }, 2500);
+            }
         });
 
         function generateProfessionalCopy(data) {
