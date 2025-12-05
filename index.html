@@ -411,14 +411,17 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- JavaScript - Optimized Loading -->
+    <!-- Critical scripts load immediately -->
     <script src="js/utils.js?v=1.0.0"></script>
     <script src="js/app.js?v=1.0.0"></script>
-    <script src="js/faq.js?v=1.0.0"></script>
-    <script src="js/form-handler.js?v=1.0.0"></script>
-    <script src="js/social-share.js?v=1.0.0"></script>
-    <script src="js/accessibility.js?v=1.0.0"></script>
-    <script src="js/cookie-consent.js?v=1.0.0"></script>
-    <script src="js/analytics.js?v=1.0.0"></script>
+
+    <!-- Non-critical scripts deferred -->
+    <script src="js/faq.js?v=1.0.0" defer></script>
+    <script src="js/form-handler.js?v=1.0.0" defer></script>
+    <script src="js/social-share.js?v=1.0.0" defer></script>
+    <script src="js/accessibility.js?v=1.0.0" defer></script>
+    <script src="js/cookie-consent.js?v=1.0.0" defer></script>
+    <script src="js/analytics.js?v=1.0.0" defer></script>
 </body>
 </html>
