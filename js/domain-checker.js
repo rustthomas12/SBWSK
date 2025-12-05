@@ -40,6 +40,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Check availability for multiple TLDs
         const results = await checkMultipleTLDs(domainName);
 
+        // Track Pinterest Custom Event
+        if (typeof pintrk !== 'undefined') {
+            pintrk('track', 'custom', {
+                event_name: 'DomainSearchCompleted',
+                value: 0,
+                currency: 'USD',
+                search_string: domainName
+            });
+        }
+
         // Display results
         displayResults(domainName, results);
     });

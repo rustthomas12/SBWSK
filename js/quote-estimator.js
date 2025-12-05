@@ -156,6 +156,15 @@ function calculateQuote() {
     // Display results
     displayQuoteResults(pricing);
 
+    // Track Pinterest Lead Conversion
+    if (typeof pintrk !== 'undefined') {
+        pintrk('track', 'lead', {
+            value: pricing.total,
+            currency: 'USD',
+            lead_type: 'Website Quote Request'
+        });
+    }
+
     // Move to results step
     const currentStepElement = document.querySelector(`.quiz-step[data-step="${currentStep}"]`);
     currentStepElement.classList.remove('active');
