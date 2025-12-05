@@ -304,6 +304,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- JavaScript -->
     <script src="js/utils.js?v=1.0.0"></script>
     <script src="js/app.js?v=1.0.0"></script>
+    <script src="js/email-collector.js?v=1.0.0"></script>
     <script src="js/domain-checker.js?v=1.0.1" defer></script>
+    <script>
+        // Trigger email popup after domain search
+        window.addEventListener('load', () => {
+            const originalDisplayResults = window.displayResults;
+            if (originalDisplayResults) {
+                window.displayResults = function(...args) {
+                    originalDisplayResults.apply(this, args);
+                    // Show email popup 3 seconds after results are displayed
+                    emailCollector.triggerAfterToolUse('Domain Checker', 3000);
+                };
+            }
+        });
+    </script>
 </body>
 </html>

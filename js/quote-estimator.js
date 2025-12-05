@@ -165,6 +165,11 @@ function calculateQuote() {
         });
     }
 
+    // Show email popup after viewing quote
+    if (typeof emailCollector !== 'undefined') {
+        emailCollector.triggerAfterToolUse('Quote Estimator', 5000);
+    }
+
     // Move to results step
     const currentStepElement = document.querySelector(`.quiz-step[data-step="${currentStep}"]`);
     currentStepElement.classList.remove('active');

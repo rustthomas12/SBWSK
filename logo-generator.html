@@ -596,6 +596,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- JavaScript -->
     <script src="js/utils.js?v=1.0.0"></script>
     <script src="js/app.js?v=1.0.0"></script>
+    <script src="js/email-collector.js?v=1.0.0"></script>
     <script>
         // Logo Generator Logic
         let selectedTemplate = 'initials';
@@ -667,6 +668,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     currency: 'USD'
                 });
             }
+
+            // Show email popup after download
+            emailCollector.triggerAfterToolUse('Logo Generator', 2000);
         });
 
         // Download JPG button
