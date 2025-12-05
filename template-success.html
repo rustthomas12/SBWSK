@@ -261,6 +261,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Set download link from session ID
         const urlParams = new URLSearchParams(window.location.search);
         const sessionId = urlParams.get('session_id');
+        // Track Pinterest Conversion
+        if (typeof pintrk !== 'undefined') {
+            pintrk('track', 'checkout', {
+                event_id: 'template_' + (sessionId || Date.now()),
+                value: 49,
+                order_quantity: 1,
+                currency: 'USD',
+                order_id: sessionId || 'unknown',
+                line_items: [{
+                    product_name: 'Website Template',
+                    product_id: 'template',
+                    product_price: 49,
+                    product_quantity: 1
+                }]
+            });
+        }
         const downloadBtn = document.getElementById('download-btn');
 
         if (sessionId && downloadBtn) {

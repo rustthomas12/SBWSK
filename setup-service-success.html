@@ -246,6 +246,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </footer>
 
     <!-- JavaScript -->
-    <script src="js/app.js"></script>
+    <script src="js/app.js">
+        // Track Pinterest Conversion
+        if (typeof pintrk !== 'undefined') {
+            pintrk('track', 'checkout', {
+                event_id: 'setup_' + (sessionId || Date.now()),
+                value: 397,
+                order_quantity: 1,
+                currency: 'USD',
+                order_id: sessionId || 'unknown',
+                line_items: [{
+                    product_name: 'Done-For-You Website Setup Service',
+                    product_id: 'setup-service',
+                    product_price: 397,
+                    product_quantity: 1
+                }]
+            });
+        }</script>
 </body>
 </html>

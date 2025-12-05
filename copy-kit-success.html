@@ -649,7 +649,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     // Track Pinterest Conversion
                     if (typeof pintrk !== 'undefined') {
                         pintrk('track', 'checkout', {
+                            event_id: 'copykit_' + sessionId,
                             value: 17,
+                            order_quantity: 1,
                             currency: 'USD',
                             order_id: sessionId,
                             line_items: [{

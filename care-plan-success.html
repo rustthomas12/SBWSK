@@ -255,6 +255,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (plan === 'pro' || plan === 'premium') {
             document.getElementById('premium-features').style.display = 'block';
         }
-    </script>
+    
+        // Track Pinterest Conversion
+        if (typeof pintrk !== 'undefined') {
+            pintrk('track', 'checkout', {
+                event_id: 'careplan_' + (sessionId || Date.now()),
+                value: 39,
+                order_quantity: 1,
+                currency: 'USD',
+                order_id: sessionId || 'unknown',
+                line_items: [{
+                    product_name: 'Website Care Plan',
+                    product_id: 'care-plan',
+                    product_price: 39,
+                    product_quantity: 1
+                }]
+            });
+        }</script>
 </body>
 </html>

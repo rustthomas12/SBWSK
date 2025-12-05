@@ -35,21 +35,33 @@ Already configured in Vercel project settings. Tokens are kept secret for securi
 Automatically tracked on all pages via Pinterest Tag.
 
 ### 2. Checkout Events
-**Triggered on**: Copy Kit purchase success page (`copy-kit-success.html`)
+**Triggered on**: All purchase success pages
 
+**Format** (Pinterest enhanced tracking):
 ```javascript
 pintrk('track', 'checkout', {
-    value: 17,
-    currency: 'USD',
-    order_id: sessionId,
-    line_items: [{
-        product_name: 'Website Copy Kit',
-        product_id: 'copy-kit-17',
-        product_price: 17,
+    event_id: 'product_' + sessionId,  // Unique event ID
+    value: 100,                         // Product value
+    order_quantity: 1,                  // Quantity purchased
+    currency: 'USD',                    // Currency code
+    order_id: sessionId,                // Order/session ID
+    line_items: [{                      // Product details
+        product_name: 'Product Name',
+        product_id: 'product-id',
+        product_price: 100,
         product_quantity: 1
     }]
 });
 ```
+
+**Tracked Products**:
+- Copy Kit ($17) - `copy-kit-success.html`
+- Premium Logo ($97) - `premium-logo-success.html`
+- Templates ($49 avg) - `template-success.html`
+- Website Packages ($499+) - `package-success.html`
+- Setup Service ($397) - `setup-service-success.html`
+- Speed Optimization ($147) - `speed-optimization-success.html`
+- Care Plans ($39/mo) - `care-plan-success.html`
 
 ### 3. Lead Events
 **Triggered on**: Quote estimator completion (`js/quote-estimator.js`)
