@@ -1,5 +1,5 @@
 /**
- * Serverless function to generate professional homepage copy using Claude AI
+ * Serverless function to generate professional homepage copy using Google Gemini AI
  * This provides accurate, AI-generated copy instead of template-based content
  */
 
@@ -35,17 +35,13 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
-        const CLAUDE_API_KEY = process.env.CLAUDE_API_KEY;
-
-        if (!CLAUDE_API_KEY) {
-            console.error('CLAUDE_API_KEY not configured');
-            return res.status(500).json({ error: 'API configuration error' });
-        }
+        // Google Gemini API key
+        const GEMINI_API_KEY = 'AIzaSyAZwDGA1yE6NL1EV-4kllsTUZEFaywqzt4';
 
         // Parse services list
         const servicesList = services.split('\n').filter(s => s.trim()).map(s => s.trim());
 
-        // Construct prompt for Claude
+        // Construct prompt for Gemini
         const prompt = `You are a professional copywriter specializing in small business websites. Generate compelling, conversion-focused homepage copy for a ${businessType} business.
 
 Business Details:
@@ -69,7 +65,7 @@ Generate the following 7 sections of homepage copy. Make it professional, benefi
 6. Why Choose Us Section (3-5 bullet points highlighting competitive advantages)
 7. Call-to-Action (Strong, action-oriented CTA with urgency)
 
-Format your response as valid JSON with these exact keys:
+IMPORTANT: Respond ONLY with valid JSON in this exact format, no markdown code blocks, no extra text:
 {
   "heroHeadline": "...",
   "heroSubheadline": "...",
@@ -80,41 +76,45 @@ Format your response as valid JSON with these exact keys:
   "ctaSection": "..."
 }
 
-Important:
+Requirements:
 - Use a ${tone} tone throughout
 - Focus on benefits, not just features
 - Include specific location references (${location})
 - Make it authentic and avoid clichés
-- Ensure all copy is ready to use on a real website`;
+- Ensure all copy is ready to use on a real website
+- Return ONLY the JSON object, nothing else`;
 
-        // Call Claude API
-        const response = await fetch('https://api.anthropic.com/v1/messages', {
+        // Call Google Gemini API (using latest Gemini 2.5 Flash model)
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': CLAUDE_API_KEY,
-                'anthropic-version': '2023-06-01'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: 'claude-3-5-sonnet-20241022',
-                max_tokens: 2048,
-                messages: [{
-                    role: 'user',
-                    content: prompt
-                }]
+                contents: [{
+                    parts: [{
+                        text: prompt
+                    }]
+                }],
+                generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 2048,
+                    topP: 0.95,
+                    topK: 40
+                }
             })
         });
 
         if (!response.ok) {
             const error = await response.text();
-            console.error('Claude API error:', error);
+            console.error('Gemini API error:', error);
             return res.status(500).json({ error: 'AI generation failed' });
         }
 
         const data = await response.json();
-        const aiResponse = data.content[0].text;
+        const aiResponse = data.candidates[0].content.parts[0].text;
 
-        // Parse the JSON response from Claude
+        // Parse the JSON response from Gemini
         let generatedCopy;
         try {
             // Extract JSON from markdown code blocks if present
@@ -122,7 +122,7 @@ Important:
             const jsonStr = jsonMatch ? (jsonMatch[1] || jsonMatch[0]) : aiResponse;
             generatedCopy = JSON.parse(jsonStr);
         } catch (parseError) {
-            console.error('Failed to parse Claude response:', aiResponse);
+            console.error('Failed to parse Gemini response:', aiResponse);
             return res.status(500).json({ error: 'Failed to parse AI response' });
         }
 
