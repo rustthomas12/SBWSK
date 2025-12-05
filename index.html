@@ -465,6 +465,60 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="js/utils.js?v=1.0.0"></script>
     <script src="js/app.js?v=1.0.0"></script>
 
+    <!-- Authentication (optional - uncomment to require login) -->
+    <!-- <script src="js/auth.js?v=1.0.0"></script> -->
+
+    <!-- Contact Form Handler -->
+    <script>
+        document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value,
+                business: document.getElementById('business')?.value
+            };
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to send message');
+                }
+
+                showAlert(data.message, 'success', 'contactForm');
+                e.target.reset();
+
+                // Track Pinterest lead event
+                if (typeof pintrk !== 'undefined') {
+                    pintrk('track', 'lead', {
+                        lead_type: 'Contact Form',
+                        value: 0,
+                        currency: 'USD'
+                    });
+                }
+
+            } catch (error) {
+                showAlert(error.message, 'error', 'contactForm');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+    </script>
+
     <!-- Non-critical scripts deferred -->
     <script src="js/faq.js?v=1.0.0" defer></script>
     <script src="js/form-handler.js?v=1.0.0" defer></script>

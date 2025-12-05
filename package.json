@@ -23,6 +23,7 @@
     "archiver": "^6.0.1",
     "dns-lookup": "^0.1.0",
     "dotenv": "^16.3.1",
+    "jsonwebtoken": "^9.0.2",
     "pdfkit": "^0.17.2",
     "resend": "^6.5.2",
     "stripe": "^14.10.0",
