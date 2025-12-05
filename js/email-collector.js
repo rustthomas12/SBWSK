@@ -19,9 +19,10 @@
     // Create email popup HTML
     function createEmailPopup(options = {}) {
         const {
-            title = 'Love our tools? Get more!',
-            message = 'Join our email list for exclusive tips, templates, and updates for your small business website.',
-            source = 'popup'
+            title = 'Get Your Free Website Starter Kit! 🎁',
+            message = 'Download our complete starter kit with templates, checklists, and step-by-step guides — absolutely free!',
+            source = 'popup',
+            leadMagnet = 'Website Starter Kit'
         } = options;
 
         const popup = document.createElement('div');
@@ -132,7 +133,7 @@
                         cursor: pointer;
                         transition: transform 0.2s;
                     " onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
-                        Subscribe for Free
+                        Get My Free ${leadMagnet} →
                     </button>
                 </form>
 
@@ -193,7 +194,7 @@
             submitBtn.textContent = 'Subscribing...';
 
             try {
-                const response = await fetch('/api/subscribe', {
+                const response = await fetch('/api/mailerlite-subscribe', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

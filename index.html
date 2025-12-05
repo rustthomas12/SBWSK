@@ -54,6 +54,7 @@
     <link rel="stylesheet" href="css/sections.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="css/social-share.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="css/cookie-consent.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/inline-email-signup.css" media="print" onload="this.media='all'">
     <noscript>
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/components.css">
@@ -61,6 +62,7 @@
         <link rel="stylesheet" href="css/sections.css">
         <link rel="stylesheet" href="css/social-share.css">
         <link rel="stylesheet" href="css/cookie-consent.css">
+        <link rel="stylesheet" href="css/inline-email-signup.css">
     </noscript>
 
     <!-- Schema.org Structured Data -->
@@ -242,6 +244,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Inline Email Signup -->
+    <section class="container">
+        <div id="homepageInlineSignup"></div>
     </section>
 
     <!-- CTA Section -->
@@ -468,6 +475,72 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Authentication (optional - uncomment to require login) -->
     <!-- <script src="js/auth.js?v=1.0.0"></script> -->
 
+    <!-- Email Collection Script -->
+    <script src="js/email-collector.js?v=1.0.0"></script>
+
+    <!-- Newsletter Form Handler -->
+    <script>
+        document.getElementById('newsletterForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const emailInput = e.target.querySelector('input[type="email"]');
+            const email = emailInput.value;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Subscribing...';
+
+            try {
+                const response = await fetch('/api/mailerlite-subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: email,
+                        name: null,
+                        source: 'Homepage Newsletter'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to subscribe');
+                }
+
+                // Mark as subscribed to prevent popup
+                if (typeof emailCollector !== 'undefined') {
+                    emailCollector.markSubscribed();
+                }
+
+                // Show success message
+                submitBtn.textContent = '✓ Subscribed!';
+                submitBtn.style.background = '#10b981';
+                emailInput.value = '';
+
+                // Track Pinterest lead event
+                if (typeof pintrk !== 'undefined') {
+                    pintrk('track', 'lead', {
+                        lead_type: 'Newsletter Subscription',
+                        value: 0,
+                        currency: 'USD'
+                    });
+                }
+
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 3000);
+
+            } catch (error) {
+                alert(error.message || 'Failed to subscribe. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+    </script>
+
     <!-- Contact Form Handler -->
     <script>
         document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
@@ -526,5 +599,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="js/accessibility.js?v=1.0.0" defer></script>
     <script src="js/cookie-consent.js?v=1.0.0" defer></script>
     <script src="js/analytics.js?v=1.0.0" defer></script>
+
+    <!-- Inline Email Signup -->
+    <script src="js/inline-email-signup.js?v=1.0.0"></script>
+    <script>
+        // Add inline signup to homepage after tools section
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof inlineEmailSignup !== 'undefined') {
+                const signup = inlineEmailSignup.create({
+                    title: 'Love These Free Tools?',
+                    subtitle: 'Get exclusive access to more templates, checklists, and step-by-step guides for building your business website.',
+                    source: 'Homepage Inline',
+                    style: 'default'
+                });
+                document.getElementById('homepageInlineSignup').appendChild(signup);
+            }
+        });
+    </script>
 </body>
 </html>

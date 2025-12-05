@@ -247,6 +247,8 @@ pintrk('page');
   src="https://ct.pinterest.com/v3/?event=init&tid=2612806189856&noscript=1" />
 </noscript>
 <!-- end Pinterest Tag -->
+
+    <link rel="stylesheet" href="css/inline-email-signup.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -726,6 +728,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
         </div>
+    
+        <!-- Inline Email Signup -->
+        <div id="inlineEmailSignupContainer"></div>
+        <script>
+            if (typeof inlineEmailSignup !== 'undefined') {
+                const signup = inlineEmailSignup.create({
+                    title: 'Want exclusive template updates?',
+                    subtitle: 'Get notified when we release new website templates, themes, and design resources.',
+                    source: 'Templates Page',
+                    style: 'default'
+                });
+                document.getElementById('inlineEmailSignupContainer').appendChild(signup);
+            }
+        </script>
+
     </main>
 
     <!-- Footer -->
@@ -807,5 +824,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Universal Stripe Checkout -->
     <script src="js/universal-checkout.js" defer></script>
+
+    <script src="js/inline-email-signup.js?v=1.0.0"></script>
 </body>
 </html>

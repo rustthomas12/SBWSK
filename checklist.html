@@ -66,6 +66,8 @@ pintrk('page');
   src="https://ct.pinterest.com/v3/?event=init&tid=2612806189856&noscript=1" />
 </noscript>
 <!-- end Pinterest Tag -->
+
+    <link rel="stylesheet" href="css/inline-email-signup.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -172,6 +174,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </div>
         </div>
+    
+        <!-- Inline Email Signup -->
+        <div id="inlineEmailSignupContainer"></div>
+        <script>
+            if (typeof inlineEmailSignup !== 'undefined') {
+                const signup = inlineEmailSignup.create({
+                    title: 'Want the complete website launch toolkit?',
+                    subtitle: 'Get our full collection of checklists, templates, and guides delivered to your inbox.',
+                    source: 'Checklist Page',
+                    style: 'default'
+                });
+                document.getElementById('inlineEmailSignupContainer').appendChild(signup);
+            }
+        </script>
+
     </main>
 
     <!-- CTA Section -->
@@ -227,5 +244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="js/utils.js?v=1.0.0"></script>
     <script src="js/app.js?v=1.0.0"></script>
     <script src="js/checklist.js?v=1.0.1" defer></script>
+
+    <script src="js/inline-email-signup.js?v=1.0.0"></script>
 </body>
 </html>
