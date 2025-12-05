@@ -100,19 +100,21 @@ For each service, generate:
 3. Process Overview (4-5 steps showing how you work with customers)
 4. Call-to-Action (strong closing paragraph with urgency)
 
-IMPORTANT: Respond with ONLY valid JSON, no markdown:
+CRITICAL: You MUST respond with ONLY valid JSON in this EXACT format. No markdown, no code blocks, no extra text. Just the raw JSON object:
 {
-  "serviceIntro": "...",
+  "serviceIntro": "text here",
   "services": [
     {
       "name": "Service Name",
-      "description": "...",
-      "features": ["feature 1", "feature 2", "feature 3"]
+      "description": "description text",
+      "features": ["feature 1", "feature 2", "feature 3", "feature 4"]
     }
   ],
-  "processSteps": ["Step 1: ...", "Step 2: ...", "Step 3: ...", "Step 4: ..."],
-  "callToAction": "..."
-}`;
+  "processSteps": ["Step 1: description", "Step 2: description", "Step 3: description", "Step 4: description"],
+  "callToAction": "call to action text"
+}
+
+Generate ${servicesList.length} services based on the services list provided.`;
 
         // =================================================================
         // GENERATE CONTACT PAGE
@@ -217,14 +219,31 @@ IMPORTANT: Respond with ONLY valid JSON array, no markdown:
             const data = await response.json();
             const aiResponse = data.candidates[0].content.parts[0].text;
 
-            // Parse JSON response
+            // Parse JSON response - handle multiple formats
             try {
-                const jsonMatch = aiResponse.match(/```json\n?([\s\S]*?)\n?```/) || aiResponse.match(/\{[\s\S]*\}/);
-                const jsonStr = jsonMatch ? (jsonMatch[1] || jsonMatch[0]) : aiResponse;
+                let jsonStr = aiResponse;
+
+                // Try to extract JSON from markdown code blocks first
+                const jsonBlockMatch = aiResponse.match(/```json\n([\s\S]*?)\n```/);
+                if (jsonBlockMatch) {
+                    jsonStr = jsonBlockMatch[1];
+                } else {
+                    // Try to find JSON object in response
+                    const jsonMatch = aiResponse.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        jsonStr = jsonMatch[0];
+                    }
+                }
+
+                // Clean up common issues
+                jsonStr = jsonStr.trim();
+
                 results[pageType] = JSON.parse(jsonStr);
+                console.log(`Successfully parsed ${pageType} page`);
             } catch (parseError) {
-                console.error(`Failed to parse ${pageType} response:`, aiResponse);
-                throw new Error(`Failed to parse ${pageType} page`);
+                console.error(`Failed to parse ${pageType} response:`, aiResponse.substring(0, 500));
+                console.error('Parse error:', parseError.message);
+                throw new Error(`Failed to parse ${pageType} page: ${parseError.message}`);
             }
         }
 
