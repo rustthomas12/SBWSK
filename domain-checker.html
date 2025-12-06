@@ -66,6 +66,8 @@ pintrk('page');
   src="https://ct.pinterest.com/v3/?event=init&tid=2612806189856&noscript=1" />
 </noscript>
 <!-- end Pinterest Tag -->
+
+    <link rel="stylesheet" href="css/inline-email-signup.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -246,6 +248,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- End Content with Sidebar Layout -->
 
         </div>
+    
+        <!-- Inline Email Signup -->
+        <section class="container" style="margin-top: 3rem;">
+            <div id="toolInlineSignup"></div>
+        </section>
+
     </main>
 
     <!-- CTA Section -->
@@ -316,6 +324,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     // Show email popup 3 seconds after results are displayed
                     emailCollector.triggerAfterToolUse('Domain Checker', 3000);
                 };
+            }
+        });
+    </script>
+
+    <!-- Inline Email Signup Script -->
+    <script src="js/inline-email-signup.js?v=1.0.0"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof inlineEmailSignup !== 'undefined') {
+                const signup = inlineEmailSignup.create({
+                    title: 'Found your perfect domain?',
+                    subtitle: 'Get our free guide on choosing hosting, setting up email, and launching your website.',
+                    source: 'Domain Checker',
+                    style: 'default'
+                });
+                document.getElementById('toolInlineSignup').appendChild(signup);
             }
         });
     </script>

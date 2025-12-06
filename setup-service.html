@@ -373,6 +373,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </section>
 
+    <!-- Inline Email Signup -->
+    <section class="container" style="margin-top: 3rem;">
+        <div id="toolInlineSignup"></div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer" style="background: #1f2937; color: white; padding: 3rem 0;">
         <div class="container">
@@ -451,6 +456,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Attach event listeners
         document.getElementById('checkout-button').addEventListener('click', handleCheckout);
         document.getElementById('checkout-button-bottom').addEventListener('click', handleCheckout);
+    </script>
+
+    <!-- Inline Email Signup Script -->
+    <link rel="stylesheet" href="css/inline-email-signup.css">
+    <script src="js/inline-email-signup.js?v=1.0.0"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof inlineEmailSignup !== 'undefined') {
+                const signup = inlineEmailSignup.create({
+                    title: 'Planning your website setup?',
+                    subtitle: 'Get our free DIY setup guide, configuration checklists, and troubleshooting tips.',
+                    source: 'Setup Service Page',
+                    style: 'default'
+                });
+                document.getElementById('toolInlineSignup').appendChild(signup);
+            }
+        });
     </script>
 </body>
 </html>

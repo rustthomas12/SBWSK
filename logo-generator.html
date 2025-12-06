@@ -206,6 +206,8 @@ pintrk('page');
   src="https://ct.pinterest.com/v3/?event=init&tid=2612806189856&noscript=1" />
 </noscript>
 <!-- end Pinterest Tag -->
+
+    <link rel="stylesheet" href="css/inline-email-signup.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -546,6 +548,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             </div>
         </div>
+    
+        <!-- Inline Email Signup -->
+        <section class="container" style="margin-top: 3rem;">
+            <div id="toolInlineSignup"></div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -1855,6 +1863,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         // Initial draw
         drawLogo();
+    </script>
+
+    <!-- Inline Email Signup Script -->
+    <script src="js/inline-email-signup.js?v=1.0.0"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof inlineEmailSignup !== 'undefined') {
+                const signup = inlineEmailSignup.create({
+                    title: 'Love your new logo?',
+                    subtitle: 'Get our complete branding guide with color palette tips, font selection, and design best practices.',
+                    source: 'Logo Generator',
+                    style: 'default'
+                });
+                document.getElementById('toolInlineSignup').appendChild(signup);
+            }
+        });
     </script>
 </body>
 </html>

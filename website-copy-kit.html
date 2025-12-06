@@ -68,6 +68,8 @@ pintrk('page');
   src="https://ct.pinterest.com/v3/?event=init&tid=2612806189856&noscript=1" />
 </noscript>
 <!-- end Pinterest Tag -->
+
+    <link rel="stylesheet" href="css/inline-email-signup.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -470,6 +472,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </div>
         </section>
+    
+        <!-- Inline Email Signup -->
+        <section class="container" style="margin-top: 3rem;">
+            <div id="toolInlineSignup"></div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -521,5 +529,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="js/utils.js"></script>
     <script src="js/app.js"></script>
     <script src="js/stripe-checkout.js" defer></script>
+
+    <!-- Inline Email Signup Script -->
+    <script src="js/inline-email-signup.js?v=1.0.0"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof inlineEmailSignup !== 'undefined') {
+                const signup = inlineEmailSignup.create({
+                    title: 'Want more writing templates?',
+                    subtitle: 'Get free email templates, social media copy, and content creation guides for your business.',
+                    source: 'Copy Kit Page',
+                    style: 'default'
+                });
+                document.getElementById('toolInlineSignup').appendChild(signup);
+            }
+        });
+    </script>
 </body>
 </html>

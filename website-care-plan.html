@@ -422,6 +422,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </section>
 
+    <!-- Inline Email Signup -->
+    <section class="container" style="margin-top: 3rem;">
+        <div id="toolInlineSignup"></div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer" style="background: #1f2937; color: white; padding: 3rem 0;">
         <div class="container">
@@ -497,6 +502,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 alert('An error occurred. Please try again or contact support.');
             }
         }
+    </script>
+
+    <!-- Inline Email Signup Script -->
+    <link rel="stylesheet" href="css/inline-email-signup.css">
+    <script src="js/inline-email-signup.js?v=1.0.0"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof inlineEmailSignup !== 'undefined') {
+                const signup = inlineEmailSignup.create({
+                    title: 'Want to maintain your site yourself?',
+                    subtitle: 'Get our free website maintenance checklist, security tips, and backup guide.',
+                    source: 'Care Plan Page',
+                    style: 'default'
+                });
+                document.getElementById('toolInlineSignup').appendChild(signup);
+            }
+        });
     </script>
 </body>
 </html>

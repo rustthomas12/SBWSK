@@ -66,6 +66,8 @@ pintrk('page');
   src="https://ct.pinterest.com/v3/?event=init&tid=2612806189856&noscript=1" />
 </noscript>
 <!-- end Pinterest Tag -->
+
+    <link rel="stylesheet" href="css/inline-email-signup.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -338,6 +340,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </div>
         </div>
+    
+        <!-- Inline Email Signup -->
+        <section class="container" style="margin-top: 3rem;">
+            <div id="toolInlineSignup"></div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -380,5 +388,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="js/app.js?v=1.0.0"></script>
     <script src="js/email-collector.js?v=1.0.0"></script>
     <script src="js/quote-estimator.js?v=1.0.0" defer></script>
+
+    <!-- Inline Email Signup Script -->
+    <script src="js/inline-email-signup.js?v=1.0.0"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof inlineEmailSignup !== 'undefined') {
+                const signup = inlineEmailSignup.create({
+                    title: 'Ready to move forward?',
+                    subtitle: 'Join our email list for website planning checklists, budget templates, and launch guides.',
+                    source: 'Quote Estimator',
+                    style: 'default'
+                });
+                document.getElementById('toolInlineSignup').appendChild(signup);
+            }
+        });
+    </script>
 </body>
 </html>
