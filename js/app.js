@@ -31,28 +31,24 @@ function initNavigation() {
 
                 // If this item has a nested dropdown
                 if (hasNestedDropdown) {
-                    // On mobile, always toggle
+                    e.preventDefault();
+
+                    // On mobile, toggle the active class
                     if (window.innerWidth <= 768) {
-                        e.preventDefault();
                         parentItem.classList.toggle('active');
-                    }
-                    // On desktop, only prevent default for # links
-                    else if (link.getAttribute('href') === '#') {
-                        e.preventDefault();
                     }
                 }
             });
         });
 
-        // Close mobile menu when clicking actual navigation links (not dropdown toggles)
+        // Close mobile menu when clicking final navigation links (not dropdown parents)
         navMenu.querySelectorAll('.nav-dropdown a').forEach(link => {
             link.addEventListener('click', () => {
-                // Only close menu if this is not a nested dropdown toggle
-                const parentItem = link.closest('.nav-item-dropdown');
-                const isNestedToggle = parentItem && link.parentElement.classList.contains('nav-item-dropdown');
+                const parentItem = link.parentElement;
+                const hasNestedDropdown = parentItem.classList.contains('nav-item-dropdown');
 
-                // If it's a real link (has href that's not #), close the menu
-                if (link.getAttribute('href') !== '#' && !isNestedToggle) {
+                // If it's a real navigation link (not a dropdown parent), close the menu on mobile
+                if (!hasNestedDropdown && window.innerWidth <= 768) {
                     navMenu.classList.remove('active');
                     navToggle.classList.remove('active');
                 }
