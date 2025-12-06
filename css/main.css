@@ -61,6 +61,7 @@
 html {
     font-size: 16px;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -70,6 +71,9 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 img {
@@ -158,10 +162,11 @@ a:hover {
 
 .logo-img {
     height: 80px;
-    width: auto;
+    width: 80px;
     display: block;
     transition: transform var(--transition-base), filter var(--transition-base);
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+    aspect-ratio: 1 / 1;
 }
 
 .nav-brand:hover .logo-img {
@@ -172,6 +177,7 @@ a:hover {
 @media (max-width: 768px) {
     .logo-img {
         height: 60px;
+        width: 60px;
     }
 }
 
