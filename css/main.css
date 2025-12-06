@@ -611,7 +611,7 @@ a:hover {
     }
 
     .nav-dropdown a {
-        padding: 0.75rem 1rem;
+        padding: 0.5rem 1rem;
         transform: none !important;
     }
 
@@ -625,6 +625,7 @@ a:hover {
     }
 
     .nav-dropdown .nav-item-dropdown > a {
+        padding: 0.5rem 1rem;
         padding-left: 1rem;
         font-weight: 600;
     }
@@ -636,6 +637,7 @@ a:hover {
     }
 
     .nav-dropdown .nav-dropdown a {
+        padding: 0.5rem 1rem;
         padding-left: 1.5rem;
     }
 
