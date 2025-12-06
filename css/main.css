@@ -633,13 +633,13 @@ a:hover {
     }
 
     .nav-dropdown .nav-item-dropdown > a {
-        padding: 0.5rem 1rem;
+        padding: 0.35rem 1rem;
         padding-left: 1rem;
         font-weight: 600;
         margin: 0;
         min-height: auto;
         height: auto;
-        line-height: normal;
+        line-height: 1.2;
     }
 
     .nav-dropdown .nav-dropdown {
