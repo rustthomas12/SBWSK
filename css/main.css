@@ -595,12 +595,13 @@ a:hover {
         transform: none;
         box-shadow: none;
         background: var(--bg-secondary);
-        border-radius: var(--radius-md);
+        border-radius: 0;
         margin: 0;
         padding: 0;
         max-height: 0;
         overflow: hidden;
         transition: max-height var(--transition-base);
+        display: block;
     }
 
     .nav-item-dropdown.active .nav-dropdown {
@@ -636,10 +637,12 @@ a:hover {
         position: static;
         margin: 0;
         padding: 0;
-        background: rgba(0, 0, 0, 0.03);
+        background: transparent;
         max-height: 0;
         overflow: hidden;
         transition: max-height var(--transition-base);
+        display: block;
+        border-radius: 0;
     }
 
     .nav-dropdown .nav-dropdown li {
