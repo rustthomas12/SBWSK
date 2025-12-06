@@ -622,15 +622,24 @@ a:hover {
     }
 
     /* Mobile Nested Dropdowns */
+    .nav-dropdown li {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
     .nav-dropdown .nav-item-dropdown {
-        margin: 0;
-        padding: 0;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .nav-dropdown .nav-item-dropdown > a {
         padding: 0.5rem 1rem;
         padding-left: 1rem;
         font-weight: 600;
+        margin: 0;
+        min-height: auto;
+        height: auto;
+        line-height: normal;
     }
 
     .nav-dropdown .nav-dropdown {
