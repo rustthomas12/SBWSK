@@ -38,22 +38,26 @@ const checklistData = {
             {
                 id: 'homepage',
                 title: 'Homepage complete',
-                description: 'Clear value proposition, call-to-action, and professional design'
+                description: 'Clear value proposition, call-to-action, and professional design',
+                link: { text: 'Get Template', url: 'templates.html' }
             },
             {
                 id: 'about-page',
                 title: 'About page created',
-                description: 'Tell your story and build trust with visitors'
+                description: 'Tell your story and build trust with visitors',
+                link: { text: 'Copy Kit', url: 'website-copy-kit.html' }
             },
             {
                 id: 'services-page',
                 title: 'Services/Products page',
-                description: 'Clearly explain what you offer and pricing (if applicable)'
+                description: 'Clearly explain what you offer and pricing (if applicable)',
+                link: { text: 'Copy Kit', url: 'website-copy-kit.html' }
             },
             {
                 id: 'contact-page',
                 title: 'Contact page set up',
-                description: 'Include form, phone, email, address, and map if relevant'
+                description: 'Include form, phone, email, address, and map if relevant',
+                link: { text: 'Copy Kit', url: 'website-copy-kit.html' }
             }
         ]
     },
@@ -120,7 +124,8 @@ const checklistData = {
             {
                 id: 'business-goals',
                 title: 'Clear website goals defined',
-                description: 'What do you want your website to achieve? (leads, sales, information, etc.)'
+                description: 'What do you want your website to achieve? (leads, sales, information, etc.)',
+                link: { text: 'Get Quote', url: 'quote-estimator.html' }
             },
             {
                 id: 'target-audience',
@@ -146,7 +151,8 @@ const checklistData = {
             {
                 id: 'loading-speed',
                 title: 'Fast loading speed',
-                description: 'Optimize images and code for quick load times (under 3 seconds)'
+                description: 'Optimize images and code for quick load times (under 3 seconds)',
+                link: { text: 'Speed Check', url: 'website-speed-check.html' }
             },
             {
                 id: 'cross-browser',
@@ -161,7 +167,8 @@ const checklistData = {
             {
                 id: 'favicon',
                 title: 'Favicon uploaded',
-                description: 'Small icon that appears in browser tabs'
+                description: 'Small icon that appears in browser tabs',
+                link: { text: 'Logo Generator', url: 'logo-generator.html' }
             }
         ]
     },
