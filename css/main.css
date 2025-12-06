@@ -638,10 +638,7 @@ a:hover {
         margin: 0;
         padding: 0;
         background: transparent;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height var(--transition-base);
-        display: block;
+        display: none;
         border-radius: 0;
     }
 
@@ -656,7 +653,7 @@ a:hover {
     }
 
     .nav-item-dropdown .nav-item-dropdown.active .nav-dropdown {
-        max-height: 300px;
+        display: block;
     }
 
     .hero-title {
