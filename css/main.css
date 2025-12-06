@@ -596,7 +596,8 @@ a:hover {
         box-shadow: none;
         background: var(--bg-secondary);
         border-radius: var(--radius-md);
-        margin-top: 0;
+        margin: 0;
+        padding: 0;
         max-height: 0;
         overflow: hidden;
         transition: max-height var(--transition-base);
@@ -622,6 +623,7 @@ a:hover {
     /* Mobile Nested Dropdowns */
     .nav-dropdown .nav-item-dropdown {
         margin: 0;
+        padding: 0;
     }
 
     .nav-dropdown .nav-item-dropdown > a {
@@ -633,10 +635,16 @@ a:hover {
     .nav-dropdown .nav-dropdown {
         position: static;
         margin: 0;
+        padding: 0;
         background: rgba(0, 0, 0, 0.03);
         max-height: 0;
         overflow: hidden;
         transition: max-height var(--transition-base);
+    }
+
+    .nav-dropdown .nav-dropdown li {
+        margin: 0;
+        padding: 0;
     }
 
     .nav-dropdown .nav-dropdown a {
