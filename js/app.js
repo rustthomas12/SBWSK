@@ -22,24 +22,40 @@ function initNavigation() {
             navToggle.classList.toggle('active');
         });
 
-        // Handle dropdown toggles on mobile
-        const dropdownToggles = navMenu.querySelectorAll('.nav-dropdown-toggle');
-        dropdownToggles.forEach(toggle => {
-            toggle.addEventListener('click', (e) => {
-                // On mobile, toggle the dropdown
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    const parentItem = toggle.closest('.nav-item-dropdown');
-                    parentItem.classList.toggle('active');
+        // Handle all dropdown toggles (both main and nested)
+        const allDropdownItems = navMenu.querySelectorAll('.nav-item-dropdown > a');
+        allDropdownItems.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const parentItem = link.closest('.nav-item-dropdown');
+                const hasNestedDropdown = parentItem.querySelector('.nav-dropdown');
+
+                // If this item has a nested dropdown
+                if (hasNestedDropdown) {
+                    // On mobile, always toggle
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        parentItem.classList.toggle('active');
+                    }
+                    // On desktop, only prevent default for # links
+                    else if (link.getAttribute('href') === '#') {
+                        e.preventDefault();
+                    }
                 }
             });
         });
 
-        // Close mobile menu when clicking a dropdown link
+        // Close mobile menu when clicking actual navigation links (not dropdown toggles)
         navMenu.querySelectorAll('.nav-dropdown a').forEach(link => {
             link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
+                // Only close menu if this is not a nested dropdown toggle
+                const parentItem = link.closest('.nav-item-dropdown');
+                const isNestedToggle = parentItem && link.parentElement.classList.contains('nav-item-dropdown');
+
+                // If it's a real link (has href that's not #), close the menu
+                if (link.getAttribute('href') !== '#' && !isNestedToggle) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
             });
         });
 
