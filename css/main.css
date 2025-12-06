@@ -634,6 +634,9 @@ a:hover {
         position: static;
         margin: 0;
         background: rgba(0, 0, 0, 0.03);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height var(--transition-base);
     }
 
     .nav-dropdown .nav-dropdown a {
